@@ -1,0 +1,19 @@
+@external .note,.with-diagram,.canvas,.buttons,.with-error,.active,.details,.message,.error,.content,.intro,.with-error;
+
+.content,.content>div, div#js-canvas {
+	width: 100%;
+	height: 100%;
+}
+
+.content:not \(.with-error \) .error,.content.with-error .intro,.content.with-diagram .intro
+	{
+	display: none;
+}
+
+.content .canvas,.content.with-error .canvas {
+	visibility: hidden;
+}
+
+.content.with-diagram .canvas {
+	visibility: visible;
+}
