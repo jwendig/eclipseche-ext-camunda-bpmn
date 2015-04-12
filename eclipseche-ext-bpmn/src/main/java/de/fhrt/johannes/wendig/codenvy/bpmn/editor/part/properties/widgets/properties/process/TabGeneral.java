@@ -11,6 +11,8 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.properties.process;
 
+import org.eclipse.che.ide.util.loging.Log;
+
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.TextBox;
@@ -29,13 +31,14 @@ public class TabGeneral extends BaseBpmnPropertiesTab {
 
 	public TabGeneral() {
 		super();
-
+		Log.info(TabGeneral.class, "constructor");
 		initContentElements();
 		initContent();
 	}
 
 	// @Override
 	public void initContent() {
+		Log.info(TabGeneral.class, "initContent");
 		getTabContent().resize(5, 2);
 
 		getTabContent().setText(0, 0, "Process Id:");
@@ -53,15 +56,22 @@ public class TabGeneral extends BaseBpmnPropertiesTab {
 
 	// @Override
 	public void initContentElements() {
+		Log.info(TabGeneral.class, "initContentElements");
 		tbProcessId = new TextBox();
+		tbProcessId.setWidth("100%");
 		tbName = new TextBox();
+		tbName.setWidth("100%");
 		cbIsExecutable = new CheckBox();
+		cbIsExecutable.setWidth("100%");
 		ctDataObjects = new CellTable<String>();
+		ctDataObjects.setWidth("100%");
 		tbDocumentation = new TextBox();
+		tbDocumentation.setWidth("100%");
 	}
 
 	@Override
 	public String getTabName() {
+		Log.info(TabGeneral.class, "getTabName");
 		return TAB_NAME;
 	}
 }

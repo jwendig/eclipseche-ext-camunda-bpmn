@@ -39,6 +39,7 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPr
 
 public class BpmnEditorDiagramWidget extends Composite {
 
+
 	public enum ElementType {
 		UNKNOWN, START_EVENT, USER_TASK, SERVICE_TASK;
 	}
@@ -53,11 +54,7 @@ public class BpmnEditorDiagramWidget extends Composite {
 	/*
 	 * Layout
 	 */
-	private SplitLayoutPanel baseSplitLayoutPanel;
-	private Grid optionsGridPanel;
 	private HTMLPanel diagramHtmlPanel;
-
-	private Label lbSelectedItem;
 	private GQuery qSelectedItem;
 
 	public BpmnEditorDiagramWidget(BpmnEditorCallback bpmnEditorCallback,
@@ -71,12 +68,9 @@ public class BpmnEditorDiagramWidget extends Composite {
 
 		loadCss();
 
-		initOptionsGridPanel();
 		initDiagramHtmlPanel();
 
-		initBaseSplitLayoutPanel();
-
-		initWidget(baseSplitLayoutPanel);
+		initWidget(diagramHtmlPanel);
 		setStyleName("gwt-bpmnDigramWidget");
 
 	}
@@ -87,62 +81,11 @@ public class BpmnEditorDiagramWidget extends Composite {
 		bpmnResource.getBpmnFontCss().ensureInjected();
 	}
 
-	private void initBaseSplitLayoutPanel() {
-		baseSplitLayoutPanel = new SplitLayoutPanel();
-		baseSplitLayoutPanel.setSize("100%", "100%");
-		baseSplitLayoutPanel.add(diagramHtmlPanel);
-		baseSplitLayoutPanel.addSouth(new ScrollPanel(optionsGridPanel), 150);
-	}
-
-	private void initOptionsGridPanel() {
-		optionsGridPanel = new Grid(2, 3);
-		optionsGridPanel.setSize("100%", "100%");
-		optionsGridPanel.addStyleName("bpmnDigramWidget-optionsGridPanel");
-
-		lbSelectedItem = new Label("Select an BPMN-Element");
-		optionsGridPanel.setWidget(0, 0, lbSelectedItem);
-
-		Button btnTestNodeManipulation = new Button("Set Camunda Class");
-		optionsGridPanel.setWidget(0, 1, btnTestNodeManipulation);
-		btnTestNodeManipulation.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				changeAttrCamundaClass();
-
-			}
-		});
-	}
-
 	private void initDiagramHtmlPanel() {
 		diagramHtmlPanel = new HTMLPanel(bpmnResource.bpmnIoIndexHtmlFile()
 				.getText());
 		diagramHtmlPanel.setSize("100%", "100%");
 		diagramHtmlPanel.addStyleName("bpmnDigramWidget-diagramHtmlPanel");
-	}
-
-	@Override
-	public void initializeClaimedElement() {
-		super.initializeClaimedElement();
-		Log.info(BpmnEditorDiagramWidget.class, "initializeClaimedElement");
-	}
-
-	@Override
-	public SafeHtml render(RenderableStamper stamper) {
-		Log.info(BpmnEditorDiagramWidget.class, "render");
-		return super.render(stamper);
-	}
-
-	@Override
-	public void render(RenderableStamper stamper, SafeHtmlBuilder builder) {
-		super.render(stamper, builder);
-		Log.info(BpmnEditorDiagramWidget.class, "render");
-	}
-
-	@Override
-	protected void initWidget(Widget widget) {
-		super.initWidget(widget);
-		Log.info(BpmnEditorDiagramWidget.class, "initWidget");
 	}
 
 	@Override
@@ -154,6 +97,7 @@ public class BpmnEditorDiagramWidget extends Composite {
 				.setWindow(ScriptInjector.TOP_WINDOW).inject();
 
 		initJavascriptCallbacks();
+
 		Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
 			public void execute() {
 				initBpmnDiagramListener();
@@ -167,8 +111,8 @@ public class BpmnEditorDiagramWidget extends Composite {
 
 	public void openDiagram(String xml) {
 		Log.info(BpmnEditorDiagramWidget.class, "openDiagram");
-		// currentXmlContent = xml;
 		jsOpenDiagram(xml);
+
 		Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
 			public void execute() {
 				initBpmnDiagramListener();
@@ -182,35 +126,60 @@ public class BpmnEditorDiagramWidget extends Composite {
 	}
 
 	private void initBpmnDiagramListener() {
-		Log.info(BpmnEditorDiagramWidget.class, "setBpmnDiagramListener");
-		$(".djs-element, .bpmnDigramWidget-diagramHtmlPanel", diagramHtmlPanel).click(new Function() {
-			public boolean f(Event e) {
-				Log.info(
-						BpmnEditorDiagramWidget.class,
-						"Element-Clicked (class='" + $(e).attr("class")
-								+ "', data-element-id='"
-								+ $(e).attr("data-element-id") + "' )");
-				lbSelectedItem.setText("Selected BPMN-Item: "
-						+ $(e).attr("data-element-id"));
+		Log.info(BpmnEditorDiagramWidget.class, "initBpmnDiagramListener");
 
-				qSelectedItem = $(e);
+		/*
+		 * Add click listener to diagram-container if listener not set
+		 */
+		$(".bjs-container", diagramHtmlPanel).not(".bpmnEditorIsListening")
+				.click(new Function() {
+					public boolean f(Event e) {
+						if (null != e.getEventTarget()
+								&& $(e.getEventTarget()).attr("class").length() == 0) {
+							Log.info(BpmnEditorDiagramWidget.class,
+									"Container-Clicked");
+							bpmnElementPropertiesCallback
+									.containerSelected($(".layer-base"));
+						} else {
+							// child clicked -> do nothing
+						}
 
-				String dataElementId = $(e).attr("data-element-id");
-				ElementType type;
-				if (dataElementId.contains("ServiceTask")) {
-					type = ElementType.SERVICE_TASK;
-				} else if (dataElementId.contains("UserTask")) {
-					type = ElementType.USER_TASK;
-				} else if (dataElementId.contains("StartEvent")) {
-					type = ElementType.START_EVENT;
-				} else {
-					type = ElementType.UNKNOWN;
-				}
+						return true;
+					}
+				}).addClass("bpmnEditorIsListening");
 
-				bpmnElementPropertiesCallback.elementSelected(type);
-				return true;
-			}
-		});
+		/*
+		 * Add click listener to diagram-elements if listener not set
+		 */
+		$(".djs-element", diagramHtmlPanel).not(".bpmnEditorIsListening")
+				.click(new Function() {
+					public boolean f(Event e) {
+						Log.info(
+								BpmnEditorDiagramWidget.class,
+								"Element-Clicked (class='" + $(e).attr("class")
+										+ "', data-element-id='"
+										+ $(e).attr("data-element-id") + "' )");
+
+						qSelectedItem = $(e);
+
+						String elementAttrClass = qSelectedItem
+								.attr("data-element-id");
+						ElementType type;
+						if (elementAttrClass.contains("ServiceTask")) {
+							type = ElementType.SERVICE_TASK;
+						} else if (elementAttrClass.contains("UserTask")) {
+							type = ElementType.USER_TASK;
+						} else if (elementAttrClass.contains("StartEvent")) {
+							type = ElementType.START_EVENT;
+						} else {
+							type = ElementType.UNKNOWN;
+						}
+
+						bpmnElementPropertiesCallback.elementSelected(type,
+								qSelectedItem);
+						return true;
+					}
+				}).addClass("bpmnEditorIsListening");
 	}
 
 	public void changeAttrCamundaClass() {
@@ -233,7 +202,12 @@ public class BpmnEditorDiagramWidget extends Composite {
 		Log.info(BpmnEditorDiagramWidget.class, "jsCallbackSaveDiagram");
 		bpmnEditorCallback.setCurrentXmlContent(xml);
 		bpmnEditorCallback.setContentIsDirty();
-		initBpmnDiagramListener();
+
+		Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
+			public void execute() {
+				initBpmnDiagramListener();
+			}
+		});
 
 	};
 
@@ -246,7 +220,6 @@ public class BpmnEditorDiagramWidget extends Composite {
 	/*
 	 * Native JS-Functions
 	 */
-
 	private native void initJavascriptCallbacks()/*-{
 													var self = this;
 													var callbackSaveDiagramFn = $entry(function(val) {

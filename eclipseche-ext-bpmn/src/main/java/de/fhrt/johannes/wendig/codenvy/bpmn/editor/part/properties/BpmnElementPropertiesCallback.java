@@ -11,9 +11,11 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties;
 
+import com.google.gwt.query.client.GQuery;
+
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
 
 public interface BpmnElementPropertiesCallback {
-	public void elementSelected(BpmnEditorDiagramWidget.ElementType type);
-	public void elementUnselected();
+	public void elementSelected(BpmnEditorDiagramWidget.ElementType type, GQuery selectedItem);
+	public void containerSelected(GQuery base);
 }

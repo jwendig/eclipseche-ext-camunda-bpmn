@@ -28,14 +28,12 @@ import org.eclipse.che.ide.util.loging.Log;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.inject.Inject;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.BpmnExtension;
 import de.fhrt.johannes.wendig.codenvy.bpmn.BpmnResource;
 import de.fhrt.johannes.wendig.codenvy.bpmn.camunda.CamundaFormKeyType;
 import de.fhrt.johannes.wendig.codenvy.bpmn.camunda.CamundaJavaDelegateType;
 import de.fhrt.johannes.wendig.codenvy.bpmn.camunda.CamundaTypeHolder;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesCallback;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesPresenter;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.util.ProjectParser;
@@ -70,8 +68,7 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 		this.bpmnResource = bpmnResource;
 		this.bpmnElementPropertiesEditorPresenter = bpmnElementPropertiesPresenter;
 		bpmnDiagramWidget = new BpmnEditorDiagramWidget(this,
-				(BpmnElementPropertiesCallback) bpmnElementPropertiesPresenter,
-				bpmnResource);
+				bpmnElementPropertiesPresenter, bpmnResource);
 		bpmnDiagramWidget.setSize("100%", "100%");
 
 	}
@@ -104,7 +101,8 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 	public void activate() {
 		Log.info(BpmnEditor.class, "activate");
 
-		parseProjectForCamundaElements();
+		// TODO: find a solution ....
+		// parseProjectForCamundaElements();
 	}
 
 	@Override
@@ -116,8 +114,6 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 	@Override
 	public void onClose(@Nonnull final AsyncCallback<Void> callback) {
 		Log.info(BpmnEditor.class, "onClose");
-
-		parseProjectForCamundaElements();
 
 		if (isDirty()) {
 			Log.info(BpmnEditor.class, "onClose: file IS DIRTY");
@@ -170,8 +166,6 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 	protected void initializeEditor() {
 		Log.info(BpmnEditor.class, "initializeEditor");
 
-		parseProjectForCamundaElements();
-
 		projectServiceClient.getFileContent(input.getFile().getPath(),
 				new AsyncRequestCallback<String>(new StringUnmarshaller()) {
 					@Override
@@ -198,6 +192,8 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 				});
 
 		initSvgFileVariables();
+
+		// TODO: disable and move to newFileAction
 		createSvgFile();
 
 		workspaceAgent.openPart(bpmnElementPropertiesEditorPresenter,
@@ -364,6 +360,8 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 		Log.info(BpmnEditor.class, "setCurrentXmlContent");
 		currentXmlContent = xml;
 
+		// TODO: find a solution ....
+		// parseProjectForCamundaElements();
 	}
 
 	/*

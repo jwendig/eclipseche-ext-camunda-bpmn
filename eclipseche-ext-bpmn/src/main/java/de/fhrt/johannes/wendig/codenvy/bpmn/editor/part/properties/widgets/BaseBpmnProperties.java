@@ -13,6 +13,7 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets;
 import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.query.client.GQuery;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.Composite;
@@ -34,25 +35,33 @@ public class BaseBpmnProperties extends Composite {
 	private DockLayoutPanel docLpRoot;
 	private Label lbElementName;
 	private TabLayoutPanel tabLpContent;
+	private GQuery selectedItem;
 
 	public BaseBpmnProperties(String lbElementName_prefixText) {
 		super();
+		Log.info(BaseBpmnProperties.class, "constructor");
 
 		this.lbElementName_prefixText = lbElementName_prefixText;
 
-		docLpRoot = new DockLayoutPanel(Unit.PX);
+		docLpRoot = new DockLayoutPanel(Unit.EM);
 		docLpRoot.setSize("100%", "100%");
 
 		lbElementName = new Label(LABEL_ELEMENT_NAME__DEFAULT_CONTENT);
 		lbElementName.setSize("100%", "100%");
 
-		tabLpContent = new TabLayoutPanel(1.5, Unit.EM);
+		tabLpContent = new TabLayoutPanel(1, Unit.EM);
 		tabLpContent.setSize("100%", "100%");
 
-		docLpRoot.addNorth(lbElementName, lbElementName.getOffsetHeight());
+		docLpRoot.addNorth(lbElementName, 1);
 		docLpRoot.add(tabLpContent);
 
 		initWidget(docLpRoot);
+	}
+
+	public void setSelectedItem(GQuery selectedItem) {
+		Log.info(BaseBpmnProperties.class, "setSelectedItem");
+		this.selectedItem = selectedItem;
+		setLbElementNameText(selectedItem.attr("data-element-id"));
 	}
 
 	@Override
@@ -100,6 +109,5 @@ public class BaseBpmnProperties extends Composite {
 	public DockLayoutPanel getDocLpRoot() {
 		return docLpRoot;
 	}
-	
-	
+
 }

@@ -10,6 +10,8 @@ var bpmnIo_saveSVG;
 var bpmnIo_saveDiagram;
 var bpmnIo_exportArtifacts;
 
+
+
 /*
  * Functions to set the callbacks
  */
@@ -22,7 +24,6 @@ function setBpmnIo_callbackSaveSVG(callback){
 }
 
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-
 
 var $ = require('jquery'),
     BpmnModeler = require('bpmn-js/lib/Modeler');
@@ -54,7 +55,7 @@ bpmnIo_openDiagram = function bpmnIo_openDiagram(xml) {
 
 bpmnIo_saveSVG = function bpmnIo_saveSVG(done) {
   console.log("bpmnIo_saveSVG");
-//  renderer.bpmnIo_saveSVG(done);
+// renderer.bpmnIo_saveSVG(done);
   	renderer.bpmnIo_saveSVG(function(err, svg) {
 	    done(err, svg);
 	    bpmnIo_callback_saveSVG(svg);
@@ -77,55 +78,55 @@ bpmnIo_saveDiagram = function bpmnIo_saveDiagram(done) {
 // bootstrap diagram functions
 
 
-//$(document).on('ready', function() {	// EDIT: begin of
+// $(document).on('ready', function() { // EDIT: begin of
 										// Document-Ready-function
 
-//  $('#js-create-diagram').click(function(e) {
-//    e.stopPropagation();
-//    e.preventDefault();
+// $('#js-create-diagram').click(function(e) {
+// e.stopPropagation();
+// e.preventDefault();
 //
-//    bpmnIo_createNewDiagram();
-//  });
+// bpmnIo_createNewDiagram();
+// });
 //
-//  var downloadLink = $('#js-download-diagram');
-//  var downloadSvgLink = $('#js-download-svg');
+// var downloadLink = $('#js-download-diagram');
+// var downloadSvgLink = $('#js-download-svg');
 //
-//  $('.buttons a').click(function(e) {
-//    if (!$(this).is('.active')) {
-//      e.preventDefault();
-//      e.stopPropagation();
-//    }
-//  });
+// $('.buttons a').click(function(e) {
+// if (!$(this).is('.active')) {
+// e.preventDefault();
+// e.stopPropagation();
+// }
+// });
 //
-//  function setEncoded(link, name, data) {
-//    var encodedData = encodeURIComponent(data);
+// function setEncoded(link, name, data) {
+// var encodedData = encodeURIComponent(data);
 //
-//    if (data) {
-//      link.addClass('active').attr({
-//        'href': 'data:application/bpmn20-xml;charset=UTF-8,' + encodedData,
-//        'download': name
-//      });
-//    } else {
-//      link.removeClass('active');
-//    }
-//  }
+// if (data) {
+// link.addClass('active').attr({
+// 'href': 'data:application/bpmn20-xml;charset=UTF-8,' + encodedData,
+// 'download': name
+// });
+// } else {
+// link.removeClass('active');
+// }
+// }
 //
-//  var _ = require('lodash');
+// var _ = require('lodash');
 //
-//  var bpmnIo_exportArtifacts = _.debounce(function() {
+// var bpmnIo_exportArtifacts = _.debounce(function() {
 //
-//    bpmnIo_saveSVG(function(err, svg) {
-//      setEncoded(downloadSvgLink, 'diagram.svg', err ? null : svg);
-//    });
+// bpmnIo_saveSVG(function(err, svg) {
+// setEncoded(downloadSvgLink, 'diagram.svg', err ? null : svg);
+// });
 //
-//    bpmnIo_saveDiagram(function(err, xml) {
-//      setEncoded(downloadLink, 'diagram.bpmn', err ? null : xml);
-//    });
-//  }, 500);
+// bpmnIo_saveDiagram(function(err, xml) {
+// setEncoded(downloadLink, 'diagram.bpmn', err ? null : xml);
+// });
+// }, 500);
 //
-//  renderer.on('commandStack.changed', bpmnIo_exportArtifacts);
+// renderer.on('commandStack.changed', bpmnIo_exportArtifacts);
   
-//});	// EDIT: end of Document-Ready-function
+// }); // EDIT: end of Document-Ready-function
   
 $(document).on('ready', function() {	// EDIT: begin of
 	// Document-Ready-function
@@ -135,11 +136,11 @@ var _ = require('lodash');
 bpmnIo_exportArtifacts = _.debounce(function() {
 	console.log("bpmnIo_exportArtifacts");
 bpmnIo_saveSVG(function(err, svg) {
-//setEncoded(downloadSvgLink, 'diagram.svg', err ? null : svg);
+// setEncoded(downloadSvgLink, 'diagram.svg', err ? null : svg);
 });
 
 bpmnIo_saveDiagram(function(err, xml) {
-//setEncoded(downloadLink, 'diagram.bpmn', err ? null : xml);
+// setEncoded(downloadLink, 'diagram.bpmn', err ? null : xml);
 });
 }, 500);
 
@@ -3076,8 +3077,10 @@ BpmnFactory.prototype._needsId = function(element) {
 
 BpmnFactory.prototype._ensureId = function(element) {
 
+	
   // generate semantic ids for elements
   // bpmn:SequenceFlow -> SequenceFlow_ID
+	
   var prefix = (element.$type || '').replace(/^[^:]*:/g, '') + '_';
 
   if (!element.id && this._needsId(element)) {
@@ -13394,8 +13397,8 @@ function createInjector(options) {
  * MyLoggingPlugin(eventBus) { eventBus.on('shape.added', function(event) {
  * console.log('shape ', event.shape, ' was added to the diagram'); }); } //
  * export as module module.exports = { __init__: [ 'myLoggingPlugin' ],
- * myLoggingPlugin: [ 'type', MyLoggingPlugin ] };
- *  // instantiate the diagram with the new plug-in
+ * myLoggingPlugin: [ 'type', MyLoggingPlugin ] }; // instantiate the diagram
+ * with the new plug-in
  * 
  * var diagram = new Diagram({ modules: [ require('path-to-my-logging-plugin') ]
  * });
@@ -19744,8 +19747,8 @@ function setVisible(el, visible) {
  * add with optional type
  * 
  * overlays.add(someShape, 'badge', { position: { top: -5, left: -5 } html: '<div
- * style="width: 10px; background: fuchsia; color: white;">0</div>' });
- *  // remove an overlay
+ * style="width: 10px; background: fuchsia; color: white;">0</div>' }); //
+ * remove an overlay
  * 
  * var id = overlays.add(...); overlays.remove(id);
  * 

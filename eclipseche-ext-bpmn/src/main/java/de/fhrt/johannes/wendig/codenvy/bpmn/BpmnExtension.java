@@ -89,7 +89,8 @@ public class BpmnExtension {
 			BpmnEditorProvider bpmnEditorProvider, FileType bpmnFileType) {
 		Log.info(BpmnExtension.class, "registerBpmnEditor");
 		editorRegistry.registerDefaultEditor(bpmnFileType, bpmnEditorProvider);
-		editorRegistry.register(bpmnFileType, bpmnEditorProvider);
+// TODO: check if work without
+//		editorRegistry.register(bpmnFileType, bpmnEditorProvider);
 	}
 
 	private void addNewBpmnFileAction(ActionManager actionManager,

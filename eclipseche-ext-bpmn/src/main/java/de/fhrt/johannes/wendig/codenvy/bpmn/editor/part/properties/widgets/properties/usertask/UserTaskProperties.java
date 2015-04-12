@@ -17,6 +17,7 @@ import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RenderableStamper;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -30,6 +31,7 @@ public class UserTaskProperties extends BaseBpmnProperties {
 	public UserTaskProperties() {
 		super(LB_ELEMENT_NAME_PREFIX);
 
+		getTabLpContent().add(new Label("TODO: tabs - UserTaskProperties"));
 	}
 
 	@Override
