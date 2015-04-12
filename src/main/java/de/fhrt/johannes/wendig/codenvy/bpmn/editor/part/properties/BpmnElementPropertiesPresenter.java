@@ -12,22 +12,27 @@
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties;
 
 import org.eclipse.che.ide.api.parts.AbstractPartPresenter;
+import org.eclipse.che.ide.util.loging.Log;
 
+import com.google.gwt.query.client.GQuery;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
+
 @Singleton
 public class BpmnElementPropertiesPresenter extends AbstractPartPresenter
-		implements BpmnElementPropertiesView.ActionDelegate {
+		implements BpmnElementPropertiesView.ActionDelegate,
+		BpmnElementPropertiesCallback {
 
 	private BpmnElementPropertiesView view;
 	private final static String TITLE = "BPMN Properties";
 
 	@Inject
-	public BpmnElementPropertiesPresenter(
-			BpmnElementPropertiesView view) {
+	public BpmnElementPropertiesPresenter(BpmnElementPropertiesView view) {
+		Log.info(BpmnElementPropertiesPresenter.class, "constructor");
 		this.view = view;
 		this.view.setDelegate(this);
 	}
@@ -49,6 +54,38 @@ public class BpmnElementPropertiesPresenter extends AbstractPartPresenter
 
 	@Override
 	public void go(AcceptsOneWidget container) {
+		Log.info(BpmnElementPropertiesPresenter.class, "go");
 		container.setWidget(view);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.
+	 * BpmnElementPropertiesCallback#elementSelected()
+	 */
+	@Override
+	public void elementSelected(BpmnEditorDiagramWidget.ElementType type,
+			GQuery selectedItem) {
+		Log.info(BpmnElementPropertiesPresenter.class, "elementSelected");
+		switch (type) {
+		case SERVICE_TASK:
+			view.loadServiceTaksProperties(selectedItem);
+			break;
+		case USER_TASK:
+			view.loadUserTaskProperties(selectedItem);
+			break;
+		case START_EVENT:
+			view.loadStartEventProperties(selectedItem);
+			break;
+		case UNKNOWN:
+			view.loadUnknownItemInfo(selectedItem);
+		}
+	}
+
+	@Override
+	public void containerSelected(GQuery base) {
+		view.loadProcessProperties(base);
+
 	}
 }

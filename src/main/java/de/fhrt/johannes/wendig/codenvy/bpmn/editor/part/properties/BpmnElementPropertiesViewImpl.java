@@ -10,7 +10,10 @@
  *******************************************************************************/
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties;
 
+import org.eclipse.che.ide.util.loging.Log;
+
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.query.client.GQuery;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.inject.Inject;
@@ -19,11 +22,12 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.BaseB
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.properties.process.ProcessProperties;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.properties.servicetask.ServiceTaskProperties;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.properties.startevent.StartEventProperties;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.properties.unknown.UnknownItem;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.properties.usertask.UserTaskProperties;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
 
 public class BpmnElementPropertiesViewImpl extends Composite implements
-		BpmnElementPropertiesView, BpmnElementPropertiesCallback {
+		BpmnElementPropertiesView {
 
 	private DockLayoutPanel dockLpCurrentContent;
 
@@ -31,19 +35,23 @@ public class BpmnElementPropertiesViewImpl extends Composite implements
 	private ServiceTaskProperties serviceTaskProperties;
 	private StartEventProperties startEventProperties;
 	private UserTaskProperties userTaskProperties;
+	private UnknownItem unknowItemProperties;
 
 	private BaseBpmnProperties currentProperties;
 
 	@Inject
 	public BpmnElementPropertiesViewImpl() {
+		Log.info(BpmnElementPropertiesViewImpl.class, "constructor");
 		processProperties = new ProcessProperties();
 		serviceTaskProperties = new ServiceTaskProperties();
 		startEventProperties = new StartEventProperties();
 		userTaskProperties = new UserTaskProperties();
+		unknowItemProperties = new UnknownItem();
 
 		currentProperties = processProperties;
 
 		dockLpCurrentContent = new DockLayoutPanel(Unit.PX);
+		dockLpCurrentContent.setSize("100%", "100%");
 		dockLpCurrentContent.add(processProperties);
 
 		initWidget(dockLpCurrentContent);
@@ -51,44 +59,53 @@ public class BpmnElementPropertiesViewImpl extends Composite implements
 
 	@Override
 	public void setDelegate(ActionDelegate delegate) {
-
+		Log.info(BpmnElementPropertiesViewImpl.class, "setDelegate");
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.
-	 * BpmnElementPropertiesCallback#elementSelected()
-	 */
 	@Override
-	public void elementSelected(BpmnEditorDiagramWidget.ElementType type) {
-		dockLpCurrentContent.remove(currentProperties);
-		switch (type) {
-		case SERVICE_TASK:
-			currentProperties = serviceTaskProperties;
-			break;
-		case USER_TASK:
-			currentProperties = userTaskProperties;
-			break;
-		case START_EVENT:
-			currentProperties = startEventProperties;
-			break;
-		case UNKNOWN:
-			currentProperties = processProperties;
-		}
-		dockLpCurrentContent.add(currentProperties);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.
-	 * BpmnElementPropertiesCallback#elementUnselected()
-	 */
-	@Override
-	public void elementUnselected() {
+	public void loadProcessProperties(GQuery selectedItem) {
+		Log.info(BpmnElementPropertiesViewImpl.class, "loadProcessProperties");
 		dockLpCurrentContent.remove(currentProperties);
 		currentProperties = processProperties;
+		currentProperties.setSelectedItem(selectedItem);
 		dockLpCurrentContent.add(currentProperties);
 	}
+
+	@Override
+	public void loadUserTaskProperties(GQuery selectedItem) {
+		Log.info(BpmnElementPropertiesViewImpl.class, "loadUserTaskProperties");
+		dockLpCurrentContent.remove(currentProperties);
+		currentProperties = userTaskProperties;
+		currentProperties.setSelectedItem(selectedItem);
+		dockLpCurrentContent.add(currentProperties);
+	}
+
+	@Override
+	public void loadServiceTaksProperties(GQuery selectedItem) {
+		Log.info(BpmnElementPropertiesViewImpl.class,
+				"loadServiceTaksProperties");
+		dockLpCurrentContent.remove(currentProperties);
+		currentProperties = serviceTaskProperties;
+		currentProperties.setSelectedItem(selectedItem);
+		dockLpCurrentContent.add(currentProperties);
+	}
+
+	@Override
+	public void loadStartEventProperties(GQuery selectedItem) {
+		Log.info(BpmnElementPropertiesViewImpl.class,
+				"loadStartEventProperties");
+		dockLpCurrentContent.remove(currentProperties);
+		currentProperties = startEventProperties;
+		currentProperties.setSelectedItem(selectedItem);
+		dockLpCurrentContent.add(currentProperties);
+	}
+
+	@Override
+	public void loadUnknownItemInfo(GQuery selectedItem) {
+		dockLpCurrentContent.remove(currentProperties);
+		currentProperties = unknowItemProperties;
+		currentProperties.setSelectedItem(selectedItem);
+		dockLpCurrentContent.add(currentProperties);
+	}
+
 }

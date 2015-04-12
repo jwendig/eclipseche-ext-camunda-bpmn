@@ -11,8 +11,11 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.properties.process;
 
+import org.eclipse.che.ide.util.loging.Log;
+
 import com.google.gwt.user.cellview.client.CellTable;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.BaseBpmnProperties;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.BaseBpmnPropertiesTab;
 
 public class TabDefinitions extends BaseBpmnPropertiesTab {
@@ -26,6 +29,7 @@ public class TabDefinitions extends BaseBpmnPropertiesTab {
 	
 	public TabDefinitions() {
 		super();
+		Log.info(TabDefinitions.class, "constructor");
 		
 		initContentElements();
 		initContent();
@@ -33,10 +37,12 @@ public class TabDefinitions extends BaseBpmnPropertiesTab {
 	
 	@Override
 	public String getTabName() {
+		Log.info(TabDefinitions.class, "getTabName");
 		return TAB_NAME;
 	}
 //	@Override
 	public void initContent() {
+		Log.info(TabDefinitions.class, "initContent");
 		getTabContent().resize(4, 2);
 
 		getTabContent().setText(0, 0, "Errors:");
@@ -51,10 +57,15 @@ public class TabDefinitions extends BaseBpmnPropertiesTab {
 	}
 //	@Override
 	public void initContentElements() {
+		Log.info(TabDefinitions.class, "initContentElements");
 		ctErrors = new CellTable<String>();
+		ctErrors.setWidth("100%");
 		ctMessages = new CellTable<String>();
+		ctMessages.setWidth("100%");
 		ctSignals = new CellTable<String>();
+		ctSignals.setWidth("100%");
 		ctDataStores = new CellTable<String>();
+		ctDataStores.setWidth("100%");
 	}
 
 }

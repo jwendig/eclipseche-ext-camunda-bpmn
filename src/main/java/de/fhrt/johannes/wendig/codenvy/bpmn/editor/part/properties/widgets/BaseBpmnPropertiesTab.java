@@ -21,6 +21,7 @@ public class BaseBpmnPropertiesTab extends Composite {
 	public BaseBpmnPropertiesTab() {
 		super();
 		tabContent = new Grid();
+		tabContent.setSize("100%", "100%");
 		
 //		initContentElements();
 //		initContent();

@@ -11,10 +11,12 @@
 package de.fhrt.johannes.wendig.codenvy.bpmn;
 
 import org.eclipse.che.ide.api.action.ActionEvent;
+import org.eclipse.che.ide.api.project.tree.TreeNode;
 import org.eclipse.che.ide.api.project.tree.generic.StorableNode;
 import org.eclipse.che.ide.newresource.AbstractNewResourceAction;
 import org.eclipse.che.ide.util.loging.Log;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -55,15 +57,14 @@ public class NewBpmnFileAction extends AbstractNewResourceAction {
 		return BpmnExtension.BPMN_MIME_TYPE;
 	}
 
-	/*
-	 *	Log for call-informations
-	 *	TODO:	maybe create svg-file here 
-	 */
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		/*
+		 * Log for call-informations TODO: maybe create svg-file here
+		 */
 		Log.info(NewBpmnFileAction.class, "actionPerformed");
 		super.actionPerformed(e);
+		Log.info(NewBpmnFileAction.class, "actionPerformed - after");
 	}
 
 	@Override
@@ -71,12 +72,4 @@ public class NewBpmnFileAction extends AbstractNewResourceAction {
 		Log.info(NewBpmnFileAction.class, "updateProjectAction");
 		super.updateProjectAction(e);
 	}
-
-	@Override
-	protected StorableNode getNewResourceParent() {
-		Log.info(NewBpmnFileAction.class, "getNewResourceParent");
-		return super.getNewResourceParent();
-	}
-	
-	
 }

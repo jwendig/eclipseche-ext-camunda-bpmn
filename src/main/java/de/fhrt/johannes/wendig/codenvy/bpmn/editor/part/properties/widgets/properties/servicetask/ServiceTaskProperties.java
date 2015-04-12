@@ -28,6 +28,8 @@ public class ServiceTaskProperties extends BaseBpmnProperties {
 	public ServiceTaskProperties() {
 		super(LB_ELEMENT_NAME_PREFIX);
 		
+		getTabLpContent().add(new Label("TODO: tabs - ServiceTaskProperties"));
+		
 	}
 
 	@Override

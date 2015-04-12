@@ -28,16 +28,17 @@ public class ProcessProperties extends BaseBpmnProperties {
 
 	public ProcessProperties() {
 		super(LB_ELEMENT_NAME_PREFIX);
+		Log.info(ProcessProperties.class, "constructor");
 
 		tabGeneralProperties = new TabGeneral();
 		tabDefinitionsProperties = new TabDefinitions();
 
-//		getTabLpContent().add(tabGeneralProperties,
-//				tabGeneralProperties.getTabName());
-//		getTabLpContent().add(tabDefinitionsProperties,
-//				tabDefinitionsProperties.getTabName());
-//
-//		getTabLpContent().selectTab(tabGeneralProperties);
+		getTabLpContent().add(tabGeneralProperties,
+				tabGeneralProperties.getTabName());
+		getTabLpContent().add(tabDefinitionsProperties,
+				tabDefinitionsProperties.getTabName());
+
+		getTabLpContent().selectTab(tabGeneralProperties);
 	}
 
 	@Override
