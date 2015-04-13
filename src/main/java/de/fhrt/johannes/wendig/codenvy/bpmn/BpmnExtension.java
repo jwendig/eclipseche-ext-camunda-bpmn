@@ -53,8 +53,8 @@ public class BpmnExtension {
 
 	@Inject
 	public BpmnExtension(WorkspaceAgent workspaceAgent,
-			HowToPresenter howToPresenter,
-			EditorRegistry editorRegistry, FileTypeRegistry fileTypeRegistry,
+			HowToPresenter howToPresenter, EditorRegistry editorRegistry,
+			FileTypeRegistry fileTypeRegistry,
 			BpmnEditorProvider bpmnEditorProvider, ActionManager actionManager,
 			NewBpmnFileAction newBpmnFileAction, BpmnResource bpmnResource) {
 		Log.info(BpmnExtension.class, "constructor");
@@ -89,8 +89,7 @@ public class BpmnExtension {
 			BpmnEditorProvider bpmnEditorProvider, FileType bpmnFileType) {
 		Log.info(BpmnExtension.class, "registerBpmnEditor");
 		editorRegistry.registerDefaultEditor(bpmnFileType, bpmnEditorProvider);
-// TODO: check if work without
-//		editorRegistry.register(bpmnFileType, bpmnEditorProvider);
+		editorRegistry.register(bpmnFileType, bpmnEditorProvider);
 	}
 
 	private void addNewBpmnFileAction(ActionManager actionManager,

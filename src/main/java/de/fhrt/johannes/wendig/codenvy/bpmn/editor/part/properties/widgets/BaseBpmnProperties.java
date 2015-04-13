@@ -51,11 +51,13 @@ public class BaseBpmnProperties extends Composite {
 
 		tabLpContent = new TabLayoutPanel(1, Unit.EM);
 		tabLpContent.setSize("100%", "100%");
-
-		docLpRoot.addNorth(lbElementName, 1);
+		tabLpContent.addStyleName("bpmnPropertiesWidget-tabLayoutPanel");
+		
+		docLpRoot.addNorth(lbElementName, 1.5);
 		docLpRoot.add(tabLpContent);
 
 		initWidget(docLpRoot);
+		
 	}
 
 	public void setSelectedItem(GQuery selectedItem) {

@@ -40,10 +40,16 @@ public interface BpmnResource extends ClientBundle {
 
 	@Source("bpmn-io-editor/css/diagram-js.css")
 	CssResource getBpmnDiagramJsCss();
+	
+//	@Source("bpmn-io-editor/css/custom.css")
+//	CssResource getBpmnDiagramJsCustomCss();
 
 	@Source("bpmn-io-editor/css/app.css")
 	CssResource getBpmnAppCss();
 
 	@Source("bpmn-io-editor/vendor/bpmn-font/css/bpmn-embedded.css")
 	CssResource getBpmnFontCss();
+	
+	@Source("bpmn-io-properties/css/gwt-custom.css")
+	CssResource getBpmnPropertiesTabCss();
 }

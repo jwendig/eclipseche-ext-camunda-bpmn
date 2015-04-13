@@ -16,27 +16,28 @@ import com.google.gwt.user.client.ui.Grid;
 
 public class BaseBpmnPropertiesTab extends Composite {
 
-	private Grid tabContent;
+	private Grid gridTabContent;
 
 	public BaseBpmnPropertiesTab() {
 		super();
-		tabContent = new Grid();
-		tabContent.setSize("100%", "100%");
-		
-//		initContentElements();
-//		initContent();
-		
-		initWidget(tabContent);
+		gridTabContent = new Grid();
+		gridTabContent.setSize("100%", "100%");
+		gridTabContent.getColumnFormatter().setWidth(0, "120px");
+
+		// initContentElements();
+		// initContent();
+
+		initWidget(gridTabContent);
 	}
 
 	/*
 	 * abstract functions
 	 */
-//	public void initContentElements() {
-//	}
-//
-//	public void initContent() {
-//	}
+	// public void initContentElements() {
+	// }
+	//
+	// public void initContent() {
+	// }
 
 	public String getTabName() {
 		return "Name of tab is not defined";
@@ -46,11 +47,11 @@ public class BaseBpmnPropertiesTab extends Composite {
 	 * getter & setter
 	 */
 
-	public Grid getTabContent() {
-		return tabContent;
+	public Grid getGridTabContent() {
+		return gridTabContent;
 	}
 
-	public void setTabContent(Grid content) {
-		this.tabContent = content;
+	public void setGridTabContent(Grid content) {
+		this.gridTabContent = content;
 	}
 }
