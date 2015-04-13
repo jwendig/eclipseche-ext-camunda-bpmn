@@ -43,17 +43,17 @@ public class TabDefinitions extends BaseBpmnPropertiesTab {
 //	@Override
 	public void initContent() {
 		Log.info(TabDefinitions.class, "initContent");
-		getTabContent().resize(4, 2);
+		getGridTabContent().resize(4, 2);
 
-		getTabContent().setText(0, 0, "Errors:");
-		getTabContent().setText(1, 0, "Messages:");
-		getTabContent().setText(2, 0, "Signals:");
-		getTabContent().setText(3, 0, "Data Stores:");
+		getGridTabContent().setText(0, 0, "Errors:");
+		getGridTabContent().setText(1, 0, "Messages:");
+		getGridTabContent().setText(2, 0, "Signals:");
+		getGridTabContent().setText(3, 0, "Data Stores:");
 
-		getTabContent().setWidget(0, 1, ctErrors);
-		getTabContent().setWidget(1, 1, ctMessages);
-		getTabContent().setWidget(2, 1, ctSignals);
-		getTabContent().setWidget(3, 1, ctDataStores);
+		getGridTabContent().setWidget(0, 1, ctErrors);
+		getGridTabContent().setWidget(1, 1, ctMessages);
+		getGridTabContent().setWidget(2, 1, ctSignals);
+		getGridTabContent().setWidget(3, 1, ctDataStores);
 	}
 //	@Override
 	public void initContentElements() {

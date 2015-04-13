@@ -16,29 +16,18 @@ import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.ScriptInjector;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.query.client.Function;
 import com.google.gwt.query.client.GQuery;
-import com.google.gwt.safehtml.shared.SafeHtml;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RenderableStamper;
-import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.SplitLayoutPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.BpmnResource;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorCallback;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesCallback;
 
 public class BpmnEditorDiagramWidget extends Composite {
-
 
 	public enum ElementType {
 		UNKNOWN, START_EVENT, USER_TASK, SERVICE_TASK;
@@ -79,6 +68,8 @@ public class BpmnEditorDiagramWidget extends Composite {
 		bpmnResource.getBpmnDiagramJsCss().ensureInjected();
 		bpmnResource.getBpmnAppCss().ensureInjected();
 		bpmnResource.getBpmnFontCss().ensureInjected();
+		bpmnResource.getBpmnPropertiesTabCss().ensureInjected();
+//		bpmnResource.getBpmnDiagramJsCustomCss().ensureInjected();
 	}
 
 	private void initDiagramHtmlPanel() {
@@ -131,8 +122,8 @@ public class BpmnEditorDiagramWidget extends Composite {
 		/*
 		 * Add click listener to diagram-container if listener not set
 		 */
-		$(".bjs-container", diagramHtmlPanel).not(".bpmnEditorIsListening")
-				.click(new Function() {
+		$(".bjs-container:not(.bpmnEditorIsListening)", diagramHtmlPanel).click(
+				new Function() {
 					public boolean f(Event e) {
 						if (null != e.getEventTarget()
 								&& $(e.getEventTarget()).attr("class").length() == 0) {
@@ -151,8 +142,8 @@ public class BpmnEditorDiagramWidget extends Composite {
 		/*
 		 * Add click listener to diagram-elements if listener not set
 		 */
-		$(".djs-element", diagramHtmlPanel).not(".bpmnEditorIsListening")
-				.click(new Function() {
+		$(".djs-element:not(.bpmnEditorIsListening)", diagramHtmlPanel).click(
+				new Function() {
 					public boolean f(Event e) {
 						Log.info(
 								BpmnEditorDiagramWidget.class,
@@ -179,7 +170,12 @@ public class BpmnEditorDiagramWidget extends Composite {
 								qSelectedItem);
 						return true;
 					}
-				}).addClass("bpmnEditorIsListening");
+				}).each(new Function() {
+			public void f(Element e) {
+				$(e).addClass("bpmnEditorIsListening");
+			}
+		});
+
 	}
 
 	public void changeAttrCamundaClass() {

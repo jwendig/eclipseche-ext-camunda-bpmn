@@ -1,0 +1,9 @@
+@external .djs-context-pad, .open, .entry;
+
+.djs-context-pad.open {
+	color: #000;
+}
+
+.djs-context-pad .entry{
+	width:auto;
+}

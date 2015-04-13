@@ -39,19 +39,19 @@ public class TabGeneral extends BaseBpmnPropertiesTab {
 	// @Override
 	public void initContent() {
 		Log.info(TabGeneral.class, "initContent");
-		getTabContent().resize(5, 2);
+		getGridTabContent().resize(5, 2);
 
-		getTabContent().setText(0, 0, "Process Id:");
-		getTabContent().setText(1, 0, "Name:");
-		getTabContent().setText(2, 0, "Is Executable:");
-		getTabContent().setText(3, 0, "Data Objects:");
-		getTabContent().setText(4, 0, "Documentation:");
+		getGridTabContent().setText(0, 0, "Process Id:");
+		getGridTabContent().setText(1, 0, "Name:");
+		getGridTabContent().setText(2, 0, "Is Executable:");
+		getGridTabContent().setText(3, 0, "Data Objects:");
+		getGridTabContent().setText(4, 0, "Documentation:");
 
-		getTabContent().setWidget(0, 1, tbProcessId);
-		getTabContent().setWidget(1, 1, tbName);
-		getTabContent().setWidget(2, 1, cbIsExecutable);
-		getTabContent().setWidget(3, 1, ctDataObjects);
-		getTabContent().setWidget(4, 1, tbDocumentation);
+		getGridTabContent().setWidget(0, 1, tbProcessId);
+		getGridTabContent().setWidget(1, 1, tbName);
+		getGridTabContent().setWidget(2, 1, cbIsExecutable);
+		getGridTabContent().setWidget(3, 1, ctDataObjects);
+		getGridTabContent().setWidget(4, 1, tbDocumentation);
 	}
 
 	// @Override
