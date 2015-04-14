@@ -23,10 +23,13 @@ import com.google.gwt.user.client.ui.Widget;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnProperties;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.UserTaskJso;
 
 public class UserTaskProperties extends AbstractBpmnProperties {
 
 	private final static String LB_ELEMENT_NAME_PREFIX = "User Task";
+	private UserTaskJso element;
 
 	public UserTaskProperties() {
 		super(LB_ELEMENT_NAME_PREFIX);
@@ -34,33 +37,16 @@ public class UserTaskProperties extends AbstractBpmnProperties {
 		getTabLpContent().add(new Label("TODO: tabs - UserTaskProperties"));
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.
+	 * AbstractBpmnProperties
+	 * #initSelectedItem(de.fhrt.johannes.wendig.codenvy.bpmn
+	 * .editor.widget.diagram.bpmnelements.BpmnDiagramElementJso)
+	 */
 	@Override
-	public void initializeClaimedElement() {
-		super.initializeClaimedElement();
-		Log.info(UserTaskProperties.class, "initializeClaimedElement");
-	}
-
-	@Override
-	public SafeHtml render(RenderableStamper stamper) {
-		Log.info(UserTaskProperties.class, "render");
-		return super.render(stamper);
-	}
-
-	@Override
-	public void render(RenderableStamper stamper, SafeHtmlBuilder builder) {
-		super.render(stamper, builder);
-		Log.info(UserTaskProperties.class, "render");
-	}
-
-	@Override
-	protected void initWidget(Widget widget) {
-		super.initWidget(widget);
-		Log.info(UserTaskProperties.class, "initWidget");
-	}
-
-	@Override
-	protected void onAttach() {
-		super.onAttach();
-		Log.info(UserTaskProperties.class, "onAttach");
+	public void initSelectedItem(BpmnDiagramElementJso selectedItem) {
+		element = selectedItem;
 	}
 }

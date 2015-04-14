@@ -18,23 +18,17 @@ import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnProcessJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.CamundaElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 
-public class AbstractBpmnProperties extends Composite {
+public abstract class AbstractBpmnProperties extends Composite {
 
 	private static final String LABEL_ELEMENT_NAME__DEFAULT_CONTENT = "No BPMN-Element selected";
 	private String lbElementName_prefixText;
-	/*
-	 * Make TabLayoutPanel vertical See: css-solution on
-	 * http://stackoverflow.com/questions/3810876/gwt-vertical-tabs-like-igoogle
-	 */
 
 	private DockLayoutPanel docLpRoot;
 	private Label lbElementName;
 	private TabLayoutPanel tabLpContent;
-	private CamundaElementJso selectedItem;
-	private BpmnProcessJso selectedProcess;
+	private BpmnDiagramElementJso selectedItem;
 
 	public AbstractBpmnProperties(String lbElementName_prefixText) {
 		super();
@@ -59,15 +53,15 @@ public class AbstractBpmnProperties extends Composite {
 
 	}
 
-	public void setSelectedItem(CamundaElementJso selectedItem) {
+	public void setSelectedItem(BpmnDiagramElementJso selectedItem) {
 		Log.info(AbstractBpmnProperties.class, "setSelectedItem");
 		this.selectedItem = selectedItem;
+
+		setLbElementNameText(selectedItem.getAttr_id());
+		initSelectedItem(selectedItem);
 	}
 
-	public void setSelectedProcess(BpmnProcessJso selectedProcess) {
-		Log.info(AbstractBpmnProperties.class, "setSelectedProcess");
-		this.selectedProcess = selectedProcess;
-	}
+	public abstract void initSelectedItem(BpmnDiagramElementJso selectedItem);
 
 	/*
 	 * Getter & Setter

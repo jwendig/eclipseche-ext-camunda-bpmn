@@ -12,16 +12,15 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.proc
 
 import org.eclipse.che.ide.util.loging.Log;
 
-import com.google.gwt.safehtml.shared.SafeHtml;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.user.client.ui.RenderableStamper;
-import com.google.gwt.user.client.ui.Widget;
-
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnProperties;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.ProcessJso;
 
 public class ProcessProperties extends AbstractBpmnProperties {
 
 	private final static String LB_ELEMENT_NAME_PREFIX = "Process";
+
+	private ProcessJso element;
 
 	private TabGeneral tabGeneralProperties;
 	private TabDefinitions tabDefinitionsProperties;
@@ -41,33 +40,18 @@ public class ProcessProperties extends AbstractBpmnProperties {
 		getTabLpContent().selectTab(tabGeneralProperties);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.
+	 * AbstractBpmnProperties
+	 * #initSelectedItem(de.fhrt.johannes.wendig.codenvy.bpmn
+	 * .editor.widget.diagram.bpmnelements.BpmnDiagramElementJso)
+	 */
 	@Override
-	public void initializeClaimedElement() {
-		super.initializeClaimedElement();
-		Log.info(ProcessProperties.class, "initializeClaimedElement");
+	public void initSelectedItem(BpmnDiagramElementJso selectedItem) {
+		element = selectedItem;
 	}
-
-	@Override
-	public SafeHtml render(RenderableStamper stamper) {
-		Log.info(ProcessProperties.class, "render");
-		return super.render(stamper);
-	}
-
-	@Override
-	public void render(RenderableStamper stamper, SafeHtmlBuilder builder) {
-		super.render(stamper, builder);
-		Log.info(ProcessProperties.class, "render");
-	}
-
-	@Override
-	protected void initWidget(Widget widget) {
-		super.initWidget(widget);
-		Log.info(ProcessProperties.class, "initWidget");
-	}
-
-	@Override
-	protected void onAttach() {
-		super.onAttach();
-		Log.info(ProcessProperties.class, "onAttach");
-	}
+	
+	
 }

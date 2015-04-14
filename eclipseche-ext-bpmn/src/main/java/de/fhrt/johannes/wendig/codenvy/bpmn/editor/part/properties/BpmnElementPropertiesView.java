@@ -12,11 +12,9 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties;
 
 import org.eclipse.che.ide.api.mvp.View;
 
-import com.google.gwt.query.client.GQuery;
 import com.google.inject.ImplementedBy;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnProcessJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.CamundaElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 
 @ImplementedBy(BpmnElementPropertiesViewImpl.class)
 public interface BpmnElementPropertiesView extends
@@ -24,13 +22,13 @@ public interface BpmnElementPropertiesView extends
 	public interface ActionDelegate {
 	}
 
-	public void loadUnknownItemInfo(CamundaElementJso selectedItem);
+	public void loadUnknownItemInfo(BpmnDiagramElementJso selectedItem);
 
-	public void loadProcessProperties(BpmnProcessJso selectedItem);
+	public void loadProcessProperties(BpmnDiagramElementJso selectedItem);
 
-	public void loadUserTaskProperties(CamundaElementJso selectedItem);
+	public void loadUserTaskProperties(BpmnDiagramElementJso selectedItem);
 
-	public void loadServiceTaksProperties(CamundaElementJso selectedItem);
+	public void loadServiceTaksProperties(BpmnDiagramElementJso selectedItem);
 
-	public void loadStartEventProperties(CamundaElementJso selectedItem);
+	public void loadStartEventProperties(BpmnDiagramElementJso selectedItem);
 }

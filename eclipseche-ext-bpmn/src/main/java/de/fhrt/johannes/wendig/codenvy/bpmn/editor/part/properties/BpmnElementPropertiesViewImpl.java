@@ -23,8 +23,7 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.servi
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.StartEventProperties;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.unknown.UnknownItem;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.usertask.UserTaskProperties;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnProcessJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.CamundaElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 
 public class BpmnElementPropertiesViewImpl extends Composite implements
 		BpmnElementPropertiesView {
@@ -63,16 +62,16 @@ public class BpmnElementPropertiesViewImpl extends Composite implements
 	}
 
 	@Override
-	public void loadProcessProperties(BpmnProcessJso selectedItem) {
+	public void loadProcessProperties(BpmnDiagramElementJso selectedItem) {
 		Log.info(BpmnElementPropertiesViewImpl.class, "loadProcessProperties");
 		dockLpCurrentContent.remove(currentProperties);
 		currentProperties = processProperties;
-		currentProperties.setSelectedProcess(selectedItem);
+		currentProperties.setSelectedItem(selectedItem);
 		dockLpCurrentContent.add(currentProperties);
 	}
 
 	@Override
-	public void loadUserTaskProperties(CamundaElementJso selectedItem) {
+	public void loadUserTaskProperties(BpmnDiagramElementJso selectedItem) {
 		Log.info(BpmnElementPropertiesViewImpl.class, "loadUserTaskProperties");
 		dockLpCurrentContent.remove(currentProperties);
 		currentProperties = userTaskProperties;
@@ -81,7 +80,7 @@ public class BpmnElementPropertiesViewImpl extends Composite implements
 	}
 
 	@Override
-	public void loadServiceTaksProperties(CamundaElementJso selectedItem) {
+	public void loadServiceTaksProperties(BpmnDiagramElementJso selectedItem) {
 		Log.info(BpmnElementPropertiesViewImpl.class,
 				"loadServiceTaksProperties");
 		dockLpCurrentContent.remove(currentProperties);
@@ -91,7 +90,7 @@ public class BpmnElementPropertiesViewImpl extends Composite implements
 	}
 
 	@Override
-	public void loadStartEventProperties(CamundaElementJso selectedItem) {
+	public void loadStartEventProperties(BpmnDiagramElementJso selectedItem) {
 		Log.info(BpmnElementPropertiesViewImpl.class,
 				"loadStartEventProperties");
 		dockLpCurrentContent.remove(currentProperties);
@@ -101,7 +100,7 @@ public class BpmnElementPropertiesViewImpl extends Composite implements
 	}
 
 	@Override
-	public void loadUnknownItemInfo(CamundaElementJso selectedItem) {
+	public void loadUnknownItemInfo(BpmnDiagramElementJso selectedItem) {
 		dockLpCurrentContent.remove(currentProperties);
 		currentProperties = unknowItemProperties;
 		currentProperties.setSelectedItem(selectedItem);
