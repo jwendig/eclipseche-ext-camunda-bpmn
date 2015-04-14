@@ -22,7 +22,6 @@ public class BaseBpmnPropertiesTab extends Composite {
 		super();
 		gridTabContent = new Grid();
 		gridTabContent.setSize("100%", "100%");
-		gridTabContent.getColumnFormatter().setWidth(0, "120px");
 
 		// initContentElements();
 		// initContent();

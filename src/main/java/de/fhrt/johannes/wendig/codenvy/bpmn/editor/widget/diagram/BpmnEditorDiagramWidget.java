@@ -69,7 +69,7 @@ public class BpmnEditorDiagramWidget extends Composite {
 		bpmnResource.getBpmnAppCss().ensureInjected();
 		bpmnResource.getBpmnFontCss().ensureInjected();
 		bpmnResource.getBpmnPropertiesTabCss().ensureInjected();
-//		bpmnResource.getBpmnDiagramJsCustomCss().ensureInjected();
+		bpmnResource.getBpmnDiagramJsCustomCss().ensureInjected();
 	}
 
 	private void initDiagramHtmlPanel() {
@@ -122,8 +122,8 @@ public class BpmnEditorDiagramWidget extends Composite {
 		/*
 		 * Add click listener to diagram-container if listener not set
 		 */
-		$(".bjs-container:not(.bpmnEditorIsListening)", diagramHtmlPanel).click(
-				new Function() {
+		$(".bjs-container:not(.bpmnEditorIsListening)", diagramHtmlPanel)
+				.click(new Function() {
 					public boolean f(Event e) {
 						if (null != e.getEventTarget()
 								&& $(e.getEventTarget()).attr("class").length() == 0) {

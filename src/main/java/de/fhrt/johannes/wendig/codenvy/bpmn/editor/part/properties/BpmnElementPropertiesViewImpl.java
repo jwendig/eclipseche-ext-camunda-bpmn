@@ -19,12 +19,10 @@ import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.inject.Inject;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.BaseBpmnProperties;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.properties.process.ProcessProperties;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.properties.servicetask.ServiceTaskProperties;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.properties.startevent.StartEventProperties;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.properties.unknown.UnknownItem;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.properties.usertask.UserTaskProperties;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.ProcessProperties;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.servicetask.ServiceTaskProperties;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.StartEventProperties;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.usertask.UserTaskProperties;
 
 public class BpmnElementPropertiesViewImpl extends Composite implements
 		BpmnElementPropertiesView {
@@ -35,7 +33,7 @@ public class BpmnElementPropertiesViewImpl extends Composite implements
 	private ServiceTaskProperties serviceTaskProperties;
 	private StartEventProperties startEventProperties;
 	private UserTaskProperties userTaskProperties;
-	private UnknownItem unknowItemProperties;
+//	private UnknownItem unknowItemProperties;
 
 	private BaseBpmnProperties currentProperties;
 
@@ -46,7 +44,7 @@ public class BpmnElementPropertiesViewImpl extends Composite implements
 		serviceTaskProperties = new ServiceTaskProperties();
 		startEventProperties = new StartEventProperties();
 		userTaskProperties = new UserTaskProperties();
-		unknowItemProperties = new UnknownItem();
+//		unknowItemProperties = new UnknownItem();
 
 		currentProperties = processProperties;
 
@@ -103,7 +101,7 @@ public class BpmnElementPropertiesViewImpl extends Composite implements
 	@Override
 	public void loadUnknownItemInfo(GQuery selectedItem) {
 		dockLpCurrentContent.remove(currentProperties);
-		currentProperties = unknowItemProperties;
+		currentProperties = processProperties;
 		currentProperties.setSelectedItem(selectedItem);
 		dockLpCurrentContent.add(currentProperties);
 	}

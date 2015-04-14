@@ -8,60 +8,56 @@
  * Contributors:
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.properties.startevent;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.unknown;
 
 import org.eclipse.che.ide.util.loging.Log;
 
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RenderableStamper;
 import com.google.gwt.user.client.ui.Widget;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.BaseBpmnProperties;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
 
-public class StartEventProperties extends BaseBpmnProperties {
+public class UnknownItem extends BaseBpmnProperties {
 
-	private final static String LB_ELEMENT_NAME_PREFIX = "Start Event";
-	
-	public StartEventProperties() {
+	private final static String LB_ELEMENT_NAME_PREFIX = "Unknown";
+
+	public UnknownItem() {
 		super(LB_ELEMENT_NAME_PREFIX);
-		
-		getTabLpContent().add(new Label("TODO: tabs - StartEventProperties"));
+		Log.info(UnknownItem.class, "constructor");
+
+		getTabLpContent().add(new Label("Unknown Item - no properties"));
 	}
 
 	@Override
 	public void initializeClaimedElement() {
 		super.initializeClaimedElement();
-		Log.info(StartEventProperties.class, "initializeClaimedElement");
-		
+		Log.info(UnknownItem.class, "initializeClaimedElement");
 	}
 
 	@Override
 	public SafeHtml render(RenderableStamper stamper) {
-		Log.info(StartEventProperties.class, "render");
+		Log.info(UnknownItem.class, "render");
 		return super.render(stamper);
 	}
 
 	@Override
 	public void render(RenderableStamper stamper, SafeHtmlBuilder builder) {
 		super.render(stamper, builder);
-		Log.info(StartEventProperties.class, "render");
+		Log.info(UnknownItem.class, "render");
 	}
 
 	@Override
 	protected void initWidget(Widget widget) {
 		super.initWidget(widget);
-		Log.info(StartEventProperties.class, "initWidget");
+		Log.info(UnknownItem.class, "initWidget");
 	}
 
 	@Override
 	protected void onAttach() {
 		super.onAttach();
-		Log.info(StartEventProperties.class, "onAttach");
+		Log.info(UnknownItem.class, "onAttach");
 	}
 }
