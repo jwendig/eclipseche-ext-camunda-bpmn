@@ -11,7 +11,7 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties;
 
-import org.eclipse.che.ide.api.parts.AbstractPartPresenter;
+import org.eclipse.che.ide.api.parts.base.BasePresenter;
 import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.resources.client.ImageResource;
@@ -23,7 +23,7 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.B
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso.BpmnElementType;
 
 @Singleton
-public class BpmnElementPropertiesPresenter extends AbstractPartPresenter
+public class BpmnElementPropertiesPresenter extends BasePresenter
 		implements BpmnElementPropertiesView.ActionDelegate,
 		BpmnElementPropertiesCallback {
 

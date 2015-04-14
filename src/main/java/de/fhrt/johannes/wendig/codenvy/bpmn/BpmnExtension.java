@@ -43,7 +43,6 @@ public class BpmnExtension {
 	 */
 	public static final String SVG_MIME_TYPE = "image/svg+xml";
 	public static final String SVG_FILE_EXTENSION_NAME = "svg";
-	public static final String SVG_NEW_FILE_CONTENT = "<html><head></head><body><h1>initial svg-file content</h1><p>real content after the next save action!</p></body></html>";
 
 	/*
 	 * bpmn-file-definition

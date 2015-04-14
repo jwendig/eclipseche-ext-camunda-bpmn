@@ -10,10 +10,11 @@
  *******************************************************************************/
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties;
 
+import org.eclipse.che.ide.api.parts.PartStackUIResources;
+import org.eclipse.che.ide.api.parts.base.BaseView;
 import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.inject.Inject;
 
@@ -25,7 +26,8 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.unkno
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.usertask.UserTaskProperties;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 
-public class BpmnElementPropertiesViewImpl extends Composite implements
+public class BpmnElementPropertiesViewImpl extends
+		BaseView<BpmnElementPropertiesView.ActionDelegate> implements
 		BpmnElementPropertiesView {
 
 	private DockLayoutPanel dockLpCurrentContent;
@@ -39,8 +41,9 @@ public class BpmnElementPropertiesViewImpl extends Composite implements
 	private AbstractBpmnProperties currentProperties;
 
 	@Inject
-	public BpmnElementPropertiesViewImpl() {
-		Log.info(BpmnElementPropertiesViewImpl.class, "constructor");
+	public BpmnElementPropertiesViewImpl(PartStackUIResources resources) {
+		super(resources);
+
 		processProperties = new ProcessProperties();
 		serviceTaskProperties = new ServiceTaskProperties();
 		startEventProperties = new StartEventProperties();
@@ -53,12 +56,7 @@ public class BpmnElementPropertiesViewImpl extends Composite implements
 		dockLpCurrentContent.setSize("100%", "100%");
 		dockLpCurrentContent.add(processProperties);
 
-		initWidget(dockLpCurrentContent);
-	}
-
-	@Override
-	public void setDelegate(ActionDelegate delegate) {
-		Log.info(BpmnElementPropertiesViewImpl.class, "setDelegate");
+		setContentWidget(dockLpCurrentContent);
 	}
 
 	@Override
