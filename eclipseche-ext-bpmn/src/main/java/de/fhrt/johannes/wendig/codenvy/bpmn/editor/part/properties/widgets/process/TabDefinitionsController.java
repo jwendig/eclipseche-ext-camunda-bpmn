@@ -9,18 +9,17 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process;
 
-public interface DefaultJso {
-	public String getType();
+public class TabDefinitionsController {
+	private TabDefinitionsView view;
 
-	public String getBusinessObject();
+	public TabDefinitionsController() {
+		view = new TabDefinitionsView();
+	}
 
-	public String getAttr_id();
+	public TabDefinitionsView getView() {
+		return view;
+	}
 
-	public void setAttr_id(String id);
-
-	public String getAttr_name();
-
-	public void setAttr_name(String name);
 }

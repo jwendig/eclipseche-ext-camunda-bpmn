@@ -84,7 +84,7 @@ public class BpmnDiagramElementJso extends JavaScriptObject implements
 												}-*/;
 
 	@Override
-	public final native void setAttr_mame(String name) /*-{
+	public final native void setAttr_name(String name) /*-{
 														this.businessObject.name = name;
 														}-*/;
 
