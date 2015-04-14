@@ -13,15 +13,13 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets;
 import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.query.client.GQuery;
-import com.google.gwt.safehtml.shared.SafeHtml;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RenderableStamper;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
-import com.google.gwt.user.client.ui.Widget;
+
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnProcessJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.CamundaElementJso;
 
 public class AbstractBpmnProperties extends Composite {
 
@@ -35,7 +33,8 @@ public class AbstractBpmnProperties extends Composite {
 	private DockLayoutPanel docLpRoot;
 	private Label lbElementName;
 	private TabLayoutPanel tabLpContent;
-	private GQuery selectedItem;
+	private CamundaElementJso selectedItem;
+	private BpmnProcessJso selectedProcess;
 
 	public AbstractBpmnProperties(String lbElementName_prefixText) {
 		super();
@@ -52,20 +51,23 @@ public class AbstractBpmnProperties extends Composite {
 		tabLpContent = new TabLayoutPanel(1, Unit.EM);
 		tabLpContent.setSize("100%", "100%");
 		tabLpContent.addStyleName("bpmnPropertiesWidget-tabLayoutPanel");
-		
+
 		docLpRoot.addNorth(lbElementName, 1.5);
 		docLpRoot.add(tabLpContent);
 
 		initWidget(docLpRoot);
-		
+
 	}
 
-	public void setSelectedItem(GQuery selectedItem) {
+	public void setSelectedItem(CamundaElementJso selectedItem) {
 		Log.info(AbstractBpmnProperties.class, "setSelectedItem");
 		this.selectedItem = selectedItem;
-		setLbElementNameText(selectedItem.attr("data-element-id"));
 	}
 
+	public void setSelectedProcess(BpmnProcessJso selectedProcess) {
+		Log.info(AbstractBpmnProperties.class, "setSelectedProcess");
+		this.selectedProcess = selectedProcess;
+	}
 
 	/*
 	 * Getter & Setter

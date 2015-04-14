@@ -15,19 +15,22 @@ import org.eclipse.che.ide.api.mvp.View;
 import com.google.gwt.query.client.GQuery;
 import com.google.inject.ImplementedBy;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnProcessJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.CamundaElementJso;
+
 @ImplementedBy(BpmnElementPropertiesViewImpl.class)
 public interface BpmnElementPropertiesView extends
 		View<BpmnElementPropertiesView.ActionDelegate> {
 	public interface ActionDelegate {
 	}
 
-	public void loadUnknownItemInfo(GQuery selectedItem);
-	
-	public void loadProcessProperties(GQuery selectedItem);
+	public void loadUnknownItemInfo(CamundaElementJso selectedItem);
 
-	public void loadUserTaskProperties(GQuery selectedItem);
+	public void loadProcessProperties(BpmnProcessJso selectedItem);
 
-	public void loadServiceTaksProperties(GQuery selectedItem);
+	public void loadUserTaskProperties(CamundaElementJso selectedItem);
 
-	public void loadStartEventProperties(GQuery selectedItem);
+	public void loadServiceTaksProperties(CamundaElementJso selectedItem);
+
+	public void loadStartEventProperties(CamundaElementJso selectedItem);
 }
