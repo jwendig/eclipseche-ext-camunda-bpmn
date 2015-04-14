@@ -21,6 +21,8 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnProcessJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.CamundaElementJso;
 
 @Singleton
 public class BpmnElementPropertiesPresenter extends AbstractPartPresenter
@@ -58,34 +60,59 @@ public class BpmnElementPropertiesPresenter extends AbstractPartPresenter
 		container.setWidget(view);
 	}
 
+	@Override
+	public void elementSelected(CamundaElementJso elementJso) {
+		Log.info(BpmnElementPropertiesPresenter.class, "elementSelected");
+		switch (elementJso.getType()) {
+		case "bpmn:ServiceTask":
+			view.loadServiceTaksProperties(elementJso);
+			break;
+		case "bpmn:UserTask":
+			view.loadUserTaskProperties(elementJso);
+			break;
+		case "bpmn:StartEvent":
+			view.loadStartEventProperties(elementJso);
+			break;
+		default:
+			view.loadUnknownItemInfo(elementJso);
+			break;
+		}
+	}
+
+	@Override
+	public void processSelected(BpmnProcessJso processJso) {
+		view.loadProcessProperties(processJso);
+
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.
 	 * BpmnElementPropertiesCallback#elementSelected()
 	 */
-	@Override
-	public void elementSelected(BpmnEditorDiagramWidget.ElementType type,
-			GQuery selectedItem) {
-		Log.info(BpmnElementPropertiesPresenter.class, "elementSelected");
-		switch (type) {
-		case SERVICE_TASK:
-			view.loadServiceTaksProperties(selectedItem);
-			break;
-		case USER_TASK:
-			view.loadUserTaskProperties(selectedItem);
-			break;
-		case START_EVENT:
-			view.loadStartEventProperties(selectedItem);
-			break;
-		case UNKNOWN:
-			view.loadUnknownItemInfo(selectedItem);
-		}
-	}
-
-	@Override
-	public void containerSelected(GQuery base) {
-		view.loadProcessProperties(base);
-
-	}
+	// @Override
+	// public void elementSelected(BpmnEditorDiagramWidget.ElementType type,
+	// GQuery selectedItem) {
+	// Log.info(BpmnElementPropertiesPresenter.class, "elementSelected");
+	// switch (type) {
+	// case SERVICE_TASK:
+	// view.loadServiceTaksProperties(selectedItem);
+	// break;
+	// case USER_TASK:
+	// view.loadUserTaskProperties(selectedItem);
+	// break;
+	// case START_EVENT:
+	// view.loadStartEventProperties(selectedItem);
+	// break;
+	// case UNKNOWN:
+	// view.loadUnknownItemInfo(selectedItem);
+	// }
+	// }
+	//
+	// @Override
+	// public void containerSelected(GQuery base) {
+	// view.loadProcessProperties(base);
+	//
+	// }
 }

@@ -13,7 +13,6 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties;
 import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.query.client.GQuery;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.inject.Inject;
@@ -22,7 +21,10 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.Abstr
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.ProcessProperties;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.servicetask.ServiceTaskProperties;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.StartEventProperties;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.unknown.UnknownItem;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.usertask.UserTaskProperties;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnProcessJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.CamundaElementJso;
 
 public class BpmnElementPropertiesViewImpl extends Composite implements
 		BpmnElementPropertiesView {
@@ -33,7 +35,7 @@ public class BpmnElementPropertiesViewImpl extends Composite implements
 	private ServiceTaskProperties serviceTaskProperties;
 	private StartEventProperties startEventProperties;
 	private UserTaskProperties userTaskProperties;
-//	private UnknownItem unknowItemProperties;
+	private UnknownItem unknowItemProperties;
 
 	private AbstractBpmnProperties currentProperties;
 
@@ -44,7 +46,7 @@ public class BpmnElementPropertiesViewImpl extends Composite implements
 		serviceTaskProperties = new ServiceTaskProperties();
 		startEventProperties = new StartEventProperties();
 		userTaskProperties = new UserTaskProperties();
-//		unknowItemProperties = new UnknownItem();
+		unknowItemProperties = new UnknownItem();
 
 		currentProperties = processProperties;
 
@@ -61,16 +63,16 @@ public class BpmnElementPropertiesViewImpl extends Composite implements
 	}
 
 	@Override
-	public void loadProcessProperties(GQuery selectedItem) {
+	public void loadProcessProperties(BpmnProcessJso selectedItem) {
 		Log.info(BpmnElementPropertiesViewImpl.class, "loadProcessProperties");
 		dockLpCurrentContent.remove(currentProperties);
 		currentProperties = processProperties;
-		currentProperties.setSelectedItem(selectedItem);
+		currentProperties.setSelectedProcess(selectedItem);
 		dockLpCurrentContent.add(currentProperties);
 	}
 
 	@Override
-	public void loadUserTaskProperties(GQuery selectedItem) {
+	public void loadUserTaskProperties(CamundaElementJso selectedItem) {
 		Log.info(BpmnElementPropertiesViewImpl.class, "loadUserTaskProperties");
 		dockLpCurrentContent.remove(currentProperties);
 		currentProperties = userTaskProperties;
@@ -79,7 +81,7 @@ public class BpmnElementPropertiesViewImpl extends Composite implements
 	}
 
 	@Override
-	public void loadServiceTaksProperties(GQuery selectedItem) {
+	public void loadServiceTaksProperties(CamundaElementJso selectedItem) {
 		Log.info(BpmnElementPropertiesViewImpl.class,
 				"loadServiceTaksProperties");
 		dockLpCurrentContent.remove(currentProperties);
@@ -89,7 +91,7 @@ public class BpmnElementPropertiesViewImpl extends Composite implements
 	}
 
 	@Override
-	public void loadStartEventProperties(GQuery selectedItem) {
+	public void loadStartEventProperties(CamundaElementJso selectedItem) {
 		Log.info(BpmnElementPropertiesViewImpl.class,
 				"loadStartEventProperties");
 		dockLpCurrentContent.remove(currentProperties);
@@ -99,9 +101,9 @@ public class BpmnElementPropertiesViewImpl extends Composite implements
 	}
 
 	@Override
-	public void loadUnknownItemInfo(GQuery selectedItem) {
+	public void loadUnknownItemInfo(CamundaElementJso selectedItem) {
 		dockLpCurrentContent.remove(currentProperties);
-		currentProperties = processProperties;
+		currentProperties = unknowItemProperties;
 		currentProperties.setSelectedItem(selectedItem);
 		dockLpCurrentContent.add(currentProperties);
 	}
