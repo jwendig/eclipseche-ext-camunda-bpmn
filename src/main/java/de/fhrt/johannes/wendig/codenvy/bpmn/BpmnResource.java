@@ -23,7 +23,7 @@ import com.google.gwt.resources.client.ClientBundle.Source;
  */
 public interface BpmnResource extends ClientBundle {
 
-	@Source("newDiagram.bpmncustom")
+	@Source("newDiagram.bpmn")
 	TextResource newBpmnFile();
 
 	@Source("img/bpmn-ico-circle-x-small.png")

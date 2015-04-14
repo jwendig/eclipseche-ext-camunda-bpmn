@@ -49,7 +49,7 @@ public class BpmnExtension {
 	 * bpmn-file-definition
 	 */
 	public static final String BPMN_MIME_TYPE = "text/bpmn";
-	public static final String BPMN_FILE_EXTENSION_NAME = "bpmncustom";
+	public static final String BPMN_FILE_EXTENSION_NAME = "bpmn";
 
 	@Inject
 	public BpmnExtension(WorkspaceAgent workspaceAgent,
