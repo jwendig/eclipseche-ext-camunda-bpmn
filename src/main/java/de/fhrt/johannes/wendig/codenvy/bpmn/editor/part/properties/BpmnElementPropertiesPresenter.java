@@ -23,9 +23,8 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.B
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso.BpmnElementType;
 
 @Singleton
-public class BpmnElementPropertiesPresenter extends BasePresenter
-		implements BpmnElementPropertiesView.ActionDelegate,
-		BpmnElementPropertiesCallback {
+public class BpmnElementPropertiesPresenter extends BasePresenter implements
+		BpmnElementPropertiesView.ActionDelegate, BpmnElementPropertiesCallback {
 
 	private BpmnElementPropertiesView view;
 	private final static String TITLE = "BPMN Properties";
@@ -49,7 +48,7 @@ public class BpmnElementPropertiesPresenter extends BasePresenter
 
 	@Override
 	public String getTitleToolTip() {
-		return null;
+		return TITLE;
 	}
 
 	@Override
