@@ -17,9 +17,9 @@ import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.TextBox;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.BaseBpmnPropertiesTab;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTab;
 
-public class TabGeneral extends BaseBpmnPropertiesTab {
+public class TabGeneral extends AbstractBpmnPropertiesTab {
 
 	private final static String TAB_NAME = "General";
 
@@ -32,11 +32,9 @@ public class TabGeneral extends BaseBpmnPropertiesTab {
 	public TabGeneral() {
 		super();
 		Log.info(TabGeneral.class, "constructor");
-		initContentElements();
-		initContent();
 	}
 
-	// @Override
+	@Override
 	public void initContent() {
 		Log.info(TabGeneral.class, "initContent");
 		getGridTabContent().resize(5, 2);
@@ -54,7 +52,7 @@ public class TabGeneral extends BaseBpmnPropertiesTab {
 		getGridTabContent().setWidget(4, 1, tbDocumentation);
 	}
 
-	// @Override
+	@Override
 	public void initContentElements() {
 		Log.info(TabGeneral.class, "initContentElements");
 		tbProcessId = new TextBox();

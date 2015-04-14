@@ -21,10 +21,10 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RenderableStamper;
 import com.google.gwt.user.client.ui.Widget;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.BaseBpmnProperties;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnProperties;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
 
-public class UserTaskProperties extends BaseBpmnProperties {
+public class UserTaskProperties extends AbstractBpmnProperties {
 
 	private final static String LB_ELEMENT_NAME_PREFIX = "User Task";
 

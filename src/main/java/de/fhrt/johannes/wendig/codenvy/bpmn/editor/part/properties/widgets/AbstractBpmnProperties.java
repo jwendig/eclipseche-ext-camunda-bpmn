@@ -23,7 +23,7 @@ import com.google.gwt.user.client.ui.RenderableStamper;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class BaseBpmnProperties extends Composite {
+public class AbstractBpmnProperties extends Composite {
 
 	private static final String LABEL_ELEMENT_NAME__DEFAULT_CONTENT = "No BPMN-Element selected";
 	private String lbElementName_prefixText;
@@ -37,9 +37,9 @@ public class BaseBpmnProperties extends Composite {
 	private TabLayoutPanel tabLpContent;
 	private GQuery selectedItem;
 
-	public BaseBpmnProperties(String lbElementName_prefixText) {
+	public AbstractBpmnProperties(String lbElementName_prefixText) {
 		super();
-		Log.info(BaseBpmnProperties.class, "constructor");
+		Log.info(AbstractBpmnProperties.class, "constructor");
 
 		this.lbElementName_prefixText = lbElementName_prefixText;
 
@@ -61,40 +61,11 @@ public class BaseBpmnProperties extends Composite {
 	}
 
 	public void setSelectedItem(GQuery selectedItem) {
-		Log.info(BaseBpmnProperties.class, "setSelectedItem");
+		Log.info(AbstractBpmnProperties.class, "setSelectedItem");
 		this.selectedItem = selectedItem;
 		setLbElementNameText(selectedItem.attr("data-element-id"));
 	}
 
-	@Override
-	public void initializeClaimedElement() {
-		super.initializeClaimedElement();
-		Log.info(BaseBpmnProperties.class, "initializeClaimedElement");
-	}
-
-	@Override
-	public SafeHtml render(RenderableStamper stamper) {
-		Log.info(BaseBpmnProperties.class, "render");
-		return super.render(stamper);
-	}
-
-	@Override
-	public void render(RenderableStamper stamper, SafeHtmlBuilder builder) {
-		super.render(stamper, builder);
-		Log.info(BaseBpmnProperties.class, "render");
-	}
-
-	@Override
-	protected void initWidget(Widget widget) {
-		super.initWidget(widget);
-		Log.info(BaseBpmnProperties.class, "initWidget");
-	}
-
-	@Override
-	protected void onAttach() {
-		super.onAttach();
-		Log.info(BaseBpmnProperties.class, "onAttach");
-	}
 
 	/*
 	 * Getter & Setter

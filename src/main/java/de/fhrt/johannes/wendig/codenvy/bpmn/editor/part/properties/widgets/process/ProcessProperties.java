@@ -17,9 +17,9 @@ import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.RenderableStamper;
 import com.google.gwt.user.client.ui.Widget;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.BaseBpmnProperties;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnProperties;
 
-public class ProcessProperties extends BaseBpmnProperties {
+public class ProcessProperties extends AbstractBpmnProperties {
 
 	private final static String LB_ELEMENT_NAME_PREFIX = "Process";
 
