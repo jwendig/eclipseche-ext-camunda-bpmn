@@ -8,57 +8,66 @@
  * Contributors:
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.properties.servicetask;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process;
 
 import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RenderableStamper;
 import com.google.gwt.user.client.ui.Widget;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.BaseBpmnProperties;
 
-public class ServiceTaskProperties extends BaseBpmnProperties {
+public class ProcessProperties extends BaseBpmnProperties {
 
-	private final static String LB_ELEMENT_NAME_PREFIX = "Service Task";
+	private final static String LB_ELEMENT_NAME_PREFIX = "Process";
 
-	public ServiceTaskProperties() {
+	private TabGeneral tabGeneralProperties;
+	private TabDefinitions tabDefinitionsProperties;
+
+	public ProcessProperties() {
 		super(LB_ELEMENT_NAME_PREFIX);
-		
-		getTabLpContent().add(new Label("TODO: tabs - ServiceTaskProperties"));
-		
+		Log.info(ProcessProperties.class, "constructor");
+
+		tabGeneralProperties = new TabGeneral();
+		tabDefinitionsProperties = new TabDefinitions();
+
+		getTabLpContent().add(tabGeneralProperties,
+				tabGeneralProperties.getTabName());
+		getTabLpContent().add(tabDefinitionsProperties,
+				tabDefinitionsProperties.getTabName());
+
+		getTabLpContent().selectTab(tabGeneralProperties);
 	}
 
 	@Override
 	public void initializeClaimedElement() {
 		super.initializeClaimedElement();
-		Log.info(ServiceTaskProperties.class, "initializeClaimedElement");
+		Log.info(ProcessProperties.class, "initializeClaimedElement");
 	}
 
 	@Override
 	public SafeHtml render(RenderableStamper stamper) {
-		Log.info(ServiceTaskProperties.class, "render");
+		Log.info(ProcessProperties.class, "render");
 		return super.render(stamper);
 	}
 
 	@Override
 	public void render(RenderableStamper stamper, SafeHtmlBuilder builder) {
 		super.render(stamper, builder);
-		Log.info(ServiceTaskProperties.class, "render");
+		Log.info(ProcessProperties.class, "render");
 	}
 
 	@Override
 	protected void initWidget(Widget widget) {
 		super.initWidget(widget);
-		Log.info(ServiceTaskProperties.class, "initWidget");
+		Log.info(ProcessProperties.class, "initWidget");
 	}
 
 	@Override
 	protected void onAttach() {
 		super.onAttach();
-		Log.info(ServiceTaskProperties.class, "onAttach");
+		Log.info(ProcessProperties.class, "onAttach");
 	}
 }

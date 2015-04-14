@@ -8,7 +8,7 @@
  * Contributors:
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.properties.usertask;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent;
 
 import org.eclipse.che.ide.util.loging.Log;
 
@@ -24,43 +24,44 @@ import com.google.gwt.user.client.ui.Widget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.BaseBpmnProperties;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
 
-public class UserTaskProperties extends BaseBpmnProperties {
+public class StartEventProperties extends BaseBpmnProperties {
 
-	private final static String LB_ELEMENT_NAME_PREFIX = "User Task";
-
-	public UserTaskProperties() {
+	private final static String LB_ELEMENT_NAME_PREFIX = "Start Event";
+	
+	public StartEventProperties() {
 		super(LB_ELEMENT_NAME_PREFIX);
-
-		getTabLpContent().add(new Label("TODO: tabs - UserTaskProperties"));
+		
+		getTabLpContent().add(new Label("TODO: tabs - StartEventProperties"));
 	}
 
 	@Override
 	public void initializeClaimedElement() {
 		super.initializeClaimedElement();
-		Log.info(UserTaskProperties.class, "initializeClaimedElement");
+		Log.info(StartEventProperties.class, "initializeClaimedElement");
+		
 	}
 
 	@Override
 	public SafeHtml render(RenderableStamper stamper) {
-		Log.info(UserTaskProperties.class, "render");
+		Log.info(StartEventProperties.class, "render");
 		return super.render(stamper);
 	}
 
 	@Override
 	public void render(RenderableStamper stamper, SafeHtmlBuilder builder) {
 		super.render(stamper, builder);
-		Log.info(UserTaskProperties.class, "render");
+		Log.info(StartEventProperties.class, "render");
 	}
 
 	@Override
 	protected void initWidget(Widget widget) {
 		super.initWidget(widget);
-		Log.info(UserTaskProperties.class, "initWidget");
+		Log.info(StartEventProperties.class, "initWidget");
 	}
 
 	@Override
 	protected void onAttach() {
 		super.onAttach();
-		Log.info(UserTaskProperties.class, "onAttach");
+		Log.info(StartEventProperties.class, "onAttach");
 	}
 }
