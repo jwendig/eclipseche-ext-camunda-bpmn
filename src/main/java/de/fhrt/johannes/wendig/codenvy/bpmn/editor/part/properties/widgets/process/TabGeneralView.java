@@ -19,24 +19,23 @@ import com.google.gwt.user.client.ui.TextBox;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTab;
 
-public class TabGeneral extends AbstractBpmnPropertiesTab {
-
+public class TabGeneralView extends AbstractBpmnPropertiesTab {
 	private final static String TAB_NAME = "General";
-
+	
 	private TextBox tbProcessId;
 	private TextBox tbName;
 	private CheckBox cbIsExecutable;
 	private CellTable<String> ctDataObjects;
 	private TextBox tbDocumentation;
 
-	public TabGeneral() {
+	public TabGeneralView() {
 		super();
-		Log.info(TabGeneral.class, "constructor");
+		Log.info(TabGeneralView.class, "constructor");
 	}
 
 	@Override
 	public void initContent() {
-		Log.info(TabGeneral.class, "initContent");
+		Log.info(TabGeneralView.class, "initContent");
 		getGridTabContent().resize(5, 2);
 
 		getGridTabContent().setText(0, 0, "Process Id:");
@@ -54,7 +53,7 @@ public class TabGeneral extends AbstractBpmnPropertiesTab {
 
 	@Override
 	public void initContentElements() {
-		Log.info(TabGeneral.class, "initContentElements");
+		Log.info(TabGeneralView.class, "initContentElements");
 		tbProcessId = new TextBox();
 		tbProcessId.setWidth("100%");
 		tbName = new TextBox();
@@ -69,7 +68,29 @@ public class TabGeneral extends AbstractBpmnPropertiesTab {
 
 	@Override
 	public String getTabName() {
-		Log.info(TabGeneral.class, "getTabName");
+		Log.info(TabGeneralView.class, "getTabName");
 		return TAB_NAME;
 	}
+
+	public TextBox getTbProcessId() {
+		return tbProcessId;
+	}
+
+	public TextBox getTbName() {
+		return tbName;
+	}
+
+	public CheckBox getCbIsExecutable() {
+		return cbIsExecutable;
+	}
+
+	public CellTable<String> getCtDataObjects() {
+		return ctDataObjects;
+	}
+
+	public TextBox getTbDocumentation() {
+		return tbDocumentation;
+	}
+	
+	
 }

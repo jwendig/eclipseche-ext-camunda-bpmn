@@ -18,7 +18,7 @@ import com.google.gwt.user.cellview.client.CellTable;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnProperties;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTab;
 
-public class TabDefinitions extends AbstractBpmnPropertiesTab {
+public class TabDefinitionsView extends AbstractBpmnPropertiesTab {
 
 	private final static String TAB_NAME = "Definitions";
 
@@ -27,20 +27,20 @@ public class TabDefinitions extends AbstractBpmnPropertiesTab {
 	private CellTable<String> ctSignals;
 	private CellTable<String> ctDataStores;
 
-	public TabDefinitions() {
+	public TabDefinitionsView() {
 		super();
-		Log.info(TabDefinitions.class, "constructor");
+		Log.info(TabDefinitionsView.class, "constructor");
 	}
 
 	@Override
 	public String getTabName() {
-		Log.info(TabDefinitions.class, "getTabName");
+		Log.info(TabDefinitionsView.class, "getTabName");
 		return TAB_NAME;
 	}
 
 	@Override
 	public void initContent() {
-		Log.info(TabDefinitions.class, "initContent");
+		Log.info(TabDefinitionsView.class, "initContent");
 		getGridTabContent().resize(4, 2);
 
 		getGridTabContent().setText(0, 0, "Errors:");
@@ -56,7 +56,7 @@ public class TabDefinitions extends AbstractBpmnPropertiesTab {
 
 	@Override
 	public void initContentElements() {
-		Log.info(TabDefinitions.class, "initContentElements");
+		Log.info(TabDefinitionsView.class, "initContentElements");
 		ctErrors = new CellTable<String>();
 		ctErrors.setWidth("100%");
 		ctMessages = new CellTable<String>();

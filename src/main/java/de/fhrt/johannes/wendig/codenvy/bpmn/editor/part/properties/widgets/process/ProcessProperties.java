@@ -22,22 +22,22 @@ public class ProcessProperties extends AbstractBpmnProperties {
 
 	private ProcessJso element;
 
-	private TabGeneral tabGeneralProperties;
-	private TabDefinitions tabDefinitionsProperties;
+	private TabGeneralController tabGeneralController;
+	private TabDefinitionsController tabDefinitionsController;
 
 	public ProcessProperties() {
 		super(LB_ELEMENT_NAME_PREFIX);
 		Log.info(ProcessProperties.class, "constructor");
 
-		tabGeneralProperties = new TabGeneral();
-		tabDefinitionsProperties = new TabDefinitions();
+		tabGeneralController = new TabGeneralController();
+		tabDefinitionsController = new TabDefinitionsController();
 
-		getTabLpContent().add(tabGeneralProperties,
-				tabGeneralProperties.getTabName());
-		getTabLpContent().add(tabDefinitionsProperties,
-				tabDefinitionsProperties.getTabName());
+		getTabLpContent().add(tabGeneralController.getView(),
+				tabGeneralController.getView().getTabName());
+		getTabLpContent().add(tabDefinitionsController.getView(),
+				tabDefinitionsController.getView().getTabName());
 
-		getTabLpContent().selectTab(tabGeneralProperties);
+		getTabLpContent().selectTab(tabGeneralController.getView());
 	}
 
 	/*
@@ -51,7 +51,8 @@ public class ProcessProperties extends AbstractBpmnProperties {
 	@Override
 	public void initSelectedItem(BpmnDiagramElementJso selectedItem) {
 		element = selectedItem;
+		
+		tabGeneralController.initView(element);
 	}
-	
-	
+
 }
