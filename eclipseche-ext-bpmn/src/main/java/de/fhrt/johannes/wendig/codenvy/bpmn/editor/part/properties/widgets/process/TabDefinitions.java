@@ -15,32 +15,30 @@ import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.user.cellview.client.CellTable;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.BaseBpmnProperties;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.BaseBpmnPropertiesTab;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnProperties;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTab;
 
-public class TabDefinitions extends BaseBpmnPropertiesTab {
+public class TabDefinitions extends AbstractBpmnPropertiesTab {
 
 	private final static String TAB_NAME = "Definitions";
-	
+
 	private CellTable<String> ctErrors;
 	private CellTable<String> ctMessages;
 	private CellTable<String> ctSignals;
 	private CellTable<String> ctDataStores;
-	
+
 	public TabDefinitions() {
 		super();
 		Log.info(TabDefinitions.class, "constructor");
-		
-		initContentElements();
-		initContent();
 	}
-	
+
 	@Override
 	public String getTabName() {
 		Log.info(TabDefinitions.class, "getTabName");
 		return TAB_NAME;
 	}
-//	@Override
+
+	@Override
 	public void initContent() {
 		Log.info(TabDefinitions.class, "initContent");
 		getGridTabContent().resize(4, 2);
@@ -55,7 +53,8 @@ public class TabDefinitions extends BaseBpmnPropertiesTab {
 		getGridTabContent().setWidget(2, 1, ctSignals);
 		getGridTabContent().setWidget(3, 1, ctDataStores);
 	}
-//	@Override
+
+	@Override
 	public void initContentElements() {
 		Log.info(TabDefinitions.class, "initContentElements");
 		ctErrors = new CellTable<String>();

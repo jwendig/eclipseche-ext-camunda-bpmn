@@ -18,7 +18,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.inject.Inject;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.BaseBpmnProperties;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnProperties;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.ProcessProperties;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.servicetask.ServiceTaskProperties;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.StartEventProperties;
@@ -35,7 +35,7 @@ public class BpmnElementPropertiesViewImpl extends Composite implements
 	private UserTaskProperties userTaskProperties;
 //	private UnknownItem unknowItemProperties;
 
-	private BaseBpmnProperties currentProperties;
+	private AbstractBpmnProperties currentProperties;
 
 	@Inject
 	public BpmnElementPropertiesViewImpl() {

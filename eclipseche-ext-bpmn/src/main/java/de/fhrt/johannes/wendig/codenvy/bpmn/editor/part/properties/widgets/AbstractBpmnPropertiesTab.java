@@ -14,17 +14,17 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 
-public class BaseBpmnPropertiesTab extends Composite {
+public abstract class AbstractBpmnPropertiesTab extends Composite {
 
 	private Grid gridTabContent;
 
-	public BaseBpmnPropertiesTab() {
+	public AbstractBpmnPropertiesTab() {
 		super();
 		gridTabContent = new Grid();
 		gridTabContent.setSize("100%", "100%");
 
-		// initContentElements();
-		// initContent();
+		initContentElements();
+		initContent();
 
 		initWidget(gridTabContent);
 	}
@@ -32,11 +32,11 @@ public class BaseBpmnPropertiesTab extends Composite {
 	/*
 	 * abstract functions
 	 */
-	// public void initContentElements() {
-	// }
-	//
-	// public void initContent() {
-	// }
+	public void initContentElements() {
+	}
+
+	public void initContent() {
+	}
 
 	public String getTabName() {
 		return "Name of tab is not defined";
