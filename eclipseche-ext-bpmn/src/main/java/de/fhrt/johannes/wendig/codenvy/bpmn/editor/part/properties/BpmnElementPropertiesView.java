@@ -11,6 +11,7 @@
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties;
 
 import org.eclipse.che.ide.api.mvp.View;
+import org.eclipse.che.ide.api.parts.base.BaseActionDelegate;
 
 import com.google.inject.ImplementedBy;
 
@@ -19,8 +20,10 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.B
 @ImplementedBy(BpmnElementPropertiesViewImpl.class)
 public interface BpmnElementPropertiesView extends
 		View<BpmnElementPropertiesView.ActionDelegate> {
-	public interface ActionDelegate {
+	public interface ActionDelegate extends BaseActionDelegate {
 	}
+
+	public void setTitle(String title);
 
 	public void loadUnknownItemInfo(BpmnDiagramElementJso selectedItem);
 

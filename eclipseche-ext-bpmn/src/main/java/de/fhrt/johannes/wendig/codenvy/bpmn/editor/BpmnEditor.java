@@ -84,8 +84,8 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 	@Override
 	public void doSave(AsyncCallback<EditorInput> callback) {
 		Log.info(BpmnEditor.class, "doSave(callback)");
-		// TODO: check if it work without a callback, when not - implement with
-		// callback
+
+		// refresh the buffered editor content
 		bpmnDiagramWidget.exportArtifacts();
 
 		doSave();
@@ -193,9 +193,6 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 
 		initSvgFileVariables();
 
-		// TODO: disable and move to newFileAction
-		createSvgFile();
-
 		workspaceAgent.openPart(bpmnElementPropertiesEditorPresenter,
 				PartStackType.INFORMATION);
 	}
@@ -286,34 +283,37 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 
 	private void createSvgFile() {
 		Log.info(BpmnEditor.class, "createSvgFile");
-		projectServiceClient.createFile(svgFileParentPath, svgFileName,
-				BpmnExtension.SVG_NEW_FILE_CONTENT,
-				BpmnExtension.SVG_MIME_TYPE,
-				new AsyncRequestCallback<ItemReference>() {
+		if (null != currentSvgContent) {
+			projectServiceClient.createFile(svgFileParentPath, svgFileName,
+					currentSvgContent, BpmnExtension.SVG_MIME_TYPE,
+					new AsyncRequestCallback<ItemReference>() {
 
-					@Override
-					protected void onSuccess(ItemReference result) {
-						Log.info(BpmnEditor.class,
-								"initializeEditor: createSvgFile: onSuccess");
-					}
-
-					@Override
-					protected void onFailure(Throwable exception) {
-						if (!exception.getMessage().contains("already exists")) {
-							Log.error(BpmnEditor.class,
-									"initializeEditor:createSvgFile:onFailure",
-									exception);
+						@Override
+						protected void onSuccess(ItemReference result) {
+							Log.info(BpmnEditor.class,
+									"initializeEditor: createSvgFile: onSuccess");
 						}
-					}
-				});
+
+						@Override
+						protected void onFailure(Throwable exception) {
+							if (!exception.getMessage().contains(
+									"already exists")) {
+								Log.error(
+										BpmnEditor.class,
+										"initializeEditor:createSvgFile:onFailure",
+										exception);
+							}
+						}
+					});
+		} else {
+			Log.info(BpmnEditor.class,
+					"createSvgFile: bpmnDiagramWidget.currentSvgContent IS NULL, do nothing");
+		}
 	}
 
 	private void updateSvgFile() {
 		Log.info(BpmnEditor.class, "updateSvgFile");
 		if (null != currentSvgContent) {
-			Log.info(
-					BpmnEditor.class,
-					"updateSvgFile: bpmnDiagramWidget.currentSvgContent IS NOT NULL, do updateSvgFile");
 			projectServiceClient.updateFile(svgFileParentPath + svgFileName,
 					currentSvgContent, BpmnExtension.SVG_MIME_TYPE,
 					new AsyncRequestCallback<Void>() {
@@ -328,6 +328,8 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 						protected void onFailure(Throwable exception) {
 							Log.error(BpmnEditor.class,
 									"doSave:updateSvgFile:onFailure", exception);
+
+							createSvgFile();
 
 						}
 					});
