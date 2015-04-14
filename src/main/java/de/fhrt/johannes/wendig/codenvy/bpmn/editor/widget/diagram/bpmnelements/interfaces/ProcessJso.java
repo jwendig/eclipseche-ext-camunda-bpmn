@@ -9,10 +9,18 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
+public interface ProcessJso extends DefaultJso {
+	public boolean getAttr_isExecutable();
 
-public interface BpmnElementPropertiesCallback {
-	public void elementSelected(BpmnDiagramElementJso elementJso);
+	public void setAttr_isExecutable(boolean isExecutable);
+
+	public String getAttr_candidateStarterGroups();
+
+	public void setAttr_candidateStarterGroups(String candidateStarterGroups);
+
+	public String getAttr_candidateStarterUsers();
+
+	public void setAttr_candidateStarterUsers(String candidateStarterUsers);
 }

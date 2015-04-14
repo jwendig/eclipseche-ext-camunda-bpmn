@@ -14,15 +14,13 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties;
 import org.eclipse.che.ide.api.parts.AbstractPartPresenter;
 import org.eclipse.che.ide.util.loging.Log;
 
-import com.google.gwt.query.client.GQuery;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnProcessJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.CamundaElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso.BpmnElementType;
 
 @Singleton
 public class BpmnElementPropertiesPresenter extends AbstractPartPresenter
@@ -61,58 +59,34 @@ public class BpmnElementPropertiesPresenter extends AbstractPartPresenter
 	}
 
 	@Override
-	public void elementSelected(CamundaElementJso elementJso) {
+	public void elementSelected(BpmnDiagramElementJso elementJso) {
 		Log.info(BpmnElementPropertiesPresenter.class, "elementSelected");
-		switch (elementJso.getType()) {
-		case "bpmn:ServiceTask":
+
+		switch (BpmnElementType
+				.findByBpmnIoTypeDefinition(elementJso.getType())) {
+		case DEFAULT:
+			view.loadUnknownItemInfo(elementJso);
+			break;
+		case PROCESS:
+			view.loadProcessProperties(elementJso);
+			break;
+		case SCRIPT_TASK:
+			view.loadUnknownItemInfo(elementJso);
+			break;
+		case SERVICE_TASK:
 			view.loadServiceTaksProperties(elementJso);
 			break;
-		case "bpmn:UserTask":
-			view.loadUserTaskProperties(elementJso);
-			break;
-		case "bpmn:StartEvent":
+		case START_EVENT:
 			view.loadStartEventProperties(elementJso);
+			break;
+		case TASK:
+			view.loadUnknownItemInfo(elementJso);
+			break;
+		case USER_TASK:
+			view.loadUserTaskProperties(elementJso);
 			break;
 		default:
 			view.loadUnknownItemInfo(elementJso);
-			break;
 		}
 	}
-
-	@Override
-	public void processSelected(BpmnProcessJso processJso) {
-		view.loadProcessProperties(processJso);
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.
-	 * BpmnElementPropertiesCallback#elementSelected()
-	 */
-	// @Override
-	// public void elementSelected(BpmnEditorDiagramWidget.ElementType type,
-	// GQuery selectedItem) {
-	// Log.info(BpmnElementPropertiesPresenter.class, "elementSelected");
-	// switch (type) {
-	// case SERVICE_TASK:
-	// view.loadServiceTaksProperties(selectedItem);
-	// break;
-	// case USER_TASK:
-	// view.loadUserTaskProperties(selectedItem);
-	// break;
-	// case START_EVENT:
-	// view.loadStartEventProperties(selectedItem);
-	// break;
-	// case UNKNOWN:
-	// view.loadUnknownItemInfo(selectedItem);
-	// }
-	// }
-	//
-	// @Override
-	// public void containerSelected(GQuery base) {
-	// view.loadProcessProperties(base);
-	//
-	// }
 }

@@ -8,18 +8,15 @@
  * Contributors:
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements;
 
-public class BpmnProcessJso extends AbstractBpmnJso {
-	protected BpmnProcessJso() {
-	}
-	
-	public final native boolean getAttrIsExecutable() /*-{
-														return this.businessObject.isExecutable;
-														}-*/;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces;
 
-	public final native void setAttrIsExecutable(boolean isExecutable) /*-{
-																		this.businessObject.isExecutable = isExecutable;
-																		}-*/;
+public interface ScriptTaskJso extends TaskJso {
+	public String getAttr_resource();
 
+	public void setAttr_resource(String resource);
+
+	public String getAttr_resultVariable();
+
+	public void setAttr_resultVariable(String resultVariable);
 }
