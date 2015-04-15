@@ -9,10 +9,24 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 
-public interface BpmnElementPropertiesCallback {
+public interface BpmnEditorView {
+
+	public interface ActionDelegate {
+		public void loadPropertiesViewForSelectedBpmnElement(
+				BpmnDiagramElementJso elementJso);
+	}
+
+	public void setActionDelegate(ActionDelegate actionDelegate);
+
+	public void setContentIsDirty();
+
 	public void bpmnElementSelected(BpmnDiagramElementJso elementJso);
+
+	public void setCurrentXmlContent(String xml);
+
+	public void setCurrentSvgContent(String svg);
 }

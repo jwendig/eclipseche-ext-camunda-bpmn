@@ -23,13 +23,15 @@ import com.google.inject.Inject;
 import de.fhrt.johannes.wendig.codenvy.bpmn.BpmnExtension;
 import de.fhrt.johannes.wendig.codenvy.bpmn.BpmnResource;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesPresenter;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 
 /**
  * EditorProvider for Groovy file type.
  * 
  * @author <a href="mailto:aplotnikov@codenvy.com">Andrey Plotnikov</a>
  */
-public class BpmnEditorProvider implements EditorProvider {
+public class BpmnEditorProvider implements EditorProvider,
+		BpmnEditorView.ActionDelegate {
 	private final DefaultEditorProvider defaultEditorProvider;
 	private final NotificationManager notificationManager;
 	private final ProjectServiceClient projectServiceClient;
@@ -38,7 +40,7 @@ public class BpmnEditorProvider implements EditorProvider {
 
 	private BpmnElementPropertiesPresenter bpmnElementPropertiesEditorPresenter;
 	private BpmnResource bpmnResource;
-	private BpmnEditor bpmnEditor;
+	private BpmnEditorViewImpl bpmnEditorView;
 
 	@Inject
 	public BpmnEditorProvider(
@@ -48,7 +50,7 @@ public class BpmnEditorProvider implements EditorProvider {
 			BpmnElementPropertiesPresenter bpmnElementPropertiesEditorPresenter,
 			WorkspaceAgent workspaceAgent,
 			ProjectServiceClient projectServiceClient,
-			DialogFactory dialogFactory, BpmnEditor bpmnEditor) {
+			DialogFactory dialogFactory, BpmnEditorViewImpl bpmnEditorView) {
 		super();
 		this.defaultEditorProvider = defaultEditorProvider;
 		this.notificationManager = notificationManager;
@@ -58,7 +60,13 @@ public class BpmnEditorProvider implements EditorProvider {
 
 		this.bpmnElementPropertiesEditorPresenter = bpmnElementPropertiesEditorPresenter;
 		this.bpmnResource = bpmnResource;
-		this.bpmnEditor = bpmnEditor;
+		this.bpmnEditorView = bpmnEditorView;
+
+		bind();
+	}
+
+	private void bind() {
+		bpmnEditorView.setActionDelegate(this);
 	}
 
 	@Override
@@ -77,6 +85,13 @@ public class BpmnEditorProvider implements EditorProvider {
 		// return new BpmnEditor(workspaceAgent, projectServiceClient,
 		// dialogFactory, bpmnElementPropertiesEditorPresenter,
 		// bpmnResource);
-		return bpmnEditor;
+		return bpmnEditorView;
 	}
+
+	@Override
+	public void loadPropertiesViewForSelectedBpmnElement(
+			BpmnDiagramElementJso elementJso) {
+		bpmnElementPropertiesEditorPresenter.bpmnElementSelected(elementJso);
+	}
+
 }

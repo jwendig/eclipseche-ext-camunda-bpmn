@@ -24,6 +24,8 @@ public interface BpmnElementPropertiesView extends
 		void onContentChange();
 	}
 
+	public void setActionDelegate(ActionDelegate actionDelegate);
+
 	public void setTitle(String title);
 
 	public void loadUnknownItemInfo(BpmnDiagramElementJso selectedItem);
