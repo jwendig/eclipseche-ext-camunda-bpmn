@@ -26,7 +26,7 @@ import com.google.gwt.typedarrays.server.JavaImpl;
 import de.fhrt.johannes.wendig.codenvy.bpmn.camunda.CamundaFormKeyType;
 import de.fhrt.johannes.wendig.codenvy.bpmn.camunda.CamundaJavaDelegateType;
 import de.fhrt.johannes.wendig.codenvy.bpmn.camunda.CamundaTypeHolder;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditor;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorViewImpl;
 
 public class ProjectParser {
 
@@ -43,7 +43,7 @@ public class ProjectParser {
 
 	public static CamundaTypeHolder parseProjectForCamundaElements(
 			ProjectNode projectNode) {
-		Log.info(BpmnEditor.class, "parseProjectForCamundaElements");
+		Log.info(BpmnEditorViewImpl.class, "parseProjectForCamundaElements");
 
 		CamundaTypeHolder camundaTypeHolder = new CamundaTypeHolder();
 		parseTreeNode(camundaTypeHolder, projectNode);
@@ -59,14 +59,14 @@ public class ProjectParser {
 	private static void parseTreeNode(CamundaTypeHolder camundaTypeHolder,
 			TreeNode<?> treeNode, boolean isChildOfJavaFolder,
 			boolean isChildOfWebappFolder) {
-		Log.info(BpmnEditor.class, "parseTreeNode");
+		Log.info(BpmnEditorViewImpl.class, "parseTreeNode");
 
 		if (treeNode.isLeaf()) {
-			Log.info(BpmnEditor.class,
+			Log.info(BpmnEditorViewImpl.class,
 					"parseTreeNode: leaf:" + treeNode.getDisplayName());
 			ItemNode itemNode = (ItemNode) treeNode;
 			try {
-				Log.info(BpmnEditor.class, "parseTreeNode: leaf: url="
+				Log.info(BpmnEditorViewImpl.class, "parseTreeNode: leaf: url="
 						+ ((FileNode) itemNode).getContentUrl());
 			} catch (ClassCastException e) {
 
@@ -84,7 +84,7 @@ public class ProjectParser {
 				
 				switch (itemNode.getData().getClass().getSuperclass().getName()) {
 				case CAMUNDA_CLASS_NAME__TEST_EXCEPTION:
-					Log.info(BpmnEditor.class, "parseTreeNode: leaf:"
+					Log.info(BpmnEditorViewImpl.class, "parseTreeNode: leaf:"
 							+ treeNode.getDisplayName() + " TYPE: "
 							+ CAMUNDA_CLASS_NAME__TEST_EXCEPTION);
 					CamundaJavaDelegateType type2 = new CamundaJavaDelegateType(
@@ -92,14 +92,14 @@ public class ProjectParser {
 					camundaTypeHolder.getJavaDelegateClasses().add(type2);
 					break;
 				default:
-					Log.info(BpmnEditor.class, "parseTreeNode: leaf:"
+					Log.info(BpmnEditorViewImpl.class, "parseTreeNode: leaf:"
 							+ treeNode.getDisplayName()
 							+ " IS NOT A SEARCHED FILE");
 					break;
 				}
 			} else if (isChildOfWebappFolder
 					&& itemNode.getData().getName().endsWith(".html")) {
-				Log.info(BpmnEditor.class,
+				Log.info(BpmnEditorViewImpl.class,
 						"parseTreeNode: leaf:" + treeNode.getDisplayName()
 								+ " TYPE: " + "HTML");
 				CamundaFormKeyType type = new CamundaFormKeyType(
@@ -109,7 +109,7 @@ public class ProjectParser {
 
 		} else {
 			// treeNode is a folder
-			Log.info(BpmnEditor.class,
+			Log.info(BpmnEditorViewImpl.class,
 					"parseTreeNode: folder:" + treeNode.getDisplayName());
 			if (treeNode.getDisplayName().equals("webapp")) {
 				isChildOfWebappFolder = true;

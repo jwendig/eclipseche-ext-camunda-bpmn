@@ -16,15 +16,15 @@ import org.eclipse.che.ide.api.extension.ExtensionGinModule;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.Singleton;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditor;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorCallback;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorViewImpl;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorView;
 
 @ExtensionGinModule
 public class BpmnGinModule extends AbstractGinModule {
 
 	@Override
 	protected void configure() {
-		bind(BpmnEditorCallback.class).to(BpmnEditor.class);
+		bind(BpmnEditorView.class).to(BpmnEditorViewImpl.class);
 
 	}
 

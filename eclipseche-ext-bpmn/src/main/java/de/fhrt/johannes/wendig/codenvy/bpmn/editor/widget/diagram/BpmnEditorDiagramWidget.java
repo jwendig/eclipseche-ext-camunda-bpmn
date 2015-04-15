@@ -18,7 +18,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.BpmnResource;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorCallback;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesCallback;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso.BpmnElementType;
@@ -33,8 +33,7 @@ public class BpmnEditorDiagramWidget extends Composite {
 	 * References
 	 */
 	private BpmnResource bpmnResource;
-	private BpmnEditorCallback bpmnEditorCallback;
-	private BpmnElementPropertiesCallback bpmnElementPropertiesCallback;
+	private BpmnEditorView bpmnEditorView;
 
 	/*
 	 * Layout
@@ -42,13 +41,11 @@ public class BpmnEditorDiagramWidget extends Composite {
 	private HTMLPanel diagramHtmlPanel;
 	private GQuery qSelectedItem;
 
-	public BpmnEditorDiagramWidget(BpmnEditorCallback bpmnEditorCallback,
-			BpmnElementPropertiesCallback bpmnElementPropertiesCallback,
+	public BpmnEditorDiagramWidget(BpmnEditorView bpmnEditorView,
 			BpmnResource bpmnResource) {
 		super();
 		Log.info(BpmnEditorDiagramWidget.class, "constructor");
-		this.bpmnEditorCallback = bpmnEditorCallback;
-		this.bpmnElementPropertiesCallback = bpmnElementPropertiesCallback;
+		this.bpmnEditorView = bpmnEditorView;
 		this.bpmnResource = bpmnResource;
 
 		loadCss();
@@ -118,14 +115,14 @@ public class BpmnEditorDiagramWidget extends Composite {
 
 	public void jsCallbackSaveDiagram(String xml) {
 		Log.info(BpmnEditorDiagramWidget.class, "jsCallbackSaveDiagram");
-		bpmnEditorCallback.setCurrentXmlContent(xml);
-		bpmnEditorCallback.setContentIsDirty();
+		bpmnEditorView.setCurrentXmlContent(xml);
+		bpmnEditorView.setContentIsDirty();
 	};
 
 	public void jsCallbackSaveSVG(String svg) {
 		Log.info(BpmnEditorDiagramWidget.class, "jsCallbackSaveSVG");
-		bpmnEditorCallback.setCurrentSvgContent(svg);
-		bpmnEditorCallback.setContentIsDirty();
+		bpmnEditorView.setCurrentSvgContent(svg);
+		bpmnEditorView.setContentIsDirty();
 	};
 
 	/*
@@ -170,7 +167,7 @@ public class BpmnEditorDiagramWidget extends Composite {
 		Log.info(BpmnEditorDiagramWidget.class,
 				"jsCallbackElementSelected: id=" + elem.getAttr_id());
 
-		bpmnElementPropertiesCallback.elementSelected(elem);
+		bpmnEditorView.bpmnElementSelected(elem);
 	};
 
 	public void jsCallbackContainerSelected(BpmnDiagramElementJso elem) {
@@ -180,7 +177,7 @@ public class BpmnEditorDiagramWidget extends Composite {
 		Log.info(BpmnEditorDiagramWidget.class,
 				"jsCallbackContainerSelected: id=" + elem.getAttr_id());
 
-		bpmnElementPropertiesCallback.elementSelected(elem);
+		bpmnEditorView.bpmnElementSelected(elem);
 	};
 
 	/*

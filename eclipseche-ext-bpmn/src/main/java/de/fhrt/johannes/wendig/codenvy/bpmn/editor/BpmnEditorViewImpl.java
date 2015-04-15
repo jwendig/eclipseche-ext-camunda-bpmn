@@ -38,13 +38,16 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.camunda.CamundaJavaDelegateType;
 import de.fhrt.johannes.wendig.codenvy.bpmn.camunda.CamundaTypeHolder;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesPresenter;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.util.ProjectParser;
 
-public class BpmnEditor extends AbstractEditorPresenter implements
-		BpmnEditorCallback {
+public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
+		BpmnEditorView {
 	private ProjectServiceClient projectServiceClient;
 	private WorkspaceAgent workspaceAgent;
 	private final DialogFactory dialogFactory;
+
+	private ActionDelegate actionDelegate;
 
 	private BpmnElementPropertiesPresenter bpmnElementPropertiesEditorPresenter;
 	private BpmnResource bpmnResource;
@@ -56,10 +59,10 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 	private String svgFileParentPath;
 	private String svgFileName;
 
-	private CamundaTypeHolder camundaTypeHolder;
+	// private CamundaTypeHolder camundaTypeHolder;
 
 	@Inject
-	public BpmnEditor(WorkspaceAgent workspaceAgent,
+	public BpmnEditorViewImpl(WorkspaceAgent workspaceAgent,
 			ProjectServiceClient projectServiceClient,
 			DialogFactory dialogFactory,
 			BpmnElementPropertiesPresenter bpmnElementPropertiesPresenter,
@@ -72,15 +75,14 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 		this.bpmnElementPropertiesEditorPresenter = bpmnElementPropertiesPresenter;
 		this.bpmnElementPropertiesEditorPresenter.setBpmnEditorCallback(this);
 
-		bpmnDiagramWidget = new BpmnEditorDiagramWidget(this,
-				bpmnElementPropertiesPresenter, bpmnResource);
+		bpmnDiagramWidget = new BpmnEditorDiagramWidget(this, bpmnResource);
 		bpmnDiagramWidget.setSize("100%", "100%");
 
 	}
 
 	@Override
 	public void doSave() {
-		Log.info(BpmnEditor.class, "doSave");
+		Log.info(BpmnEditorViewImpl.class, "doSave");
 
 		updateSvgFile();
 		updateXmlFile();
@@ -88,7 +90,7 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 
 	@Override
 	public void doSave(AsyncCallback<EditorInput> callback) {
-		Log.info(BpmnEditor.class, "doSave(callback)");
+		Log.info(BpmnEditorViewImpl.class, "doSave(callback)");
 
 		// refresh the buffered editor content
 		bpmnDiagramWidget.exportArtifacts();
@@ -99,12 +101,12 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 
 	@Override
 	public void doSaveAs() {
-		Log.info(BpmnEditor.class, "doSaveAs");
+		Log.info(BpmnEditorViewImpl.class, "doSaveAs");
 	}
 
 	@Override
 	public void activate() {
-		Log.info(BpmnEditor.class, "activate");
+		Log.info(BpmnEditorViewImpl.class, "activate");
 
 		// TODO: find a solution ....
 		// parseProjectForCamundaElements();
@@ -112,16 +114,16 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 
 	@Override
 	public void close(boolean save) {
-		Log.info(BpmnEditor.class, "close");
+		Log.info(BpmnEditorViewImpl.class, "close");
 
 	}
 
 	@Override
 	public void onClose(@Nonnull final AsyncCallback<Void> callback) {
-		Log.info(BpmnEditor.class, "onClose");
+		Log.info(BpmnEditorViewImpl.class, "onClose");
 
 		if (isDirty()) {
-			Log.info(BpmnEditor.class, "onClose: file IS DIRTY");
+			Log.info(BpmnEditorViewImpl.class, "onClose: file IS DIRTY");
 			dialogFactory.createConfirmDialog(
 					"Close",
 					"'" + getEditorInput().getName()
@@ -141,7 +143,7 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 						}
 					}).show();
 		} else {
-			Log.info(BpmnEditor.class, "onClose: file IS NOT DIRTY");
+			Log.info(BpmnEditorViewImpl.class, "onClose: file IS NOT DIRTY");
 			handleClose();
 			callback.onSuccess(null);
 		}
@@ -151,45 +153,45 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 
 	@Override
 	public String getTitle() {
-		Log.info(BpmnEditor.class, "getTitle");
+		Log.info(BpmnEditorViewImpl.class, "getTitle");
 		return "BPMN Editor: " + input.getFile().getName();
 	}
 
 	@Override
 	public ImageResource getTitleImage() {
-		Log.info(BpmnEditor.class, "getTitleImage");
+		Log.info(BpmnEditorViewImpl.class, "getTitleImage");
 		return null;
 	}
 
 	@Override
 	public String getTitleToolTip() {
-		Log.info(BpmnEditor.class, "getTitleToolTip");
+		Log.info(BpmnEditorViewImpl.class, "getTitleToolTip");
 		return null;
 	}
 
 	@Override
 	protected void initializeEditor() {
-		Log.info(BpmnEditor.class, "initializeEditor");
+		Log.info(BpmnEditorViewImpl.class, "initializeEditor");
 
 		projectServiceClient.getFileContent(input.getFile().getPath(),
 				new AsyncRequestCallback<String>(new StringUnmarshaller()) {
 					@Override
 					protected void onSuccess(String result) {
-						Log.info(BpmnEditor.class,
+						Log.info(BpmnEditorViewImpl.class,
 								"initializeEditor:getFileContent:onSuccess: file-loaded");
 						while (null == bpmnDiagramWidget) {
-							Log.info(BpmnEditor.class,
+							Log.info(BpmnEditorViewImpl.class,
 									"initializeEditor:getFileContent:onSuccess: diagramWidget not ready");
 						}
 
-						Log.info(BpmnEditor.class,
+						Log.info(BpmnEditorViewImpl.class,
 								"initializeEditor:getFileContent:onSuccess: diagramWidget ready");
 						bpmnDiagramWidget.openDiagram(result);
 					}
 
 					@Override
 					protected void onFailure(Throwable exception) {
-						Log.error(BpmnEditor.class,
+						Log.error(BpmnEditorViewImpl.class,
 								"initializeEditor:getFileContent:onFailure",
 								exception);
 						// TODO: alert or something else
@@ -204,7 +206,7 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 
 	@Override
 	public void go(AcceptsOneWidget container) {
-		Log.info(BpmnEditor.class, "go");
+		Log.info(BpmnEditorViewImpl.class, "go");
 
 		container.setWidget(bpmnDiagramWidget);
 	}
@@ -214,7 +216,7 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 	 */
 
 	private void initSvgFileVariables() {
-		Log.info(BpmnEditor.class, "initSvgFileVariables");
+		Log.info(BpmnEditorViewImpl.class, "initSvgFileVariables");
 		svgFileName = input
 				.getFile()
 				.getName()
@@ -224,44 +226,46 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 				.replace(input.getFile().getName(), "");
 	}
 
-	public void parseProjectForCamundaElements() {
-		Log.info(BpmnEditor.class, "parseProjectForCamundaElements");
-		camundaTypeHolder = ProjectParser.parseProjectForCamundaElements(input
-				.getFile().getProject());
-
-		Log.info(BpmnEditor.class, "parseProjectForCamundaElements: Found ("
-				+ CamundaJavaDelegateType.class.getSimpleName() + ")");
-		for (CamundaJavaDelegateType cjdt : camundaTypeHolder
-				.getJavaDelegateClasses()) {
-			Log.info(BpmnEditor.class,
-					"parseProjectForCamundaElements: Found ("
-							+ CamundaJavaDelegateType.class.getSimpleName()
-							+ "): FileName=" + cjdt.getFilename());
-			Log.info(BpmnEditor.class,
-					"parseProjectForCamundaElements: Found ("
-							+ CamundaJavaDelegateType.class.getSimpleName()
-							+ "): Path=" + cjdt.getPath());
-		}
-
-		Log.info(BpmnEditor.class, "parseProjectForCamundaElements: Found ("
-				+ CamundaFormKeyType.class.getSimpleName() + ")");
-		for (CamundaFormKeyType cjdt : camundaTypeHolder.getFormKeyFiles()) {
-			Log.info(BpmnEditor.class,
-					"parseProjectForCamundaElements: Found ("
-							+ CamundaFormKeyType.class.getSimpleName()
-							+ "): FileName=" + cjdt.getFilename());
-			Log.info(BpmnEditor.class,
-					"parseProjectForCamundaElements: Found ("
-							+ CamundaFormKeyType.class.getSimpleName()
-							+ "): Path=" + cjdt.getPath());
-		}
-	}
+	// public void parseProjectForCamundaElements() {
+	// Log.info(BpmnEditorViewImpl.class, "parseProjectForCamundaElements");
+	// camundaTypeHolder = ProjectParser.parseProjectForCamundaElements(input
+	// .getFile().getProject());
+	//
+	// Log.info(BpmnEditorViewImpl.class,
+	// "parseProjectForCamundaElements: Found ("
+	// + CamundaJavaDelegateType.class.getSimpleName() + ")");
+	// for (CamundaJavaDelegateType cjdt : camundaTypeHolder
+	// .getJavaDelegateClasses()) {
+	// Log.info(BpmnEditorViewImpl.class,
+	// "parseProjectForCamundaElements: Found ("
+	// + CamundaJavaDelegateType.class.getSimpleName()
+	// + "): FileName=" + cjdt.getFilename());
+	// Log.info(BpmnEditorViewImpl.class,
+	// "parseProjectForCamundaElements: Found ("
+	// + CamundaJavaDelegateType.class.getSimpleName()
+	// + "): Path=" + cjdt.getPath());
+	// }
+	//
+	// Log.info(BpmnEditorViewImpl.class,
+	// "parseProjectForCamundaElements: Found ("
+	// + CamundaFormKeyType.class.getSimpleName() + ")");
+	// for (CamundaFormKeyType cjdt : camundaTypeHolder.getFormKeyFiles()) {
+	// Log.info(BpmnEditorViewImpl.class,
+	// "parseProjectForCamundaElements: Found ("
+	// + CamundaFormKeyType.class.getSimpleName()
+	// + "): FileName=" + cjdt.getFilename());
+	// Log.info(BpmnEditorViewImpl.class,
+	// "parseProjectForCamundaElements: Found ("
+	// + CamundaFormKeyType.class.getSimpleName()
+	// + "): Path=" + cjdt.getPath());
+	// }
+	// }
 
 	private void updateXmlFile() {
-		Log.info(BpmnEditor.class, "updateXmlFile");
+		Log.info(BpmnEditorViewImpl.class, "updateXmlFile");
 		if (null != currentXmlContent) {
 			Log.info(
-					BpmnEditor.class,
+					BpmnEditorViewImpl.class,
 					"updateXmlFile: bpmnDiagramWidget.currentXmlContent IS NOT NULL, do updateXmlFile");
 			projectServiceClient.updateFile(input.getFile().getPath(),
 					currentXmlContent, BpmnExtension.BPMN_MIME_TYPE,
@@ -269,25 +273,25 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 
 						@Override
 						protected void onSuccess(Void result) {
-							Log.info(BpmnEditor.class,
+							Log.info(BpmnEditorViewImpl.class,
 									"doSave:updateXmlFile:onSuccess");
 						}
 
 						@Override
 						protected void onFailure(Throwable exception) {
-							Log.error(BpmnEditor.class,
+							Log.error(BpmnEditorViewImpl.class,
 									"doSave:updateXmlFile:onFailure", exception);
 
 						}
 					});
 		} else {
-			Log.info(BpmnEditor.class,
+			Log.info(BpmnEditorViewImpl.class,
 					"updateXmlFile: bpmnDiagramWidget.currentXmlContent IS NULL, do nothing");
 		}
 	}
 
 	private void createSvgFile() {
-		Log.info(BpmnEditor.class, "createSvgFile");
+		Log.info(BpmnEditorViewImpl.class, "createSvgFile");
 		if (null != currentSvgContent) {
 			projectServiceClient.createFile(svgFileParentPath, svgFileName,
 					currentSvgContent, BpmnExtension.SVG_MIME_TYPE,
@@ -295,7 +299,7 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 
 						@Override
 						protected void onSuccess(ItemReference result) {
-							Log.info(BpmnEditor.class,
+							Log.info(BpmnEditorViewImpl.class,
 									"initializeEditor: createSvgFile: onSuccess");
 						}
 
@@ -304,20 +308,20 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 							if (!exception.getMessage().contains(
 									"already exists")) {
 								Log.error(
-										BpmnEditor.class,
+										BpmnEditorViewImpl.class,
 										"initializeEditor:createSvgFile:onFailure",
 										exception);
 							}
 						}
 					});
 		} else {
-			Log.info(BpmnEditor.class,
+			Log.info(BpmnEditorViewImpl.class,
 					"createSvgFile: bpmnDiagramWidget.currentSvgContent IS NULL, do nothing");
 		}
 	}
 
 	private void updateSvgFile() {
-		Log.info(BpmnEditor.class, "updateSvgFile");
+		Log.info(BpmnEditorViewImpl.class, "updateSvgFile");
 		if (null != currentSvgContent) {
 			projectServiceClient.updateFile(svgFileParentPath + svgFileName,
 					currentSvgContent, BpmnExtension.SVG_MIME_TYPE,
@@ -325,7 +329,7 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 
 						@Override
 						protected void onSuccess(Void result) {
-							Log.info(BpmnEditor.class,
+							Log.info(BpmnEditorViewImpl.class,
 									"doSave: updateSvgFile: onSuccess");
 						}
 
@@ -333,11 +337,11 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 						protected void onFailure(Throwable exception) {
 							if (exception.getMessage()
 									.contains("doesn't exist")) {
-								Log.info(BpmnEditor.class,
+								Log.info(BpmnEditorViewImpl.class,
 										"doSave: updateSvgFile: onFailure: file doesn't exist, create it");
 								createSvgFile();
 							} else {
-								Log.error(BpmnEditor.class,
+								Log.error(BpmnEditorViewImpl.class,
 										"doSave: updateSvgFile: onFailure",
 										exception);
 							}
@@ -345,7 +349,7 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 						}
 					});
 		} else {
-			Log.info(BpmnEditor.class,
+			Log.info(BpmnEditorViewImpl.class,
 					"updateSvgFile: bpmnDiagramWidget.currentSvgContent IS NULL, do nothing");
 		}
 	}
@@ -358,7 +362,7 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 	 */
 	@Override
 	public void setContentIsDirty() {
-		Log.info(BpmnEditor.class, "setContentIsDirty");
+		Log.info(BpmnEditorViewImpl.class, "setContentIsDirty");
 		updateDirtyState(true);
 	}
 
@@ -370,7 +374,7 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 	 */
 	@Override
 	public void setCurrentXmlContent(String xml) {
-		Log.info(BpmnEditor.class, "setCurrentXmlContent");
+		Log.info(BpmnEditorViewImpl.class, "setCurrentXmlContent");
 		currentXmlContent = xml;
 
 		// TODO: find a solution ....
@@ -385,8 +389,29 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 	 */
 	@Override
 	public void setCurrentSvgContent(String svg) {
-		Log.info(BpmnEditor.class, "setCurrentSvgContent");
+		Log.info(BpmnEditorViewImpl.class, "setCurrentSvgContent");
 		currentSvgContent = svg;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorCallback#
+	 * elementSelected
+	 * (de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram
+	 * .bpmnelements.BpmnDiagramElementJso)
+	 */
+	@Override
+	public void bpmnElementSelected(BpmnDiagramElementJso elementJso) {
+		actionDelegate.loadPropertiesViewForSelectedBpmnElement(elementJso);
+	}
+
+	/*
+	 * Getter & Setter
+	 */
+
+	@Override
+	public void setActionDelegate(ActionDelegate actionDelegate) {
+		this.actionDelegate = actionDelegate;
+	}
 }

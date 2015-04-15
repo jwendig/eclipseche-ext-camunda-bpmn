@@ -21,14 +21,14 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorCallback;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso.BpmnElementType;
 
 public class BpmnElementPropertiesPresenter extends BasePresenter implements
 		BpmnElementPropertiesView.ActionDelegate, BpmnElementPropertiesCallback {
 
-	private BpmnEditorCallback bpmnEditorCallback;
+	private BpmnEditorView bpmnEditorCallback;
 
 	private BpmnElementPropertiesView view;
 	private final static String TITLE = "BPMN Properties";
@@ -72,8 +72,8 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 	}
 
 	@Override
-	public void elementSelected(BpmnDiagramElementJso elementJso) {
-		Log.info(BpmnElementPropertiesPresenter.class, "elementSelected");
+	public void bpmnElementSelected(BpmnDiagramElementJso elementJso) {
+		Log.info(BpmnElementPropertiesPresenter.class, "bpmnElementSelected");
 
 		switch (BpmnElementType
 				.findByBpmnIoTypeDefinition(elementJso.getType())) {
@@ -123,11 +123,11 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 	 * Getter & Setter
 	 */
 
-	public BpmnEditorCallback getBpmnEditorCallback() {
+	public BpmnEditorView getBpmnEditorCallback() {
 		return bpmnEditorCallback;
 	}
 
-	public void setBpmnEditorCallback(BpmnEditorCallback bpmnEditorCallback) {
+	public void setBpmnEditorCallback(BpmnEditorView bpmnEditorCallback) {
 		this.bpmnEditorCallback = bpmnEditorCallback;
 	}
 
