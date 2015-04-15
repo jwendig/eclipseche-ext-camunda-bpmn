@@ -51,8 +51,7 @@ public class ProcessProperties extends AbstractBpmnProperties {
 	@Override
 	public void initSelectedItem(BpmnDiagramElementJso selectedItem) {
 		element = selectedItem;
-		
+
 		tabGeneralController.initView(element);
 	}
-
 }

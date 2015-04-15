@@ -17,11 +17,12 @@ import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.TextBox;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTab;
 
 public class TabGeneralView extends AbstractBpmnPropertiesTab {
 	private final static String TAB_NAME = "General";
-	
+
 	private TextBox tbProcessId;
 	private TextBox tbName;
 	private CheckBox cbIsExecutable;
@@ -91,6 +92,5 @@ public class TabGeneralView extends AbstractBpmnPropertiesTab {
 	public TextBox getTbDocumentation() {
 		return tbDocumentation;
 	}
-	
-	
+
 }

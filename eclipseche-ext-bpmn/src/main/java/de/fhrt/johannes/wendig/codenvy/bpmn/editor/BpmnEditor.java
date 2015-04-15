@@ -28,6 +28,8 @@ import org.eclipse.che.ide.util.loging.Log;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.BpmnExtension;
 import de.fhrt.johannes.wendig.codenvy.bpmn.BpmnResource;
@@ -56,6 +58,7 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 
 	private CamundaTypeHolder camundaTypeHolder;
 
+	@Inject
 	public BpmnEditor(WorkspaceAgent workspaceAgent,
 			ProjectServiceClient projectServiceClient,
 			DialogFactory dialogFactory,
@@ -67,6 +70,8 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 
 		this.bpmnResource = bpmnResource;
 		this.bpmnElementPropertiesEditorPresenter = bpmnElementPropertiesPresenter;
+		this.bpmnElementPropertiesEditorPresenter.setBpmnEditorCallback(this);
+
 		bpmnDiagramWidget = new BpmnEditorDiagramWidget(this,
 				bpmnElementPropertiesPresenter, bpmnResource);
 		bpmnDiagramWidget.setSize("100%", "100%");
@@ -321,15 +326,21 @@ public class BpmnEditor extends AbstractEditorPresenter implements
 						@Override
 						protected void onSuccess(Void result) {
 							Log.info(BpmnEditor.class,
-									"doSave:updateSvgFile:onSuccess");
+									"doSave: updateSvgFile: onSuccess");
 						}
 
 						@Override
 						protected void onFailure(Throwable exception) {
-							Log.error(BpmnEditor.class,
-									"doSave:updateSvgFile:onFailure", exception);
-
-							createSvgFile();
+							if (exception.getMessage()
+									.contains("doesn't exist")) {
+								Log.info(BpmnEditor.class,
+										"doSave: updateSvgFile: onFailure: file doesn't exist, create it");
+								createSvgFile();
+							} else {
+								Log.error(BpmnEditor.class,
+										"doSave: updateSvgFile: onFailure",
+										exception);
+							}
 
 						}
 					});

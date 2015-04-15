@@ -19,11 +19,10 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.ProcessJso;
 
 public class TabGeneralController {
-
 	private TabGeneralView view;
 
 	public TabGeneralController() {
-		view = new TabGeneralView();
+		this.view = new TabGeneralView();
 	}
 
 	public TabGeneralView getView() {

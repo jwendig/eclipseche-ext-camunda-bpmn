@@ -13,18 +13,22 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties;
 
 import org.eclipse.che.ide.api.parts.base.BasePresenter;
 import org.eclipse.che.ide.util.loging.Log;
+import org.vectomatic.dom.svg.ui.SVGResource;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorCallback;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso.BpmnElementType;
 
-@Singleton
 public class BpmnElementPropertiesPresenter extends BasePresenter implements
 		BpmnElementPropertiesView.ActionDelegate, BpmnElementPropertiesCallback {
+
+	private BpmnEditorCallback bpmnEditorCallback;
 
 	private BpmnElementPropertiesView view;
 	private final static String TITLE = "BPMN Properties";
@@ -44,6 +48,16 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 	@Override
 	public ImageResource getTitleImage() {
 		return null;
+	}
+
+	@Override
+	public IsWidget getTitleWidget() {
+		return super.getTitleWidget();
+	}
+
+	@Override
+	public SVGResource getTitleSVGImage() {
+		return super.getTitleSVGImage();
 	}
 
 	@Override
@@ -88,4 +102,33 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 			view.loadUnknownItemInfo(elementJso);
 		}
 	}
+
+	/*
+	 * Callbacks from view
+	 */
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.
+	 * BpmnElementPropertiesView.ActionDelegate#onContentChange()
+	 */
+	@Override
+	public void onContentChange() {
+		Log.info(BpmnElementPropertiesPresenter.class, "onContentChange");
+		bpmnEditorCallback.setContentIsDirty();
+	}
+
+	/*
+	 * Getter & Setter
+	 */
+
+	public BpmnEditorCallback getBpmnEditorCallback() {
+		return bpmnEditorCallback;
+	}
+
+	public void setBpmnEditorCallback(BpmnEditorCallback bpmnEditorCallback) {
+		this.bpmnEditorCallback = bpmnEditorCallback;
+	}
+
 }

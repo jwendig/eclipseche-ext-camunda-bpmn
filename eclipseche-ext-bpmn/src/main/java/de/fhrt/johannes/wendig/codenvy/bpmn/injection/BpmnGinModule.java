@@ -9,18 +9,23 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process;
+package de.fhrt.johannes.wendig.codenvy.bpmn.injection;
 
+import org.eclipse.che.ide.api.extension.ExtensionGinModule;
 
-public class TabDefinitionsController {
-	private TabDefinitionsView view;
+import com.google.gwt.inject.client.AbstractGinModule;
+import com.google.inject.Singleton;
 
-	public TabDefinitionsController() {
-		this.view = new TabDefinitionsView();
-	}
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditor;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorCallback;
 
-	public TabDefinitionsView getView() {
-		return view;
+@ExtensionGinModule
+public class BpmnGinModule extends AbstractGinModule {
+
+	@Override
+	protected void configure() {
+		bind(BpmnEditorCallback.class).to(BpmnEditor.class);
+
 	}
 
 }
