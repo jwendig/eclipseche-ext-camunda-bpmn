@@ -21,6 +21,7 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.B
 public interface BpmnElementPropertiesView extends
 		View<BpmnElementPropertiesView.ActionDelegate> {
 	public interface ActionDelegate extends BaseActionDelegate {
+		void onContentChange();
 	}
 
 	public void setTitle(String title);

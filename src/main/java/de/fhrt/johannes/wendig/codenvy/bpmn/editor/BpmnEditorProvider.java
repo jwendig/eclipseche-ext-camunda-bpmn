@@ -11,17 +11,14 @@
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor;
 
 import org.eclipse.che.api.project.gwt.client.ProjectServiceClient;
-import org.eclipse.che.ide.api.app.AppContext;
 import org.eclipse.che.ide.api.editor.EditorPartPresenter;
 import org.eclipse.che.ide.api.editor.EditorProvider;
 import org.eclipse.che.ide.api.notification.NotificationManager;
 import org.eclipse.che.ide.api.parts.WorkspaceAgent;
 import org.eclipse.che.ide.jseditor.client.defaulteditor.DefaultEditorProvider;
-import org.eclipse.che.ide.jseditor.client.texteditor.ConfigurableTextEditor;
 import org.eclipse.che.ide.ui.dialogs.DialogFactory;
 
 import com.google.inject.Inject;
-import com.google.web.bindery.event.shared.EventBus;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.BpmnExtension;
 import de.fhrt.johannes.wendig.codenvy.bpmn.BpmnResource;
@@ -41,6 +38,7 @@ public class BpmnEditorProvider implements EditorProvider {
 
 	private BpmnElementPropertiesPresenter bpmnElementPropertiesEditorPresenter;
 	private BpmnResource bpmnResource;
+	private BpmnEditor bpmnEditor;
 
 	@Inject
 	public BpmnEditorProvider(
@@ -50,7 +48,7 @@ public class BpmnEditorProvider implements EditorProvider {
 			BpmnElementPropertiesPresenter bpmnElementPropertiesEditorPresenter,
 			WorkspaceAgent workspaceAgent,
 			ProjectServiceClient projectServiceClient,
-			DialogFactory dialogFactory) {
+			DialogFactory dialogFactory, BpmnEditor bpmnEditor) {
 		super();
 		this.defaultEditorProvider = defaultEditorProvider;
 		this.notificationManager = notificationManager;
@@ -60,7 +58,7 @@ public class BpmnEditorProvider implements EditorProvider {
 
 		this.bpmnElementPropertiesEditorPresenter = bpmnElementPropertiesEditorPresenter;
 		this.bpmnResource = bpmnResource;
-
+		this.bpmnEditor = bpmnEditor;
 	}
 
 	@Override
@@ -76,8 +74,9 @@ public class BpmnEditorProvider implements EditorProvider {
 	/** {@inheritDoc} */
 	@Override
 	public EditorPartPresenter getEditor() {
-		return new BpmnEditor(workspaceAgent, projectServiceClient,
-				dialogFactory, bpmnElementPropertiesEditorPresenter,
-				bpmnResource);
+		// return new BpmnEditor(workspaceAgent, projectServiceClient,
+		// dialogFactory, bpmnElementPropertiesEditorPresenter,
+		// bpmnResource);
+		return bpmnEditor;
 	}
 }

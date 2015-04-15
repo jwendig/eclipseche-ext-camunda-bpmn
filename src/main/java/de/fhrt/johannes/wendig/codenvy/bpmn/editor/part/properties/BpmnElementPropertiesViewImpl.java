@@ -60,6 +60,19 @@ public class BpmnElementPropertiesViewImpl extends
 	}
 
 	@Override
+	public String getTitle() {
+		Log.info(BpmnElementPropertiesViewImpl.class, "getTitle");
+		return "test";
+	}
+
+	@Override
+	public void setTitle(String title) {
+		Log.info(BpmnElementPropertiesViewImpl.class,
+				"setTitle: title before = " + title);
+		super.setTitle(title);
+	}
+
+	@Override
 	public void loadProcessProperties(BpmnDiagramElementJso selectedItem) {
 		Log.info(BpmnElementPropertiesViewImpl.class, "loadProcessProperties");
 		dockLpCurrentContent.remove(currentProperties);
