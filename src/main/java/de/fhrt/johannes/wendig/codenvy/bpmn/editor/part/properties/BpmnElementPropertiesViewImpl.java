@@ -32,6 +32,8 @@ public class BpmnElementPropertiesViewImpl extends
 
 	private DockLayoutPanel dockLpCurrentContent;
 
+	// TODO: create View for NoElementSelected and load it on Startup
+	
 	private ProcessProperties processProperties;
 	private ServiceTaskProperties serviceTaskProperties;
 	private StartEventProperties startEventProperties;
@@ -55,6 +57,7 @@ public class BpmnElementPropertiesViewImpl extends
 		dockLpCurrentContent = new DockLayoutPanel(Unit.PX);
 		dockLpCurrentContent.setSize("100%", "100%");
 		dockLpCurrentContent.add(processProperties);
+		
 		setContentWidget(dockLpCurrentContent);
 	}
 

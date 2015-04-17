@@ -43,7 +43,7 @@ public class UnknownItem extends AbstractBpmnProperties {
 	 * .editor.widget.diagram.bpmnelements.BpmnDiagramElementJso)
 	 */
 	@Override
-	public void initSelectedItem(BpmnDiagramElementJso selectedItem) {
+	public void loadSelectedItem(BpmnDiagramElementJso selectedItem) {
 		element = selectedItem;
 	}
 }

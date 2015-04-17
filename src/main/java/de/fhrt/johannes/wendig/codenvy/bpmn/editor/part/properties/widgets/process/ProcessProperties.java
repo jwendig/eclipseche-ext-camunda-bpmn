@@ -13,6 +13,7 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.proc
 import org.eclipse.che.ide.util.loging.Log;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnProperties;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.TabListenerController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.ProcessJso;
 
@@ -24,11 +25,13 @@ public class ProcessProperties extends AbstractBpmnProperties {
 
 	private TabGeneralController tabGeneralController;
 	private TabDefinitionsController tabDefinitionsController;
+	private TabListenerController tabListenerController;
 
 	public ProcessProperties() {
 		super(LB_ELEMENT_NAME_PREFIX);
 		Log.info(ProcessProperties.class, "constructor");
 
+		tabListenerController = new TabListenerController();
 		tabGeneralController = new TabGeneralController();
 		tabDefinitionsController = new TabDefinitionsController();
 
@@ -36,6 +39,8 @@ public class ProcessProperties extends AbstractBpmnProperties {
 				tabGeneralController.getView().getTabName());
 		getTabLpContent().add(tabDefinitionsController.getView(),
 				tabDefinitionsController.getView().getTabName());
+		getTabLpContent().add(tabListenerController.getView(),
+				tabListenerController.getView().getTabName());
 
 		getTabLpContent().selectTab(tabGeneralController.getView());
 	}
@@ -49,9 +54,10 @@ public class ProcessProperties extends AbstractBpmnProperties {
 	 * .editor.widget.diagram.bpmnelements.BpmnDiagramElementJso)
 	 */
 	@Override
-	public void initSelectedItem(BpmnDiagramElementJso selectedItem) {
+	public void loadSelectedItem(BpmnDiagramElementJso selectedItem) {
 		element = selectedItem;
 
-		tabGeneralController.initView(element);
+		tabGeneralController.initView(selectedItem);
+		tabListenerController.loadSelectedElement(selectedItem);
 	}
 }
