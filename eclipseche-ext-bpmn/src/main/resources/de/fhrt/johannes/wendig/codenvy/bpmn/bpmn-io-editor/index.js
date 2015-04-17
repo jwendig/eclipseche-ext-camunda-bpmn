@@ -14,7 +14,8 @@ var bpmnIo_fktSaveSVG;
 var bpmnIo_fktSaveDiagram;
 var bpmnIo_fktExportArtifacts;
 
-var bpmnIo_camundaFktGetExtension;
+var bpmnIo_fktGetElementExtensionsByType;
+var bpmnIo_fktAddElementExtensionType;
 
 /*
  * Functions to set the callbacks
@@ -35,9 +36,11 @@ function setBpmnIo_callback_containerSelected(callback) {
 	bpmnIo_callback_containerSelected = callback;
 }
 
-//END COPY BLOG 
+// END COPY BLOG
 
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+
+
 /*
  * BpmnIoInit
  */
@@ -56,32 +59,43 @@ var renderer = new BpmnModeler({
 	}
 });
 
-var newDiagramXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn2:definitions xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:bpmn2=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:camunda=\"http://activiti.org/bpmn\" xsi:schemaLocation=\"http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd\" id=\"sample-diagram\" targetNamespace=\"http://activiti.org/bpmn\">\n  <bpmn2:process id=\"Process_1\" isExecutable=\"false\">\n    <bpmn2:startEvent id=\"StartEvent_1\"/>\n  </bpmn2:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"Process_1\">\n      <bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds height=\"36.0\" width=\"36.0\" x=\"412.0\" y=\"240.0\"/>\n      </bpmndi:BPMNShape>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn2:definitions>";
+var newDiagramXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn2:definitions xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:bpmn2=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:camunda=\"http://activiti.org/bpmn\" xsi:schemaLocation=\"http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd\" id=\"sample-diagram\" targetNamespace=\"http://activiti.org/bpmn\">\n  <bpmn2:process id=\"Process_1\" isExecutable=\"false\">\n  \t<bpmn2:extensionElements>\n      <camunda:executionListener class=\"TestClassListener\" event=\"start\"/>\n      <camunda:executionListener class=\"TestClassListenerEnd\" event=\"end\"/>\n    </bpmn2:extensionElements>\n    <bpmn2:startEvent id=\"StartEvent_1\"/>\n  </bpmn2:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"Process_1\">\n      <bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds height=\"36.0\" width=\"36.0\" x=\"412.0\" y=\"240.0\"/>\n      </bpmndi:BPMNShape>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn2:definitions>";
 
 /*
  * Camunda functions
  */
-function getCamundaExtension(element, type) {
+bpmnIo_fktGetElementExtensionsByType = function getElementExtensionsByType(element, type) {
 	if (!element.extensionElements) {
 		return null;
 	}
 
 	return element.extensionElements.values.filter(function(e) {
 		return e.$instanceOf(type);
-	})[0];
-}
+	});
+};
+
+bpmnIo_fktAddElementExtensionType = function addElementExtension(element, type) {
+	var moddle = viewer.get('moddle');
+	var businessObject = element.businessObject;
+	var ext = moddle.create(type);
+
+	businessObject.extensionElements = businessObject.extensionElements	|| moddle.create('bpmn:ExtensionElements');
+	businessObject.extensionElements.get('values').push(ext);
+
+	return ext;
+};
 
 renderer.on('element.click', function(event) {
 	var element = event.element;
 	var moddle = renderer.get('moddle');
 
 	// do not allow on root element
-	if(!element.parent) {
-		bpmnIo_callback_containerSelected(element);
+	if (!element.parent) {
+		bpmnIo_callback_containerSelected(element.businessObject);
 		return;
 	}
 
-	bpmnIo_callback_elementSelected(element);
+	bpmnIo_callback_elementSelected(element.businessObject);
 });
 
 /*
@@ -498,7 +512,33 @@ module.exports={
           "type": "String"
         }
       ]
-    }
+    },
+    {
+      "name": "ExecutionListener",
+      "superClass": [ "Element" ],
+      "properties": [
+      	{
+          "name": "event",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "class",
+          "isAttr": true,
+          "type": "attr_class"
+        },
+        {
+          "name": "expression",
+          "isAttr": true,
+          "type": "attr_expression"
+        },
+        {
+          "name": "delegateExpression",
+          "isAttr": true,
+          "type": "attr_delegateExpression"
+        }
+      ]
+    }   
   ],
   "emumerations": [],
   "associations": []

@@ -18,6 +18,7 @@ import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.TabListenerController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 
 public abstract class AbstractBpmnProperties extends Composite {
@@ -25,10 +26,14 @@ public abstract class AbstractBpmnProperties extends Composite {
 	private static final String LABEL_ELEMENT_NAME__DEFAULT_CONTENT = "No BPMN-Element selected";
 	private String lbElementName_prefixText;
 
+	/*
+	 * root elements
+	 */
 	private DockLayoutPanel docLpRoot;
 	private Label lbElementName;
 	private TabLayoutPanel tabLpContent;
 	private BpmnDiagramElementJso selectedItem;
+
 
 	public AbstractBpmnProperties(String lbElementName_prefixText) {
 		super();
@@ -36,6 +41,13 @@ public abstract class AbstractBpmnProperties extends Composite {
 
 		this.lbElementName_prefixText = lbElementName_prefixText;
 
+		initPropertiesRoot();
+
+		initWidget(docLpRoot);
+
+	}
+
+	private void initPropertiesRoot() {
 		docLpRoot = new DockLayoutPanel(Unit.EM);
 		docLpRoot.setSize("100%", "100%");
 
@@ -46,11 +58,8 @@ public abstract class AbstractBpmnProperties extends Composite {
 		tabLpContent.setSize("100%", "100%");
 		tabLpContent.addStyleName("bpmnPropertiesWidget-tabLayoutPanel");
 
-		docLpRoot.addNorth(lbElementName, 1.5);
+		docLpRoot.addNorth(lbElementName, 1);
 		docLpRoot.add(tabLpContent);
-
-		initWidget(docLpRoot);
-
 	}
 
 	public void setSelectedItem(BpmnDiagramElementJso selectedItem) {
@@ -58,10 +67,10 @@ public abstract class AbstractBpmnProperties extends Composite {
 		this.selectedItem = selectedItem;
 
 		setLbElementNameText(selectedItem.getAttr_id());
-		initSelectedItem(selectedItem);
+		loadSelectedItem(selectedItem);
 	}
 
-	public abstract void initSelectedItem(BpmnDiagramElementJso selectedItem);
+	public abstract void loadSelectedItem(BpmnDiagramElementJso selectedItem);
 
 	/*
 	 * Getter & Setter
