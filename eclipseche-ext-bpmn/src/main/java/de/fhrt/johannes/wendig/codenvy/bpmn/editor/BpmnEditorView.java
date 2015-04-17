@@ -16,8 +16,6 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.B
 public interface BpmnEditorView {
 
 	public interface ActionDelegate {
-		public void loadPropertiesViewForSelectedBpmnElement(
-				BpmnDiagramElementJso elementJso);
 	}
 
 	public void setActionDelegate(ActionDelegate actionDelegate);

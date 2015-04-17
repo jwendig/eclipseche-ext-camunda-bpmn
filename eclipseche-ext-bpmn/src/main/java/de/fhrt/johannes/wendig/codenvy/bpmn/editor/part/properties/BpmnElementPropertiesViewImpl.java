@@ -30,8 +30,6 @@ public class BpmnElementPropertiesViewImpl extends
 		BaseView<BpmnElementPropertiesView.ActionDelegate> implements
 		BpmnElementPropertiesView {
 
-	private ActionDelegate actionDelegate;
-
 	private DockLayoutPanel dockLpCurrentContent;
 
 	private ProcessProperties processProperties;
@@ -57,7 +55,6 @@ public class BpmnElementPropertiesViewImpl extends
 		dockLpCurrentContent = new DockLayoutPanel(Unit.PX);
 		dockLpCurrentContent.setSize("100%", "100%");
 		dockLpCurrentContent.add(processProperties);
-
 		setContentWidget(dockLpCurrentContent);
 	}
 
@@ -72,11 +69,6 @@ public class BpmnElementPropertiesViewImpl extends
 		Log.info(BpmnElementPropertiesViewImpl.class,
 				"setTitle: title before = " + title);
 		super.setTitle(title);
-	}
-
-	@Override
-	public void setActionDelegate(ActionDelegate actionDelegate) {
-		this.actionDelegate = actionDelegate;
 	}
 
 	@Override
@@ -123,5 +115,11 @@ public class BpmnElementPropertiesViewImpl extends
 		currentProperties = unknowItemProperties;
 		currentProperties.setSelectedItem(selectedItem);
 		dockLpCurrentContent.add(currentProperties);
+	}
+
+	@Override
+	public void setActionDelegate(ActionDelegate actionDelegate) {
+		// TODO Auto-generated method stub
+		
 	}
 }

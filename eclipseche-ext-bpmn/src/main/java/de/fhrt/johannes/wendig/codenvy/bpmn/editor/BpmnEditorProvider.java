@@ -32,34 +32,13 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.B
  */
 public class BpmnEditorProvider implements EditorProvider,
 		BpmnEditorView.ActionDelegate {
-	private final DefaultEditorProvider defaultEditorProvider;
-	private final NotificationManager notificationManager;
-	private final ProjectServiceClient projectServiceClient;
-	private final DialogFactory dialogFactory;
-	private WorkspaceAgent workspaceAgent;
 
-	private BpmnElementPropertiesPresenter bpmnElementPropertiesEditorPresenter;
-	private BpmnResource bpmnResource;
 	private BpmnEditorViewImpl bpmnEditorView;
 
 	@Inject
-	public BpmnEditorProvider(
-			final DefaultEditorProvider defaultEditorProvider,
-			final NotificationManager notificationManager,
-			BpmnResource bpmnResource,
-			BpmnElementPropertiesPresenter bpmnElementPropertiesEditorPresenter,
-			WorkspaceAgent workspaceAgent,
-			ProjectServiceClient projectServiceClient,
-			DialogFactory dialogFactory, BpmnEditorViewImpl bpmnEditorView) {
+	public BpmnEditorProvider(BpmnEditorViewImpl bpmnEditorView) {
 		super();
-		this.defaultEditorProvider = defaultEditorProvider;
-		this.notificationManager = notificationManager;
-		this.projectServiceClient = projectServiceClient;
-		this.dialogFactory = dialogFactory;
-		this.workspaceAgent = workspaceAgent;
 
-		this.bpmnElementPropertiesEditorPresenter = bpmnElementPropertiesEditorPresenter;
-		this.bpmnResource = bpmnResource;
 		this.bpmnEditorView = bpmnEditorView;
 
 		bind();
@@ -82,16 +61,6 @@ public class BpmnEditorProvider implements EditorProvider,
 	/** {@inheritDoc} */
 	@Override
 	public EditorPartPresenter getEditor() {
-		// return new BpmnEditor(workspaceAgent, projectServiceClient,
-		// dialogFactory, bpmnElementPropertiesEditorPresenter,
-		// bpmnResource);
 		return bpmnEditorView;
 	}
-
-	@Override
-	public void loadPropertiesViewForSelectedBpmnElement(
-			BpmnDiagramElementJso elementJso) {
-		bpmnElementPropertiesEditorPresenter.bpmnElementSelected(elementJso);
-	}
-
 }

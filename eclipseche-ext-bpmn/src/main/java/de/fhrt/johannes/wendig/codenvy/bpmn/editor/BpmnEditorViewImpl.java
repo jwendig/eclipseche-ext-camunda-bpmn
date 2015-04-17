@@ -357,8 +357,9 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorCallback#
-	 * setContentIsDirty()
+	 * @see
+	 * de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorView#setContentIsDirty
+	 * ()
 	 */
 	@Override
 	public void setContentIsDirty() {
@@ -369,7 +370,7 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorCallback#
+	 * @see de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorView#
 	 * setCurrentXmlContent(java.lang.String)
 	 */
 	@Override
@@ -384,7 +385,7 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorCallback#
+	 * @see de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorView#
 	 * setCurrentSvgContent(java.lang.String)
 	 */
 	@Override
@@ -396,14 +397,14 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorCallback#
-	 * elementSelected
+	 * @see de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorView#
+	 * bpmnElementSelected
 	 * (de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram
 	 * .bpmnelements.BpmnDiagramElementJso)
 	 */
 	@Override
 	public void bpmnElementSelected(BpmnDiagramElementJso elementJso) {
-		actionDelegate.loadPropertiesViewForSelectedBpmnElement(elementJso);
+		bpmnElementPropertiesEditorPresenter.bpmnElementSelected(elementJso);
 	}
 
 	/*
