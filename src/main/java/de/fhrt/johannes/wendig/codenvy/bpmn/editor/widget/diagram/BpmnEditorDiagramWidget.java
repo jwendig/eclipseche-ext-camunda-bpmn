@@ -115,6 +115,7 @@ public class BpmnEditorDiagramWidget extends Composite {
 
 	public void jsCallbackSaveDiagram(String xml) {
 		Log.info(BpmnEditorDiagramWidget.class, "jsCallbackSaveDiagram");
+		Log.info(BpmnEditorDiagramWidget.class, "jsCallbackSaveDiagram: xml = " + xml);
 		bpmnEditorView.setCurrentXmlContent(xml);
 		bpmnEditorView.setContentIsDirty();
 	};

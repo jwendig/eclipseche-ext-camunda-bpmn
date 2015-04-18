@@ -62,9 +62,22 @@ public class BpmnDiagramElementJso extends BpmnBaseElementJso implements
 	private final native BpmnDiagramElementExtensionJso addExt_elemenemt(
 			String bpmnExtensionElementType)/*-{
 											console.log("js-native: addExt_elemenemt");
-											return $wnd.bpmnIo_fktAddElementExtension(this,
+											return $wnd.bpmnIo_fktAddElementExtensionType(this,
 											bpmnExtensionElementType);
 											}-*/;
+
+	public final native boolean removeExt_elemenemt(BpmnDiagramElementExtensionJso extElement)/*-{
+														console.log("js-native: removeExt_elemenemt");
+														var extElementIndex = this.extensionElements.values.indexOf(extElement);
+														if (extElementIndex > -1) {
+															console.log("js-native: removeExt_elemenemt: extElement found at index:" + extElementIndex);
+														    this.extensionElements.values.splice(extElementIndex, 1);
+														    return true;
+														}else{
+															console.log("js-native: removeExt_elemenemt: extElement not found");
+															return false;
+														}
+														}-*/;
 
 	private final native JsArray<BpmnDiagramElementExtensionJso> getExt_elements(
 			String bpmnExtensionElementType) /*-{
@@ -86,6 +99,7 @@ public class BpmnDiagramElementJso extends BpmnBaseElementJso implements
 		return extElements;
 	}
 
+	@Override
 	public final BpmnDiagramElementExtensionJso addExt_executionListener() {
 		BpmnDiagramElementExtensionJso newExtElement = addExt_elemenemt(BpmnExtensionElementType.CAMUNDA_EXECUTION_LISTENER
 				.toString());

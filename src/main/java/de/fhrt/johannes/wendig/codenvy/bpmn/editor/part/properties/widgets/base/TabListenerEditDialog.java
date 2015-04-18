@@ -98,6 +98,7 @@ public class TabListenerEditDialog extends DialogBox {
 		hpOptions.add(btnOk);
 		hpOptions.add(btnBack);
 
+		vpRoot.add(gridContent);
 		vpRoot.add(hpOptions);
 
 		setWidget(vpRoot);

@@ -23,6 +23,16 @@
     padding-right: 2px;
 }
 
+@external table.bpmnPropertiesWidget-cellTable {
+	/*border: 1px solid #fff;*/
+}
+
+@external table.bpmnPropertiesWidget-cellTable th, table.bpmnPropertiesWidget-cellTable td, , table.bpmnPropertiesWidget-cellTable tr {
+	text-shadow: none;
+	border: 1px solid #fff;
+	background: none;
+}
+
 /*
 bpmnPropertiesWidget-tabLayoutPanel
 */

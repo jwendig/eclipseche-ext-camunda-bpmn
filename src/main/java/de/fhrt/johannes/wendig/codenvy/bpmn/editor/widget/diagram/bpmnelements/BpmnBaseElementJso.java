@@ -203,12 +203,12 @@ public class BpmnBaseElementJso extends JavaScriptObject implements DefaultJso,
 
 	@Override
 	public final native String getAttr_class() /*-{
-												return this.businessObject['class'];
+												return this['class'];
 												}-*/;
 
 	@Override
 	public final native void setAttr_class(String clazz) /*-{
-															this.businessObject['class'] = clazz;
+															this['class'] = clazz;
 															}-*/;
 
 	@Override
