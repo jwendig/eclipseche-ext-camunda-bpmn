@@ -12,6 +12,7 @@
 .bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelTabs {
 	top: 0 !important;
 	width: 140px !important;
+	
 }
 
 @external gwt-TabLayoutPanelTab ;
@@ -26,17 +27,27 @@
 	{
 	left: 140px !important;
 	top: 0 !important;
-	padding-right: 2px;
+	padding: 2px;
 }
 
+@external gwt-TabLayoutPanelContent ;
+.bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelContent
+	{
+	
+}
+
+
 .bpmnPropertiesWidget-cellTable {
-	border: 1px solid #fff;
-	background: none;
+	/*border: 1px solid #DBDBDB;*/
 }
 
 .bpmnPropertiesWidget-cellTable th, .bpmnPropertiesWidget-cellTable td, .bpmnPropertiesWidget-cellTable tr {
 	text-shadow: none;
-	border: 1px solid #fff;
-	background: none;
+	border: 1px solid #DBDBDB;
+	color: #DBDBDB;
+}
+
+.bpmnPropertiesWidget-cellTable td{
+	color: #404040;
 }
 

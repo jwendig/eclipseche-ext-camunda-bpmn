@@ -15,22 +15,19 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.ScrollPanel;
 
-public abstract class AbstractBpmnPropertiesTab extends Composite {
+public abstract class AbstractBpmnPropertiesTabView extends Composite {
 
 	private Grid gridTabContent;
 
-	public AbstractBpmnPropertiesTab() {
+	public AbstractBpmnPropertiesTabView() {
 		super();
 		gridTabContent = new Grid();
-		gridTabContent.setSize("100%", "auto");
+		gridTabContent.setSize("100%", "100%");
 
 		initContentElements();
 		initContent();
 
-		ScrollPanel spRoot = new ScrollPanel(gridTabContent);
-		spRoot.setSize("100%", "100%");
-
-		initWidget(spRoot);
+		initWidget(gridTabContent);
 	}
 
 	/*
