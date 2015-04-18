@@ -73,7 +73,6 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 
 		this.bpmnResource = bpmnResource;
 		this.bpmnElementPropertiesEditorPresenter = bpmnElementPropertiesPresenter;
-		this.bpmnElementPropertiesEditorPresenter.setBpmnEditorCallback(this);
 
 		bpmnDiagramWidget = new BpmnEditorDiagramWidget(this, bpmnResource);
 		bpmnDiagramWidget.setSize("100%", "100%");

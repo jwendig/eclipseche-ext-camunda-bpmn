@@ -28,8 +28,6 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.B
 public class BpmnElementPropertiesPresenter extends BasePresenter implements
 		BpmnElementPropertiesView.ActionDelegate, BpmnElementPropertiesCallback {
 
-	private BpmnEditorView bpmnEditorCallback;
-
 	private BpmnElementPropertiesView view;
 	private final static String TITLE = "BPMN Properties";
 
@@ -116,19 +114,10 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 	@Override
 	public void onContentChange() {
 		Log.info(BpmnElementPropertiesPresenter.class, "onContentChange");
-		bpmnEditorCallback.setContentIsDirty();
+		jsUpdateEditor();
 	}
 
-	/*
-	 * Getter & Setter
-	 */
-
-	public BpmnEditorView getBpmnEditorCallback() {
-		return bpmnEditorCallback;
-	}
-
-	public void setBpmnEditorCallback(BpmnEditorView bpmnEditorCallback) {
-		this.bpmnEditorCallback = bpmnEditorCallback;
-	}
-
+	private native void jsUpdateEditor()/*-{
+										$wnd.bpmnIo_fktExportArtifacts();
+										}-*/;
 }

@@ -1,38 +1,42 @@
-@external gwt-TabLayoutPanel, .bpmnPropertiesWidget-tabLayoutPanel;
+@external gwt-TabLayoutPanel,.bpmnPropertiesWidget-tabLayoutPanel,.bpmnPropertiesWidget-cellTable;
+
 .gwt-TabLayoutPanel.bpmnPropertiesWidget-tabLayoutPanel>div {
-    position: static !important;
+	position: static !important;
 }
+
 .gwt-TabLayoutPanel.bpmnPropertiesWidget-tabLayoutPanel {
-    margin-left: 0px;
+	margin-left: 0px;
 }
-@external gwt-TabLayoutPanelTabs;
+
+@external gwt-TabLayoutPanelTabs ;
 .bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelTabs {
-    top: 0 !important;
-    width: 140px !important;
+	top: 0 !important;
+	width: 140px !important;
 }
-@external gwt-TabLayoutPanelTab;
+
+@external gwt-TabLayoutPanelTab ;
 .bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelTab {
-    display: block !important;
-    margin-top: 2px;
-    padding: 2px 3px !important; 
-}
-@external gwt-TabLayoutPanelContentContainer;
-.bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelContentContainer {
-    left: 140px !important;
-    top: 0 !important;
-    padding-right: 2px;
+	display: block !important;
+	margin-top: 2px;
+	padding: 2px 3px !important;
 }
 
-@external table.bpmnPropertiesWidget-cellTable {
-	/*border: 1px solid #fff;*/
+@external gwt-TabLayoutPanelContentContainer ;
+.bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelContentContainer
+	{
+	left: 140px !important;
+	top: 0 !important;
+	padding-right: 2px;
 }
 
-@external table.bpmnPropertiesWidget-cellTable th, table.bpmnPropertiesWidget-cellTable td, , table.bpmnPropertiesWidget-cellTable tr {
+.bpmnPropertiesWidget-cellTable {
+	border: 1px solid #fff;
+	background: none;
+}
+
+.bpmnPropertiesWidget-cellTable th, .bpmnPropertiesWidget-cellTable td, .bpmnPropertiesWidget-cellTable tr {
 	text-shadow: none;
 	border: 1px solid #fff;
 	background: none;
 }
 
-/*
-bpmnPropertiesWidget-tabLayoutPanel
-*/

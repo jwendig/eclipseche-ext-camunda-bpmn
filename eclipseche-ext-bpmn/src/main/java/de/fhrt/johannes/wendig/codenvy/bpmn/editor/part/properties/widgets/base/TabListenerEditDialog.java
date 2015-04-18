@@ -43,6 +43,8 @@ public class TabListenerEditDialog extends DialogBox {
 		this.tabListenerControler = tabListenerControler;
 
 		setTitle("Execution Listener Details");
+		setText("Execution Listener Details");
+		
 		setAnimationEnabled(true);
 		setGlassEnabled(true);
 

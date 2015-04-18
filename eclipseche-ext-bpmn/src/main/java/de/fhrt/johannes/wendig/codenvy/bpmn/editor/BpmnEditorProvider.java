@@ -61,6 +61,12 @@ public class BpmnEditorProvider implements EditorProvider,
 	/** {@inheritDoc} */
 	@Override
 	public EditorPartPresenter getEditor() {
+		/*
+		 * with the injected instance of editor view i can open only one editor window at one time.
+		 * Fix: instead of inject the instance, create a new instance here.
+		 * 		but this needs to fix the id-generation of bpmn.io
+		 */
+		
 		return bpmnEditorView;
 	}
 }
