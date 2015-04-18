@@ -8,31 +8,33 @@
  * Contributors:
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.servicetask;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.usertask;
 
 import org.eclipse.che.ide.util.loging.Log;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RenderableStamper;
 import com.google.gwt.user.client.ui.Widget;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnProperties;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.ServiceTaskJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.UserTaskJso;
 
-public class ServiceTaskProperties extends AbstractBpmnProperties {
+public class UserTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 
-	private final static String LB_ELEMENT_NAME_PREFIX = "Service Task";
-	private ServiceTaskJso element;
+	private final static String LB_ELEMENT_NAME_PREFIX = "User Task";
+	private UserTaskJso element;
 
-	public ServiceTaskProperties() {
+	public UserTaskPropertiesWidget() {
 		super(LB_ELEMENT_NAME_PREFIX);
 
-		getTabLpContent().add(new Label("TODO: tabs - ServiceTaskProperties"));
-
+		getTabLpContent().add(new Label("TODO: tabs - UserTaskProperties"));
 	}
 
 	/*

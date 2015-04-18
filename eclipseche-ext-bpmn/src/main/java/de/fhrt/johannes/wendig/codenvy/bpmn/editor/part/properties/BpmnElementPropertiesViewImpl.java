@@ -18,12 +18,13 @@ import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.inject.Inject;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnProperties;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.ProcessProperties;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.servicetask.ServiceTaskProperties;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.StartEventProperties;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.unknown.UnknownItem;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.usertask.UserTaskProperties;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.noselection.NoSelectionWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.ProcessPropertiesWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.servicetask.ServiceTaskPropertiesWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.StartEventPropertiesWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.unknown.UnknownItemWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.usertask.UserTaskPropertiesWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 
 public class BpmnElementPropertiesViewImpl extends
@@ -33,30 +34,33 @@ public class BpmnElementPropertiesViewImpl extends
 	private DockLayoutPanel dockLpCurrentContent;
 
 	// TODO: create View for NoElementSelected and load it on Startup
-	
-	private ProcessProperties processProperties;
-	private ServiceTaskProperties serviceTaskProperties;
-	private StartEventProperties startEventProperties;
-	private UserTaskProperties userTaskProperties;
-	private UnknownItem unknowItemProperties;
+	private UnknownItemWidget unknowItemProperties;
+	private NoSelectionWidget noselectionProperties;
 
-	private AbstractBpmnProperties currentProperties;
+	private ProcessPropertiesWidget processProperties;
+	private ServiceTaskPropertiesWidget serviceTaskProperties;
+	private StartEventPropertiesWidget startEventProperties;
+	private UserTaskPropertiesWidget userTaskProperties;
+
+	private AbstractBpmnPropertiesWidget currentProperties;
 
 	@Inject
 	public BpmnElementPropertiesViewImpl(PartStackUIResources resources) {
 		super(resources);
-		processProperties = new ProcessProperties(delegate);
-		serviceTaskProperties = new ServiceTaskProperties();
-		startEventProperties = new StartEventProperties();
-		userTaskProperties = new UserTaskProperties();
-		unknowItemProperties = new UnknownItem();
+		unknowItemProperties = new UnknownItemWidget();
+		noselectionProperties = new NoSelectionWidget();
 
-		currentProperties = processProperties;
+		processProperties = new ProcessPropertiesWidget(delegate);
+		serviceTaskProperties = new ServiceTaskPropertiesWidget();
+		startEventProperties = new StartEventPropertiesWidget();
+		userTaskProperties = new UserTaskPropertiesWidget();
+
+		currentProperties = noselectionProperties;
 
 		dockLpCurrentContent = new DockLayoutPanel(Unit.PX);
 		dockLpCurrentContent.setSize("100%", "100%");
-		dockLpCurrentContent.add(processProperties);
-		
+		dockLpCurrentContent.add(currentProperties);
+
 		setContentWidget(dockLpCurrentContent);
 	}
 
@@ -118,6 +122,12 @@ public class BpmnElementPropertiesViewImpl extends
 		currentProperties.setSelectedItem(selectedItem);
 		dockLpCurrentContent.add(currentProperties);
 	}
-	
-	
+
+	@Override
+	public void loadNoSelectionInfo() {
+		dockLpCurrentContent.remove(currentProperties);
+		currentProperties = noselectionProperties;
+		dockLpCurrentContent.add(currentProperties);
+	}
+
 }

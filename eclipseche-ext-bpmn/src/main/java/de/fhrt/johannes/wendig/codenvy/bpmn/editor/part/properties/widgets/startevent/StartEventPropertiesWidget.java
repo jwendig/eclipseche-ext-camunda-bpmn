@@ -8,33 +8,23 @@
  * Contributors:
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.usertask;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent;
 
-import org.eclipse.che.ide.util.loging.Log;
-
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.ScriptInjector;
-import com.google.gwt.safehtml.shared.SafeHtml;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RenderableStamper;
-import com.google.gwt.user.client.ui.Widget;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnProperties;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.UserTaskJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.StartEventJso;
 
-public class UserTaskProperties extends AbstractBpmnProperties {
+public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 
-	private final static String LB_ELEMENT_NAME_PREFIX = "User Task";
-	private UserTaskJso element;
+	private final static String LB_ELEMENT_NAME_PREFIX = "Start Event";
+	private StartEventJso element;
 
-	public UserTaskProperties() {
+	public StartEventPropertiesWidget() {
 		super(LB_ELEMENT_NAME_PREFIX);
 
-		getTabLpContent().add(new Label("TODO: tabs - UserTaskProperties"));
+		getTabLpContent().add(new Label("TODO: tabs - StartEventProperties"));
 	}
 
 	/*

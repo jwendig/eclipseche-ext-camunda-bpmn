@@ -201,6 +201,7 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 
 		workspaceAgent.openPart(bpmnElementPropertiesEditorPresenter,
 				PartStackType.INFORMATION);
+		bpmnElementPropertiesEditorPresenter.bpmnElementSelected(null);
 	}
 
 	@Override

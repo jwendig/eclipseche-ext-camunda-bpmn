@@ -8,7 +8,7 @@
  * Contributors:
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.unknown;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.noselection;
 
 import org.eclipse.che.ide.util.loging.Log;
 
@@ -18,20 +18,20 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RenderableStamper;
 import com.google.gwt.user.client.ui.Widget;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnProperties;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.DefaultJso;
 
-public class UnknownItem extends AbstractBpmnProperties {
+public class NoSelectionWidget extends AbstractBpmnPropertiesWidget {
 
-	private final static String LB_ELEMENT_NAME_PREFIX = "Unknown";
-	private DefaultJso element;
+	private final static String LB_ELEMENT_NAME_PREFIX = "Nothing selected";
 
-	public UnknownItem() {
+	public NoSelectionWidget() {
 		super(LB_ELEMENT_NAME_PREFIX);
-		Log.info(UnknownItem.class, "constructor");
+		Log.info(NoSelectionWidget.class, "constructor");
 
-		getTabLpContent().add(new Label("Unknown Item - no properties"));
+		getTabLpContent().add(
+				new Label("Select a BPMN-Element to edit his properties!"));
 	}
 
 	/*
@@ -44,6 +44,6 @@ public class UnknownItem extends AbstractBpmnProperties {
 	 */
 	@Override
 	public void loadSelectedItem(BpmnDiagramElementJso selectedItem) {
-		element = selectedItem;
+		// no implementation here
 	}
 }

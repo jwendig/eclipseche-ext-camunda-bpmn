@@ -73,31 +73,35 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 	public void bpmnElementSelected(BpmnDiagramElementJso elementJso) {
 		Log.info(BpmnElementPropertiesPresenter.class, "bpmnElementSelected");
 
-		switch (BpmnElementType
-				.findByBpmnIoTypeDefinition(elementJso.getType())) {
-		case DEFAULT:
-			view.loadUnknownItemInfo(elementJso);
-			break;
-		case PROCESS:
-			view.loadProcessProperties(elementJso);
-			break;
-		case SCRIPT_TASK:
-			view.loadUnknownItemInfo(elementJso);
-			break;
-		case SERVICE_TASK:
-			view.loadServiceTaksProperties(elementJso);
-			break;
-		case START_EVENT:
-			view.loadStartEventProperties(elementJso);
-			break;
-		case TASK:
-			view.loadUnknownItemInfo(elementJso);
-			break;
-		case USER_TASK:
-			view.loadUserTaskProperties(elementJso);
-			break;
-		default:
-			view.loadUnknownItemInfo(elementJso);
+		if (null == elementJso) {
+			view.loadNoSelectionInfo();
+		} else {
+			switch (BpmnElementType.findByBpmnIoTypeDefinition(elementJso
+					.getType())) {
+			case DEFAULT:
+				view.loadUnknownItemInfo(elementJso);
+				break;
+			case PROCESS:
+				view.loadProcessProperties(elementJso);
+				break;
+			case SCRIPT_TASK:
+				view.loadUnknownItemInfo(elementJso);
+				break;
+			case SERVICE_TASK:
+				view.loadServiceTaksProperties(elementJso);
+				break;
+			case START_EVENT:
+				view.loadStartEventProperties(elementJso);
+				break;
+			case TASK:
+				view.loadUnknownItemInfo(elementJso);
+				break;
+			case USER_TASK:
+				view.loadUserTaskProperties(elementJso);
+				break;
+			default:
+				view.loadUnknownItemInfo(elementJso);
+			}
 		}
 	}
 

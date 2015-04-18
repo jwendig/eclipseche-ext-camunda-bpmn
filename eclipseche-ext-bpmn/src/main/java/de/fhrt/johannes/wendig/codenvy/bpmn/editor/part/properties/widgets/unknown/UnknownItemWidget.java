@@ -8,23 +8,30 @@
  * Contributors:
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.unknown;
 
+import org.eclipse.che.ide.util.loging.Log;
+
+import com.google.gwt.safehtml.shared.SafeHtml;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RenderableStamper;
+import com.google.gwt.user.client.ui.Widget;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnProperties;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.StartEventJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.DefaultJso;
 
-public class StartEventProperties extends AbstractBpmnProperties {
+public class UnknownItemWidget extends AbstractBpmnPropertiesWidget {
 
-	private final static String LB_ELEMENT_NAME_PREFIX = "Start Event";
-	private StartEventJso element;
+	private final static String LB_ELEMENT_NAME_PREFIX = "Unknown";
+	private DefaultJso element;
 
-	public StartEventProperties() {
+	public UnknownItemWidget() {
 		super(LB_ELEMENT_NAME_PREFIX);
+		Log.info(UnknownItemWidget.class, "constructor");
 
-		getTabLpContent().add(new Label("TODO: tabs - StartEventProperties"));
+		getTabLpContent().add(new Label("Unknown Item - no properties"));
 	}
 
 	/*

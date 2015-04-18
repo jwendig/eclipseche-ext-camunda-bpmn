@@ -26,6 +26,8 @@ public interface BpmnElementPropertiesView extends
 
 	public void setTitle(String title);
 
+	public void loadNoSelectionInfo();
+
 	public void loadUnknownItemInfo(BpmnDiagramElementJso selectedItem);
 
 	public void loadProcessProperties(BpmnDiagramElementJso selectedItem);

@@ -22,7 +22,7 @@ import com.google.gwt.user.client.ui.TabLayoutPanel;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.TabListenerController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 
-public abstract class AbstractBpmnProperties extends Composite {
+public abstract class AbstractBpmnPropertiesWidget extends Composite {
 
 	private static final String LABEL_ELEMENT_NAME__DEFAULT_CONTENT = "No BPMN-Element selected";
 	private String lbElementName_prefixText;
@@ -35,9 +35,9 @@ public abstract class AbstractBpmnProperties extends Composite {
 	private TabLayoutPanel tabLpContent;
 	private BpmnDiagramElementJso selectedItem;
 
-	public AbstractBpmnProperties(String lbElementName_prefixText) {
+	public AbstractBpmnPropertiesWidget(String lbElementName_prefixText) {
 		super();
-		Log.info(AbstractBpmnProperties.class, "constructor");
+		Log.info(AbstractBpmnPropertiesWidget.class, "constructor");
 
 		this.lbElementName_prefixText = lbElementName_prefixText;
 
@@ -63,7 +63,7 @@ public abstract class AbstractBpmnProperties extends Composite {
 	}
 
 	public void setSelectedItem(BpmnDiagramElementJso selectedItem) {
-		Log.info(AbstractBpmnProperties.class, "setSelectedItem");
+		Log.info(AbstractBpmnPropertiesWidget.class, "setSelectedItem");
 		this.selectedItem = selectedItem;
 
 		setLbElementNameText(selectedItem.getAttr_id());
