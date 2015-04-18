@@ -96,7 +96,7 @@ public class TabListenerView extends AbstractBpmnPropertiesTab {
 		};
 
 		ctExecutionListeners = new CellTable<ExecutionListenerModel>();
-		ctExecutionListeners.setStyleName("bpmnPropertiesWidget-cellTable");
+		ctExecutionListeners.addStyleName("bpmnPropertiesWidget-cellTable");
 		ctExecutionListeners.setWidth("100%");
 		ctExecutionListeners.addColumn(tcExecutionListenersClass, "Class");
 		ctExecutionListeners.addColumn(tcExecutionListenersExpression,
@@ -128,6 +128,5 @@ public class TabListenerView extends AbstractBpmnPropertiesTab {
 	public Button getBtnEditExecutionListener() {
 		return btnEditExecutionListener;
 	}
-	
-	
+
 }

@@ -16,12 +16,15 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.ProcessJso;
 
 public class TabGeneralController {
 	private TabGeneralView view;
+	private ActionDelegate delegate;
 
-	public TabGeneralController() {
+	public TabGeneralController(ActionDelegate delegate) {
+		this.delegate = delegate;
 		this.view = new TabGeneralView();
 	}
 
@@ -43,6 +46,7 @@ public class TabGeneralController {
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
 				element.setAttr_id(view.getTbProcessId().getText());
+				delegate.onContentChange();
 			}
 		});
 
@@ -51,6 +55,7 @@ public class TabGeneralController {
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
 				element.setAttr_name(view.getTbName().getText());
+				delegate.onContentChange();
 			}
 		});
 
@@ -60,6 +65,7 @@ public class TabGeneralController {
 					@Override
 					public void onValueChange(ValueChangeEvent<Boolean> event) {
 						element.setAttr_isExecutable(event.getValue());
+						delegate.onContentChange();
 					}
 				});
 	}

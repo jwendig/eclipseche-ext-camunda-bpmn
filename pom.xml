@@ -23,6 +23,9 @@
 	<artifactId>eclipseche-ext-bpmn</artifactId>
 	<packaging>jar</packaging>
 	<name>Codenvy Tutorial :: Editor API</name>
+	<properties>
+		<chesdk.created-jar-target-folder>../../../eclipse-che/assembly-sdk/target/tomcat-ide/ext</chesdk.created-jar-target-folder>
+	</properties>
 <!-- 	<dependencyManagement> -->
 <!-- 		<dependencies> -->
 <!-- 			<dependency> -->
@@ -142,6 +145,31 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+					<executions>
+					    <execution>
+					        <id>copy-resources</id>
+					        <phase>install</phase>
+					        <goals>
+					            <goal>copy-resources</goal>
+					        </goals>
+					        <configuration>
+					            <outputDirectory>${chesdk.created-jar-target-folder}</outputDirectory>
+					            <overwrite>true</overwrite>
+					            <resources>
+					                <resource>
+					                    <directory>${project.basedir}/target</directory>
+					                    <includes>
+					                        <include>${project.artifactId}-${project.version}.jar</include>
+					                    </includes>
+					                </resource>
+					            </resources>
+					        </configuration>
+					    </execution>
+					</executions>
+				</plugin>
 		</plugins>
 	</build>
 </project>

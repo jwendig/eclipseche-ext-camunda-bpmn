@@ -12,6 +12,7 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.proc
 
 import org.eclipse.che.ide.util.loging.Log;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnProperties;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.TabListenerController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
@@ -27,12 +28,12 @@ public class ProcessProperties extends AbstractBpmnProperties {
 	private TabDefinitionsController tabDefinitionsController;
 	private TabListenerController tabListenerController;
 
-	public ProcessProperties() {
+	public ProcessProperties(ActionDelegate delegate) {
 		super(LB_ELEMENT_NAME_PREFIX);
 		Log.info(ProcessProperties.class, "constructor");
 
 		tabListenerController = new TabListenerController();
-		tabGeneralController = new TabGeneralController();
+		tabGeneralController = new TabGeneralController(delegate);
 		tabDefinitionsController = new TabDefinitionsController();
 
 		getTabLpContent().add(tabGeneralController.getView(),

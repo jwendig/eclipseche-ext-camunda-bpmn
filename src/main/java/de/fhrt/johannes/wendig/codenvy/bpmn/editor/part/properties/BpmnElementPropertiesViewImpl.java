@@ -45,8 +45,7 @@ public class BpmnElementPropertiesViewImpl extends
 	@Inject
 	public BpmnElementPropertiesViewImpl(PartStackUIResources resources) {
 		super(resources);
-
-		processProperties = new ProcessProperties();
+		processProperties = new ProcessProperties(delegate);
 		serviceTaskProperties = new ServiceTaskProperties();
 		startEventProperties = new StartEventProperties();
 		userTaskProperties = new UserTaskProperties();
@@ -119,10 +118,6 @@ public class BpmnElementPropertiesViewImpl extends
 		currentProperties.setSelectedItem(selectedItem);
 		dockLpCurrentContent.add(currentProperties);
 	}
-
-	@Override
-	public void setActionDelegate(ActionDelegate actionDelegate) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	
 }

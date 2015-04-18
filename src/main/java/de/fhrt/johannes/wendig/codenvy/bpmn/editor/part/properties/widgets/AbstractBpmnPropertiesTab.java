@@ -13,6 +13,7 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.ScrollPanel;
 
 public abstract class AbstractBpmnPropertiesTab extends Composite {
 
@@ -21,12 +22,15 @@ public abstract class AbstractBpmnPropertiesTab extends Composite {
 	public AbstractBpmnPropertiesTab() {
 		super();
 		gridTabContent = new Grid();
-		gridTabContent.setSize("100%", "100%");
+		gridTabContent.setSize("100%", "auto");
 
 		initContentElements();
 		initContent();
 
-		initWidget(gridTabContent);
+		ScrollPanel spRoot = new ScrollPanel(gridTabContent);
+		spRoot.setSize("100%", "100%");
+
+		initWidget(spRoot);
 	}
 
 	/*
