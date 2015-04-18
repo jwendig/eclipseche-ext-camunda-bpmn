@@ -101,7 +101,15 @@ public class TabListenerController {
 
 					@Override
 					public void onClick(ClickEvent event) {
-						// TODO Auto-generated method stub
+						if (TabListenerController.this.bpmnDiagramElementJso
+								.removeExt_elemenemt((BpmnDiagramElementExtensionJso) TabListenerController.this.selectedExecutionListener
+										.getExecutioinListenerJso())) {
+							TabListenerController.this.executionListenersProvider
+									.getList()
+									.remove(TabListenerController.this.selectedExecutionListener);
+						} else {
+
+						}
 
 					}
 				});
@@ -174,6 +182,5 @@ public class TabListenerController {
 	public ListDataProvider<ExecutionListenerModel> getExecutionListenersProvider() {
 		return executionListenersProvider;
 	}
-	
-	
+
 }

@@ -74,9 +74,8 @@ bpmnIo_fktGetElementExtensionsByType = function getElementExtensionsByType(eleme
 	});
 };
 
-bpmnIo_fktAddElementExtensionType = function addElementExtension(element, type) {
-	var moddle = viewer.get('moddle');
-	var businessObject = element.businessObject;
+bpmnIo_fktAddElementExtensionType = function addElementExtension(businessObject, type) {
+	var moddle = renderer.get('moddle');
 	var ext = moddle.create(type);
 
 	businessObject.extensionElements = businessObject.extensionElements	|| moddle.create('bpmn:ExtensionElements');

@@ -11,7 +11,12 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementExtensionJso;
+
 public interface DefaultJso {
+	/*
+	 * attributes
+	 */
 	public String getType();
 
 	public String getBusinessObject();
@@ -23,4 +28,9 @@ public interface DefaultJso {
 	public String getAttr_name();
 
 	public void setAttr_name(String name);
+
+	/*
+	 * extensions
+	 */
+	public void addExt_executionListener();
 }
