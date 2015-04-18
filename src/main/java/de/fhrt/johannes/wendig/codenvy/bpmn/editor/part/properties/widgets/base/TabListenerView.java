@@ -18,10 +18,10 @@ import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTab;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.TabListenerController.ExecutionListenerModel;
 
-public class TabListenerView extends AbstractBpmnPropertiesTab {
+public class TabListenerView extends AbstractBpmnPropertiesTabView {
 	private final static String TAB_NAME = "Listener";
 
 	private CellTable<ExecutionListenerModel> ctExecutionListeners;
@@ -104,7 +104,6 @@ public class TabListenerView extends AbstractBpmnPropertiesTab {
 		ctExecutionListeners.addColumn(tcExecutionListenersDelegateExpression,
 				"DelegateExpression");
 		ctExecutionListeners.addColumn(tcExecutionListenersEvent, "Event");
-
 	}
 
 	@Override

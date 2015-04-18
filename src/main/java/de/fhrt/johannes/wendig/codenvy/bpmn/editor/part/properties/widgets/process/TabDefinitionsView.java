@@ -17,9 +17,9 @@ import com.google.gwt.user.cellview.client.CellTable;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnProperties;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTab;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabView;
 
-public class TabDefinitionsView extends AbstractBpmnPropertiesTab {
+public class TabDefinitionsView extends AbstractBpmnPropertiesTabView {
 
 	private final static String TAB_NAME = "Definitions";
 

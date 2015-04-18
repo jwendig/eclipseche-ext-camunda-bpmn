@@ -16,6 +16,7 @@ import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.TabListenerController;
@@ -33,7 +34,6 @@ public abstract class AbstractBpmnProperties extends Composite {
 	private Label lbElementName;
 	private TabLayoutPanel tabLpContent;
 	private BpmnDiagramElementJso selectedItem;
-
 
 	public AbstractBpmnProperties(String lbElementName_prefixText) {
 		super();

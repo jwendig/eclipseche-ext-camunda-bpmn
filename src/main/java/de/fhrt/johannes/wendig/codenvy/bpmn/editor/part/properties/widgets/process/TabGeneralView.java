@@ -18,9 +18,9 @@ import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.TextBox;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTab;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabView;
 
-public class TabGeneralView extends AbstractBpmnPropertiesTab {
+public class TabGeneralView extends AbstractBpmnPropertiesTabView {
 	private final static String TAB_NAME = "General";
 
 	private TextBox tbProcessId;
