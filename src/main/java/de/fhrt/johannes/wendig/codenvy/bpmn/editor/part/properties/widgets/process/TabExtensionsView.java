@@ -19,21 +19,21 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPr
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabView;
 
-public class TabDefinitionsView extends AbstractBpmnPropertiesTabView {
+public class TabExtensionsView extends AbstractBpmnPropertiesTabView {
 
 	private CellTable<String> ctErrors;
 	private CellTable<String> ctMessages;
 	private CellTable<String> ctSignals;
 	private CellTable<String> ctDataStores;
 
-	public TabDefinitionsView(String tabName) {
+	public TabExtensionsView(String tabName) {
 		super(tabName);
-		Log.info(TabDefinitionsView.class, "constructor");
+		Log.info(TabExtensionsView.class, "constructor");
 	}
 
 	@Override
 	public void initContent() {
-		Log.info(TabDefinitionsView.class, "initContent");
+		Log.info(TabExtensionsView.class, "initContent");
 		getGridTabContent().resize(4, 2);
 
 		getGridTabContent().setText(0, 0, "Errors:");
@@ -49,7 +49,7 @@ public class TabDefinitionsView extends AbstractBpmnPropertiesTabView {
 
 	@Override
 	public void initContentElements() {
-		Log.info(TabDefinitionsView.class, "initContentElements");
+		Log.info(TabExtensionsView.class, "initContentElements");
 		ctErrors = new CellTable<String>();
 		ctErrors.setWidth("100%");
 		ctMessages = new CellTable<String>();

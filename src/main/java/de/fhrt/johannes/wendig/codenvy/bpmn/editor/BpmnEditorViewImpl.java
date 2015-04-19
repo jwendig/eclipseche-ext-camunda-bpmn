@@ -85,6 +85,8 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 
 		updateSvgFile();
 		updateXmlFile();
+
+		updateDirtyState(false);
 	}
 
 	@Override

@@ -9,17 +9,18 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.TabDefinitionsView;
 
-public class TabDefinitionsController extends
+public class TabMultiInstanceController extends
 		AbstractBpmnPropertiesTabController {
-	private final static String TAB_NAME = "Definitions";
+	private final static String TAB_NAME = "Multi Instance";
 	private TabDefinitionsView view;
 
-	public TabDefinitionsController(ActionDelegate delegate) {
+	public TabMultiInstanceController(ActionDelegate delegate) {
 		super(delegate);
 		this.view = new TabDefinitionsView(TAB_NAME);
 	}

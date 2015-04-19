@@ -20,8 +20,6 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.TabListenerController.ExecutionListenerModel;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.extensions.ExecutionListenerJso;
 
 public class TabListenerEditDialog extends DialogBox {
@@ -35,7 +33,7 @@ public class TabListenerEditDialog extends DialogBox {
 	private TextBox tbClass;
 
 	private TabListenerController tabListenerControler;
-	private ExecutionListenerModel executionListenerModel;
+	private ExecutionListenerJso currentExecutionListenerJso;
 
 	public TabListenerEditDialog(
 			final TabListenerController tabListenerControler) {
@@ -44,7 +42,7 @@ public class TabListenerEditDialog extends DialogBox {
 
 		setTitle("Execution Listener Details");
 		setText("Execution Listener Details");
-		
+
 		setAnimationEnabled(true);
 		setGlassEnabled(true);
 
@@ -61,23 +59,18 @@ public class TabListenerEditDialog extends DialogBox {
 		gridContent.setWidget(1, 1, tbClass);
 
 		btnOk = new Button("Save");
+
 		btnOk.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				ExecutionListenerJso executionListenerJso;
-				if (null != TabListenerEditDialog.this
-						.getExecutionListenerModel()) {
-					executionListenerJso = TabListenerEditDialog.this
-							.getExecutionListenerModel()
-							.getExecutioinListenerJso();
+				if (null != TabListenerEditDialog.this.currentExecutionListenerJso) {
+					executionListenerJso = currentExecutionListenerJso;
 				} else {
 					executionListenerJso = tabListenerControler
 							.getBpmnDiagramElementJso()
 							.addExt_executionListener();
-					tabListenerControler
-							.getExecutionListenersProvider()
-							.getList()
-							.add(new ExecutionListenerModel(
-									executionListenerJso));
+					tabListenerControler.getExecutionListenersProvider()
+							.getList().add(executionListenerJso);
 				}
 
 				executionListenerJso.setAttr_class(TabListenerEditDialog.this
@@ -86,6 +79,9 @@ public class TabListenerEditDialog extends DialogBox {
 						.getTbEvent().getText());
 
 				TabListenerEditDialog.this.hide();
+
+				tabListenerControler.getExecutionListenersProvider().refresh();
+				tabListenerControler.getActionDelegate().onContentChange();
 			}
 		});
 
@@ -108,12 +104,12 @@ public class TabListenerEditDialog extends DialogBox {
 
 	public TabListenerEditDialog(
 			final TabListenerController tabListenerControler,
-			ExecutionListenerModel executionListenerModel) {
+			ExecutionListenerJso executionListenerModel) {
 		this(tabListenerControler);
-		this.executionListenerModel = executionListenerModel;
+		this.currentExecutionListenerJso = executionListenerModel;
 
-		tbEvent.setText(executionListenerModel.getEvent());
-		tbClass.setText(executionListenerModel.getClazz());
+		tbEvent.setText(executionListenerModel.getAttr_event());
+		tbClass.setText(executionListenerModel.getAttr_class());
 	}
 
 	public TextBox getTbEvent() {
@@ -123,9 +119,4 @@ public class TabListenerEditDialog extends DialogBox {
 	public TextBox getTbClass() {
 		return tbClass;
 	}
-
-	public ExecutionListenerModel getExecutionListenerModel() {
-		return executionListenerModel;
-	}
-
 }
