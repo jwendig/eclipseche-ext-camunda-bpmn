@@ -12,9 +12,11 @@
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 
 public abstract class AbstractBpmnPropertiesTabController {
 	private BpmnElementPropertiesView.ActionDelegate actionDelegate;
+	private BpmnDiagramElementJso bpmnDiagramElementJso;
 
 	public AbstractBpmnPropertiesTabController(
 			BpmnElementPropertiesView.ActionDelegate actionDelegate) {
@@ -23,6 +25,15 @@ public abstract class AbstractBpmnPropertiesTabController {
 
 	public BpmnElementPropertiesView.ActionDelegate getActionDelegate() {
 		return actionDelegate;
+	}
+
+	public BpmnDiagramElementJso getBpmnDiagramElementJso() {
+		return bpmnDiagramElementJso;
+	}
+
+	public void setBpmnDiagramElementJso(
+			BpmnDiagramElementJso bpmnDiagramElementJso) {
+		this.bpmnDiagramElementJso = bpmnDiagramElementJso;
 	}
 
 }

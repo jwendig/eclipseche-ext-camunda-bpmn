@@ -25,15 +25,18 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.Abstr
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.extensions.ExecutionListenerJso;
 
 public class TabListenerView extends AbstractBpmnPropertiesTabView {
-	private CellTable<ExecutionListenerJso> ctExecutionListeners;
-	private TextColumn<ExecutionListenerJso> tcExecutionListenersClass;
-	private TextColumn<ExecutionListenerJso> tcExecutionListenersEvent;
-	private TextColumn<ExecutionListenerJso> tcExecutionListenersExpression;
-	private TextColumn<ExecutionListenerJso> tcExecutionListenersDelegateExpression;
-	private Column<ExecutionListenerJso, String> tcExecutionListenerBtnRemove;
-	private Column<ExecutionListenerJso, String> tcExecutionListenerBtnEdit;
-
-	private Button btnAddExecutionListener;
+	// private CellTable<ExecutionListenerJso> ctExecutionListeners;
+	// private TextColumn<ExecutionListenerJso> tcExecutionListenersClass;
+	// private TextColumn<ExecutionListenerJso> tcExecutionListenersEvent;
+	// private TextColumn<ExecutionListenerJso> tcExecutionListenersExpression;
+	// private TextColumn<ExecutionListenerJso>
+	// tcExecutionListenersDelegateExpression;
+	// private Column<ExecutionListenerJso, String>
+	// tcExecutionListenerBtnRemove;
+	// private Column<ExecutionListenerJso, String> tcExecutionListenerBtnEdit;
+	//
+	// private Button btnAddExecutionListener;
+	private TableExecutionListenerWidget tableExecutionListener;
 
 	public TabListenerView(String tabName) {
 		super(tabName);
@@ -47,110 +50,119 @@ public class TabListenerView extends AbstractBpmnPropertiesTabView {
 
 		getGridTabContent().setText(0, 0, "Execution Listeners:");
 
-		getGridTabContent().setWidget(0, 1, ctExecutionListeners);
-
-		HorizontalPanel hpExecutionListenerButtons = new HorizontalPanel();
-		hpExecutionListenerButtons.add(btnAddExecutionListener);
-		getGridTabContent().setWidget(1, 1, hpExecutionListenerButtons);
+		getGridTabContent().setWidget(0, 1, tableExecutionListener);
+//		getGridTabContent().setWidget(0, 1, ctExecutionListeners);
+//
+//		HorizontalPanel hpExecutionListenerButtons = new HorizontalPanel();
+//		hpExecutionListenerButtons.add(btnAddExecutionListener);
+//		getGridTabContent().setWidget(1, 1, hpExecutionListenerButtons);
 	}
 
 	@Override
 	public void initContentElements() {
 		Log.info(TabListenerView.class, "initContentElements");
 
-		btnAddExecutionListener = new Button("Add");
-
-		tcExecutionListenersClass = new TextColumn<ExecutionListenerJso>() {
-
-			@Override
-			public String getValue(ExecutionListenerJso object) {
-				return object.getAttr_class();
-			}
-		};
-
-		tcExecutionListenersEvent = new TextColumn<ExecutionListenerJso>() {
-
-			@Override
-			public String getValue(ExecutionListenerJso object) {
-				return object.getAttr_event();
-			}
-		};
-
-		tcExecutionListenersExpression = new TextColumn<ExecutionListenerJso>() {
-
-			@Override
-			public String getValue(ExecutionListenerJso object) {
-				return object.getAttr_expression();
-			}
-		};
-
-		tcExecutionListenersDelegateExpression = new TextColumn<ExecutionListenerJso>() {
-
-			@Override
-			public String getValue(ExecutionListenerJso object) {
-				return object.getAttr_delegateExpression();
-			}
-		};
-
-		tcExecutionListenerBtnRemove = new Column<ExecutionListenerJso, String>(
-				new ButtonCell()) {
-			@Override
-			public String getValue(ExecutionListenerJso object) {
-				return "x";
-			}
-		};
-
-		tcExecutionListenerBtnEdit = new Column<ExecutionListenerJso, String>(
-				new ButtonCell()) {
-			@Override
-			public String getValue(ExecutionListenerJso object) {
-				return "Edit";
-			}
-		};
-
-		ctExecutionListeners = new CellTable<ExecutionListenerJso>();
-		ctExecutionListeners.addStyleName("bpmnPropertiesWidget-cellTable");
-		ctExecutionListeners.setWidth("100%");
-		ctExecutionListeners.addColumn(tcExecutionListenersClass, "Class");
-		ctExecutionListeners.addColumn(tcExecutionListenersExpression,
-				"Expression");
-		ctExecutionListeners.addColumn(tcExecutionListenersDelegateExpression,
-				"DelegateExpression");
-		ctExecutionListeners.addColumn(tcExecutionListenersEvent, "Event");
-		ctExecutionListeners.addColumn(tcExecutionListenerBtnEdit, "");
-		ctExecutionListeners.addColumn(tcExecutionListenerBtnRemove, "");
+//		btnAddExecutionListener = new Button("Add");
+//
+//		tcExecutionListenersClass = new TextColumn<ExecutionListenerJso>() {
+//
+//			@Override
+//			public String getValue(ExecutionListenerJso object) {
+//				return object.getAttr_class();
+//			}
+//		};
+//
+//		tcExecutionListenersEvent = new TextColumn<ExecutionListenerJso>() {
+//
+//			@Override
+//			public String getValue(ExecutionListenerJso object) {
+//				return object.getAttr_event();
+//			}
+//		};
+//
+//		tcExecutionListenersExpression = new TextColumn<ExecutionListenerJso>() {
+//
+//			@Override
+//			public String getValue(ExecutionListenerJso object) {
+//				return object.getAttr_expression();
+//			}
+//		};
+//
+//		tcExecutionListenersDelegateExpression = new TextColumn<ExecutionListenerJso>() {
+//
+//			@Override
+//			public String getValue(ExecutionListenerJso object) {
+//				return object.getAttr_delegateExpression();
+//			}
+//		};
+//
+//		tcExecutionListenerBtnRemove = new Column<ExecutionListenerJso, String>(
+//				new ButtonCell()) {
+//			@Override
+//			public String getValue(ExecutionListenerJso object) {
+//				return "x";
+//			}
+//		};
+//
+//		tcExecutionListenerBtnEdit = new Column<ExecutionListenerJso, String>(
+//				new ButtonCell()) {
+//			@Override
+//			public String getValue(ExecutionListenerJso object) {
+//				return "Edit";
+//			}
+//		};
+//
+//		ctExecutionListeners = new CellTable<ExecutionListenerJso>();
+//		ctExecutionListeners.addStyleName("bpmnPropertiesWidget-cellTable");
+//		ctExecutionListeners.setWidth("100%");
+//		ctExecutionListeners.addColumn(tcExecutionListenersClass, "Class");
+//		ctExecutionListeners.addColumn(tcExecutionListenersExpression,
+//				"Expression");
+//		ctExecutionListeners.addColumn(tcExecutionListenersDelegateExpression,
+//				"DelegateExpression");
+//		ctExecutionListeners.addColumn(tcExecutionListenersEvent, "Event");
+//		ctExecutionListeners.addColumn(tcExecutionListenerBtnEdit, "");
+//		ctExecutionListeners.addColumn(tcExecutionListenerBtnRemove, "");
+		
+		tableExecutionListener = new TableExecutionListenerWidget();
 	}
 
-	public CellTable<ExecutionListenerJso> getCtExecutionListeners() {
-		return ctExecutionListeners;
+	public TableExecutionListenerWidget getTableExecutionListener() {
+		return tableExecutionListener;
 	}
 
-	public Column<ExecutionListenerJso, String> getTcExecutionListenerBtnRemove() {
-		return tcExecutionListenerBtnRemove;
-	}
-
-	public Button getBtnAddExecutionListener() {
-		return btnAddExecutionListener;
-	}
-
-	public TextColumn<ExecutionListenerJso> getTcExecutionListenersClass() {
-		return tcExecutionListenersClass;
-	}
-
-	public TextColumn<ExecutionListenerJso> getTcExecutionListenersEvent() {
-		return tcExecutionListenersEvent;
-	}
-
-	public TextColumn<ExecutionListenerJso> getTcExecutionListenersExpression() {
-		return tcExecutionListenersExpression;
-	}
-
-	public TextColumn<ExecutionListenerJso> getTcExecutionListenersDelegateExpression() {
-		return tcExecutionListenersDelegateExpression;
-	}
-
-	public Column<ExecutionListenerJso, String> getTcExecutionListenerBtnEdit() {
-		return tcExecutionListenerBtnEdit;
-	}
+//	public CellTable<ExecutionListenerJso> getCtExecutionListeners() {
+//		return ctExecutionListeners;
+//	}
+//
+//	public Column<ExecutionListenerJso, String> getTcExecutionListenerBtnRemove() {
+//		return tcExecutionListenerBtnRemove;
+//	}
+//
+//	public Button getBtnAddExecutionListener() {
+//		return btnAddExecutionListener;
+//	}
+//
+//	public TextColumn<ExecutionListenerJso> getTcExecutionListenersClass() {
+//		return tcExecutionListenersClass;
+//	}
+//
+//	public TextColumn<ExecutionListenerJso> getTcExecutionListenersEvent() {
+//		return tcExecutionListenersEvent;
+//	}
+//
+//	public TextColumn<ExecutionListenerJso> getTcExecutionListenersExpression() {
+//		return tcExecutionListenersExpression;
+//	}
+//
+//	public TextColumn<ExecutionListenerJso> getTcExecutionListenersDelegateExpression() {
+//		return tcExecutionListenersDelegateExpression;
+//	}
+//
+//	public Column<ExecutionListenerJso, String> getTcExecutionListenerBtnEdit() {
+//		return tcExecutionListenerBtnEdit;
+//	}
+	
+	
 
 }

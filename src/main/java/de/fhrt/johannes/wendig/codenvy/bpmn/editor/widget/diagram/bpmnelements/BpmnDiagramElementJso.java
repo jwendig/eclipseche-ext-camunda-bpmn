@@ -73,6 +73,7 @@ public class BpmnDiagramElementJso extends BpmnBaseElementJso implements
 														if (extElementIndex > -1) {
 														console.log("js-native: removeExt_elemenemt: extElement found at index:" + extElementIndex);
 														this.extensionElements.values.splice(extElementIndex, 1);
+														
 														return true;
 														}else{
 														console.log("js-native: removeExt_elemenemt: extElement not found");
@@ -83,7 +84,7 @@ public class BpmnDiagramElementJso extends BpmnBaseElementJso implements
 	private final native JsArray<BpmnDiagramElementExtensionJso> getExt_elements(
 			String bpmnExtensionElementType) /*-{
 												console.log("js-native: getExt_executionListeners");
-												if (!this.extensionElements) {
+												if (!this.extensionElements || this.extensionElements.values == 'undefined') {
 												console
 												.log("js-native: getExt_executionListeners: no extensionElementsAvailable");
 												return [];
