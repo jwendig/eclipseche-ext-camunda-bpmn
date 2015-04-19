@@ -22,7 +22,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.extensions.ExecutionListenerJso;
 
-public class TabListenerEditDialog extends DialogBox {
+public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 
 	private Button btnOk;
 	private Button btnBack;
@@ -32,13 +32,13 @@ public class TabListenerEditDialog extends DialogBox {
 	private TextBox tbEvent;
 	private TextBox tbClass;
 
-	private TabListenerController tabListenerControler;
+	private TableExecutionListenerWidget widgetCallback;
 	private ExecutionListenerJso currentExecutionListenerJso;
 
-	public TabListenerEditDialog(
-			final TabListenerController tabListenerControler) {
+	public TableExecutionListenerEditTableEntryDialog(
+			final TableExecutionListenerWidget widgetCallback) {
 		super();
-		this.tabListenerControler = tabListenerControler;
+		this.widgetCallback = widgetCallback;
 
 		setTitle("Execution Listener Details");
 		setText("Execution Listener Details");
@@ -63,32 +63,33 @@ public class TabListenerEditDialog extends DialogBox {
 		btnOk.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				ExecutionListenerJso executionListenerJso;
-				if (null != TabListenerEditDialog.this.currentExecutionListenerJso) {
+				if (null != TableExecutionListenerEditTableEntryDialog.this.currentExecutionListenerJso) {
 					executionListenerJso = currentExecutionListenerJso;
 				} else {
-					executionListenerJso = tabListenerControler
+					executionListenerJso = widgetCallback.getController()
 							.getBpmnDiagramElementJso()
 							.addExt_executionListener();
-					tabListenerControler.getExecutionListenersProvider()
-							.getList().add(executionListenerJso);
+					widgetCallback.getExecutionListenersProvider().getList()
+							.add(executionListenerJso);
 				}
 
-				executionListenerJso.setAttr_class(TabListenerEditDialog.this
+				executionListenerJso.setAttr_class(TableExecutionListenerEditTableEntryDialog.this
 						.getTbClass().getText());
-				executionListenerJso.setAttr_event(TabListenerEditDialog.this
+				executionListenerJso.setAttr_event(TableExecutionListenerEditTableEntryDialog.this
 						.getTbEvent().getText());
 
-				TabListenerEditDialog.this.hide();
+				TableExecutionListenerEditTableEntryDialog.this.hide();
 
-				tabListenerControler.getExecutionListenersProvider().refresh();
-				tabListenerControler.getActionDelegate().onContentChange();
+				widgetCallback.getExecutionListenersProvider().refresh();
+				widgetCallback.getController().getActionDelegate()
+						.onContentChange();
 			}
 		});
 
 		btnBack = new Button("Back");
 		btnBack.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				TabListenerEditDialog.this.hide();
+				TableExecutionListenerEditTableEntryDialog.this.hide();
 			}
 		});
 
@@ -102,10 +103,10 @@ public class TabListenerEditDialog extends DialogBox {
 		setWidget(vpRoot);
 	}
 
-	public TabListenerEditDialog(
-			final TabListenerController tabListenerControler,
+	public TableExecutionListenerEditTableEntryDialog(
+			final TableExecutionListenerWidget widgetCallback,
 			ExecutionListenerJso executionListenerModel) {
-		this(tabListenerControler);
+		this(widgetCallback);
 		this.currentExecutionListenerJso = executionListenerModel;
 
 		tbEvent.setText(executionListenerModel.getAttr_event());

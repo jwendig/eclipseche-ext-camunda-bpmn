@@ -15,7 +15,6 @@ import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.view.client.ListDataProvider;
@@ -33,64 +32,16 @@ public class TabListenerController extends AbstractBpmnPropertiesTabController {
 	private final static String TAB_NAME = "Listener";
 
 	private TabListenerView view;
-	private ListDataProvider<ExecutionListenerJso> executionListenersProvider;
-	private ExecutionListenerJso selectedExecutionListenerJso;
-	private BpmnDiagramElementJso bpmnDiagramElementJso;
 
 	public TabListenerController(ActionDelegate delegate) {
 		super(delegate);
 		this.view = new TabListenerView(TAB_NAME);
-
-		initExecutionListenerDataProvider();
+		view.getTableExecutionListener().setController(this);
 
 		// initExecutionListenerSelectionModel();
-
-		initExecutionListenerButtons();
 	}
 
-	private void initExecutionListenerButtons() {
-		Log.info(TabListenerController.class, "initExecutionListenerButtons");
-		view.getBtnAddExecutionListener().addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				new TabListenerEditDialog(TabListenerController.this).show();
-
-			}
-		});
-
-		view.getTcExecutionListenerBtnEdit().setFieldUpdater(
-				new FieldUpdater<ExecutionListenerJso, String>() {
-
-					@Override
-					public void update(int index, ExecutionListenerJso object,
-							String value) {
-						new TabListenerEditDialog(TabListenerController.this,
-								object).show();
-
-					}
-				});
-
-		view.getTcExecutionListenerBtnRemove().setFieldUpdater(
-				new FieldUpdater<ExecutionListenerJso, String>() {
-
-					@Override
-					public void update(int index, ExecutionListenerJso object,
-							String value) {
-						if (TabListenerController.this.bpmnDiagramElementJso
-								.removeExt_elemenemt((BpmnDiagramElementExtensionJso) object)) {
-							getExecutionListenersProvider().getList().remove(
-									object);
-							getExecutionListenersProvider().refresh();
-							view.getCtExecutionListeners().redraw();
-							getActionDelegate().onContentChange();
-						} else {
-
-						}
-					}
-				});
-	}
-
+	// TODO: no need there, but stay for example...
 	// private void initExecutionListenerSelectionModel() {
 	// Log.info(TabListenerController.class,
 	// "initExecutionListenerSelectionModel");
@@ -121,13 +72,14 @@ public class TabListenerController extends AbstractBpmnPropertiesTabController {
 	// view.getCtExecutionListeners().setSelectionModel(selectionModel);
 	// }
 
-	private void initExecutionListenerDataProvider() {
-		Log.info(TabListenerController.class,
-				"initExecutionListenerDataProvider");
-		executionListenersProvider = new ListDataProvider<ExecutionListenerJso>();
-		executionListenersProvider.addDataDisplay(view
-				.getCtExecutionListeners());
-	}
+	// private void initExecutionListenerDataProvider() {
+	// Log.info(TabListenerController.class,
+	// "initExecutionListenerDataProvider");
+	// executionListenersProvider = new
+	// ListDataProvider<ExecutionListenerJso>();
+	// executionListenersProvider.addDataDisplay(view
+	// .getCtExecutionListeners());
+	// }
 
 	public TabListenerView getView() {
 		return view;
@@ -136,20 +88,7 @@ public class TabListenerController extends AbstractBpmnPropertiesTabController {
 	public void loadSelectedElement(final BpmnDiagramElementJso element) {
 		Log.info(TabListenerController.class, "loadSelectedElement");
 
-		this.bpmnDiagramElementJso = element;
-		executionListenersProvider.getList().clear();
-		JsArray<BpmnDiagramElementExtensionJso> executionListeners = bpmnDiagramElementJso
-				.getExt_executionListeners();
-		for (int i = 0; i < executionListeners.length(); i++) {
-			executionListenersProvider.getList().add(executionListeners.get(i));
-		}
-	}
-
-	public BpmnDiagramElementJso getBpmnDiagramElementJso() {
-		return bpmnDiagramElementJso;
-	}
-
-	public ListDataProvider<ExecutionListenerJso> getExecutionListenersProvider() {
-		return executionListenersProvider;
+		setBpmnDiagramElementJso(element);
+		view.getTableExecutionListener().update();
 	}
 }
