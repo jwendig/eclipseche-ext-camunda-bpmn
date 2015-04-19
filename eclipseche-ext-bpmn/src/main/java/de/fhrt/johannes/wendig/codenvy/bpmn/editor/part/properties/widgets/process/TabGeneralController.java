@@ -21,11 +21,12 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.Abstr
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.ProcessJso;
 
 public class TabGeneralController extends AbstractBpmnPropertiesTabController {
+	private final static String TAB_NAME = "General";
 	private TabGeneralView view;
 
 	public TabGeneralController(ActionDelegate delegate) {
 		super(delegate);
-		this.view = new TabGeneralView();
+		this.view = new TabGeneralView(TAB_NAME);
 	}
 
 	public TabGeneralView getView() {

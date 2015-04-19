@@ -21,16 +21,14 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPr
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabView;
 
 public class TabGeneralView extends AbstractBpmnPropertiesTabView {
-	private final static String TAB_NAME = "General";
-
 	private TextBox tbProcessId;
 	private TextBox tbName;
 	private CheckBox cbIsExecutable;
 	private CellTable<String> ctDataObjects;
 	private TextBox tbDocumentation;
 
-	public TabGeneralView() {
-		super();
+	public TabGeneralView(String tabName) {
+		super(tabName);
 		Log.info(TabGeneralView.class, "constructor");
 	}
 
@@ -65,12 +63,6 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabView {
 		ctDataObjects.setWidth("100%");
 		tbDocumentation = new TextBox();
 		tbDocumentation.setWidth("100%");
-	}
-
-	@Override
-	public String getTabName() {
-		Log.info(TabGeneralView.class, "getTabName");
-		return TAB_NAME;
 	}
 
 	public TextBox getTbProcessId() {

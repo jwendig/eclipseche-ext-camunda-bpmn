@@ -14,17 +14,16 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.proc
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabController;
 
-public class TabDefinitionsController extends
-		AbstractBpmnPropertiesTabController {
-	private final static String TAB_NAME = "Definitions";
-	private TabDefinitionsView view;
+public class TabDocumentController extends AbstractBpmnPropertiesTabController {
+	private final static String TAB_NAME = "Document";
+	private TabDocumentView view;
 
-	public TabDefinitionsController(ActionDelegate delegate) {
+	public TabDocumentController(ActionDelegate delegate) {
 		super(delegate);
-		this.view = new TabDefinitionsView(TAB_NAME);
+		this.view = new TabDocumentView(TAB_NAME);
 	}
 
-	public TabDefinitionsView getView() {
+	public TabDocumentView getView() {
 		return view;
 	}
 

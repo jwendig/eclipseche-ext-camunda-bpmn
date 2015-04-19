@@ -17,10 +17,13 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 
 public abstract class AbstractBpmnPropertiesTabView extends Composite {
 
+	private String tabName = "Document";
 	private Grid gridTabContent;
 
-	public AbstractBpmnPropertiesTabView() {
+	public AbstractBpmnPropertiesTabView(String tabName) {
 		super();
+		this.tabName = tabName;
+
 		gridTabContent = new Grid();
 		gridTabContent.setSize("100%", "100%");
 
@@ -40,7 +43,7 @@ public abstract class AbstractBpmnPropertiesTabView extends Composite {
 	}
 
 	public String getTabName() {
-		return "Name of tab is not defined";
+		return tabName;
 	}
 
 	/*

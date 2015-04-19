@@ -32,9 +32,9 @@ public class ProcessPropertiesWidget extends AbstractBpmnPropertiesWidget {
 		super(LB_ELEMENT_NAME_PREFIX);
 		Log.info(ProcessPropertiesWidget.class, "constructor");
 
-		tabListenerController = new TabListenerController();
+		tabListenerController = new TabListenerController(delegate);
 		tabGeneralController = new TabGeneralController(delegate);
-		tabDefinitionsController = new TabDefinitionsController();
+		tabDefinitionsController = new TabDefinitionsController(delegate);
 
 		getTabLpContent().add(tabGeneralController.getView(),
 				tabGeneralController.getView().getTabName());
