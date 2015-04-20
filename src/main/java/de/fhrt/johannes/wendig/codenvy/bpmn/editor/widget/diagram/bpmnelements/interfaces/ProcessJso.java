@@ -11,6 +11,11 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces;
 
+import com.google.gwt.core.client.JsArray;
+
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementPropertyJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.properties.DataObjectJso;
+
 public interface ProcessJso extends DefaultJso {
 	public boolean getAttr_isExecutable();
 
@@ -23,4 +28,11 @@ public interface ProcessJso extends DefaultJso {
 	public String getAttr_candidateStarterUsers();
 
 	public void setAttr_candidateStarterUsers(String candidateStarterUsers);
+
+	public JsArray<BpmnDiagramElementPropertyJso> getProperty_dataObjects();
+
+	public BpmnDiagramElementPropertyJso addProperty_dataObject();
+
+	public boolean removeProperty_element(
+			BpmnDiagramElementPropertyJso propElement);
 }

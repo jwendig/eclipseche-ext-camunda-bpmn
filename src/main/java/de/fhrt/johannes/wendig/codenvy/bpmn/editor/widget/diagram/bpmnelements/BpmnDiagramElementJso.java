@@ -13,6 +13,7 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements;
 import com.google.gwt.core.client.JsArray;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementExtensionJso.BpmnExtensionElementType;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementPropertyJso.BpmnPropertyElementType;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.DefaultJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.ProcessJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.ScriptTaskJso;
@@ -20,6 +21,7 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.i
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.StartEventJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.TaskJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.UserTaskJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.properties.DataObjectJso;
 
 public class BpmnDiagramElementJso extends BpmnBaseElementJso implements
 		DefaultJso, ProcessJso, UserTaskJso, ServiceTaskJso, ScriptTaskJso,
@@ -66,6 +68,7 @@ public class BpmnDiagramElementJso extends BpmnBaseElementJso implements
 											bpmnExtensionElementType);
 											}-*/;
 
+	@Override
 	public final native boolean removeExt_elemenemt(
 			BpmnDiagramElementExtensionJso extElement)/*-{
 														console.log("js-native: removeExt_elemenemt");
@@ -105,6 +108,60 @@ public class BpmnDiagramElementJso extends BpmnBaseElementJso implements
 	@Override
 	public final BpmnDiagramElementExtensionJso addExt_executionListener() {
 		BpmnDiagramElementExtensionJso newExtElement = addExt_elemenemt(BpmnExtensionElementType.CAMUNDA_EXECUTION_LISTENER
+				.toString());
+		return newExtElement;
+	}
+
+	/*
+	 * functions for properties
+	 */
+	private final native JsArray<BpmnDiagramElementPropertyJso> getProperty_elements(
+			String bpmnPropertyElementType) /*-{
+											console.log("js-native: getProperty_elements");
+											if (!this.flowElements) {
+											console
+											.log("js-native: getProperty_elements: no flowElements available");
+											return [];
+											}
+
+											return this.flowElements.filter(function(e) {
+											return e.$instanceOf(bpmnPropertyElementType);
+											});
+											}-*/;
+
+	@Override
+	public final native boolean removeProperty_element(
+			BpmnDiagramElementPropertyJso propElement)/*-{
+														console.log("js-native: removeProperty_elemenemt");
+														var propElementIndex = this.flowElements.indexOf(propElement);
+														if (propElementIndex > -1) {
+														console.log("js-native: removeProperty_elemenemt: propElement found at index:" + extElementIndex);
+														this.flowElements.splice(propElementIndex, 1);
+														
+														return true;
+														}else{
+														console.log("js-native: removeProperty_elemenemt: propElement not found");
+														return false;
+														}
+														}-*/;
+
+	private final native BpmnDiagramElementPropertyJso addProperty_elemenemt(
+			String bpmnPropertyElementType)/*-{
+											console.log("js-native: addExt_elemenemt");
+											return $wnd.bpmnIo_fktAddElementPropertyType(this,
+											bpmnPropertyElementType);
+											}-*/;
+
+	@Override
+	public final JsArray<BpmnDiagramElementPropertyJso> getProperty_dataObjects() {
+		JsArray<BpmnDiagramElementPropertyJso> extElements = getProperty_elements(BpmnPropertyElementType.BPMN_DATA_OBJECT
+				.toString());
+		return extElements;
+	}
+
+	@Override
+	public final BpmnDiagramElementPropertyJso addProperty_dataObject() {
+		BpmnDiagramElementPropertyJso newExtElement = addProperty_elemenemt(BpmnPropertyElementType.BPMN_DATA_OBJECT
 				.toString());
 		return newExtElement;
 	}

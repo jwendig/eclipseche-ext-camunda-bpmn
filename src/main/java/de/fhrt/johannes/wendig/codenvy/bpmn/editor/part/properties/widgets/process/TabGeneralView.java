@@ -19,12 +19,13 @@ import com.google.gwt.user.client.ui.TextBox;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabView;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.TableDataObjectsWidget;
 
 public class TabGeneralView extends AbstractBpmnPropertiesTabView {
 	private TextBox tbProcessId;
 	private TextBox tbName;
 	private CheckBox cbIsExecutable;
-	private CellTable<String> ctDataObjects;
+	private TableDataObjectsWidget ctDataObjects;
 	private TextBox tbDocumentation;
 
 	public TabGeneralView(String tabName) {
@@ -59,7 +60,7 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabView {
 		tbName.setWidth("100%");
 		cbIsExecutable = new CheckBox();
 		cbIsExecutable.setWidth("100%");
-		ctDataObjects = new CellTable<String>();
+		ctDataObjects = new TableDataObjectsWidget();
 		ctDataObjects.setWidth("100%");
 		tbDocumentation = new TextBox();
 		tbDocumentation.setWidth("100%");
@@ -77,7 +78,7 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabView {
 		return cbIsExecutable;
 	}
 
-	public CellTable<String> getCtDataObjects() {
+	public TableDataObjectsWidget getTableDataObjectsWidget() {
 		return ctDataObjects;
 	}
 
