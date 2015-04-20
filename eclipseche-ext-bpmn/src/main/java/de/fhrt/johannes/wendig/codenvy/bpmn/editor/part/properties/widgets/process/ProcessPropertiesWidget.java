@@ -59,6 +59,7 @@ public class ProcessPropertiesWidget extends AbstractBpmnPropertiesWidget {
 		element = selectedItem;
 
 		tabGeneralController.initView(selectedItem);
+		tabGeneralController.loadSelectedElement(selectedItem);
 		tabListenerController.loadSelectedElement(selectedItem);
 	}
 }

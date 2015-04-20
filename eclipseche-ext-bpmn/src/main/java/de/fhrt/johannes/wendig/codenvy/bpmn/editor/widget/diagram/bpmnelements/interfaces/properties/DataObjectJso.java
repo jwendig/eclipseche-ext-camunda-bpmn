@@ -9,20 +9,9 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.properties;
 
-import com.google.gwt.core.client.JsArray;
-
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementExtensionJso;
-
-public interface DefaultJso {
-	/*
-	 * attributes
-	 */
-	public String getType();
-
-	public String getBusinessObject();
-
+public interface DataObjectJso {
 	public String getAttr_id();
 
 	public void setAttr_id(String id);
@@ -30,13 +19,4 @@ public interface DefaultJso {
 	public String getAttr_name();
 
 	public void setAttr_name(String name);
-
-	/*
-	 * extensions
-	 */
-	public JsArray<BpmnDiagramElementExtensionJso> getExt_executionListeners();
-
-	public BpmnDiagramElementExtensionJso addExt_executionListener();
-
-	public boolean removeExt_elemenemt(BpmnDiagramElementExtensionJso element);
 }

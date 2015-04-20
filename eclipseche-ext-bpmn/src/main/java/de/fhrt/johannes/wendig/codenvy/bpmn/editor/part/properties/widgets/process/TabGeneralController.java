@@ -11,6 +11,8 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process;
 
+import org.eclipse.che.ide.util.loging.Log;
+
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -18,6 +20,8 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.TabListenerController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.ProcessJso;
 
 public class TabGeneralController extends AbstractBpmnPropertiesTabController {
@@ -27,6 +31,7 @@ public class TabGeneralController extends AbstractBpmnPropertiesTabController {
 	public TabGeneralController(ActionDelegate delegate) {
 		super(delegate);
 		this.view = new TabGeneralView(TAB_NAME);
+		view.getTableDataObjectsWidget().setController(this);
 	}
 
 	public TabGeneralView getView() {
@@ -69,5 +74,12 @@ public class TabGeneralController extends AbstractBpmnPropertiesTabController {
 						getActionDelegate().onContentChange();
 					}
 				});
+	}
+	
+	public void loadSelectedElement(final BpmnDiagramElementJso element) {
+		Log.info(TabListenerController.class, "loadSelectedElement");
+
+		setBpmnDiagramElementJso(element);
+		view.getTableDataObjectsWidget().update();
 	}
 }

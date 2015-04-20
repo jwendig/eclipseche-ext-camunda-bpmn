@@ -17,6 +17,8 @@ var bpmnIo_fktExportArtifacts;
 var bpmnIo_fktGetElementExtensionsByType;
 var bpmnIo_fktAddElementExtensionType;
 
+var bpmnIo_fktAddElementPropertyType;
+
 /*
  * Functions to set the callbacks
  */
@@ -80,6 +82,16 @@ bpmnIo_fktAddElementExtensionType = function addElementExtension(businessObject,
 
 	businessObject.extensionElements = businessObject.extensionElements	|| moddle.create('bpmn:ExtensionElements');
 	businessObject.extensionElements.get('values').push(ext);
+
+	return ext;
+};
+
+bpmnIo_fktAddElementPropertyType = function addElementProperty(businessObject, type) {
+	var moddle = renderer.get('moddle');
+	var ext = moddle.create(type);
+
+	businessObject.flowElements = businessObject.flowElements	|| moddle.create('bpmn:FlowElements');
+	businessObject.flowElements.push(ext);
 
 	return ext;
 };
