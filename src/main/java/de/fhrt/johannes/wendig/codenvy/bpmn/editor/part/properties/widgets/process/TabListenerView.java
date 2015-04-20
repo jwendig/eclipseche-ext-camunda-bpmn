@@ -1,0 +1,55 @@
+/*******************************************************************************
+ * Copyright (c) 2012-2015 Codenvy, S.A.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   Codenvy, S.A. - initial API and implementation
+ *******************************************************************************/
+
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process;
+
+import org.eclipse.che.ide.util.loging.Log;
+
+import com.google.gwt.cell.client.ButtonCell;
+import com.google.gwt.cell.client.FieldUpdater;
+import com.google.gwt.user.cellview.client.CellTable;
+import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.cellview.client.TextColumn;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabView;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.TableExecutionListenerWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.extensions.ExecutionListenerJso;
+
+public class TabListenerView extends AbstractBpmnPropertiesTabView {
+	private TableExecutionListenerWidget tableExecutionListener;
+
+	public TabListenerView(String tabName) {
+		super(tabName);
+		Log.info(TabListenerView.class, "constructor");
+	}
+
+	@Override
+	public void initContent() {
+		Log.info(TabListenerView.class, "initContent");
+		getGridTabContent().resize(2, 2);
+
+		getGridTabContent().setText(0, 0, "Execution Listeners:");
+		getGridTabContent().setWidget(0, 1, tableExecutionListener);
+	}
+
+	@Override
+	public void initContentElements() {
+		Log.info(TabListenerView.class, "initContentElements");
+
+		tableExecutionListener = new TableExecutionListenerWidget();
+	}
+
+	public TableExecutionListenerWidget getTableExecutionListener() {
+		return tableExecutionListener;
+	}
+}

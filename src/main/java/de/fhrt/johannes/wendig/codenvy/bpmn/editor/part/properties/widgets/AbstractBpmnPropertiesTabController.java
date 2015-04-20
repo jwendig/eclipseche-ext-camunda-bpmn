@@ -23,6 +23,8 @@ public abstract class AbstractBpmnPropertiesTabController {
 		this.actionDelegate = actionDelegate;
 	}
 
+	public abstract void updateView(final BpmnDiagramElementJso element);
+
 	public BpmnElementPropertiesView.ActionDelegate getActionDelegate() {
 		return actionDelegate;
 	}
