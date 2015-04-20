@@ -20,7 +20,6 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabController;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.TabListenerController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.ProcessJso;
 
@@ -38,7 +37,10 @@ public class TabGeneralController extends AbstractBpmnPropertiesTabController {
 		return view;
 	}
 
-	public void initView(final ProcessJso element) {
+	@Override
+	public void updateView(final BpmnDiagramElementJso element) {
+		setBpmnDiagramElementJso(element);
+
 		view.getTbProcessId().setText(element.getAttr_id());
 		view.getTbName().setText(element.getAttr_name());
 
@@ -74,12 +76,7 @@ public class TabGeneralController extends AbstractBpmnPropertiesTabController {
 						getActionDelegate().onContentChange();
 					}
 				});
-	}
-	
-	public void loadSelectedElement(final BpmnDiagramElementJso element) {
-		Log.info(TabListenerController.class, "loadSelectedElement");
 
-		setBpmnDiagramElementJso(element);
 		view.getTableDataObjectsWidget().update();
 	}
 }

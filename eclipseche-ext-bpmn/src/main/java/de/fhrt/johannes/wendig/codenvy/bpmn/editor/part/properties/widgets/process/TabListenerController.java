@@ -9,7 +9,7 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process;
 
 import org.eclipse.che.ide.util.loging.Log;
 
@@ -85,7 +85,8 @@ public class TabListenerController extends AbstractBpmnPropertiesTabController {
 		return view;
 	}
 
-	public void loadSelectedElement(final BpmnDiagramElementJso element) {
+	@Override
+	public void updateView(final BpmnDiagramElementJso element) {
 		Log.info(TabListenerController.class, "loadSelectedElement");
 
 		setBpmnDiagramElementJso(element);

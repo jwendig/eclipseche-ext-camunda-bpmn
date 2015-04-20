@@ -135,7 +135,7 @@ public class BpmnDiagramElementJso extends BpmnBaseElementJso implements
 														console.log("js-native: removeProperty_elemenemt");
 														var propElementIndex = this.flowElements.indexOf(propElement);
 														if (propElementIndex > -1) {
-														console.log("js-native: removeProperty_elemenemt: propElement found at index:" + extElementIndex);
+														console.log("js-native: removeProperty_elemenemt: propElement found at index:" + propElementIndex);
 														this.flowElements.splice(propElementIndex, 1);
 														
 														return true;

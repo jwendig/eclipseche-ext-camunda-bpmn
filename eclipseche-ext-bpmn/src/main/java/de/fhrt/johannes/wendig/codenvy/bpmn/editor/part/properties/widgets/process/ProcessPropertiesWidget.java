@@ -14,7 +14,6 @@ import org.eclipse.che.ide.util.loging.Log;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.TabListenerController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.ProcessJso;
 
@@ -58,8 +57,7 @@ public class ProcessPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	public void loadSelectedItem(BpmnDiagramElementJso selectedItem) {
 		element = selectedItem;
 
-		tabGeneralController.initView(selectedItem);
-		tabGeneralController.loadSelectedElement(selectedItem);
-		tabListenerController.loadSelectedElement(selectedItem);
+		tabGeneralController.updateView(selectedItem);
+		tabListenerController.updateView(selectedItem);
 	}
 }

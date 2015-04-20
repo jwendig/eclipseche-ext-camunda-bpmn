@@ -19,7 +19,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.TabListenerController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.TabListenerController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 
 public abstract class AbstractBpmnPropertiesWidget extends Composite {
