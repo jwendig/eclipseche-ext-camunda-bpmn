@@ -13,6 +13,7 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties;
 import org.eclipse.che.ide.api.mvp.View;
 import org.eclipse.che.ide.api.parts.base.BaseActionDelegate;
 
+import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.inject.ImplementedBy;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
@@ -22,19 +23,11 @@ public interface BpmnElementPropertiesView extends
 		View<BpmnElementPropertiesView.ActionDelegate> {
 	public interface ActionDelegate extends BaseActionDelegate {
 		void onContentChange();
+
+		BpmnDiagramElementJso getCurrentElementJso();
 	}
 
 	public void setTitle(String title);
 
-	public void loadNoSelectionInfo();
-
-	public void loadUnknownItemInfo(BpmnDiagramElementJso selectedItem);
-
-	public void loadProcessProperties(BpmnDiagramElementJso selectedItem);
-
-	public void loadUserTaskProperties(BpmnDiagramElementJso selectedItem);
-
-	public void loadServiceTaksProperties(BpmnDiagramElementJso selectedItem);
-
-	public void loadStartEventProperties(BpmnDiagramElementJso selectedItem);
+	public DockLayoutPanel getDockLpCurrentContent();
 }

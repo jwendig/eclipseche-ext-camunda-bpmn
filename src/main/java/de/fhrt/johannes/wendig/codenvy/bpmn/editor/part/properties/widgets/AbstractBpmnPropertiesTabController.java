@@ -16,26 +16,28 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.B
 
 public abstract class AbstractBpmnPropertiesTabController {
 	private BpmnElementPropertiesView.ActionDelegate actionDelegate;
-	private BpmnDiagramElementJso bpmnDiagramElementJso;
+
+	// private BpmnDiagramElementJso bpmnDiagramElementJso;
 
 	public AbstractBpmnPropertiesTabController(
 			BpmnElementPropertiesView.ActionDelegate actionDelegate) {
 		this.actionDelegate = actionDelegate;
 	}
 
-	public abstract void updateView(final BpmnDiagramElementJso element);
+	// public abstract void updateView(final BpmnDiagramElementJso element);
+	public abstract void updateView();
 
 	public BpmnElementPropertiesView.ActionDelegate getActionDelegate() {
 		return actionDelegate;
 	}
 
-	public BpmnDiagramElementJso getBpmnDiagramElementJso() {
-		return bpmnDiagramElementJso;
-	}
-
-	public void setBpmnDiagramElementJso(
-			BpmnDiagramElementJso bpmnDiagramElementJso) {
-		this.bpmnDiagramElementJso = bpmnDiagramElementJso;
-	}
+	// public BpmnDiagramElementJso getBpmnDiagramElementJso() {
+	// return bpmnDiagramElementJso;
+	// }
+	//
+	// public void setBpmnDiagramElementJso(
+	// BpmnDiagramElementJso bpmnDiagramElementJso) {
+	// this.bpmnDiagramElementJso = bpmnDiagramElementJso;
+	// }
 
 }

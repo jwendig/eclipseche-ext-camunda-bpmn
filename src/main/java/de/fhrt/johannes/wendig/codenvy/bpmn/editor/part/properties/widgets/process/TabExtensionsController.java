@@ -13,6 +13,7 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.proc
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 
 public class TabExtensionsController extends
 		AbstractBpmnPropertiesTabController {
@@ -21,11 +22,16 @@ public class TabExtensionsController extends
 
 	public TabExtensionsController(ActionDelegate delegate) {
 		super(delegate);
-		this.view = new TabExtensionsView(TAB_NAME);
+		this.view = new TabExtensionsView(TAB_NAME, delegate);
 	}
 
 	public TabExtensionsView getView() {
 		return view;
+	}
+
+	@Override
+	public void updateView() {
+
 	}
 
 }

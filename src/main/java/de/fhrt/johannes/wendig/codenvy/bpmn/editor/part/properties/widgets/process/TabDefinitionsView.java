@@ -15,19 +15,21 @@ import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.user.cellview.client.CellTable;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabView;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabWidget;
 
-public class TabDefinitionsView extends AbstractBpmnPropertiesTabView {
+public class TabDefinitionsView extends AbstractBpmnPropertiesTabWidget {
 
 	private CellTable<String> ctErrors;
 	private CellTable<String> ctMessages;
 	private CellTable<String> ctSignals;
 	private CellTable<String> ctDataStores;
 
-	public TabDefinitionsView(String tabName) {
-		super(tabName);
+	public TabDefinitionsView(String tabName,
+			BpmnElementPropertiesView.ActionDelegate delegate) {
+		super(tabName, delegate);
 		Log.info(TabDefinitionsView.class, "constructor");
 	}
 

@@ -19,6 +19,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RenderableStamper;
 import com.google.gwt.user.client.ui.Widget;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.ServiceTaskJso;
@@ -26,10 +27,10 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.i
 public class ServiceTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 
 	private final static String LB_ELEMENT_NAME_PREFIX = "Service Task";
-	private ServiceTaskJso element;
 
-	public ServiceTaskPropertiesWidget() {
-		super(LB_ELEMENT_NAME_PREFIX);
+	public ServiceTaskPropertiesWidget(
+			BpmnElementPropertiesView.ActionDelegate delegate) {
+		super(LB_ELEMENT_NAME_PREFIX, delegate);
 
 		getTabLpContent().add(new Label("TODO: tabs - ServiceTaskProperties"));
 
@@ -44,7 +45,6 @@ public class ServiceTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	 * .editor.widget.diagram.bpmnelements.BpmnDiagramElementJso)
 	 */
 	@Override
-	public void loadSelectedItem(BpmnDiagramElementJso selectedItem) {
-		element = selectedItem;
+	public void updateTabs(BpmnDiagramElementJso selectedItem) {
 	}
 }

@@ -15,14 +15,16 @@ import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.user.client.ui.TextBox;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabView;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabWidget;
 
-public class TabDocumentView extends AbstractBpmnPropertiesTabView {
+public class TabDocumentView extends AbstractBpmnPropertiesTabWidget {
 
 	private TextBox tbTargetNamespace;
 
-	public TabDocumentView(String tabName) {
-		super(tabName);
+	public TabDocumentView(String tabName,
+			BpmnElementPropertiesView.ActionDelegate delegate) {
+		super(tabName, delegate);
 		Log.info(TabDocumentView.class, "constructor");
 	}
 

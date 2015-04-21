@@ -22,11 +22,15 @@ public class TabMultiInstanceController extends
 
 	public TabMultiInstanceController(ActionDelegate delegate) {
 		super(delegate);
-		this.view = new TabDefinitionsView(TAB_NAME);
+		this.view = new TabDefinitionsView(TAB_NAME, delegate);
 	}
 
 	public TabDefinitionsView getView() {
 		return view;
+	}
+
+	@Override
+	public void updateView() {
 	}
 
 }

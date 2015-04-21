@@ -35,61 +35,17 @@ public class TabListenerController extends AbstractBpmnPropertiesTabController {
 
 	public TabListenerController(ActionDelegate delegate) {
 		super(delegate);
-		this.view = new TabListenerView(TAB_NAME);
+		this.view = new TabListenerView(TAB_NAME, delegate);
 		view.getTableExecutionListener().setController(this);
-
-		// initExecutionListenerSelectionModel();
 	}
-
-	// TODO: no need there, but stay for example...
-	// private void initExecutionListenerSelectionModel() {
-	// Log.info(TabListenerController.class,
-	// "initExecutionListenerSelectionModel");
-	//
-	// final SingleSelectionModel<ExecutionListenerJso> selectionModel = new
-	// SingleSelectionModel<ExecutionListenerJso>();
-	// selectionModel
-	// .addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
-	// public void onSelectionChange(SelectionChangeEvent event) {
-	// Log.info(TabListenerController.class,
-	// "initExecutionListenerSelectionModel: selectionChangeHandler");
-	// selectedExecutionListenerJso = selectionModel
-	// .getSelectedObject();
-	//
-	// if (null != selectedExecutionListenerJso) {
-	// Log.info(
-	// TabListenerController.class,
-	// "initExecutionListenerSelectionModel: selectionChangeHandler: a element is selected ("
-	// + selectedExecutionListenerJso
-	// .getAttr_class() + ")");
-	// } else {
-	// Log.info(
-	// TabListenerController.class,
-	// "initExecutionListenerSelectionModel: selectionChangeHandler: no element is selected");
-	// }
-	// }
-	// });
-	// view.getCtExecutionListeners().setSelectionModel(selectionModel);
-	// }
-
-	// private void initExecutionListenerDataProvider() {
-	// Log.info(TabListenerController.class,
-	// "initExecutionListenerDataProvider");
-	// executionListenersProvider = new
-	// ListDataProvider<ExecutionListenerJso>();
-	// executionListenersProvider.addDataDisplay(view
-	// .getCtExecutionListeners());
-	// }
 
 	public TabListenerView getView() {
 		return view;
 	}
 
 	@Override
-	public void updateView(final BpmnDiagramElementJso element) {
+	public void updateView() {
 		Log.info(TabListenerController.class, "loadSelectedElement");
-
-		setBpmnDiagramElementJso(element);
 		view.getTableExecutionListener().update();
 	}
 }

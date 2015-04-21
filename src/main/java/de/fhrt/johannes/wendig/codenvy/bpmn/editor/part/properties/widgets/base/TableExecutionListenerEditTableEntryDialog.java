@@ -67,16 +67,19 @@ public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 					executionListenerJso = currentExecutionListenerJso;
 				} else {
 					executionListenerJso = widgetCallback.getController()
-							.getBpmnDiagramElementJso()
+							.getActionDelegate().getCurrentElementJso()
+
 							.addExt_executionListener();
 					widgetCallback.getExecutionListenersProvider().getList()
 							.add(executionListenerJso);
 				}
 
-				executionListenerJso.setAttr_class(TableExecutionListenerEditTableEntryDialog.this
-						.getTbClass().getText());
-				executionListenerJso.setAttr_event(TableExecutionListenerEditTableEntryDialog.this
-						.getTbEvent().getText());
+				executionListenerJso
+						.setAttr_class(TableExecutionListenerEditTableEntryDialog.this
+								.getTbClass().getText());
+				executionListenerJso
+						.setAttr_event(TableExecutionListenerEditTableEntryDialog.this
+								.getTbEvent().getText());
 
 				TableExecutionListenerEditTableEntryDialog.this.hide();
 
