@@ -36,6 +36,6 @@ public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	 * .editor.widget.diagram.bpmnelements.BpmnDiagramElementJso)
 	 */
 	@Override
-	public void updateTabs(BpmnDiagramElementJso selectedItem) {
+	public void updateTabs() {
 	}
 }

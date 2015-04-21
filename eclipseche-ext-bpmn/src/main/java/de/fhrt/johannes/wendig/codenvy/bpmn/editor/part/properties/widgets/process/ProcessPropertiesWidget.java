@@ -25,8 +25,10 @@ public class ProcessPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	// private ProcessJso element;
 
 	private TabGeneralController tabGeneralController;
+	private TabDocumentController tabDocumentController;
 	private TabDefinitionsController tabDefinitionsController;
 	private TabListenerController tabListenerController;
+	private TabExtensionsController tabExtensionsController;
 
 	public ProcessPropertiesWidget(
 			BpmnElementPropertiesView.ActionDelegate delegate) {
@@ -34,15 +36,21 @@ public class ProcessPropertiesWidget extends AbstractBpmnPropertiesWidget {
 		Log.info(ProcessPropertiesWidget.class, "constructor");
 
 		tabListenerController = new TabListenerController(delegate);
+		tabDocumentController = new TabDocumentController(delegate);
 		tabGeneralController = new TabGeneralController(delegate);
 		tabDefinitionsController = new TabDefinitionsController(delegate);
+		tabExtensionsController = new TabExtensionsController(delegate);
 
 		getTabLpContent().add(tabGeneralController.getView(),
 				tabGeneralController.getView().getTabName());
 		getTabLpContent().add(tabDefinitionsController.getView(),
 				tabDefinitionsController.getView().getTabName());
+		getTabLpContent().add(tabDocumentController.getView(),
+				tabDocumentController.getView().getTabName());
 		getTabLpContent().add(tabListenerController.getView(),
 				tabListenerController.getView().getTabName());
+		getTabLpContent().add(tabExtensionsController.getView(),
+				tabExtensionsController.getView().getTabName());
 
 		getTabLpContent().selectTab(tabGeneralController.getView());
 	}
@@ -56,8 +64,7 @@ public class ProcessPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	 * .editor.widget.diagram.bpmnelements.BpmnDiagramElementJso)
 	 */
 	@Override
-	public void updateTabs(BpmnDiagramElementJso selectedItem) {
-		// element = selectedItem;
+	public void updateTabs() {
 		tabGeneralController.updateView();
 		tabListenerController.updateView();
 	}

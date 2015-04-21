@@ -68,14 +68,19 @@ public abstract class AbstractBpmnPropertiesWidget extends Composite {
 		flowLpRoot.add(tabLpContent);
 	}
 
-	public void setSelectedItem(BpmnDiagramElementJso selectedItem) {
+	public void updatePropertiesView() {
 		Log.info(AbstractBpmnPropertiesWidget.class, "setSelectedItem");
 
-		// setLbElementNameText(this.delegate.getCurrentElementJso().getAttr_id());
-		updateTabs(selectedItem);
+		if (null != delegate.getCurrentElementJso()) {
+			setLbElementNameText(this.delegate.getCurrentElementJso()
+					.getAttr_id());
+		} else {
+			setLbElementNameText("");
+		}
+		updateTabs();
 	}
 
-	public abstract void updateTabs(BpmnDiagramElementJso selectedItem);
+	public abstract void updateTabs();
 
 	/*
 	 * Getter & Setter
