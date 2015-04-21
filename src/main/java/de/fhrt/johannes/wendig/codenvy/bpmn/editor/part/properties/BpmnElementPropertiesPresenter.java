@@ -134,7 +134,7 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 			}
 		}
 		view.getDockLpCurrentContent().add(currentProperties);
-		currentProperties.setSelectedItem(currentElementJso);
+		currentProperties.updatePropertiesView();
 	}
 
 	/*
