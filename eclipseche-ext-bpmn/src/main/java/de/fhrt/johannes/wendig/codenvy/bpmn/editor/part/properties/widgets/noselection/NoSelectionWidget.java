@@ -18,6 +18,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RenderableStamper;
 import com.google.gwt.user.client.ui.Widget;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.DefaultJso;
@@ -26,8 +27,8 @@ public class NoSelectionWidget extends AbstractBpmnPropertiesWidget {
 
 	private final static String LB_ELEMENT_NAME_PREFIX = "Nothing selected";
 
-	public NoSelectionWidget() {
-		super(LB_ELEMENT_NAME_PREFIX);
+	public NoSelectionWidget(BpmnElementPropertiesView.ActionDelegate delegate) {
+		super(LB_ELEMENT_NAME_PREFIX, delegate);
 		Log.info(NoSelectionWidget.class, "constructor");
 
 		getTabLpContent().add(
@@ -43,7 +44,7 @@ public class NoSelectionWidget extends AbstractBpmnPropertiesWidget {
 	 * .editor.widget.diagram.bpmnelements.BpmnDiagramElementJso)
 	 */
 	@Override
-	public void loadSelectedItem(BpmnDiagramElementJso selectedItem) {
+	public void updateTabs(BpmnDiagramElementJso selectedItem) {
 		// no implementation here
 	}
 }

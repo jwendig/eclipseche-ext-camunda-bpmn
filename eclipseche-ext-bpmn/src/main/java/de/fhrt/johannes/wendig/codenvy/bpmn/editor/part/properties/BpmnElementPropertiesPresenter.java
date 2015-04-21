@@ -22,6 +22,13 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorView;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.noselection.NoSelectionWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.ProcessPropertiesWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.servicetask.ServiceTaskPropertiesWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.StartEventPropertiesWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.unknown.UnknownItemWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.usertask.UserTaskPropertiesWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso.BpmnElementType;
 
@@ -30,12 +37,33 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 
 	private BpmnElementPropertiesView view;
 	private final static String TITLE = "BPMN Properties";
+	private BpmnDiagramElementJso currentElementJso;
+
+	private UnknownItemWidget unknowItemProperties;
+	private NoSelectionWidget noselectionProperties;
+
+	private ProcessPropertiesWidget processProperties;
+	private ServiceTaskPropertiesWidget serviceTaskProperties;
+	private StartEventPropertiesWidget startEventProperties;
+	private UserTaskPropertiesWidget userTaskProperties;
+
+	private AbstractBpmnPropertiesWidget currentProperties;
 
 	@Inject
 	public BpmnElementPropertiesPresenter(BpmnElementPropertiesView view) {
 		Log.info(BpmnElementPropertiesPresenter.class, "constructor");
 		this.view = view;
 		this.view.setDelegate(this);
+
+		unknowItemProperties = new UnknownItemWidget(this);
+		noselectionProperties = new NoSelectionWidget(this);
+
+		processProperties = new ProcessPropertiesWidget(this);
+		serviceTaskProperties = new ServiceTaskPropertiesWidget(this);
+		startEventProperties = new StartEventPropertiesWidget(this);
+		userTaskProperties = new UserTaskPropertiesWidget(this);
+
+		currentProperties = noselectionProperties;
 	}
 
 	@Override
@@ -73,41 +101,56 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 	public void bpmnElementSelected(BpmnDiagramElementJso elementJso) {
 		Log.info(BpmnElementPropertiesPresenter.class, "bpmnElementSelected");
 
+		currentElementJso = elementJso;
+		view.getDockLpCurrentContent().remove(currentProperties);
 		if (null == elementJso) {
-			view.loadNoSelectionInfo();
+			currentProperties = noselectionProperties;
 		} else {
 			switch (BpmnElementType.findByBpmnIoTypeDefinition(elementJso
 					.getType())) {
 			case DEFAULT:
-				view.loadUnknownItemInfo(elementJso);
+				currentProperties = unknowItemProperties;
 				break;
 			case PROCESS:
-				view.loadProcessProperties(elementJso);
+				currentProperties = processProperties;
 				break;
 			case SCRIPT_TASK:
-				view.loadUnknownItemInfo(elementJso);
+				currentProperties = unknowItemProperties;
 				break;
 			case SERVICE_TASK:
-				view.loadServiceTaksProperties(elementJso);
+				currentProperties = serviceTaskProperties;
 				break;
 			case START_EVENT:
-				view.loadStartEventProperties(elementJso);
+				currentProperties = startEventProperties;
 				break;
 			case TASK:
-				view.loadUnknownItemInfo(elementJso);
+				currentProperties = unknowItemProperties;
 				break;
 			case USER_TASK:
-				view.loadUserTaskProperties(elementJso);
+				currentProperties = userTaskProperties;
 				break;
 			default:
-				view.loadUnknownItemInfo(elementJso);
+				currentProperties = unknowItemProperties;
 			}
 		}
+		view.getDockLpCurrentContent().add(currentProperties);
+		currentProperties.setSelectedItem(currentElementJso);
 	}
 
 	/*
 	 * Callbacks from view
 	 */
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.
+	 * BpmnElementPropertiesView.ActionDelegate#getCurrentElementJso()
+	 */
+	@Override
+	public BpmnDiagramElementJso getCurrentElementJso() {
+		return currentElementJso;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -124,4 +167,5 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 	private native void jsUpdateEditor()/*-{
 										$wnd.bpmnIo_fktExportArtifacts();
 										}-*/;
+
 }

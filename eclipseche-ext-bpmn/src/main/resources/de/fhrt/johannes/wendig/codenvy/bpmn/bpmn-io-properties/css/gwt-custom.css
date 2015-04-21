@@ -6,48 +6,52 @@
 
 .gwt-TabLayoutPanel.bpmnPropertiesWidget-tabLayoutPanel {
 	margin-left: 0px;
+	height: 100%;
 }
 
-@external gwt-TabLayoutPanelTabs ;
-.bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelTabs {
+.gwt-TabLayoutPanel.bpmnPropertiesWidget-tabLayoutPanel, .gwt-TabLayoutPanel.bpmnPropertiesWidget-tabLayoutPanel td, .gwt-TabLayoutPanel.bpmnPropertiesWidget-tabLayoutPanel input, .gwt-TabLayoutPanel.bpmnPropertiesWidget-tabLayoutPanel button{
+	font-size: 11px;
+}
+
+@external gwt-TabLayoutPanelTabs ; .bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelTabs
+	{
 	top: 0 !important;
 	width: 140px !important;
-	
 }
 
-@external gwt-TabLayoutPanelTab ;
-.bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelTab {
+@external gwt-TabLayoutPanelTab ; .bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelTab
+	{
 	display: block !important;
 	margin-top: 2px;
 	padding: 2px 3px !important;
 }
 
 @external gwt-TabLayoutPanelContentContainer ;
-.bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelContentContainer
+	.bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelContentContainer
 	{
 	left: 140px !important;
 	top: 0 !important;
 	padding: 2px;
+	margin-bottom: 20px;
 }
 
 @external gwt-TabLayoutPanelContent ;
-.bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelContent
-	{
-	
+	.bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelContent {
+	padding: 0px;
 }
-
 
 .bpmnPropertiesWidget-cellTable {
 	/*border: 1px solid #DBDBDB;*/
+	
 }
 
-.bpmnPropertiesWidget-cellTable th, .bpmnPropertiesWidget-cellTable td, .bpmnPropertiesWidget-cellTable tr {
+.bpmnPropertiesWidget-cellTable th,.bpmnPropertiesWidget-cellTable td,.bpmnPropertiesWidget-cellTable tr
+	{
 	text-shadow: none;
 	border: 1px solid #DBDBDB;
 	color: #DBDBDB;
 }
 
-.bpmnPropertiesWidget-cellTable td{
+.bpmnPropertiesWidget-cellTable td {
 	color: #404040;
 }
-

@@ -12,17 +12,17 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.star
 
 import com.google.gwt.user.client.ui.Label;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.StartEventJso;
 
 public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 
 	private final static String LB_ELEMENT_NAME_PREFIX = "Start Event";
-	private StartEventJso element;
 
-	public StartEventPropertiesWidget() {
-		super(LB_ELEMENT_NAME_PREFIX);
+	public StartEventPropertiesWidget(
+			BpmnElementPropertiesView.ActionDelegate delegate) {
+		super(LB_ELEMENT_NAME_PREFIX, delegate);
 
 		getTabLpContent().add(new Label("TODO: tabs - StartEventProperties"));
 	}
@@ -36,7 +36,6 @@ public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	 * .editor.widget.diagram.bpmnelements.BpmnDiagramElementJso)
 	 */
 	@Override
-	public void loadSelectedItem(BpmnDiagramElementJso selectedItem) {
-		element = selectedItem;
+	public void updateTabs(BpmnDiagramElementJso selectedItem) {
 	}
 }

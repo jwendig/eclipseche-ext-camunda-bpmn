@@ -21,15 +21,17 @@ import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabView;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.TableExecutionListenerWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.extensions.ExecutionListenerJso;
 
-public class TabListenerView extends AbstractBpmnPropertiesTabView {
+public class TabListenerView extends AbstractBpmnPropertiesTabWidget {
 	private TableExecutionListenerWidget tableExecutionListener;
 
-	public TabListenerView(String tabName) {
-		super(tabName);
+	public TabListenerView(String tabName,
+			BpmnElementPropertiesView.ActionDelegate delegate) {
+		super(tabName, delegate);
 		Log.info(TabListenerView.class, "constructor");
 	}
 

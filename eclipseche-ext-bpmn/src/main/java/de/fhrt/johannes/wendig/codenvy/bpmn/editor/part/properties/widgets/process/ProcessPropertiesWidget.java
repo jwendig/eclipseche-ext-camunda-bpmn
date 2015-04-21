@@ -12,6 +12,7 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.proc
 
 import org.eclipse.che.ide.util.loging.Log;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
@@ -21,14 +22,15 @@ public class ProcessPropertiesWidget extends AbstractBpmnPropertiesWidget {
 
 	private final static String LB_ELEMENT_NAME_PREFIX = "Process";
 
-	private ProcessJso element;
+	// private ProcessJso element;
 
 	private TabGeneralController tabGeneralController;
 	private TabDefinitionsController tabDefinitionsController;
 	private TabListenerController tabListenerController;
 
-	public ProcessPropertiesWidget(ActionDelegate delegate) {
-		super(LB_ELEMENT_NAME_PREFIX);
+	public ProcessPropertiesWidget(
+			BpmnElementPropertiesView.ActionDelegate delegate) {
+		super(LB_ELEMENT_NAME_PREFIX, delegate);
 		Log.info(ProcessPropertiesWidget.class, "constructor");
 
 		tabListenerController = new TabListenerController(delegate);
@@ -54,10 +56,9 @@ public class ProcessPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	 * .editor.widget.diagram.bpmnelements.BpmnDiagramElementJso)
 	 */
 	@Override
-	public void loadSelectedItem(BpmnDiagramElementJso selectedItem) {
-		element = selectedItem;
-
-		tabGeneralController.updateView(selectedItem);
-		tabListenerController.updateView(selectedItem);
+	public void updateTabs(BpmnDiagramElementJso selectedItem) {
+		// element = selectedItem;
+		tabGeneralController.updateView();
+		tabListenerController.updateView();
 	}
 }

@@ -17,19 +17,21 @@ import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.TextBox;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabView;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.TableDataObjectsWidget;
 
-public class TabGeneralView extends AbstractBpmnPropertiesTabView {
+public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
 	private TextBox tbProcessId;
 	private TextBox tbName;
 	private CheckBox cbIsExecutable;
 	private TableDataObjectsWidget ctDataObjects;
 	private TextBox tbDocumentation;
 
-	public TabGeneralView(String tabName) {
-		super(tabName);
+	public TabGeneralView(String tabName,
+			BpmnElementPropertiesView.ActionDelegate delegate) {
+		super(tabName, delegate);
 		Log.info(TabGeneralView.class, "constructor");
 	}
 
@@ -60,7 +62,7 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabView {
 		tbName.setWidth("100%");
 		cbIsExecutable = new CheckBox();
 		cbIsExecutable.setWidth("100%");
-		ctDataObjects = new TableDataObjectsWidget();
+		ctDataObjects = new TableDataObjectsWidget(getDelegate());
 		ctDataObjects.setWidth("100%");
 		tbDocumentation = new TextBox();
 		tbDocumentation.setWidth("100%");

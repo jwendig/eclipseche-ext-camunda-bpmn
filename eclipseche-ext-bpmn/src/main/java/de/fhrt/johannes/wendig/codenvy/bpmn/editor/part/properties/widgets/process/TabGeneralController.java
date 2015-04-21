@@ -18,42 +18,25 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.ProcessJso;
 
 public class TabGeneralController extends AbstractBpmnPropertiesTabController {
 	private final static String TAB_NAME = "General";
 	private TabGeneralView view;
 
-	public TabGeneralController(ActionDelegate delegate) {
+	public TabGeneralController(
+			BpmnElementPropertiesView.ActionDelegate delegate) {
 		super(delegate);
-		this.view = new TabGeneralView(TAB_NAME);
-		view.getTableDataObjectsWidget().setController(this);
-	}
-
-	public TabGeneralView getView() {
-		return view;
-	}
-
-	@Override
-	public void updateView(final BpmnDiagramElementJso element) {
-		setBpmnDiagramElementJso(element);
-
-		view.getTbProcessId().setText(element.getAttr_id());
-		view.getTbName().setText(element.getAttr_name());
-
-		view.getCbIsExecutable().setValue(element.getAttr_isExecutable());
-
-		view.getTbDocumentation().setEnabled(false);
-		view.getTbDocumentation().setText("not implemented");
-
+		view = new TabGeneralView(TAB_NAME, delegate);
 		view.getTbProcessId().addKeyUpHandler(new KeyUpHandler() {
 
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
-				element.setAttr_id(view.getTbProcessId().getText());
+				Log.info(TabGeneralController.class, "processId-changed");
+				getActionDelegate().getCurrentElementJso().setAttr_id(
+						view.getTbProcessId().getText());
 				getActionDelegate().onContentChange();
 			}
 		});
@@ -62,7 +45,9 @@ public class TabGeneralController extends AbstractBpmnPropertiesTabController {
 
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
-				element.setAttr_name(view.getTbName().getText());
+				Log.info(TabGeneralController.class, "name-changed");
+				getActionDelegate().getCurrentElementJso().setAttr_name(
+						view.getTbName().getText());
 				getActionDelegate().onContentChange();
 			}
 		});
@@ -72,10 +57,33 @@ public class TabGeneralController extends AbstractBpmnPropertiesTabController {
 
 					@Override
 					public void onValueChange(ValueChangeEvent<Boolean> event) {
-						element.setAttr_isExecutable(event.getValue());
+						Log.info(TabGeneralController.class,
+								"isExecuteable-changed");
+						getActionDelegate().getCurrentElementJso()
+								.setAttr_isExecutable(event.getValue());
 						getActionDelegate().onContentChange();
 					}
 				});
+	}
+
+	public TabGeneralView getView() {
+		return view;
+	}
+
+	@Override
+	public void updateView() {
+
+		view.getTbProcessId().setText(
+				getActionDelegate().getCurrentElementJso().getAttr_id());
+		view.getTbName().setText(
+				getActionDelegate().getCurrentElementJso().getAttr_name());
+
+		view.getCbIsExecutable().setValue(
+				getActionDelegate().getCurrentElementJso()
+						.getAttr_isExecutable());
+
+		view.getTbDocumentation().setEnabled(false);
+		view.getTbDocumentation().setText("not implemented");
 
 		view.getTableDataObjectsWidget().update();
 	}

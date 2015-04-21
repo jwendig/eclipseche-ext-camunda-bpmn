@@ -11,18 +11,25 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets;
 
+import org.eclipse.che.ide.util.loging.Log;
+
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.ScrollPanel;
 
-public abstract class AbstractBpmnPropertiesTabView extends Composite {
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 
+public abstract class AbstractBpmnPropertiesTabWidget extends Composite {
+
+	private BpmnElementPropertiesView.ActionDelegate delegate;
 	private String tabName = "Document";
 	private Grid gridTabContent;
 
-	public AbstractBpmnPropertiesTabView(String tabName) {
+	public AbstractBpmnPropertiesTabWidget(String tabName,
+			BpmnElementPropertiesView.ActionDelegate delegate) {
 		super();
 		this.tabName = tabName;
+		this.delegate = delegate;
 
 		gridTabContent = new Grid();
 		gridTabContent.setSize("100%", "100%");
@@ -30,7 +37,17 @@ public abstract class AbstractBpmnPropertiesTabView extends Composite {
 		initContentElements();
 		initContent();
 
-		initWidget(gridTabContent);
+
+		ScrollPanel scrollLpContentWrapper = new ScrollPanel(gridTabContent);
+		scrollLpContentWrapper.setSize("100%", "100%");
+
+		initWidget(scrollLpContentWrapper);
+		
+		
+		if (gridTabContent.getColumnCount() > 1) {
+			gridTabContent.getColumnFormatter().setWidth(0, "100px");
+			gridTabContent.getColumnFormatter().setWidth(1, "auto");
+		}
 	}
 
 	/*
@@ -40,10 +57,6 @@ public abstract class AbstractBpmnPropertiesTabView extends Composite {
 	}
 
 	public void initContent() {
-	}
-
-	public String getTabName() {
-		return tabName;
 	}
 
 	/*
@@ -57,4 +70,13 @@ public abstract class AbstractBpmnPropertiesTabView extends Composite {
 	public void setGridTabContent(Grid content) {
 		this.gridTabContent = content;
 	}
+
+	public BpmnElementPropertiesView.ActionDelegate getDelegate() {
+		return delegate;
+	}
+
+	public String getTabName() {
+		return tabName;
+	}
+
 }

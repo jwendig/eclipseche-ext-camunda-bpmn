@@ -131,8 +131,8 @@ public class TableExecutionListenerWidget extends Composite {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				new TableExecutionListenerEditTableEntryDialog(TableExecutionListenerWidget.this)
-						.show();
+				new TableExecutionListenerEditTableEntryDialog(
+						TableExecutionListenerWidget.this).show();
 
 			}
 		});
@@ -157,7 +157,8 @@ public class TableExecutionListenerWidget extends Composite {
 					public void update(int index, ExecutionListenerJso object,
 							String value) {
 						if (controller
-								.getBpmnDiagramElementJso()
+								.getActionDelegate()
+								.getCurrentElementJso()
 								.removeExt_elemenemt(
 										(BpmnDiagramElementExtensionJso) object)) {
 							executionListenersProvider.getList().remove(object);
@@ -193,7 +194,8 @@ public class TableExecutionListenerWidget extends Composite {
 	public void update() {
 		executionListenersProvider.getList().clear();
 		JsArray<BpmnDiagramElementExtensionJso> executionListeners = controller
-				.getBpmnDiagramElementJso().getExt_executionListeners();
+				.getActionDelegate().getCurrentElementJso()
+				.getExt_executionListeners();
 		for (int i = 0; i < executionListeners.length(); i++) {
 			executionListenersProvider.getList().add(executionListeners.get(i));
 		}

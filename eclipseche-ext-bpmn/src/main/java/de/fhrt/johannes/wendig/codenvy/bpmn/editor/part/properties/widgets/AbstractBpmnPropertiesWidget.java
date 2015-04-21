@@ -10,16 +10,20 @@
  *******************************************************************************/
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets;
 
+import java.awt.FlowLayout;
+
 import org.eclipse.che.ide.util.loging.Log;
 
+import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.TabListenerController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 
 public abstract class AbstractBpmnPropertiesWidget extends Composite {
@@ -30,47 +34,48 @@ public abstract class AbstractBpmnPropertiesWidget extends Composite {
 	/*
 	 * root elements
 	 */
-	private DockLayoutPanel docLpRoot;
+	private FlowPanel flowLpRoot;
 	private Label lbElementName;
 	private TabLayoutPanel tabLpContent;
-	private BpmnDiagramElementJso selectedItem;
+	private BpmnElementPropertiesView.ActionDelegate delegate;
 
-	public AbstractBpmnPropertiesWidget(String lbElementName_prefixText) {
+	public AbstractBpmnPropertiesWidget(String lbElementName_prefixText,
+			BpmnElementPropertiesView.ActionDelegate delegate) {
 		super();
 		Log.info(AbstractBpmnPropertiesWidget.class, "constructor");
 
+		this.delegate = delegate;
 		this.lbElementName_prefixText = lbElementName_prefixText;
 
 		initPropertiesRoot();
 
-		initWidget(docLpRoot);
+		initWidget(flowLpRoot);
 
 	}
 
 	private void initPropertiesRoot() {
-		docLpRoot = new DockLayoutPanel(Unit.EM);
-		docLpRoot.setSize("100%", "100%");
+		flowLpRoot = new FlowPanel();
+		flowLpRoot.setSize("100%", "100%");
 
 		lbElementName = new Label(LABEL_ELEMENT_NAME__DEFAULT_CONTENT);
-		lbElementName.setSize("100%", "100%");
+		lbElementName.setSize("100%", "auto");
 
 		tabLpContent = new TabLayoutPanel(1, Unit.EM);
 		tabLpContent.setSize("100%", "100%");
 		tabLpContent.addStyleName("bpmnPropertiesWidget-tabLayoutPanel");
 
-		docLpRoot.addNorth(lbElementName, 1);
-		docLpRoot.add(tabLpContent);
+		flowLpRoot.add(lbElementName);
+		flowLpRoot.add(tabLpContent);
 	}
 
 	public void setSelectedItem(BpmnDiagramElementJso selectedItem) {
 		Log.info(AbstractBpmnPropertiesWidget.class, "setSelectedItem");
-		this.selectedItem = selectedItem;
 
-		setLbElementNameText(selectedItem.getAttr_id());
-		loadSelectedItem(selectedItem);
+		// setLbElementNameText(this.delegate.getCurrentElementJso().getAttr_id());
+		updateTabs(selectedItem);
 	}
 
-	public abstract void loadSelectedItem(BpmnDiagramElementJso selectedItem);
+	public abstract void updateTabs(BpmnDiagramElementJso selectedItem);
 
 	/*
 	 * Getter & Setter
@@ -83,9 +88,4 @@ public abstract class AbstractBpmnPropertiesWidget extends Composite {
 	public TabLayoutPanel getTabLpContent() {
 		return tabLpContent;
 	}
-
-	public DockLayoutPanel getDocLpRoot() {
-		return docLpRoot;
-	}
-
 }

@@ -16,52 +16,23 @@ import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.inject.Inject;
-
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.noselection.NoSelectionWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.ProcessPropertiesWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.servicetask.ServiceTaskPropertiesWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.StartEventPropertiesWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.unknown.UnknownItemWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.usertask.UserTaskPropertiesWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 
 public class BpmnElementPropertiesViewImpl extends
 		BaseView<BpmnElementPropertiesView.ActionDelegate> implements
 		BpmnElementPropertiesView {
 
-	private DockLayoutPanel dockLpCurrentContent;
-
-	// TODO: create View for NoElementSelected and load it on Startup
-	private UnknownItemWidget unknowItemProperties;
-	private NoSelectionWidget noselectionProperties;
-
-	private ProcessPropertiesWidget processProperties;
-	private ServiceTaskPropertiesWidget serviceTaskProperties;
-	private StartEventPropertiesWidget startEventProperties;
-	private UserTaskPropertiesWidget userTaskProperties;
-
-	private AbstractBpmnPropertiesWidget currentProperties;
+	private DockLayoutPanel root;
 
 	@Inject
 	public BpmnElementPropertiesViewImpl(PartStackUIResources resources) {
 		super(resources);
-		unknowItemProperties = new UnknownItemWidget();
-		noselectionProperties = new NoSelectionWidget();
 
-		processProperties = new ProcessPropertiesWidget(delegate);
-		serviceTaskProperties = new ServiceTaskPropertiesWidget();
-		startEventProperties = new StartEventPropertiesWidget();
-		userTaskProperties = new UserTaskPropertiesWidget();
+		root = new DockLayoutPanel(Unit.PX);
+		root.setSize("100%", "100%");
 
-		currentProperties = noselectionProperties;
-
-		dockLpCurrentContent = new DockLayoutPanel(Unit.PX);
-		dockLpCurrentContent.setSize("100%", "100%");
-		dockLpCurrentContent.add(currentProperties);
-
-		setContentWidget(dockLpCurrentContent);
+		setContentWidget(root);
 	}
 
 	@Override
@@ -78,56 +49,7 @@ public class BpmnElementPropertiesViewImpl extends
 	}
 
 	@Override
-	public void loadProcessProperties(BpmnDiagramElementJso selectedItem) {
-		Log.info(BpmnElementPropertiesViewImpl.class, "loadProcessProperties");
-		dockLpCurrentContent.remove(currentProperties);
-		currentProperties = processProperties;
-		currentProperties.setSelectedItem(selectedItem);
-		dockLpCurrentContent.add(currentProperties);
+	public DockLayoutPanel getDockLpCurrentContent() {
+		return root;
 	}
-
-	@Override
-	public void loadUserTaskProperties(BpmnDiagramElementJso selectedItem) {
-		Log.info(BpmnElementPropertiesViewImpl.class, "loadUserTaskProperties");
-		dockLpCurrentContent.remove(currentProperties);
-		currentProperties = userTaskProperties;
-		currentProperties.setSelectedItem(selectedItem);
-		dockLpCurrentContent.add(currentProperties);
-	}
-
-	@Override
-	public void loadServiceTaksProperties(BpmnDiagramElementJso selectedItem) {
-		Log.info(BpmnElementPropertiesViewImpl.class,
-				"loadServiceTaksProperties");
-		dockLpCurrentContent.remove(currentProperties);
-		currentProperties = serviceTaskProperties;
-		currentProperties.setSelectedItem(selectedItem);
-		dockLpCurrentContent.add(currentProperties);
-	}
-
-	@Override
-	public void loadStartEventProperties(BpmnDiagramElementJso selectedItem) {
-		Log.info(BpmnElementPropertiesViewImpl.class,
-				"loadStartEventProperties");
-		dockLpCurrentContent.remove(currentProperties);
-		currentProperties = startEventProperties;
-		currentProperties.setSelectedItem(selectedItem);
-		dockLpCurrentContent.add(currentProperties);
-	}
-
-	@Override
-	public void loadUnknownItemInfo(BpmnDiagramElementJso selectedItem) {
-		dockLpCurrentContent.remove(currentProperties);
-		currentProperties = unknowItemProperties;
-		currentProperties.setSelectedItem(selectedItem);
-		dockLpCurrentContent.add(currentProperties);
-	}
-
-	@Override
-	public void loadNoSelectionInfo() {
-		dockLpCurrentContent.remove(currentProperties);
-		currentProperties = noselectionProperties;
-		dockLpCurrentContent.add(currentProperties);
-	}
-
 }
