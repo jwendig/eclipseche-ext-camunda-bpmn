@@ -34,6 +34,7 @@ public class BpmnEditorDiagramWidget extends Composite {
 	 */
 	private BpmnResource bpmnResource;
 	private BpmnEditorView bpmnEditorView;
+	private BpmnIoModelerJso bpmnIoModelerJso;
 
 	/*
 	 * Layout
@@ -80,34 +81,24 @@ public class BpmnEditorDiagramWidget extends Composite {
 		ScriptInjector.fromString(bpmnResource.bpmnIoIndexJsFile().getText())
 				.setWindow(ScriptInjector.TOP_WINDOW).inject();
 
-		initJavascriptCallbacks();
+		// TODO: test
+		// initJavascriptCallbacks();
+		bpmnIoModelerJso = BpmnIoModelerJso.nativeCreateModeler(this);
 	}
 
 	/*
 	 * Custom functions
 	 */
-
-	public void openDiagram(String xml) {
-		Log.info(BpmnEditorDiagramWidget.class, "openDiagram");
-		jsOpenDiagram(xml);
-	}
-
-	public void exportArtifacts() {
-		Log.info(BpmnEditorDiagramWidget.class, "exportArtifacts");
-		jsExportArtifacts();
-	}
-
-	public void changeAttrCamundaClass() {
-		Log.info(BpmnEditorDiagramWidget.class, "changeAttrCamundaClass");
-		if (null != qSelectedItem) {
-			Log.info(BpmnEditorDiagramWidget.class,
-					"changeAttrCamundaClass: qSelectedItem NOT NULL");
-			qSelectedItem.attr("camunda:class", "test");
-		} else {
-			Log.info(BpmnEditorDiagramWidget.class,
-					"changeAttrCamundaClass: qSelectedItem NULL");
-		}
-	}
+	// TODO: remove ... implemented in BpmnIoModelerJso
+	// public void openDiagram(String xml) {
+	// Log.info(BpmnEditorDiagramWidget.class, "openDiagram");
+	// jsOpenDiagram(xml);
+	// }
+	//
+	// public void exportArtifacts() {
+	// Log.info(BpmnEditorDiagramWidget.class, "exportArtifacts");
+	// jsExportArtifacts();
+	// }
 
 	/*
 	 * Javascript Callbacks
@@ -115,7 +106,8 @@ public class BpmnEditorDiagramWidget extends Composite {
 
 	public void jsCallbackSaveDiagram(String xml) {
 		Log.info(BpmnEditorDiagramWidget.class, "jsCallbackSaveDiagram");
-		Log.info(BpmnEditorDiagramWidget.class, "jsCallbackSaveDiagram: xml = " + xml);
+		Log.info(BpmnEditorDiagramWidget.class, "jsCallbackSaveDiagram: xml = "
+				+ xml);
 		bpmnEditorView.setCurrentXmlContent(xml);
 		bpmnEditorView.setContentIsDirty();
 	};
@@ -126,40 +118,41 @@ public class BpmnEditorDiagramWidget extends Composite {
 		bpmnEditorView.setContentIsDirty();
 	};
 
+	// TODO: remove ... implemented in BpmnIoModelerJso
 	/*
 	 * Native JS-Functions
 	 */
-	private native void initJavascriptCallbacks()/*-{
-													var self = this;
-													var callbackSaveDiagramFn = $entry(function(val) {
-													self.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackSaveDiagram(Ljava/lang/String;)(val);
-													});
-													$wnd.setBpmnIo_callbackSaveDiagram(callbackSaveDiagramFn);
+	// private native void initJavascriptCallbacks()/*-{
+	// var self = this;
+	// var callbackSaveDiagramFn = $entry(function(val) {
+	// self.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackSaveDiagram(Ljava/lang/String;)(val);
+	// });
+	// $wnd.setBpmnIo_callbackSaveDiagram(callbackSaveDiagramFn);
+	//
+	// var callbackSaveSvgFn = $entry(function(val) {
+	// self.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackSaveSVG(Ljava/lang/String;)(val);
+	// });
+	// $wnd.setBpmnIo_callbackSaveSVG(callbackSaveSvgFn);
+	//
+	// var callbackElementSelected = $entry(function(val) {
+	// self.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackElementSelected(Lde/fhrt/johannes/wendig/codenvy/bpmn/editor/widget/diagram/bpmnelements/BpmnDiagramElementJso;)(val);
+	// });
+	// $wnd.setBpmnIo_callback_elementSelected(callbackElementSelected);
+	//
+	// var callbackContainerSelected = $entry(function(val) {
+	// self.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackContainerSelected(Lde/fhrt/johannes/wendig/codenvy/bpmn/editor/widget/diagram/bpmnelements/BpmnDiagramElementJso;)(val);
+	// });
+	// $wnd.setBpmnIo_callback_containerSelected(callbackContainerSelected);
+	//
+	// }-*/;
 
-													var callbackSaveSvgFn = $entry(function(val) {
-													self.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackSaveSVG(Ljava/lang/String;)(val);
-													});
-													$wnd.setBpmnIo_callbackSaveSVG(callbackSaveSvgFn);
-													
-													var callbackElementSelected = $entry(function(val) {
-													self.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackElementSelected(Lde/fhrt/johannes/wendig/codenvy/bpmn/editor/widget/diagram/bpmnelements/BpmnDiagramElementJso;)(val);
-													});
-													$wnd.setBpmnIo_callback_elementSelected(callbackElementSelected);
-
-													var callbackContainerSelected = $entry(function(val) {
-													self.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackContainerSelected(Lde/fhrt/johannes/wendig/codenvy/bpmn/editor/widget/diagram/bpmnelements/BpmnDiagramElementJso;)(val);
-													});
-													$wnd.setBpmnIo_callback_containerSelected(callbackContainerSelected);
-
-													}-*/;
-
-	private native void jsOpenDiagram(String xml)/*-{
-													$wnd.bpmnIo_fktOpenDiagram(xml);
-													}-*/;
-
-	private native void jsExportArtifacts()/*-{
-											$wnd.bpmnIo_fktExportArtifacts();
-											}-*/;
+	// private native void jsOpenDiagram(String xml)/*-{
+	// $wnd.bpmnIo_fktOpenDiagram(xml);
+	// }-*/;
+	//
+	// private native void jsExportArtifacts()/*-{
+	// $wnd.bpmnIo_fktExportArtifacts();
+	// }-*/;
 
 	public void jsCallbackElementSelected(BpmnDiagramElementJso elem) {
 		Log.info(BpmnEditorDiagramWidget.class, "jsCallbackElementSelected");
@@ -168,7 +161,7 @@ public class BpmnEditorDiagramWidget extends Composite {
 		Log.info(BpmnEditorDiagramWidget.class,
 				"jsCallbackElementSelected: id=" + elem.getAttr_id());
 
-		bpmnEditorView.bpmnElementSelected(elem);
+//		bpmnEditorView.bpmnElementSelected(elem);
 	};
 
 	public void jsCallbackContainerSelected(BpmnDiagramElementJso elem) {
@@ -178,11 +171,13 @@ public class BpmnEditorDiagramWidget extends Composite {
 		Log.info(BpmnEditorDiagramWidget.class,
 				"jsCallbackContainerSelected: id=" + elem.getAttr_id());
 
-		bpmnEditorView.bpmnElementSelected(elem);
+//		bpmnEditorView.bpmnElementSelected(elem);
 	};
 
 	/*
 	 * Getter
 	 */
-
+	public BpmnIoModelerJso getBpmnIoModelerJso() {
+		return bpmnIoModelerJso;
+	}
 }

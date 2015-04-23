@@ -94,7 +94,8 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 		Log.info(BpmnEditorViewImpl.class, "doSave(callback)");
 
 		// refresh the buffered editor content
-		bpmnDiagramWidget.exportArtifacts();
+		// TODO: implement in BpmnIoModelerJso
+		// bpmnDiagramWidget.exportArtifacts();
 
 		doSave();
 
@@ -187,7 +188,11 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 
 						Log.info(BpmnEditorViewImpl.class,
 								"initializeEditor:getFileContent:onSuccess: diagramWidget ready");
-						bpmnDiagramWidget.openDiagram(result);
+
+						// TODO: remove old code
+						// bpmnDiagramWidget.openDiagram(result);
+						bpmnDiagramWidget.getBpmnIoModelerJso()
+								.nativeOpenDiagram(result);
 					}
 
 					@Override
