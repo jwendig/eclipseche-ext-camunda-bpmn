@@ -9,20 +9,18 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.definitions;
 
 import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.user.cellview.client.CellTable;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabWidget;
 
 public class TabDefinitionsView extends AbstractBpmnPropertiesTabWidget {
 
-	private CellTable<String> ctErrors;
+	private TableErrorsWidget ctErrors;
 	private CellTable<String> ctMessages;
 	private CellTable<String> ctSignals;
 	private CellTable<String> ctDataStores;
@@ -52,7 +50,7 @@ public class TabDefinitionsView extends AbstractBpmnPropertiesTabWidget {
 	@Override
 	public void initContentElements() {
 		Log.info(TabDefinitionsView.class, "initContentElements");
-		ctErrors = new CellTable<String>();
+		ctErrors = new TableErrorsWidget(getDelegate());
 		ctErrors.setWidth("100%");
 		ctMessages = new CellTable<String>();
 		ctMessages.setWidth("100%");
@@ -62,4 +60,10 @@ public class TabDefinitionsView extends AbstractBpmnPropertiesTabWidget {
 		ctDataStores.setWidth("100%");
 	}
 
+	public TableErrorsWidget getCtErrors() {
+		return ctErrors;
+	}
+
+	
+	
 }

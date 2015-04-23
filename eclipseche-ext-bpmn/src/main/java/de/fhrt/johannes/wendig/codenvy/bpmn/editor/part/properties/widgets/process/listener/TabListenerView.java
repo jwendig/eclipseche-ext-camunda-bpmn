@@ -9,7 +9,7 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.listener;
 
 import org.eclipse.che.ide.util.loging.Log;
 

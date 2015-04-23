@@ -9,7 +9,7 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.definitions;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabController;
@@ -31,8 +31,7 @@ public class TabDefinitionsController extends
 
 	@Override
 	public void updateView() {
-		// TODO Auto-generated method stub
-
+		view.getCtErrors().update();
 	}
 
 }

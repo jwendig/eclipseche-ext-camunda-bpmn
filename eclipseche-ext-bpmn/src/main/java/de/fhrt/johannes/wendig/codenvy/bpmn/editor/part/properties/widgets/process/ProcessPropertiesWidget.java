@@ -15,6 +15,11 @@ import org.eclipse.che.ide.util.loging.Log;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.definitions.TabDefinitionsController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.document.TabDocumentController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.extensions.TabExtensionsController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.general.TabGeneralController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.listener.TabListenerController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.ProcessJso;
 
@@ -67,5 +72,8 @@ public class ProcessPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	public void updateTabs() {
 		tabGeneralController.updateView();
 		tabListenerController.updateView();
+		tabDocumentController.updateView();
+		tabDefinitionsController.updateView();
+		tabExtensionsController.updateView();
 	}
 }

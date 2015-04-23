@@ -9,7 +9,7 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.general;
 
 import org.eclipse.che.ide.util.loging.Log;
 
@@ -20,7 +20,6 @@ import com.google.gwt.user.client.ui.TextBox;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.TableDataObjectsWidget;
 
 public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
 	private TextBox tbProcessId;
