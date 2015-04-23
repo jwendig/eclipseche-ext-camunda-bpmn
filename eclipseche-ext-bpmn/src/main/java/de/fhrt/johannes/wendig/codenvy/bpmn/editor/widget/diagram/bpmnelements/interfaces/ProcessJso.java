@@ -11,6 +11,7 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementPropertyJso;
@@ -31,7 +32,7 @@ public interface ProcessJso extends DefaultJso {
 
 	public JsArray<BpmnDiagramElementPropertyJso> getProperty_dataObjects();
 
-	public BpmnDiagramElementPropertyJso addProperty_dataObject();
+	public BpmnDiagramElementPropertyJso addProperty_dataObject(JavaScriptObject moddle);
 
 	public boolean removeProperty_element(
 			BpmnDiagramElementPropertyJso propElement);

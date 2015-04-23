@@ -30,6 +30,7 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.start
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.unknown.UnknownItemWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.usertask.UserTaskPropertiesWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnModelerJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso.BpmnElementType;
 
 public class BpmnElementPropertiesPresenter extends BasePresenter implements
@@ -38,6 +39,7 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 	private BpmnElementPropertiesView view;
 	private final static String TITLE = "BPMN Properties";
 	private BpmnDiagramElementJso currentElementJso;
+	private BpmnModelerJso currentBpmnIoModelerJso;
 
 	private UnknownItemWidget unknowItemProperties;
 	private NoSelectionWidget noselectionProperties;
@@ -98,10 +100,13 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 	}
 
 	@Override
-	public void bpmnElementSelected(BpmnDiagramElementJso elementJso) {
+	public void bpmnElementSelected(BpmnModelerJso modelerJso,
+			BpmnDiagramElementJso elementJso) {
 		Log.info(BpmnElementPropertiesPresenter.class, "bpmnElementSelected");
 
-		currentElementJso = elementJso;
+		this.currentBpmnIoModelerJso = modelerJso;
+		this.currentElementJso = elementJso;
+
 		view.getDockLpCurrentContent().remove(currentProperties);
 		if (null == elementJso) {
 			currentProperties = noselectionProperties;
@@ -161,11 +166,11 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 	@Override
 	public void onContentChange() {
 		Log.info(BpmnElementPropertiesPresenter.class, "onContentChange");
-		jsUpdateEditor();
+		currentBpmnIoModelerJso.nativeUpdateData();
 	}
 
-	private native void jsUpdateEditor()/*-{
-										$wnd.bpmnIo_fktExportArtifacts();
-										}-*/;
-
+	@Override
+	public BpmnModelerJso getCurrentBpmnIoModelerJso() {
+		return currentBpmnIoModelerJso;
+	}
 }

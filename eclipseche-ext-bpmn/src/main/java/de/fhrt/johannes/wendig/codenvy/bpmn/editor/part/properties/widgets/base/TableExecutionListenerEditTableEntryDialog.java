@@ -66,10 +66,16 @@ public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 				if (null != TableExecutionListenerEditTableEntryDialog.this.currentExecutionListenerJso) {
 					executionListenerJso = currentExecutionListenerJso;
 				} else {
-					executionListenerJso = widgetCallback.getController()
-							.getActionDelegate().getCurrentElementJso()
+					executionListenerJso = widgetCallback
+							.getController()
+							.getActionDelegate()
+							.getCurrentElementJso()
 
-							.addExt_executionListener();
+							.addExt_executionListener(
+									widgetCallback.getController()
+											.getActionDelegate()
+											.getCurrentBpmnIoModelerJso()
+											.nativeGetModdle());
 					widgetCallback.getExecutionListenersProvider().getList()
 							.add(executionListenerJso);
 				}

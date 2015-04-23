@@ -60,6 +60,8 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	private String svgFileParentPath;
 	private String svgFileName;
 
+	private static int viewCounter = 0;
+
 	// private CamundaTypeHolder camundaTypeHolder;
 
 	@Inject
@@ -68,6 +70,9 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 			DialogFactory dialogFactory,
 			BpmnElementPropertiesPresenter bpmnElementPropertiesPresenter,
 			BpmnResource bpmnResource) {
+
+		viewCounter++;
+
 		this.workspaceAgent = workspaceAgent;
 		this.projectServiceClient = projectServiceClient;
 		this.dialogFactory = dialogFactory;
@@ -75,7 +80,8 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 		this.bpmnResource = bpmnResource;
 		this.bpmnElementPropertiesEditorPresenter = bpmnElementPropertiesPresenter;
 
-		bpmnDiagramWidget = new BpmnEditorDiagramWidget(this, bpmnResource);
+		bpmnDiagramWidget = new BpmnEditorDiagramWidget(this, bpmnResource,
+				viewCounter);
 		bpmnDiagramWidget.setSize("100%", "100%");
 
 	}
@@ -124,6 +130,7 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	@Override
 	public void onClose(@Nonnull final AsyncCallback<Void> callback) {
 		Log.info(BpmnEditorViewImpl.class, "onClose");
+		viewCounter--;
 
 		if (isDirty()) {
 			Log.info(BpmnEditorViewImpl.class, "onClose: file IS DIRTY");
@@ -195,8 +202,6 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 						Log.info(BpmnEditorViewImpl.class,
 								"initializeEditor:getFileContent:onSuccess: diagramWidget ready");
 
-						// TODO: remove old code
-						// bpmnDiagramWidget.openDiagram(result);
 						bpmnDiagramWidget.getBpmnIoModelerJso()
 								.nativeOpenDiagram(result);
 					}
@@ -214,7 +219,8 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 
 		workspaceAgent.openPart(bpmnElementPropertiesEditorPresenter,
 				PartStackType.INFORMATION);
-		bpmnElementPropertiesEditorPresenter.bpmnElementSelected(null);
+		bpmnElementPropertiesEditorPresenter.bpmnElementSelected(
+				bpmnDiagramWidget.getBpmnIoModelerJso(), null);
 	}
 
 	@Override
@@ -417,7 +423,8 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	 */
 	@Override
 	public void bpmnElementSelected(BpmnDiagramElementJso elementJso) {
-		bpmnElementPropertiesEditorPresenter.bpmnElementSelected(elementJso);
+		bpmnElementPropertiesEditorPresenter.bpmnElementSelected(
+				bpmnDiagramWidget.getBpmnIoModelerJso(), elementJso);
 	}
 
 	/*

@@ -11,6 +11,7 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementExtensionJso;
@@ -36,7 +37,7 @@ public interface DefaultJso {
 	 */
 	public JsArray<BpmnDiagramElementExtensionJso> getExt_executionListeners();
 
-	public BpmnDiagramElementExtensionJso addExt_executionListener();
+	public BpmnDiagramElementExtensionJso addExt_executionListener(JavaScriptObject moddle);
 
 	public boolean removeExt_elemenemt(BpmnDiagramElementExtensionJso element);
 }

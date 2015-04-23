@@ -12,7 +12,9 @@
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnModelerJso;
 
 public interface BpmnElementPropertiesCallback {
-	public void bpmnElementSelected(BpmnDiagramElementJso elementJso);
+	public void bpmnElementSelected(BpmnModelerJso modelerJso,
+			BpmnDiagramElementJso elementJso);
 }

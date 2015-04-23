@@ -104,7 +104,7 @@ public class TableDataObjectsWidget extends
 			@Override
 			public void onClick(ClickEvent event) {
 				BpmnDiagramElementPropertyJso newDataObject = getDelegate()
-						.getCurrentElementJso().addProperty_dataObject();
+						.getCurrentElementJso().addProperty_dataObject(getDelegate().getCurrentBpmnIoModelerJso().nativeGetModdle());
 				getDataProvider().getList().add(newDataObject);
 				getDataProvider().refresh();
 				getTable().redraw();

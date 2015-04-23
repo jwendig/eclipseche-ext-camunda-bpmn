@@ -10,6 +10,7 @@
  *******************************************************************************/
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementExtensionJso.BpmnExtensionElementType;
@@ -61,12 +62,17 @@ public class BpmnDiagramElementJso extends BpmnBaseElementJso implements
 	/*
 	 * functions for extension elements
 	 */
-	private final native BpmnDiagramElementExtensionJso addExt_elemenemt(
-			String bpmnExtensionElementType)/*-{
-											console.log("js-native: addExt_elemenemt");
-											return $wnd.bpmnIo_fktAddElementExtensionType(this,
-											bpmnExtensionElementType);
-											}-*/;
+	private final native BpmnDiagramElementExtensionJso nativeAddExt_elemenemt(
+			JavaScriptObject moddle, String bpmnExtensionElementType)/*-{
+																		var ext = moddle.create(bpmnExtensionElementType);
+
+																		this.extensionElements = this.extensionElements	|| moddle.create('bpmn:ExtensionElements');
+																		this.extensionElements.get('values').push(ext);
+																		
+																		return ext;
+																		
+																		
+																		}-*/;
 
 	@Override
 	public final native boolean removeExt_elemenemt(
@@ -106,9 +112,11 @@ public class BpmnDiagramElementJso extends BpmnBaseElementJso implements
 	}
 
 	@Override
-	public final BpmnDiagramElementExtensionJso addExt_executionListener() {
-		BpmnDiagramElementExtensionJso newExtElement = addExt_elemenemt(BpmnExtensionElementType.CAMUNDA_EXECUTION_LISTENER
-				.toString());
+	public final BpmnDiagramElementExtensionJso addExt_executionListener(
+			JavaScriptObject moddle) {
+		BpmnDiagramElementExtensionJso newExtElement = nativeAddExt_elemenemt(
+				moddle,
+				BpmnExtensionElementType.CAMUNDA_EXECUTION_LISTENER.toString());
 		return newExtElement;
 	}
 
@@ -145,12 +153,15 @@ public class BpmnDiagramElementJso extends BpmnBaseElementJso implements
 														}
 														}-*/;
 
-	private final native BpmnDiagramElementPropertyJso addProperty_elemenemt(
-			String bpmnPropertyElementType)/*-{
-											console.log("js-native: addExt_elemenemt");
-											return $wnd.bpmnIo_fktAddElementPropertyType(this,
-											bpmnPropertyElementType);
-											}-*/;
+	private final native BpmnDiagramElementPropertyJso nativeAddProperty_element(
+			JavaScriptObject moddle, String bpmnPropertyElementType)/*-{
+																	var ext = moddle.create(bpmnPropertyElementType);
+																	this.flowElements = this.flowElements	|| [];
+																	this.flowElements.push(ext);
+
+																	return ext;
+																	
+																	}-*/;
 
 	@Override
 	public final JsArray<BpmnDiagramElementPropertyJso> getProperty_dataObjects() {
@@ -160,9 +171,10 @@ public class BpmnDiagramElementJso extends BpmnBaseElementJso implements
 	}
 
 	@Override
-	public final BpmnDiagramElementPropertyJso addProperty_dataObject() {
-		BpmnDiagramElementPropertyJso newExtElement = addProperty_elemenemt(BpmnPropertyElementType.BPMN_DATA_OBJECT
-				.toString());
+	public final BpmnDiagramElementPropertyJso addProperty_dataObject(
+			JavaScriptObject moddle) {
+		BpmnDiagramElementPropertyJso newExtElement = nativeAddProperty_element(
+				moddle, BpmnPropertyElementType.BPMN_DATA_OBJECT.toString());
 		return newExtElement;
 	}
 }

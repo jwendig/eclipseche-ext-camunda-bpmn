@@ -9,18 +9,25 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.user.client.ui.Panel;
 
-public class BpmnIoModelerJso extends JavaScriptObject {
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
 
-	protected BpmnIoModelerJso() {
+public class BpmnModelerJso extends JavaScriptObject {
+
+	protected BpmnModelerJso() {
 	}
 
-	public static native BpmnIoModelerJso nativeCreateModeler(
+	/*
+	 * handler functions
+	 */
+	
+	public static native BpmnModelerJso nativeCreateModeler(String wrapperId,
 			BpmnEditorDiagramWidget callback)/*-{
-												var renderer = $wnd.bpmnIo_fkt_createNewModeler();
+												var renderer = $wnd.bpmnIo_fkt_createNewModeler(wrapperId);
 												
 												renderer.on('element.click', function(event) {
 													var element = event.element;
@@ -54,9 +61,9 @@ public class BpmnIoModelerJso extends JavaScriptObject {
 															this.importXML(xml, function(err) {
 
 															if (err) {
-															console.error(err);
+																console.error(err);
 															} else {
-															console.log("openDiagram: success");
+																console.log("openDiagram: success");
 															}
 
 															});
@@ -64,6 +71,18 @@ public class BpmnIoModelerJso extends JavaScriptObject {
 
 	public final native JavaScriptObject nativeGetModdle()/*-{
 															return this.get('moddle');
+															}-*/;
+
+	public final native JavaScriptObject nativeUpdateData()/*-{
+															this.saveXML({
+																format : true
+															}, function(err, xml) {														
+																callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackSaveDiagram(Ljava/lang/String;)(xml);
+															});
+															
+															this.saveSVG(function(err, svg) {														
+																callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackSaveSVG(Ljava/lang/String;)(svg);
+															});
 															}-*/;
 
 }
