@@ -17,7 +17,9 @@ import org.eclipse.che.ide.api.notification.NotificationManager;
 import org.eclipse.che.ide.api.parts.WorkspaceAgent;
 import org.eclipse.che.ide.jseditor.client.defaulteditor.DefaultEditorProvider;
 import org.eclipse.che.ide.ui.dialogs.DialogFactory;
+import org.vectomatic.dom.svg.ui.SVGResource;
 
+import com.google.gwt.resources.client.ImageResource;
 import com.google.inject.Inject;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.BpmnExtension;
@@ -57,7 +59,7 @@ public class BpmnEditorProvider implements EditorProvider,
 	public String getDescription() {
 		return "Codenvy BPMN Editor";
 	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public EditorPartPresenter getEditor() {

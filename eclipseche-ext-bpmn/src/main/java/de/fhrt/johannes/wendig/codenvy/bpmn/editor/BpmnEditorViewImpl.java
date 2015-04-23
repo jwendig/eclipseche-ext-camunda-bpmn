@@ -24,6 +24,7 @@ import org.eclipse.che.ide.ui.dialogs.CancelCallback;
 import org.eclipse.che.ide.ui.dialogs.ConfirmCallback;
 import org.eclipse.che.ide.ui.dialogs.DialogFactory;
 import org.eclipse.che.ide.util.loging.Log;
+import org.vectomatic.dom.svg.ui.SVGResource;
 
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -162,7 +163,12 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	@Override
 	public ImageResource getTitleImage() {
 		Log.info(BpmnEditorViewImpl.class, "getTitleImage");
-		return null;
+		return input.getImageResource();
+	}
+
+	@Override
+	public SVGResource getTitleSVGImage() {
+		return input.getSVGResource();
 	}
 
 	@Override

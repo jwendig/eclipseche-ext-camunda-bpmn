@@ -10,11 +10,12 @@
  *******************************************************************************/
 package de.fhrt.johannes.wendig.codenvy.bpmn;
 
+import org.vectomatic.dom.svg.ui.SVGResource;
+
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.TextResource;
-import com.google.gwt.resources.client.ClientBundle.Source;
 
 /**
  * The resources for editor tutorial.
@@ -25,6 +26,9 @@ public interface BpmnResource extends ClientBundle {
 
 	@Source("newDiagram.bpmn")
 	TextResource newBpmnFile();
+
+	@Source("img/bpmn-file-ico.svg")
+	SVGResource bpmnIconSvgFile();
 
 	@Source("img/bpmn-ico-circle-x-small.png")
 	ImageResource bpmnIconXsFile();
@@ -40,7 +44,7 @@ public interface BpmnResource extends ClientBundle {
 
 	@Source("bpmn-io-editor/css/diagram-js.css")
 	CssResource getBpmnDiagramJsCss();
-	
+
 	@Source("bpmn-io-editor/css/custom.css")
 	CssResource getBpmnDiagramJsCustomCss();
 
@@ -49,7 +53,7 @@ public interface BpmnResource extends ClientBundle {
 
 	@Source("bpmn-io-editor/vendor/bpmn-font/css/bpmn-embedded.css")
 	CssResource getBpmnFontCss();
-	
+
 	@Source("bpmn-io-properties/css/gwt-custom.css")
 	CssResource getBpmnPropertiesTabCss();
 }
