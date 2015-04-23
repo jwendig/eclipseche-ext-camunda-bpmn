@@ -14,17 +14,22 @@ import com.google.gwt.user.client.ui.Label;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.general.TabGeneralController;
 
 public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 
 	private final static String LB_ELEMENT_NAME_PREFIX = "Start Event";
 
+	private TabGeneralController tabGeneralController;
+
 	public StartEventPropertiesWidget(
 			BpmnElementPropertiesView.ActionDelegate delegate) {
 		super(LB_ELEMENT_NAME_PREFIX, delegate);
 
-		getTabLpContent().add(new Label("TODO: tabs - StartEventProperties"));
+		tabGeneralController = new TabGeneralController(delegate);
+
+		getTabLpContent().add(tabGeneralController.getView(),
+				tabGeneralController.getView().getTabName());
 	}
 
 	/*
@@ -37,5 +42,6 @@ public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	 */
 	@Override
 	public void updateTabs() {
+		tabGeneralController.updateView();
 	}
 }
