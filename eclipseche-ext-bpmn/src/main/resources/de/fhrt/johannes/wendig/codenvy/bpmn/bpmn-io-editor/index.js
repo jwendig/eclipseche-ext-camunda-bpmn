@@ -1,51 +1,21 @@
 // BEGIN COPY BLOG (copy this to the top of the generated .js document)
 
-/*
- * Variables for access from native Gwt functions ($wnd.XXXX); 
- */
-
-var bpmnIo_callback_saveDiagram;
-var bpmnIo_callback_saveSVG;
-var bpmnIo_callback_elementSelected;
-var bpmnIo_callback_containerSelected;
-
-var bpmnIo_fktOpenDiagram;
-var bpmnIo_fktSaveSVG;
-var bpmnIo_fktSaveDiagram;
-var bpmnIo_fktExportArtifacts;
-
-var bpmnIo_fktGetElementExtensionsByType;
-var bpmnIo_fktAddElementExtensionType;
-
-var bpmnIo_fktAddElementPropertyType;
-
-/*
- * Functions to set the callbacks
- */
-function setBpmnIo_callbackSaveDiagram(callback) {
-	bpmnIo_callback_saveDiagram = callback;
-}
-
-function setBpmnIo_callbackSaveSVG(callback) {
-	bpmnIo_callback_saveSVG = callback;
-}
-
-function setBpmnIo_callback_elementSelected(callback) {
-	bpmnIo_callback_elementSelected = callback;
-}
-
-function setBpmnIo_callback_containerSelected(callback) {
-	bpmnIo_callback_containerSelected = callback;
-}
+var bpmnIo_fkt_createNewModeler;
 
 // END COPY BLOG
 
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-
-
-/*
- * BpmnIoInit
- */
+	bpmnIo_fkt_createNewModeler = function(){
+		
+		renderer = new BpmnModeler({
+			container : canvas,
+			moddleExtensions : {
+				camunda : camundaMetaModel
+			}
+		});
+		
+		return renderer;
+	};
 
 
 var $ = require('jquery'), BpmnModeler = require('bpmn-js/lib/Modeler');
@@ -54,18 +24,10 @@ var camundaMetaModel = require('../customlib/camunda');
 
 var canvas = $('#js-canvas');
 
-var renderer = new BpmnModeler({
-	container : canvas,
-	moddleExtensions : {
-		camunda : camundaMetaModel
-	}
-});
-
-var newDiagramXML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<bpmn2:definitions xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:bpmn2=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:camunda=\"http://activiti.org/bpmn\" xsi:schemaLocation=\"http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd\" id=\"sample-diagram\" targetNamespace=\"http://activiti.org/bpmn\">\n  <bpmn2:process id=\"Process_1\" isExecutable=\"false\">\n  \t<bpmn2:extensionElements>\n      <camunda:executionListener class=\"TestClassListener\" event=\"start\"/>\n      <camunda:executionListener class=\"TestClassListenerEnd\" event=\"end\"/>\n    </bpmn2:extensionElements>\n    <bpmn2:startEvent id=\"StartEvent_1\"/>\n  </bpmn2:process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">\n    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"Process_1\">\n      <bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\">\n        <dc:Bounds height=\"36.0\" width=\"36.0\" x=\"412.0\" y=\"240.0\"/>\n      </bpmndi:BPMNShape>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</bpmn2:definitions>";
-
 /*
  * Camunda functions
  */
+/*
 bpmnIo_fktGetElementExtensionsByType = function getElementExtensionsByType(element, type) {
 	if (!element.extensionElements) {
 		return null;
@@ -95,7 +57,8 @@ bpmnIo_fktAddElementPropertyType = function addElementProperty(businessObject, t
 
 	return ext;
 };
-
+*/
+/* TEST MOD BEGIN
 renderer.on('element.click', function(event) {
 	var element = event.element;
 	var moddle = renderer.get('moddle');
@@ -109,61 +72,48 @@ renderer.on('element.click', function(event) {
 	bpmnIo_callback_elementSelected(element.businessObject);
 });
 
-/*
- * Default functions
- */
-function createNewDiagram() {
-	openDiagram(newDiagramXML);
-}
 
-bpmnIo_fktOpenDiagram = function openDiagram(xml) {
 
-	renderer.importXML(xml, function(err) {
-
-		if (err) {
-			console.error(err);
-		} else {
-			console.log("openDiagram: success");
-		}
-
-	});
-};
-
-bpmnIo_fktSaveSVG = function saveSVG(done) {
-	renderer.saveSVG(function(err, svg) {
-		done(err, svg);
-		bpmnIo_callback_saveSVG(svg);
-	});
-};
-
-bpmnIo_fktSaveDiagram = function saveDiagram(done) {
-
-	renderer.saveXML({
-		format : true
-	}, function(err, xml) {
-		done(err, xml);
-		bpmnIo_callback_saveDiagram(xml);
-	});
-};
+//bpmnIo_fktSaveSVG = function saveSVG(done) {
+//	renderer.saveSVG(function(err, svg) {
+//		done(err, svg);
+//		bpmnIo_callback_saveSVG(svg);
+//	});
+//};
+//
+//bpmnIo_fktSaveDiagram = function saveDiagram(done) {
+//
+//	renderer.saveXML({
+//		format : true
+//	}, function(err, xml) {
+//		done(err, xml);
+//		bpmnIo_callback_saveDiagram(xml);
+//	});
+//};
 
 // bootstrap diagram functions
 
-$(document).on('ready', function() {
-	var _ = require('lodash');
+//$(document).on('ready', function() {
+//	var _ = require('lodash');
+//
+//	bpmnIo_fktExportArtifacts = _.debounce(function() {
+//
+//		bpmnIo_fktSaveSVG(function(err, svg) {
+//			// callback was automatically called
+//		});
+//
+//		bpmnIo_fktSaveDiagram(function(err, xml) {
+//			// callback was automatically called
+//		});
+//	}, 500);
+//
+//	renderer.on('commandStack.changed', bpmnIo_fktExportArtifacts);
+//});
 
-	bpmnIo_fktExportArtifacts = _.debounce(function() {
 
-		bpmnIo_fktSaveSVG(function(err, svg) {
-			// callback was automatically called
-		});
+ TEST MOD END */
 
-		bpmnIo_fktSaveDiagram(function(err, xml) {
-			// callback was automatically called
-		});
-	}, 500);
 
-	renderer.on('commandStack.changed', bpmnIo_fktExportArtifacts);
-});
 },{"../customlib/camunda":2,"bpmn-js/lib/Modeler":3,"jquery":196,"lodash":217}],2:[function(require,module,exports){
 module.exports={
   "name": "CamundaBpmn",
