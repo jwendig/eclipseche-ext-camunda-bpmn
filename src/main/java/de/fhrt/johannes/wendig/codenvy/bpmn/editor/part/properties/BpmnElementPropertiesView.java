@@ -17,6 +17,7 @@ import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.inject.ImplementedBy;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnModelerJso;
 
 @ImplementedBy(BpmnElementPropertiesViewImpl.class)
 public interface BpmnElementPropertiesView extends
@@ -25,6 +26,7 @@ public interface BpmnElementPropertiesView extends
 		void onContentChange();
 
 		BpmnDiagramElementJso getCurrentElementJso();
+		BpmnModelerJso getCurrentBpmnIoModelerJso();
 	}
 
 	public void setTitle(String title);
