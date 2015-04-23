@@ -59,9 +59,6 @@ public class NewBpmnFileAction extends AbstractNewResourceAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		/*
-		 * Log for call-informations TODO: maybe create svg-file here
-		 */
 		Log.info(NewBpmnFileAction.class, "actionPerformed");
 		super.actionPerformed(e);
 		Log.info(NewBpmnFileAction.class, "actionPerformed - after");
