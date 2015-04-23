@@ -35,19 +35,34 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.B
 public class BpmnEditorProvider implements EditorProvider,
 		BpmnEditorView.ActionDelegate {
 
+	private final DefaultEditorProvider defaultEditorProvider;
+	private final NotificationManager notificationManager;
+	private final ProjectServiceClient projectServiceClient;
+	private final DialogFactory dialogFactory;
+	private WorkspaceAgent workspaceAgent;
+	
+	private BpmnResource bpmnResource;
 	private BpmnEditorViewImpl bpmnEditorView;
+	private BpmnElementPropertiesPresenter bpmnElementPropertiesEditorPresenter;
 
 	@Inject
-	public BpmnEditorProvider(BpmnEditorViewImpl bpmnEditorView) {
+	public BpmnEditorProvider(final DefaultEditorProvider defaultEditorProvider,
+			final NotificationManager notificationManager,
+			BpmnResource bpmnResource,
+			BpmnElementPropertiesPresenter bpmnElementPropertiesEditorPresenter,
+			WorkspaceAgent workspaceAgent,
+			ProjectServiceClient projectServiceClient,
+			DialogFactory dialogFactory) {
 		super();
 
-		this.bpmnEditorView = bpmnEditorView;
-
-		bind();
-	}
-
-	private void bind() {
-		bpmnEditorView.setActionDelegate(this);
+		this.defaultEditorProvider = defaultEditorProvider;
+		this.notificationManager = notificationManager;
+		this.projectServiceClient = projectServiceClient;
+		this.dialogFactory = dialogFactory;
+		this.workspaceAgent = workspaceAgent;
+		
+		this.bpmnElementPropertiesEditorPresenter = bpmnElementPropertiesEditorPresenter;
+		this.bpmnResource = bpmnResource;
 	}
 
 	@Override
@@ -63,12 +78,11 @@ public class BpmnEditorProvider implements EditorProvider,
 	/** {@inheritDoc} */
 	@Override
 	public EditorPartPresenter getEditor() {
-		/*
-		 * with the injected instance of editor view i can open only one editor window at one time.
-		 * Fix: instead of inject the instance, create a new instance here.
-		 * 		but this needs to fix the id-generation of bpmn.io
-		 */
-		
+		bpmnEditorView = new BpmnEditorViewImpl(workspaceAgent, projectServiceClient,
+				dialogFactory, bpmnElementPropertiesEditorPresenter,
+				bpmnResource);
+		bpmnEditorView.setActionDelegate(this);
 		return bpmnEditorView;
+		
 	}
 }
