@@ -166,7 +166,7 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 	@Override
 	public void onContentChange() {
 		Log.info(BpmnElementPropertiesPresenter.class, "onContentChange");
-		currentBpmnIoModelerJso.nativeUpdateData();
+		currentBpmnIoModelerJso.updateData();
 	}
 
 	@Override

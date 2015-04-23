@@ -52,7 +52,7 @@ public class BpmnEditorDiagramWidget extends Composite {
 		this.bpmnResource = bpmnResource;
 
 		diagramHtmlWrapperId = "bpmnIoCanvas_" + viewNumber++;
-		
+
 		loadCss();
 
 		initDiagramHtmlPanel();
@@ -71,9 +71,11 @@ public class BpmnEditorDiagramWidget extends Composite {
 	}
 
 	private void initDiagramHtmlPanel() {
-//		diagramHtmlPanel = new HTMLPanel(bpmnResource.bpmnIoIndexHtmlFile()
-//				.getText());
-		diagramHtmlPanel = new HTMLPanel("<div class=\"canvas bpmnDigramWidget-diagramHtmlPanel-wrapper\" id=\""+diagramHtmlWrapperId+"\"></div>");
+		// diagramHtmlPanel = new HTMLPanel(bpmnResource.bpmnIoIndexHtmlFile()
+		// .getText());
+		diagramHtmlPanel = new HTMLPanel(
+				"<div class=\"canvas bpmnDigramWidget-diagramHtmlPanel-wrapper\" id=\""
+						+ diagramHtmlWrapperId + "\"></div>");
 		diagramHtmlPanel.setSize("100%", "100%");
 		diagramHtmlPanel.addStyleName("bpmnDigramWidget-diagramHtmlPanel");
 	}
@@ -86,10 +88,9 @@ public class BpmnEditorDiagramWidget extends Composite {
 		ScriptInjector.fromString(bpmnResource.bpmnIoIndexJsFile().getText())
 				.setWindow(ScriptInjector.TOP_WINDOW).inject();
 
-		bpmnIoModelerJso = BpmnModelerJso.nativeCreateModeler(diagramHtmlWrapperId, this);
+		bpmnIoModelerJso = BpmnModelerJso.createInstance(diagramHtmlWrapperId,
+				this);
 	}
-	
-	
 
 	/*
 	 * Javascript Callbacks
