@@ -88,8 +88,8 @@ public class BpmnEditorDiagramWidget extends Composite {
 		ScriptInjector.fromString(bpmnResource.bpmnIoIndexJsFile().getText())
 				.setWindow(ScriptInjector.TOP_WINDOW).inject();
 
-		bpmnIoModelerJso = BpmnModelerJso.createInstance(diagramHtmlWrapperId,
-				this);
+		bpmnIoModelerJso = BpmnModelerJso.nativeCreateInstance(
+				diagramHtmlWrapperId, this);
 	}
 
 	/*
