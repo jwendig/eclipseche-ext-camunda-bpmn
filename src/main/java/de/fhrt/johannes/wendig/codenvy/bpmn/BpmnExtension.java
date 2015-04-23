@@ -78,7 +78,7 @@ public class BpmnExtension {
 			FileTypeRegistry fileTypeRegistry, BpmnResource bpmnResource) {
 		Log.info(BpmnExtension.class, "createAndRegisterBpmnFileType");
 		FileType bpmnFileType = new FileType("BPMN",
-				bpmnResource.bpmnIconXsFile(), BPMN_MIME_TYPE,
+				bpmnResource.bpmnIconSvgFile(), BPMN_MIME_TYPE,
 				BPMN_FILE_EXTENSION_NAME);
 		fileTypeRegistry.registerFileType(bpmnFileType);
 		return bpmnFileType;
