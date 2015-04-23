@@ -18,8 +18,6 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiag
 
 public class BpmnModelerJso extends JavaScriptObject {
 
-	private BpmnEditorDiagramWidget callback;
-
 	protected BpmnModelerJso() {
 	}
 
@@ -27,44 +25,49 @@ public class BpmnModelerJso extends JavaScriptObject {
 	 * handler functions
 	 */
 
-	public static BpmnModelerJso createInstance(String wrapperId,
-			BpmnEditorDiagramWidget callback) {
-		BpmnModelerJso instance = nativeCreateInstance(wrapperId, callback);
-		instance.callback = callback;
-		return instance;
-	}
-
-	private static native BpmnModelerJso nativeCreateInstance(String wrapperId,
-			BpmnEditorDiagramWidget callback)/*-{
-												var renderer = $wnd.bpmnIo_fkt_createNewModeler(wrapperId);
-												
-												renderer.on('element.click', function(event) {
-													var element = event.element;
-													var moddle = renderer.get('moddle');
-												
-													// do not allow on root element
-													if (!element.parent) {
-													callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackContainerSelected(Lde/fhrt/johannes/wendig/codenvy/bpmn/editor/widget/diagram/bpmnelements/BpmnDiagramElementJso;)(element.businessObject);
-													return;
-													}
-												
-													callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackElementSelected(Lde/fhrt/johannes/wendig/codenvy/bpmn/editor/widget/diagram/bpmnelements/BpmnDiagramElementJso;)(element.businessObject);
-												});
-												
-												renderer.on('commandStack.changed', function() {
-													renderer.saveXML({
-														format : true
-													}, function(err, xml) {														
-														callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackSaveDiagram(Ljava/lang/String;)(xml);
-													});
-													
-													renderer.saveSVG(function(err, svg) {														
-														callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackSaveSVG(Ljava/lang/String;)(svg);
-													});
-												});
-												
-												return renderer;
-												}-*/;
+	public final static native BpmnModelerJso nativeCreateInstance(
+			String wrapperId, BpmnEditorDiagramWidget callback)/*-{
+																var renderer = $wnd.bpmnIo_fkt_createNewModeler(wrapperId);
+																
+																renderer.on('element.click', function(event) {
+																	var element = event.element;
+																	var moddle = renderer.get('moddle');
+																
+																	// do not allow on root element
+																	if (!element.parent) {
+																	callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackContainerSelected(Lde/fhrt/johannes/wendig/codenvy/bpmn/editor/widget/diagram/bpmnelements/BpmnDiagramElementJso;)(element.businessObject);
+																	return;
+																	}
+																
+																	callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackElementSelected(Lde/fhrt/johannes/wendig/codenvy/bpmn/editor/widget/diagram/bpmnelements/BpmnDiagramElementJso;)(element.businessObject);
+																});
+																
+																renderer.updateData = function(){
+																	renderer.saveXML({
+																		format : true
+																	}, function(err, xml) {														
+																		callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackSaveDiagram(Ljava/lang/String;)(xml);
+																	});
+																	
+																	renderer.saveSVG(function(err, svg) {														
+																		callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackSaveSVG(Ljava/lang/String;)(svg);
+																	});
+																};
+																
+																renderer.on('commandStack.changed', function() {
+																	renderer.saveXML({
+																		format : true
+																	}, function(err, xml) {														
+																		callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackSaveDiagram(Ljava/lang/String;)(xml);
+																	});
+																	
+																	renderer.saveSVG(function(err, svg) {														
+																		callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackSaveSVG(Ljava/lang/String;)(svg);
+																	});
+																});
+																
+																return renderer;
+																}-*/;
 
 	public final native void nativeOpenDiagram(String xml)/*-{
 															this.importXML(xml, function(err) {
@@ -82,21 +85,8 @@ public class BpmnModelerJso extends JavaScriptObject {
 															return this.get('moddle');
 															}-*/;
 
-	public void updateData() {
-		nativeUpdateData(callback);
-	}
-
-	private final native JavaScriptObject nativeUpdateData(
-			BpmnEditorDiagramWidget callback)/*-{
-												renderer.saveXML({
-													format : true
-												}, function(err, xml) {														
-													callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackSaveDiagram(Ljava/lang/String;)(xml);
-												});
-												
-												renderer.saveSVG(function(err, svg) {														
-													callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackSaveSVG(Ljava/lang/String;)(svg);
-												});
+	public final native void nativeUpdateData()/*-{
+												this.updateData();
 												}-*/;
 
 }
