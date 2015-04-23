@@ -9,7 +9,7 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.document;
 
 import org.eclipse.che.ide.util.loging.Log;
 
@@ -42,9 +42,11 @@ public class TabDocumentView extends AbstractBpmnPropertiesTabWidget {
 	public void initContentElements() {
 		Log.info(TabDocumentView.class, "initContentElements");
 		tbTargetNamespace = new TextBox();
-		tbTargetNamespace.setText("http://activiti.org/bpmn");
-		tbTargetNamespace.setEnabled(false);
 		tbTargetNamespace.setWidth("100%");
+	}
+
+	public TextBox getTbTargetNamespace() {
+		return tbTargetNamespace;
 	}
 
 }

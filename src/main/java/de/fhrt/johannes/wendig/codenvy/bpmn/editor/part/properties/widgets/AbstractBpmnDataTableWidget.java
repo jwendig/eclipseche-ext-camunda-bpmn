@@ -11,10 +11,9 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets;
 
-import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment.HorizontalAlignmentConstant;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.view.client.ListDataProvider;
@@ -37,8 +36,8 @@ public abstract class AbstractBpmnDataTableWidget<T> extends Composite {
 		table.setWidth("100%");
 
 		buttonPanel = new HorizontalPanel();
-		buttonPanel.setHorizontalAlignment(HorizontalAlignmentConstant
-				.startOf(Direction.RTL));
+		
+		buttonPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
 
 		rootPanel = new VerticalPanel();
 		rootPanel.setSize("100%", "auto");

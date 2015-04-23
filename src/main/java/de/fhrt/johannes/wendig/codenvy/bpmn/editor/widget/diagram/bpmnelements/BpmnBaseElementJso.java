@@ -29,32 +29,32 @@ public class BpmnBaseElementJso extends JavaScriptObject {
 	/*
 	 * functions default
 	 */
-//	@Override
+	// @Override
 	public final native String getType() /*-{
 											return this.$type;
 											}-*/;
 
-//	@Override
+	// @Override
 	public final native String getBusinessObject() /*-{
 													return this.businessObject;
 													}-*/;
 
-//	@Override
+	// @Override
 	public final native String getAttr_id() /*-{
 											return this.id;
 											}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_id(String id) /*-{
 													this.id = id;
 													}-*/;
 
-//	@Override
+	// @Override
 	public final native String getAttr_name() /*-{
 												return this.name;
 												}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_name(String name) /*-{
 														this.name = name;
 														}-*/;
@@ -62,12 +62,12 @@ public class BpmnBaseElementJso extends JavaScriptObject {
 	/*
 	 * process-element only
 	 */
-//	@Override
+	// @Override
 	public final native boolean getAttr_isExecutable() /*-{
 														return this.isExecutable;
 														}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_isExecutable(boolean isExecutable) /*-{
 																		this.isExecutable = isExecutable;
 																		}-*/;
@@ -75,48 +75,48 @@ public class BpmnBaseElementJso extends JavaScriptObject {
 	/*
 	 * functions for different bpmn-elements
 	 */
-//	@Override
+	// @Override
 	public final native String getAttr_assignee() /*-{
 														return this.assignee;
 														}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_assignee(String assignee) /*-{
 																		this.assignee = assignee;
 																		}-*/;
 
-//	@Override
+	// @Override
 	public final native boolean getAttr_asyncAfter() /*-{
 														return this.asyncAfter;
 														}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_asyncAfter(boolean asyncAfter) /*-{
 																	this.asyncAfter = asyncAfter;
 																	}-*/;
 
-//	@Override
+	// @Override
 	public final native boolean getAttr_asyncBefore() /*-{
 														return this.asyncBefore;
 														}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_asyncBefore(boolean asyncBefore) /*-{
 																		this.asyncBefore = asyncBefore;
 																		}-*/;
 
-//	 @Override
+	// @Override
 	public final native String getAttr_calledElementBinding() /*-{
 																return this.calledElementBinding;
 																}-*/;
 
-//	 @Override
+	// @Override
 	public final native void setAttr_calledElementBinding(
 			String calledElementBinding) /*-{
 											this.calledElementBinding = calledElementBinding;
 											}-*/;
 
-//	 @Override
+	// @Override
 	public final native int getAttr_calledElementVersion() /*-{
 																return this.calledElementVersion;
 																}-*/;
@@ -127,49 +127,49 @@ public class BpmnBaseElementJso extends JavaScriptObject {
 											this.calledElementVersion = calledElementVersion;
 											}-*/;
 
-//	@Override
+	// @Override
 	public final native String getAttr_candidateGroups() /*-{
 																return this.candidateGroups;
 																}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_candidateGroups(String candidateGroups) /*-{
 																						this.candidateGroups = candidateGroups;
 																						}-*/;
 
-//	@Override
+	// @Override
 	public final native String getAttr_candidateStarterGroups() /*-{
 																return this.candidateStarterGroups;
 																}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_candidateStarterGroups(
 			String candidateStarterGroups) /*-{
 											this.candidateStarterGroups = candidateStarterGroups;
 											}-*/;
 
-//	@Override
+	// @Override
 	public final native String getAttr_candidateStarterUsers() /*-{
 																return this.candidateStarterUsers;
 																}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_candidateStarterUsers(
 			String candidateStarterUsers) /*-{
 											this.candidateStarterUsers = candidateStarterUsers;
 											}-*/;
 
-//	@Override
+	// @Override
 	public final native String getAttr_candidateUsers() /*-{
 																return this.candidateUsers;
 																}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_candidateUsers(String candidateUsers) /*-{
 																					this.candidateUsers = candidateUsers;
 																					}-*/;
 
-//	 @Override
+	// @Override
 	public final native String getAttr_caseBinding() /*-{
 														return this.caseBinding;
 														}-*/;
@@ -199,145 +199,155 @@ public class BpmnBaseElementJso extends JavaScriptObject {
 																	this.caseVersion = caseVersion;
 																	}-*/;
 
-//	@Override
+	// @Override
 	public final native String getAttr_class() /*-{
 												return this['class'];
 												}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_class(String clazz) /*-{
 															this['class'] = clazz;
 															}-*/;
 
-//	@Override
+	// @Override
 	public final native String getAttr_collection() /*-{
 													return this.collection;
 													}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_collection(String collection) /*-{
 																	this.collection = collection;
 																	}-*/;
 
-//	@Override
+	// @Override
 	public final native String getAttr_delegateExpression() /*-{
 															return this.delegateExpression;
 															}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_delegateExpression(
 			String delegateExpression) /*-{
 										this.delegateExpression = delegateExpression;
 										}-*/;
 
-//	@Override
+	// @Override
 	public final native String getAttr_dueDate() /*-{
 															return this.dueDate;
 															}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_dueDate(String dueDate) /*-{
 																			this.dueDate = dueDate;
 																			}-*/;
 
-//	@Override
+	// @Override
 	public final native String getAttr_elementVariable() /*-{
 															return this.elementVariable;
 															}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_elementVariable(String elementVariable) /*-{
 																				this.elementVariable = elementVariable;
 																				}-*/;
 
-//	@Override
+	// @Override
 	public final native boolean getAttr_exclusive() /*-{
 													return this.exclusive;
 													}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_exclusive(boolean exclusive) /*-{
 																	this.exclusive = exclusive;
 																	}-*/;
 
-//	@Override
+	// @Override
 	public final native String getAttr_expression() /*-{
 													return this.expression;
 													}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_expression(String expression) /*-{
 																	this.expression = expression;
 																	}-*/;
 
-//	@Override
+	// @Override
 	public final native String getAttr_formHandlerClass() /*-{
 															return this.formHandlerClass;
 															}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_formHandlerClass(String formHandlerClass) /*-{
 																				this.formHandlerClass = formHandlerClass;
 																				}-*/;
 
-//	@Override
+	// @Override
 	public final native String getAttr_formKey() /*-{
 													return this.formKey;
 													}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_formKey(String formKey) /*-{
 																this.formKey = formKey;
 																}-*/;
 
-//	@Override
+	// @Override
 	public final native String getAttr_initiator() /*-{
 													return this.initiator;
 													}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_initiator(String initiator) /*-{
 																	this.initiator = initiator;
 																	}-*/;
 
-//	@Override
+	// @Override
 	public final native String getAttr_priority() /*-{
 													return this.priority;
 													}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_priority(String priority) /*-{
 																this.priority = priority;
 																}-*/;
 
-//	@Override
+	// @Override
 	public final native String getAttr_resource() /*-{
 													return this.resource;
 													}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_resource(String resource) /*-{
 																this.resource = resource;
 																}-*/;
 
-//	@Override
+	// @Override
 	public final native String getAttr_resultVariable() /*-{
 														return this.resultVariable;
 														}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_resultVariable(String resultVariable) /*-{
 																			this.resultVariable = resultVariable;
 																			}-*/;
 
-//	@Override
+	// @Override
 	public final native String getAttr_type() /*-{
 														return this.type;
 														}-*/;
 
-//	@Override
+	// @Override
 	public final native void setAttr_type(String type) /*-{
 																			this.type = type;
 																			}-*/;
+
+	// @Override
+	public final native String getAttr_errorCode() /*-{
+													return this.errorCode;
+													}-*/;
+
+	// @Override
+	public final native void setAttr_errorCode(String errorCode) /*-{
+																	this.errorCode = errorCode;
+																	}-*/;
 
 }

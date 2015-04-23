@@ -12,9 +12,12 @@
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.user.client.ui.Panel;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementExtensionJso.BpmnExtensionElementType;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementPropertyJso.BpmnPropertyElementType;
 
 public class BpmnModelerJso extends JavaScriptObject {
 
@@ -88,5 +91,78 @@ public class BpmnModelerJso extends JavaScriptObject {
 	public final native void nativeUpdateData()/*-{
 												this.updateData();
 												}-*/;
+
+	/*
+	 * Functions to create bpmn-properties
+	 */
+
+	private final native BpmnDiagramElementPropertyJso nativeAddRoot_element(
+			JavaScriptObject moddle, String bpmnRootElementType)/*-{
+																console.log("js-native: nativeAddRoot_element");
+																		var ext = moddle.create(bpmnRootElementType);
+
+																		this.definitions = this.definitions	|| [];
+																		this.definitions.get('rootElements').push(ext);
+																		
+																		return ext;
+																		
+																		}-*/;
+
+	// @Override
+	public final native boolean nativeRemoveRootElement(
+			BpmnDiagramElementPropertyJso extElement)/*-{
+														console.log("js-native: removeRoot_elemenemt");
+														var extElementIndex = this.definitions.rootElements.indexOf(extElement);
+														if (extElementIndex > -1) {
+														console.log("js-native: removeRoot_elemenemt: extElement found at index:" + extElementIndex);
+														this.definitions.rootElements.splice(extElementIndex, 1);
+														
+														return true;
+														}else{
+														console.log("js-native: removeRoot_elemenemt: extElement not found");
+														return false;
+														}
+														}-*/;
+
+	private final native JsArray<BpmnDiagramElementPropertyJso> nativeGetRootElementsByType(
+			String bpmnRootElementType) /*-{
+												console.log("js-native: getRoot_elements");
+												if (!this.definitions || this.definitions.rootElements == 'undefined') {
+												console
+												.log("js-native: getRoot_elements: no root elements");
+												return [];
+												}
+
+												return this.definitions.rootElements.filter(function(e) {
+												return e.$instanceOf(bpmnRootElementType);
+												});
+												}-*/;
+
+	// @Override
+	public final JsArray<BpmnDiagramElementPropertyJso> getRootElements_errors() {
+		JsArray<BpmnDiagramElementPropertyJso> extElements = nativeGetRootElementsByType(BpmnPropertyElementType.BPMN_ERROR
+				.toString());
+		return extElements;
+	}
+
+	// @Override
+	public final BpmnDiagramElementPropertyJso addRootElement_error(
+			JavaScriptObject moddle) {
+		BpmnDiagramElementPropertyJso newExtElement = nativeAddRoot_element(
+				moddle, BpmnPropertyElementType.BPMN_ERROR.toString());
+		return newExtElement;
+	}
+
+	/*
+	 * Getter & setter for attritubes
+	 */
+
+	public final native String getAttr_targetNamespace()/*-{
+														return this.definitions.targetNamespace;
+														}-*/;
+
+	public final native void setAttr_targetNamespace(String targetNamespace)/*-{
+																				this.definitions.targetNamespace = targetNamespace;
+																				}-*/;
 
 }

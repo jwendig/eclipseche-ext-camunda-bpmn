@@ -11,12 +11,13 @@
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.properties.DataObjectJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.properties.ErrorJso;
 
 public class BpmnDiagramElementPropertyJso extends BpmnBaseElementJso implements
-		DataObjectJso {
+		DataObjectJso, ErrorJso {
 
 	public enum BpmnPropertyElementType {
-		BPMN_DATA_OBJECT("bpmn:DataObject");
+		BPMN_DATA_OBJECT("bpmn:DataObject"), BPMN_ERROR("bpmn:Error");
 
 		private final String bpmnIoTypeDefinition;
 

@@ -13,7 +13,7 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.star
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabController;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.TabDefinitionsView;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.definitions.TabDefinitionsView;
 
 public class TabMultiInstanceController extends
 		AbstractBpmnPropertiesTabController {
