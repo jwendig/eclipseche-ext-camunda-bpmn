@@ -21,8 +21,10 @@ import com.google.web.bindery.requestfactory.server.RequestFactoryJarExtractor.C
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.StartEventJso;
 
-public class TabGeneralController extends AbstractBpmnPropertiesTabController {
+public class TabGeneralController extends
+		AbstractBpmnPropertiesTabController<StartEventJso> {
 	private final static String TAB_NAME = "General";
 	private TabGeneralView view;
 
@@ -34,9 +36,11 @@ public class TabGeneralController extends AbstractBpmnPropertiesTabController {
 
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
-				getActionDelegate().getCurrentElementJso().setAttr_id(
-						view.getTbId().getText());
-				getActionDelegate().onContentChange();
+				// getActionDelegate().getCurrentElementJso().setAttr_id(
+				// view.getTbId().getText());
+				// getActionDelegate().onContentChange();
+				getCurrentBpmnElement().setAttr_id(view.getTbId().getText());
+				contentChanged();
 			}
 		});
 
@@ -44,9 +48,12 @@ public class TabGeneralController extends AbstractBpmnPropertiesTabController {
 
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
-				getActionDelegate().getCurrentElementJso().setAttr_name(
-						view.getTbName().getText());
-				getActionDelegate().onContentChange();
+				// getActionDelegate().getCurrentElementJso().setAttr_name(
+				// view.getTbName().getText());
+				// getActionDelegate().onContentChange();
+				getCurrentBpmnElement()
+						.setAttr_name(view.getTbName().getText());
+				contentChanged();
 			}
 		});
 
@@ -54,9 +61,12 @@ public class TabGeneralController extends AbstractBpmnPropertiesTabController {
 
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
-				getActionDelegate().getCurrentElementJso().setAttr_formKey(
+				// getActionDelegate().getCurrentElementJso().setAttr_formKey(
+				// view.getTbFormKey().getText());
+				// getActionDelegate().onContentChange();
+				getCurrentBpmnElement().setAttr_formKey(
 						view.getTbFormKey().getText());
-				getActionDelegate().onContentChange();
+				contentChanged();
 			}
 		});
 
@@ -67,9 +77,13 @@ public class TabGeneralController extends AbstractBpmnPropertiesTabController {
 					public void onValueChange(ValueChangeEvent<Boolean> event) {
 						Log.info(TabGeneralController.class,
 								"isExecuteable-changed");
-						getActionDelegate().getCurrentElementJso()
-								.setAttr_asyncAfter(event.getValue());
-						getActionDelegate().onContentChange();
+						// getActionDelegate().getCurrentElementJso()
+						// .setAttr_asyncAfter(event.getValue());
+						// getActionDelegate().onContentChange();
+						getCurrentBpmnElement().setAttr_asyncAfter(
+								event.getValue());
+						contentChanged();
+
 					}
 				});
 
@@ -80,9 +94,12 @@ public class TabGeneralController extends AbstractBpmnPropertiesTabController {
 					public void onValueChange(ValueChangeEvent<Boolean> event) {
 						Log.info(TabGeneralController.class,
 								"isExecuteable-changed");
-						getActionDelegate().getCurrentElementJso()
-								.setAttr_asyncBefore(event.getValue());
-						getActionDelegate().onContentChange();
+						// getActionDelegate().getCurrentElementJso()
+						// .setAttr_asyncBefore(event.getValue());
+						// getActionDelegate().onContentChange();
+						getCurrentBpmnElement().setAttr_asyncBefore(
+								event.getValue());
+						contentChanged();
 					}
 				});
 
@@ -111,28 +128,38 @@ public class TabGeneralController extends AbstractBpmnPropertiesTabController {
 
 	@Override
 	public void updateView() {
-		view.getTbId().setText(
-				getActionDelegate().getCurrentElementJso().getAttr_id());
+		// view.getTbId().setText(
+		// getActionDelegate().getCurrentElementJso().getAttr_id());
+		//
+		// view.getTbName().setText(
+		// getActionDelegate().getCurrentElementJso().getAttr_name());
+		// view.getTbFormKey().setText(
+		// getActionDelegate().getCurrentElementJso().getAttr_formKey());
+		//
+		// view.getCbAsycAfter()
+		// .setValue(
+		// getActionDelegate().getCurrentElementJso()
+		// .getAttr_asyncAfter());
+		// view.getCbAsycBefore().setValue(
+		// getActionDelegate().getCurrentElementJso()
+		// .getAttr_asyncBefore());
 
-		view.getTbName().setEnabled(false);
-		view.getTbName().setText(
-				getActionDelegate().getCurrentElementJso().getAttr_name());
-		view.getTbFormKey().setText(
-				getActionDelegate().getCurrentElementJso().getAttr_formKey());
+		view.getTbId().setText(getCurrentBpmnElement().getAttr_id());
 
-		view.getCbAsycAfter()
-				.setValue(
-						getActionDelegate().getCurrentElementJso()
-								.getAttr_asyncAfter());
+		view.getTbName().setText(getCurrentBpmnElement().getAttr_name());
+		view.getTbFormKey().setText(getCurrentBpmnElement().getAttr_formKey());
+
+		view.getCbAsycAfter().setValue(
+				getCurrentBpmnElement().getAttr_asyncAfter());
 		view.getCbAsycBefore().setValue(
-				getActionDelegate().getCurrentElementJso()
-						.getAttr_asyncBefore());
+				getCurrentBpmnElement().getAttr_asyncBefore());
 
-		view.getTbRetryTimeCycle().setEnabled(false);
 		view.getTbRetryTimeCycle().setText("not implemented");
 
-		view.getTbDocumentation().setEnabled(false);
 		view.getTbDocumentation().setText("not implemented");
 
+		view.getTbName().setEnabled(false);
+		view.getTbRetryTimeCycle().setEnabled(false);
+		view.getTbDocumentation().setEnabled(false);
 	}
 }

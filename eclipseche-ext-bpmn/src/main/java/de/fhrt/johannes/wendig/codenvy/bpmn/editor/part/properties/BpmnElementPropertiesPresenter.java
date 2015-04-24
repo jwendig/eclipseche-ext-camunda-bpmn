@@ -19,9 +19,7 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.noselection.NoSelectionWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.ProcessPropertiesWidget;
@@ -29,16 +27,16 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.servi
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.StartEventPropertiesWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.unknown.UnknownItemWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.usertask.UserTaskPropertiesWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnModelerJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso.BpmnElementType;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso.BpmnElementType;
 
 public class BpmnElementPropertiesPresenter extends BasePresenter implements
 		BpmnElementPropertiesView.ActionDelegate, BpmnElementPropertiesCallback {
 
 	private BpmnElementPropertiesView view;
 	private final static String TITLE = "BPMN Properties";
-	private BpmnDiagramElementJso currentElementJso;
+	private BpmnElementJso currentElementJso;
 	private BpmnModelerJso currentBpmnIoModelerJso;
 
 	private UnknownItemWidget unknowItemProperties;
@@ -101,7 +99,7 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 
 	@Override
 	public void bpmnElementSelected(BpmnModelerJso modelerJso,
-			BpmnDiagramElementJso elementJso) {
+			BpmnElementJso elementJso) {
 		Log.info(BpmnElementPropertiesPresenter.class, "bpmnElementSelected");
 
 		this.currentBpmnIoModelerJso = modelerJso;
@@ -153,7 +151,7 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 	 * BpmnElementPropertiesView.ActionDelegate#getCurrentElementJso()
 	 */
 	@Override
-	public BpmnDiagramElementJso getCurrentElementJso() {
+	public BpmnElementJso getCurrentElementJso() {
 		return currentElementJso;
 	}
 

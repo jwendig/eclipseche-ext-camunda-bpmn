@@ -9,12 +9,15 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces;
+
+import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.JsArray;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementExtensionJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementCamundaExtensionJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ExecutionListenerJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.PropertyJso;
 
 public interface DefaultJso {
 	/*
@@ -35,9 +38,16 @@ public interface DefaultJso {
 	/*
 	 * extensions
 	 */
-	public JsArray<BpmnDiagramElementExtensionJso> getExt_executionListeners();
+	public boolean removeCamundaExt_executionListener(ExecutionListenerJso element);
 
-	public BpmnDiagramElementExtensionJso addExt_executionListener(JavaScriptObject moddle);
+	public List<ExecutionListenerJso> getCamundaExt_executionListeners();
 
-	public boolean removeExt_elemenemt(BpmnDiagramElementExtensionJso element);
+	public ExecutionListenerJso addCamundaExt_executionListener(JavaScriptObject moddle);
+
+	public boolean removeCamundaExt_property(PropertyJso element);
+
+	public List<PropertyJso> getCamundaExt_property();
+
+	public PropertyJso addCamundaExt_property(JavaScriptObject moddle);
+
 }

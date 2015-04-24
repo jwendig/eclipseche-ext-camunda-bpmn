@@ -12,32 +12,32 @@
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
 
-public abstract class AbstractBpmnPropertiesTabController {
+public abstract class AbstractBpmnPropertiesTabController<T> {
 	private BpmnElementPropertiesView.ActionDelegate actionDelegate;
-
-	// private BpmnDiagramElementJso bpmnDiagramElementJso;
 
 	public AbstractBpmnPropertiesTabController(
 			BpmnElementPropertiesView.ActionDelegate actionDelegate) {
 		this.actionDelegate = actionDelegate;
 	}
 
-	// public abstract void updateView(final BpmnDiagramElementJso element);
 	public abstract void updateView();
 
-	public BpmnElementPropertiesView.ActionDelegate getActionDelegate() {
-		return actionDelegate;
+	// public BpmnElementPropertiesView.ActionDelegate getActionDelegate() {
+	// return actionDelegate;
+	// }
+
+	public T getCurrentBpmnElement() {
+		return (T) actionDelegate.getCurrentElementJso();
 	}
 
-	// public BpmnDiagramElementJso getBpmnDiagramElementJso() {
-	// return bpmnDiagramElementJso;
-	// }
-	//
-	// public void setBpmnDiagramElementJso(
-	// BpmnDiagramElementJso bpmnDiagramElementJso) {
-	// this.bpmnDiagramElementJso = bpmnDiagramElementJso;
-	// }
+	public BpmnModelerJso getCurrentBpmnModeler() {
+		return actionDelegate.getCurrentBpmnIoModelerJso();
+	}
 
+	public void contentChanged() {
+		actionDelegate.onContentChange();
+	}
 }

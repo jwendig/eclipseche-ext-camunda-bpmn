@@ -39,7 +39,7 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.camunda.CamundaJavaDelegateType;
 import de.fhrt.johannes.wendig.codenvy.bpmn.camunda.CamundaTypeHolder;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesPresenter;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.util.ProjectParser;
 
 public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
@@ -422,7 +422,7 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	 * .bpmnelements.BpmnDiagramElementJso)
 	 */
 	@Override
-	public void bpmnElementSelected(BpmnDiagramElementJso elementJso) {
+	public void bpmnElementSelected(BpmnElementJso elementJso) {
 		bpmnElementPropertiesEditorPresenter.bpmnElementSelected(
 				bpmnDiagramWidget.getBpmnIoModelerJso(), elementJso);
 	}

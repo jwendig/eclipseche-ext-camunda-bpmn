@@ -19,9 +19,11 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.general.TabGeneralController;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.ProcessJso;
 
-public class TabDocumentController extends AbstractBpmnPropertiesTabController {
+public class TabDocumentController extends
+		AbstractBpmnPropertiesTabController<ProcessJso> {
 	private final static String TAB_NAME = "Document";
 	private TabDocumentView view;
 
@@ -34,10 +36,13 @@ public class TabDocumentController extends AbstractBpmnPropertiesTabController {
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
 				Log.info(TabGeneralController.class, "name-changed");
-				getActionDelegate().getCurrentBpmnIoModelerJso()
-						.setAttr_targetNamespace(
-								view.getTbTargetNamespace().getText());
-				getActionDelegate().onContentChange();
+				// getActionDelegate().getCurrentBpmnIoModelerJso()
+				// .setAttr_targetNamespace(
+				// view.getTbTargetNamespace().getText());
+				// getActionDelegate().onContentChange();
+				getCurrentBpmnModeler().setAttr_targetNamespace(
+						view.getTbTargetNamespace().getText());
+				contentChanged();
 			}
 		});
 
@@ -49,9 +54,11 @@ public class TabDocumentController extends AbstractBpmnPropertiesTabController {
 
 	@Override
 	public void updateView() {
+		// this.view.getTbTargetNamespace().setText(
+		// getActionDelegate().getCurrentBpmnIoModelerJso()
+		// .getAttr_targetNamespace());
 		this.view.getTbTargetNamespace().setText(
-				getActionDelegate().getCurrentBpmnIoModelerJso()
-						.getAttr_targetNamespace());
+				getCurrentBpmnModeler().getAttr_targetNamespace());
 	}
 
 }

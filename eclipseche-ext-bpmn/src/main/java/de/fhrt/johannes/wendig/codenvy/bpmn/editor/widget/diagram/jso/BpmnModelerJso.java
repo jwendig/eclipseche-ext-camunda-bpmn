@@ -9,15 +9,17 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.user.client.ui.Panel;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementExtensionJso.BpmnExtensionElementType;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementPropertyJso.BpmnPropertyElementType;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnRootPropertyJso.BpmnRootPropertyType;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.root.ErrorJso;
 
 public class BpmnModelerJso extends JavaScriptObject {
 
@@ -38,11 +40,11 @@ public class BpmnModelerJso extends JavaScriptObject {
 																
 																	// do not allow on root element
 																	if (!element.parent) {
-																	callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackContainerSelected(Lde/fhrt/johannes/wendig/codenvy/bpmn/editor/widget/diagram/bpmnelements/BpmnDiagramElementJso;)(element.businessObject);
+																	callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackContainerSelected(Lde/fhrt/johannes/wendig/codenvy/bpmn/editor/widget/diagram/jso/BpmnElementJso;)(element.businessObject);
 																	return;
 																	}
 																
-																	callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackElementSelected(Lde/fhrt/johannes/wendig/codenvy/bpmn/editor/widget/diagram/bpmnelements/BpmnDiagramElementJso;)(element.businessObject);
+																	callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackElementSelected(Lde/fhrt/johannes/wendig/codenvy/bpmn/editor/widget/diagram/jso/BpmnElementJso;)(element.businessObject);
 																});
 																
 																renderer.updateData = function(){
@@ -96,7 +98,7 @@ public class BpmnModelerJso extends JavaScriptObject {
 	 * Functions to create bpmn-properties
 	 */
 
-	private final native BpmnDiagramElementPropertyJso nativeAddRoot_element(
+	private final native BpmnRootPropertyJso nativeAddRoot_element(
 			JavaScriptObject moddle, String bpmnRootElementType)/*-{
 																console.log("js-native: nativeAddRoot_element");
 																		var ext = moddle.create(bpmnRootElementType);
@@ -109,22 +111,26 @@ public class BpmnModelerJso extends JavaScriptObject {
 																		}-*/;
 
 	// @Override
-	public final native boolean nativeRemoveRootElement(
-			BpmnDiagramElementPropertyJso extElement)/*-{
-														console.log("js-native: removeRoot_elemenemt");
-														var extElementIndex = this.definitions.rootElements.indexOf(extElement);
-														if (extElementIndex > -1) {
-														console.log("js-native: removeRoot_elemenemt: extElement found at index:" + extElementIndex);
-														this.definitions.rootElements.splice(extElementIndex, 1);
-														
-														return true;
-														}else{
-														console.log("js-native: removeRoot_elemenemt: extElement not found");
-														return false;
-														}
-														}-*/;
+	private final native boolean nativeRemoveRootElement(
+			BpmnRootPropertyJso extElement)/*-{
+											console.log("js-native: removeRoot_elemenemt");
+											var extElementIndex = this.definitions.rootElements.indexOf(extElement);
+											if (extElementIndex > -1) {
+											console.log("js-native: removeRoot_elemenemt: extElement found at index:" + extElementIndex);
+											this.definitions.rootElements.splice(extElementIndex, 1);
+											
+											return true;
+											}else{
+											console.log("js-native: removeRoot_elemenemt: extElement not found");
+											return false;
+											}
+											}-*/;
 
-	private final native JsArray<BpmnDiagramElementPropertyJso> nativeGetRootElementsByType(
+	public final boolean removeRootElement_errors(ErrorJso element) {
+		return nativeRemoveRootElement((BpmnRootPropertyJso) element);
+	}
+
+	private final native JsArray<BpmnRootPropertyJso> nativeGetRootElementsByType(
 			String bpmnRootElementType) /*-{
 												console.log("js-native: getRoot_elements");
 												if (!this.definitions || this.definitions.rootElements == 'undefined') {
@@ -139,17 +145,21 @@ public class BpmnModelerJso extends JavaScriptObject {
 												}-*/;
 
 	// @Override
-	public final JsArray<BpmnDiagramElementPropertyJso> getRootElements_errors() {
-		JsArray<BpmnDiagramElementPropertyJso> extElements = nativeGetRootElementsByType(BpmnPropertyElementType.BPMN_ERROR
+	public final List<ErrorJso> getRootElements_errors() {
+		JsArray<BpmnRootPropertyJso> extElements = nativeGetRootElementsByType(BpmnRootPropertyType.BPMN_ERROR
 				.toString());
-		return extElements;
+		List<ErrorJso> list = new ArrayList<ErrorJso>();
+		for (int i = 0; i < extElements.length(); i++) {
+			list.add(extElements.get(i));
+		}
+
+		return list;
 	}
 
 	// @Override
-	public final BpmnDiagramElementPropertyJso addRootElement_error(
-			JavaScriptObject moddle) {
-		BpmnDiagramElementPropertyJso newExtElement = nativeAddRoot_element(
-				moddle, BpmnPropertyElementType.BPMN_ERROR.toString());
+	public final ErrorJso addRootElement_error(JavaScriptObject moddle) {
+		BpmnRootPropertyJso newExtElement = nativeAddRoot_element(moddle,
+				BpmnRootPropertyType.BPMN_ERROR.toString());
 		return newExtElement;
 	}
 

@@ -9,18 +9,22 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.properties;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions;
 
-public interface ErrorJso {
-	public String getAttr_id();
+public interface ExecutionListenerJso {
+	public String getAttr_class();
 
-	public void setAttr_id(String id);
+	public void setAttr_class(String clazz);
 
-	public String getAttr_name();
+	public String getAttr_delegateExpression();
 
-	public void setAttr_name(String name);
+	public void setAttr_delegateExpression(String delegateExpression);
 
-	public String getAttr_errorCode();
+	public String getAttr_expression();
 
-	public void setAttr_errorCode(String errorCode);
+	public void setAttr_expression(String expression);
+
+	public String getAttr_event();
+
+	public void setAttr_event(String event);
 }

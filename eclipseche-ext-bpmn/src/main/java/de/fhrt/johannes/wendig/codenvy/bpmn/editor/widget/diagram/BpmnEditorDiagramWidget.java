@@ -20,9 +20,9 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import de.fhrt.johannes.wendig.codenvy.bpmn.BpmnResource;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesCallback;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnModelerJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso.BpmnElementType;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso.BpmnElementType;
 
 public class BpmnEditorDiagramWidget extends Composite {
 
@@ -110,7 +110,7 @@ public class BpmnEditorDiagramWidget extends Composite {
 		bpmnEditorView.setContentIsDirty();
 	};
 
-	public void jsCallbackElementSelected(BpmnDiagramElementJso elem) {
+	public void jsCallbackElementSelected(BpmnElementJso elem) {
 		Log.info(BpmnEditorDiagramWidget.class, "jsCallbackElementSelected");
 		Log.info(BpmnEditorDiagramWidget.class,
 				"jsCallbackElementSelected: type=" + elem.getType());
@@ -120,7 +120,7 @@ public class BpmnEditorDiagramWidget extends Composite {
 		bpmnEditorView.bpmnElementSelected(elem);
 	};
 
-	public void jsCallbackContainerSelected(BpmnDiagramElementJso elem) {
+	public void jsCallbackContainerSelected(BpmnElementJso elem) {
 		Log.info(BpmnEditorDiagramWidget.class, "jsCallbackContainerSelected");
 		Log.info(BpmnEditorDiagramWidget.class,
 				"jsCallbackContainerSelected: type=" + elem.getType());

@@ -25,7 +25,7 @@ import com.google.inject.Inject;
 import de.fhrt.johannes.wendig.codenvy.bpmn.BpmnExtension;
 import de.fhrt.johannes.wendig.codenvy.bpmn.BpmnResource;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesPresenter;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
 
 /**
  * EditorProvider for Groovy file type.

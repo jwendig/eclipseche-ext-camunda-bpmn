@@ -9,7 +9,7 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.listener;
 
 import org.eclipse.che.ide.util.loging.Log;
 
@@ -23,7 +23,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.extensions.ExecutionListenerJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ExecutionListenerJso;
 
 public class TabListenerView extends AbstractBpmnPropertiesTabWidget {
 	private TableExecutionListenerWidget tableExecutionListener;
@@ -47,7 +47,7 @@ public class TabListenerView extends AbstractBpmnPropertiesTabWidget {
 	public void initContentElements() {
 		Log.info(TabListenerView.class, "initContentElements");
 
-		tableExecutionListener = new TableExecutionListenerWidget();
+		tableExecutionListener = new TableExecutionListenerWidget(getDelegate());
 	}
 
 	public TableExecutionListenerWidget getTableExecutionListener() {

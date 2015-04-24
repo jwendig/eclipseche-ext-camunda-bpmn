@@ -12,8 +12,9 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.star
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.TabListenerController;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.general.TabEventController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.extensions.TabExtensionsController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.listener.TabListenerController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.event.TabEventController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.general.TabGeneralController;
 
 public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
@@ -23,6 +24,7 @@ public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	private TabGeneralController tabGeneralController;
 	private TabEventController tabEventController;
 	private TabListenerController tabListenerController;
+	private TabExtensionsController tabExtensionsController;
 
 	public StartEventPropertiesWidget(
 			BpmnElementPropertiesView.ActionDelegate delegate) {
@@ -31,6 +33,8 @@ public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 		tabGeneralController = new TabGeneralController(delegate);
 		tabEventController = new TabEventController(delegate);
 		tabListenerController = new TabListenerController(delegate);
+		tabExtensionsController = new TabExtensionsController(delegate);
+		
 
 		getTabLpContent().add(tabGeneralController.getView(),
 				tabGeneralController.getView().getTabName());
@@ -38,6 +42,8 @@ public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 				tabEventController.getView().getTabName());
 		getTabLpContent().add(tabListenerController.getView(),
 				tabListenerController.getView().getTabName());
+		getTabLpContent().add(tabExtensionsController.getView(),
+				tabExtensionsController.getView().getTabName());
 	}
 
 	/*
@@ -53,5 +59,6 @@ public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 		tabGeneralController.updateView();
 		tabEventController.updateView();
 		tabListenerController.updateView();
+		tabExtensionsController.updateView();
 	}
 }
