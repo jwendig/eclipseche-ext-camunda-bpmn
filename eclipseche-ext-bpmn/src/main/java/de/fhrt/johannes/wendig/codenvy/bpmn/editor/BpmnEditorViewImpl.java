@@ -117,10 +117,15 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	public void activate() {
 		Log.info(BpmnEditorViewImpl.class, "activate");
 
+		bpmnElementPropertiesEditorPresenter.bpmnElementSelected(
+				bpmnDiagramWidget.getBpmnIoModelerJso(), null);
+		
 		// TODO: find a solution ....
 		// parseProjectForCamundaElements();
 	}
 
+	
+	
 	@Override
 	public void close(boolean save) {
 		Log.info(BpmnEditorViewImpl.class, "close");
@@ -219,8 +224,6 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 
 		workspaceAgent.openPart(bpmnElementPropertiesEditorPresenter,
 				PartStackType.INFORMATION);
-		bpmnElementPropertiesEditorPresenter.bpmnElementSelected(
-				bpmnDiagramWidget.getBpmnIoModelerJso(), null);
 	}
 
 	@Override
