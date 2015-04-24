@@ -33,6 +33,9 @@ public class TabDefinitionsController extends
 	@Override
 	public void updateView() {
 		view.getCtErrors().update();
+		view.getCtDataStores().update();
+		view.getCtMessages().update();
+		view.getCtSignals().update();
 	}
 
 }
