@@ -9,12 +9,14 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
+public interface ScriptTaskJso extends TaskJso {
+	public String getAttr_resource();
 
-public interface BpmnElementPropertiesCallback {
-	public void bpmnElementSelected(BpmnModelerJso modelerJso,
-			BpmnElementJso elementJso);
+	public void setAttr_resource(String resource);
+
+	public String getAttr_resultVariable();
+
+	public void setAttr_resultVariable(String resultVariable);
 }

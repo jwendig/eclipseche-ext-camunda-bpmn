@@ -16,26 +16,14 @@ import org.eclipse.che.ide.util.loging.Log;
 import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.EditTextCell;
 import com.google.gwt.cell.client.FieldUpdater;
-import com.google.gwt.core.client.JsArray;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.i18n.client.HasDirection.Direction;
-import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment.HorizontalAlignmentConstant;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.view.client.ListDataProvider;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnDataTableWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabController;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.TabListenerController;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementPropertyJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.properties.DataObjectJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.properties.ErrorJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.root.ErrorJso;
 
 public class TableErrorsWidget extends AbstractBpmnDataTableWidget<ErrorJso> {
 
@@ -105,9 +93,8 @@ public class TableErrorsWidget extends AbstractBpmnDataTableWidget<ErrorJso> {
 
 			@Override
 			public void update(int index, ErrorJso object, String value) {
-				if (getDelegate().getCurrentElementJso()
-						.removeProperty_element(
-								(BpmnDiagramElementPropertyJso) object)) {
+				if (getDelegate().getCurrentBpmnIoModelerJso()
+						.removeRootElement_errors(object)) {
 					getDataProvider().getList().remove(object);
 					getDataProvider().refresh();
 					getTable().redraw();
@@ -127,7 +114,7 @@ public class TableErrorsWidget extends AbstractBpmnDataTableWidget<ErrorJso> {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				BpmnDiagramElementPropertyJso newDataObject = getDelegate()
+				ErrorJso newDataObject = getDelegate()
 						.getCurrentBpmnIoModelerJso().addRootElement_error(
 								getDelegate().getCurrentBpmnIoModelerJso()
 										.nativeGetModdle());
@@ -145,10 +132,13 @@ public class TableErrorsWidget extends AbstractBpmnDataTableWidget<ErrorJso> {
 	@Override
 	public void update() {
 		getDataProvider().getList().clear();
-		JsArray<BpmnDiagramElementPropertyJso> dataObjects = getDelegate()
-				.getCurrentBpmnIoModelerJso().getRootElements_errors();
-		for (int i = 0; i < dataObjects.length(); i++) {
-			getDataProvider().getList().add(dataObjects.get(i));
-		}
+		getDataProvider().getList().addAll(
+				getDelegate().getCurrentBpmnIoModelerJso()
+						.getRootElements_errors());
+		// JsArray<BpmnRootPropertyJso> dataObjects = getDelegate()
+		// .getCurrentBpmnIoModelerJso().getRootElements_errors();
+		// for (int i = 0; i < dataObjects.length(); i++) {
+		// getDataProvider().getList().add(dataObjects.get(i));
+		// }
 	}
 }

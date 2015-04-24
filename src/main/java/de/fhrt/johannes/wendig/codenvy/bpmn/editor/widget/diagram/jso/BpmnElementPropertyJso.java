@@ -8,16 +8,15 @@
  * Contributors:
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.properties.DataObjectJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.properties.ErrorJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.properties.DataObjectJso;
 
-public class BpmnDiagramElementPropertyJso extends BpmnBaseElementJso implements
-		DataObjectJso, ErrorJso {
+public class BpmnElementPropertyJso extends AbstractBpmnElementJso implements
+		DataObjectJso {
 
 	public enum BpmnPropertyElementType {
-		BPMN_DATA_OBJECT("bpmn:DataObject"), BPMN_ERROR("bpmn:Error");
+		BPMN_DATA_OBJECT("bpmn:DataObject");
 
 		private final String bpmnIoTypeDefinition;
 
@@ -41,6 +40,6 @@ public class BpmnDiagramElementPropertyJso extends BpmnBaseElementJso implements
 		}
 	}
 
-	protected BpmnDiagramElementPropertyJso() {
+	protected BpmnElementPropertyJso() {
 	}
 }

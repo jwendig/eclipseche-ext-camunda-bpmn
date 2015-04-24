@@ -9,7 +9,7 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.listener;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -20,7 +20,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.extensions.ExecutionListenerJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ExecutionListenerJso;
 
 public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 
@@ -67,16 +67,14 @@ public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 					executionListenerJso = currentExecutionListenerJso;
 				} else {
 					executionListenerJso = widgetCallback
-							.getController()
-							.getActionDelegate()
+							.getDelegate()
 							.getCurrentElementJso()
 
-							.addExt_executionListener(
-									widgetCallback.getController()
-											.getActionDelegate()
+							.addCamundaExt_executionListener(
+									widgetCallback.getDelegate()
 											.getCurrentBpmnIoModelerJso()
 											.nativeGetModdle());
-					widgetCallback.getExecutionListenersProvider().getList()
+					widgetCallback.getDataProvider().getList()
 							.add(executionListenerJso);
 				}
 
@@ -89,9 +87,8 @@ public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 
 				TableExecutionListenerEditTableEntryDialog.this.hide();
 
-				widgetCallback.getExecutionListenersProvider().refresh();
-				widgetCallback.getController().getActionDelegate()
-						.onContentChange();
+				widgetCallback.getDataProvider().refresh();
+				widgetCallback.getDelegate().onContentChange();
 			}
 		});
 

@@ -9,13 +9,13 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementPropertyJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.properties.DataObjectJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementPropertyJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.properties.DataObjectJso;
 
 public interface ProcessJso extends DefaultJso {
 	public boolean getAttr_isExecutable();
@@ -30,10 +30,9 @@ public interface ProcessJso extends DefaultJso {
 
 	public void setAttr_candidateStarterUsers(String candidateStarterUsers);
 
-	public JsArray<BpmnDiagramElementPropertyJso> getProperty_dataObjects();
+	public JsArray<BpmnElementPropertyJso> getBpmnProperty_dataObjects();
 
-	public BpmnDiagramElementPropertyJso addProperty_dataObject(JavaScriptObject moddle);
+	public BpmnElementPropertyJso addProperty_dataObject(JavaScriptObject moddle);
 
-	public boolean removeProperty_element(
-			BpmnDiagramElementPropertyJso propElement);
+	public boolean removeBpmnProperty_element(BpmnElementPropertyJso propElement);
 }

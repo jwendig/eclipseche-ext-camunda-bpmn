@@ -16,8 +16,8 @@ import org.eclipse.che.ide.api.parts.base.BaseActionDelegate;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.inject.ImplementedBy;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnModelerJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
 
 @ImplementedBy(BpmnElementPropertiesViewImpl.class)
 public interface BpmnElementPropertiesView extends
@@ -25,7 +25,7 @@ public interface BpmnElementPropertiesView extends
 	public interface ActionDelegate extends BaseActionDelegate {
 		void onContentChange();
 
-		BpmnDiagramElementJso getCurrentElementJso();
+		BpmnElementJso getCurrentElementJso();
 		BpmnModelerJso getCurrentBpmnIoModelerJso();
 	}
 

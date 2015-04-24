@@ -9,9 +9,9 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.properties;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.root;
 
-public interface DataObjectJso {
+public interface ErrorJso {
 	public String getAttr_id();
 
 	public void setAttr_id(String id);
@@ -19,4 +19,8 @@ public interface DataObjectJso {
 	public String getAttr_name();
 
 	public void setAttr_name(String name);
+
+	public String getAttr_errorCode();
+
+	public void setAttr_errorCode(String errorCode);
 }

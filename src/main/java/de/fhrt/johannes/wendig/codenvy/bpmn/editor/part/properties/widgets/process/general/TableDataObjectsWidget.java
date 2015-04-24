@@ -32,9 +32,9 @@ import com.google.gwt.view.client.ListDataProvider;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnDataTableWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabController;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.TabListenerController;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementPropertyJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.interfaces.properties.DataObjectJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.listener.TabListenerController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementPropertyJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.properties.DataObjectJso;
 
 public class TableDataObjectsWidget extends
 		AbstractBpmnDataTableWidget<DataObjectJso> {
@@ -83,8 +83,8 @@ public class TableDataObjectsWidget extends
 			@Override
 			public void update(int index, DataObjectJso object, String value) {
 				if (getDelegate().getCurrentElementJso()
-						.removeProperty_element(
-								(BpmnDiagramElementPropertyJso) object)) {
+						.removeBpmnProperty_element(
+								(BpmnElementPropertyJso) object)) {
 					getDataProvider().getList().remove(object);
 					getDataProvider().refresh();
 					getTable().redraw();
@@ -103,7 +103,7 @@ public class TableDataObjectsWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
-				BpmnDiagramElementPropertyJso newDataObject = getDelegate()
+				BpmnElementPropertyJso newDataObject = getDelegate()
 						.getCurrentElementJso().addProperty_dataObject(getDelegate().getCurrentBpmnIoModelerJso().nativeGetModdle());
 				getDataProvider().getList().add(newDataObject);
 				getDataProvider().refresh();
@@ -119,8 +119,8 @@ public class TableDataObjectsWidget extends
 	@Override
 	public void update() {
 		getDataProvider().getList().clear();
-		JsArray<BpmnDiagramElementPropertyJso> dataObjects = getDelegate()
-				.getCurrentElementJso().getProperty_dataObjects();
+		JsArray<BpmnElementPropertyJso> dataObjects = getDelegate()
+				.getCurrentElementJso().getBpmnProperty_dataObjects();
 		for (int i = 0; i < dataObjects.length(); i++) {
 			getDataProvider().getList().add(dataObjects.get(i));
 		}

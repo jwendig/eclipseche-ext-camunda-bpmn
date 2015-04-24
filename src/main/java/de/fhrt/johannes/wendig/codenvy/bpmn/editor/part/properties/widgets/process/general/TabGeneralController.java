@@ -20,9 +20,11 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabController;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.bpmnelements.BpmnDiagramElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.ProcessJso;
 
-public class TabGeneralController extends AbstractBpmnPropertiesTabController {
+public class TabGeneralController extends
+		AbstractBpmnPropertiesTabController<ProcessJso> {
 	private final static String TAB_NAME = "General";
 	private TabGeneralView view;
 
@@ -35,9 +37,12 @@ public class TabGeneralController extends AbstractBpmnPropertiesTabController {
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
 				Log.info(TabGeneralController.class, "processId-changed");
-				getActionDelegate().getCurrentElementJso().setAttr_id(
+				// getActionDelegate().getCurrentElementJso().setAttr_id(
+				// view.getTbProcessId().getText());
+				// getActionDelegate().onContentChange();
+				getCurrentBpmnElement().setAttr_id(
 						view.getTbProcessId().getText());
-				getActionDelegate().onContentChange();
+				contentChanged();
 			}
 		});
 
@@ -46,9 +51,12 @@ public class TabGeneralController extends AbstractBpmnPropertiesTabController {
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
 				Log.info(TabGeneralController.class, "name-changed");
-				getActionDelegate().getCurrentElementJso().setAttr_name(
-						view.getTbName().getText());
-				getActionDelegate().onContentChange();
+				// getActionDelegate().getCurrentElementJso().setAttr_name(
+				// view.getTbName().getText());
+				// getActionDelegate().onContentChange();
+				getCurrentBpmnElement()
+						.setAttr_name(view.getTbName().getText());
+				contentChanged();
 			}
 		});
 
@@ -59,9 +67,12 @@ public class TabGeneralController extends AbstractBpmnPropertiesTabController {
 					public void onValueChange(ValueChangeEvent<Boolean> event) {
 						Log.info(TabGeneralController.class,
 								"isExecuteable-changed");
-						getActionDelegate().getCurrentElementJso()
-								.setAttr_isExecutable(event.getValue());
-						getActionDelegate().onContentChange();
+						// getActionDelegate().getCurrentElementJso()
+						// .setAttr_isExecutable(event.getValue());
+						// getActionDelegate().onContentChange();
+						getCurrentBpmnElement().setAttr_isExecutable(
+								event.getValue());
+						contentChanged();
 					}
 				});
 	}
@@ -73,14 +84,20 @@ public class TabGeneralController extends AbstractBpmnPropertiesTabController {
 	@Override
 	public void updateView() {
 
-		view.getTbProcessId().setText(
-				getActionDelegate().getCurrentElementJso().getAttr_id());
-		view.getTbName().setText(
-				getActionDelegate().getCurrentElementJso().getAttr_name());
+		// view.getTbProcessId().setText(
+		// getActionDelegate().getCurrentElementJso().getAttr_id());
+		// view.getTbName().setText(
+		// getActionDelegate().getCurrentElementJso().getAttr_name());
+		//
+		// view.getCbIsExecutable().setValue(
+		// getActionDelegate().getCurrentElementJso()
+		// .getAttr_isExecutable());
+
+		view.getTbProcessId().setText(getCurrentBpmnElement().getAttr_id());
+		view.getTbName().setText(getCurrentBpmnElement().getAttr_name());
 
 		view.getCbIsExecutable().setValue(
-				getActionDelegate().getCurrentElementJso()
-						.getAttr_isExecutable());
+				getCurrentBpmnElement().getAttr_isExecutable());
 
 		view.getTbDocumentation().setEnabled(false);
 		view.getTbDocumentation().setText("not implemented");
