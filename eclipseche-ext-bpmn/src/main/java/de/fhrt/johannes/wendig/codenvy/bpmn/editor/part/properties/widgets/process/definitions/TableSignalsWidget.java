@@ -102,8 +102,8 @@ public class TableSignalsWidget extends AbstractBpmnDataTableWidget<SignalJso> {
 			}
 		});
 
+		getTable().addColumn(tcId, "Id");
 		getTable().addColumn(tcName, "Name");
-		getTable().addColumn(tcId, "Error Code");
 		getTable().addColumn(tcBtnRemove, "");
 
 		btnAdd = new Button("Add");
