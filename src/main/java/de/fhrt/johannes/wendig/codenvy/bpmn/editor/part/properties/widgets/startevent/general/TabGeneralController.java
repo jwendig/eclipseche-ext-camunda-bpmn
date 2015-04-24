@@ -113,21 +113,24 @@ public class TabGeneralController extends AbstractBpmnPropertiesTabController {
 	public void updateView() {
 		view.getTbId().setText(
 				getActionDelegate().getCurrentElementJso().getAttr_id());
+
+		view.getTbName().setEnabled(false);
 		view.getTbName().setText(
 				getActionDelegate().getCurrentElementJso().getAttr_name());
 		view.getTbFormKey().setText(
 				getActionDelegate().getCurrentElementJso().getAttr_formKey());
 
-		view.getCbAsycAfter().setValue(
-				getActionDelegate().getCurrentElementJso()
-						.getAttr_asyncAfter());
+		view.getCbAsycAfter()
+				.setValue(
+						getActionDelegate().getCurrentElementJso()
+								.getAttr_asyncAfter());
 		view.getCbAsycBefore().setValue(
 				getActionDelegate().getCurrentElementJso()
 						.getAttr_asyncBefore());
 
 		view.getTbRetryTimeCycle().setEnabled(false);
 		view.getTbRetryTimeCycle().setText("not implemented");
-		
+
 		view.getTbDocumentation().setEnabled(false);
 		view.getTbDocumentation().setText("not implemented");
 

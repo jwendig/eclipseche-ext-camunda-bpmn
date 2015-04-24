@@ -10,10 +10,10 @@
  *******************************************************************************/
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent;
 
-import com.google.gwt.user.client.ui.Label;
-
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.TabListenerController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.general.TabEventController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.general.TabGeneralController;
 
 public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
@@ -21,15 +21,23 @@ public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	private final static String LB_ELEMENT_NAME_PREFIX = "Start Event";
 
 	private TabGeneralController tabGeneralController;
+	private TabEventController tabEventController;
+	private TabListenerController tabListenerController;
 
 	public StartEventPropertiesWidget(
 			BpmnElementPropertiesView.ActionDelegate delegate) {
 		super(LB_ELEMENT_NAME_PREFIX, delegate);
 
 		tabGeneralController = new TabGeneralController(delegate);
+		tabEventController = new TabEventController(delegate);
+		tabListenerController = new TabListenerController(delegate);
 
 		getTabLpContent().add(tabGeneralController.getView(),
 				tabGeneralController.getView().getTabName());
+		getTabLpContent().add(tabEventController.getView(),
+				tabEventController.getView().getTabName());
+		getTabLpContent().add(tabListenerController.getView(),
+				tabListenerController.getView().getTabName());
 	}
 
 	/*
@@ -43,5 +51,7 @@ public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	@Override
 	public void updateTabs() {
 		tabGeneralController.updateView();
+		tabEventController.updateView();
+		tabListenerController.updateView();
 	}
 }
