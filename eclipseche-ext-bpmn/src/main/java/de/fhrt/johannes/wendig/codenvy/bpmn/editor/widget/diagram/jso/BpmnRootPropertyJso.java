@@ -10,13 +10,17 @@
  *******************************************************************************/
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.root.DataStoreJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.root.ErrorJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.root.MessageJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.root.SignalJso;
 
 public class BpmnRootPropertyJso extends AbstractBpmnElementJso implements
-		ErrorJso {
+		ErrorJso, DataStoreJso, SignalJso, MessageJso {
 
 	public enum BpmnRootPropertyType {
-		BPMN_ERROR("bpmn:Error");
+		BPMN_ERROR("bpmn:Error"), BPMN_MESSAGE("bpmn:Message"), BPMN_SIGNAL(
+				"bpmn:Signal"), BPMN_DATASTORE("bpmn:DataStore");
 
 		private final String bpmnIoTypeDefinition;
 

@@ -23,21 +23,48 @@ import com.google.gwt.user.client.ui.Button;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnDataTableWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.root.DataStoreJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.root.ErrorJso;
 
-public class TableErrorsWidget extends AbstractBpmnDataTableWidget<ErrorJso> {
+public class TableDataStoresWidget extends
+		AbstractBpmnDataTableWidget<DataStoreJso> {
 
-	private Column<ErrorJso, String> tcName;
-	private Column<ErrorJso, String> tcErrorCode;
-	private Column<ErrorJso, String> tcBtnRemove;
+	private Column<DataStoreJso, String> tcId;
+	private Column<DataStoreJso, String> tcName;
+	private Column<DataStoreJso, String> tcBtnRemove;
 	private Button btnAdd;
 
-	public TableErrorsWidget(BpmnElementPropertiesView.ActionDelegate delegate) {
+	public TableDataStoresWidget(
+			BpmnElementPropertiesView.ActionDelegate delegate) {
 		super(delegate);
-		tcName = new Column<ErrorJso, String>(new EditTextCell()) {
+		tcId = new Column<DataStoreJso, String>(new EditTextCell()) {
 
 			@Override
-			public String getValue(ErrorJso object) {
+			public String getValue(DataStoreJso object) {
+				if (null == object.getAttr_id()) {
+					return "";
+				}
+				return object.getAttr_id();
+			}
+		};
+
+		tcId.setFieldUpdater(new FieldUpdater<DataStoreJso, String>() {
+
+			public void update(int index, final DataStoreJso object,
+					final String value) {
+				Log.info(TableDataStoresWidget.class,
+						"tcDataObjectName-fieldUpdater: update");
+				object.setAttr_id(value);
+				getTable().redraw();
+				getDelegate().onContentChange();
+			}
+
+		});
+
+		tcName = new Column<DataStoreJso, String>(new EditTextCell()) {
+
+			@Override
+			public String getValue(DataStoreJso object) {
 				if (null == object.getAttr_name()) {
 					return "";
 				}
@@ -45,11 +72,11 @@ public class TableErrorsWidget extends AbstractBpmnDataTableWidget<ErrorJso> {
 			}
 		};
 
-		tcName.setFieldUpdater(new FieldUpdater<ErrorJso, String>() {
+		tcName.setFieldUpdater(new FieldUpdater<DataStoreJso, String>() {
 
-			public void update(int index, final ErrorJso object,
+			public void update(int index, final DataStoreJso object,
 					final String value) {
-				Log.info(TableErrorsWidget.class,
+				Log.info(TableDataStoresWidget.class,
 						"tcDataObjectName-fieldUpdater: update");
 				object.setAttr_name(value);
 				getTable().redraw();
@@ -58,43 +85,19 @@ public class TableErrorsWidget extends AbstractBpmnDataTableWidget<ErrorJso> {
 
 		});
 
-		tcErrorCode = new Column<ErrorJso, String>(new EditTextCell()) {
-
+		tcBtnRemove = new Column<DataStoreJso, String>(new ButtonCell()) {
 			@Override
-			public String getValue(ErrorJso object) {
-				if (null == object.getAttr_errorCode()) {
-					return "";
-				}
-				return object.getAttr_errorCode();
-			}
-		};
-
-		tcErrorCode.setFieldUpdater(new FieldUpdater<ErrorJso, String>() {
-
-			public void update(int index, final ErrorJso object,
-					final String value) {
-				Log.info(TableErrorsWidget.class,
-						"tcDataObjectName-fieldUpdater: update");
-				object.setAttr_errorCode(value);
-				getTable().redraw();
-				getDelegate().onContentChange();
-			}
-
-		});
-
-		tcBtnRemove = new Column<ErrorJso, String>(new ButtonCell()) {
-			@Override
-			public String getValue(ErrorJso object) {
+			public String getValue(DataStoreJso object) {
 				return "x";
 			}
 		};
 
-		tcBtnRemove.setFieldUpdater(new FieldUpdater<ErrorJso, String>() {
+		tcBtnRemove.setFieldUpdater(new FieldUpdater<DataStoreJso, String>() {
 
 			@Override
-			public void update(int index, ErrorJso object, String value) {
+			public void update(int index, DataStoreJso object, String value) {
 				if (getDelegate().getCurrentBpmnIoModelerJso()
-						.removeRootElementErrors(object)) {
+						.removeRootElementDataStore(object)) {
 					getDataProvider().getList().remove(object);
 					getDataProvider().refresh();
 					getTable().redraw();
@@ -105,8 +108,8 @@ public class TableErrorsWidget extends AbstractBpmnDataTableWidget<ErrorJso> {
 			}
 		});
 
+		getTable().addColumn(tcId, "Id");
 		getTable().addColumn(tcName, "Name");
-		getTable().addColumn(tcErrorCode, "Error Code");
 		getTable().addColumn(tcBtnRemove, "");
 
 		btnAdd = new Button("Add");
@@ -114,8 +117,8 @@ public class TableErrorsWidget extends AbstractBpmnDataTableWidget<ErrorJso> {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				ErrorJso newDataObject = getDelegate()
-						.getCurrentBpmnIoModelerJso().addRootElementError(
+				DataStoreJso newDataObject = getDelegate()
+						.getCurrentBpmnIoModelerJso().addRootElementDataStore(
 								getDelegate().getCurrentBpmnIoModelerJso()
 										.nativeGetModdle());
 				getDataProvider().getList().add(newDataObject);
@@ -134,11 +137,6 @@ public class TableErrorsWidget extends AbstractBpmnDataTableWidget<ErrorJso> {
 		getDataProvider().getList().clear();
 		getDataProvider().getList().addAll(
 				getDelegate().getCurrentBpmnIoModelerJso()
-						.getRootElementsErrors());
-		// JsArray<BpmnRootPropertyJso> dataObjects = getDelegate()
-		// .getCurrentBpmnIoModelerJso().getRootElements_errors();
-		// for (int i = 0; i < dataObjects.length(); i++) {
-		// getDataProvider().getList().add(dataObjects.get(i));
-		// }
+						.getRootElementsDataStores());
 	}
 }

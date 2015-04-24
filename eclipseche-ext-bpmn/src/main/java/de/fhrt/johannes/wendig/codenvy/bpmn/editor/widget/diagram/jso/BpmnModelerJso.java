@@ -19,7 +19,10 @@ import com.google.gwt.core.client.JsArray;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnRootPropertyJso.BpmnRootPropertyType;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.root.DataStoreJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.root.ErrorJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.root.MessageJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.root.SignalJso;
 
 public class BpmnModelerJso extends JavaScriptObject {
 
@@ -98,7 +101,7 @@ public class BpmnModelerJso extends JavaScriptObject {
 	 * Functions to create bpmn-properties
 	 */
 
-	private final native BpmnRootPropertyJso nativeAddRoot_element(
+	private final native BpmnRootPropertyJso nativeAddRootElement(
 			JavaScriptObject moddle, String bpmnRootElementType)/*-{
 																console.log("js-native: nativeAddRoot_element");
 																		var ext = moddle.create(bpmnRootElementType);
@@ -110,7 +113,6 @@ public class BpmnModelerJso extends JavaScriptObject {
 																		
 																		}-*/;
 
-	// @Override
 	private final native boolean nativeRemoveRootElement(
 			BpmnRootPropertyJso extElement)/*-{
 											console.log("js-native: removeRoot_elemenemt");
@@ -126,10 +128,6 @@ public class BpmnModelerJso extends JavaScriptObject {
 											}
 											}-*/;
 
-	public final boolean removeRootElement_errors(ErrorJso element) {
-		return nativeRemoveRootElement((BpmnRootPropertyJso) element);
-	}
-
 	private final native JsArray<BpmnRootPropertyJso> nativeGetRootElementsByType(
 			String bpmnRootElementType) /*-{
 												console.log("js-native: getRoot_elements");
@@ -144,8 +142,14 @@ public class BpmnModelerJso extends JavaScriptObject {
 												});
 												}-*/;
 
-	// @Override
-	public final List<ErrorJso> getRootElements_errors() {
+	/*
+	 * functions for errors
+	 */
+	public final boolean removeRootElementErrors(ErrorJso element) {
+		return nativeRemoveRootElement((BpmnRootPropertyJso) element);
+	}
+
+	public final List<ErrorJso> getRootElementsErrors() {
 		JsArray<BpmnRootPropertyJso> extElements = nativeGetRootElementsByType(BpmnRootPropertyType.BPMN_ERROR
 				.toString());
 		List<ErrorJso> list = new ArrayList<ErrorJso>();
@@ -156,10 +160,81 @@ public class BpmnModelerJso extends JavaScriptObject {
 		return list;
 	}
 
-	// @Override
-	public final ErrorJso addRootElement_error(JavaScriptObject moddle) {
-		BpmnRootPropertyJso newExtElement = nativeAddRoot_element(moddle,
+	public final ErrorJso addRootElementError(JavaScriptObject moddle) {
+		BpmnRootPropertyJso newExtElement = nativeAddRootElement(moddle,
 				BpmnRootPropertyType.BPMN_ERROR.toString());
+		return newExtElement;
+	}
+
+	/*
+	 * functions for signals
+	 */
+	public final boolean removeRootElementSignal(SignalJso element) {
+		return nativeRemoveRootElement((BpmnRootPropertyJso) element);
+	}
+
+	public final List<SignalJso> getRootElementsSignals() {
+		JsArray<BpmnRootPropertyJso> extElements = nativeGetRootElementsByType(BpmnRootPropertyType.BPMN_SIGNAL
+				.toString());
+		List<SignalJso> list = new ArrayList<SignalJso>();
+		for (int i = 0; i < extElements.length(); i++) {
+			list.add(extElements.get(i));
+		}
+
+		return list;
+	}
+
+	public final SignalJso addRootElementSignalJso(JavaScriptObject moddle) {
+		BpmnRootPropertyJso newExtElement = nativeAddRootElement(moddle,
+				BpmnRootPropertyType.BPMN_SIGNAL.toString());
+		return newExtElement;
+	}
+
+	/*
+	 * functions for data-stores
+	 */
+	public final boolean removeRootElementDataStore(DataStoreJso element) {
+		return nativeRemoveRootElement((BpmnRootPropertyJso) element);
+	}
+
+	public final List<DataStoreJso> getRootElementsDataStores() {
+		JsArray<BpmnRootPropertyJso> extElements = nativeGetRootElementsByType(BpmnRootPropertyType.BPMN_DATASTORE
+				.toString());
+		List<DataStoreJso> list = new ArrayList<DataStoreJso>();
+		for (int i = 0; i < extElements.length(); i++) {
+			list.add(extElements.get(i));
+		}
+
+		return list;
+	}
+
+	public final DataStoreJso addRootElementDataStore(JavaScriptObject moddle) {
+		BpmnRootPropertyJso newExtElement = nativeAddRootElement(moddle,
+				BpmnRootPropertyType.BPMN_DATASTORE.toString());
+		return newExtElement;
+	}
+
+	/*
+	 * functions for messages
+	 */
+	public final boolean removeRootElementMessage(MessageJso element) {
+		return nativeRemoveRootElement((BpmnRootPropertyJso) element);
+	}
+
+	public final List<MessageJso> getRootElementsMessages() {
+		JsArray<BpmnRootPropertyJso> extElements = nativeGetRootElementsByType(BpmnRootPropertyType.BPMN_MESSAGE
+				.toString());
+		List<MessageJso> list = new ArrayList<MessageJso>();
+		for (int i = 0; i < extElements.length(); i++) {
+			list.add(extElements.get(i));
+		}
+
+		return list;
+	}
+
+	public final MessageJso addRootElementMessage(JavaScriptObject moddle) {
+		BpmnRootPropertyJso newExtElement = nativeAddRootElement(moddle,
+				BpmnRootPropertyType.BPMN_MESSAGE.toString());
 		return newExtElement;
 	}
 

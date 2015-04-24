@@ -21,9 +21,9 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.Abstr
 public class TabDefinitionsView extends AbstractBpmnPropertiesTabWidget {
 
 	private TableErrorsWidget ctErrors;
-	private CellTable<String> ctMessages;
-	private CellTable<String> ctSignals;
-	private CellTable<String> ctDataStores;
+	private TableDataStoresWidget ctDataStores;
+	private TableMessagesWidget ctMessages;
+	private TableSignalsWidget ctSignals;
 
 	public TabDefinitionsView(String tabName,
 			BpmnElementPropertiesView.ActionDelegate delegate) {
@@ -51,19 +51,25 @@ public class TabDefinitionsView extends AbstractBpmnPropertiesTabWidget {
 	public void initContentElements() {
 		Log.info(TabDefinitionsView.class, "initContentElements");
 		ctErrors = new TableErrorsWidget(getDelegate());
-		ctErrors.setWidth("100%");
-		ctMessages = new CellTable<String>();
-		ctMessages.setWidth("100%");
-		ctSignals = new CellTable<String>();
-		ctSignals.setWidth("100%");
-		ctDataStores = new CellTable<String>();
-		ctDataStores.setWidth("100%");
+		ctMessages = new TableMessagesWidget(getDelegate());
+		ctSignals = new TableSignalsWidget(getDelegate());
+		ctDataStores = new TableDataStoresWidget(getDelegate());
 	}
 
 	public TableErrorsWidget getCtErrors() {
 		return ctErrors;
 	}
 
-	
-	
+	public TableDataStoresWidget getCtDataStores() {
+		return ctDataStores;
+	}
+
+	public TableMessagesWidget getCtMessages() {
+		return ctMessages;
+	}
+
+	public TableSignalsWidget getCtSignals() {
+		return ctSignals;
+	}
+
 }
