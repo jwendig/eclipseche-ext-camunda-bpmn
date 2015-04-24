@@ -331,7 +331,9 @@ module.exports={
         {
           "name": "initiator",
           "isAttr": true,
-          "type": "String"
+          "type": "String",
+          "default": ""
+        	  
         }
       ]
     },
