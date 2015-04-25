@@ -9,30 +9,30 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.listener;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.formfields;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView.ActionDelegate;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabController;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ExecutionListenerJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.FormFieldJso;
 
-public class TabListenerController extends
-		AbstractBpmnPropertiesTabController<ExecutionListenerJso> {
+public class TabFormFieldsController extends
+		AbstractBpmnPropertiesTabController<FormFieldJso> {
 
-	private final static String TAB_NAME = "Listener";
+	private final static String TAB_NAME = "Form Fields";
 
-	private TabListenerView view;
+	private TabFormFieldsView view;
 
-	public TabListenerController(ActionDelegate delegate) {
+	public TabFormFieldsController(ActionDelegate delegate) {
 		super(delegate);
-		this.view = new TabListenerView(TAB_NAME, delegate);
+		this.view = new TabFormFieldsView(TAB_NAME, delegate);
 	}
 
-	public TabListenerView getView() {
+	public TabFormFieldsView getView() {
 		return view;
 	}
 
 	@Override
 	public void updateView() {
-		view.getTableExecutionListener().update();
+		view.getTableFormFields().update();
 	}
 }
