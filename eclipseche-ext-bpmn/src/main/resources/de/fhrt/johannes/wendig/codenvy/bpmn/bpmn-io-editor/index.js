@@ -6,7 +6,6 @@ var bpmnIo_fkt_createNewModeler;
 
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 
-
 bpmnIo_fkt_createNewModeler = function(wrapperId){
 	
 	renderer = new BpmnModeler({
@@ -336,7 +335,6 @@ module.exports={
           "isAttr": true,
           "type": "String",
           "default": ""
-        	  
         }
       ]
     },
@@ -399,8 +397,7 @@ module.exports={
       	{
           "name": "event",
           "isAttr": true,
-          "type": "String",
-          "default": ""
+          "type": "String"
         },
         {
           "name": "class",
@@ -455,7 +452,86 @@ module.exports={
           "type": "String"
         }        
       ]
-    }        
+    },
+    {
+      "name": "Validation",
+      "superClass": [ "Element" ],
+      "properties": [
+      	{
+          "name": "values",
+          "isMany": true,
+          "type": "Constraint"
+        }
+      ]
+    },
+    {
+      "name": "Constraint",
+       "extends": [
+        "camunda:Validation"
+      ],
+      "properties": [
+      	{
+          "name": "name",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "config",
+          "isAttr": true,
+          "type": "String"
+        }        
+      ]
+    },
+    {
+      "name": "FormData",
+      "superClass": [ "Element" ],
+      "properties": [
+      	{
+          "name": "values",
+          "isMany": true,
+          "type": "FormField"
+        }
+      ]
+    },
+    {
+      "name": "FormField",
+       "extends": [
+        "camunda:FormData"
+      ],
+      "properties": [
+      	{
+          "name": "id",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "label",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "type",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "defaultValue",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "properties",
+          "isAttr": false,
+          "type": "Properties"
+        },
+        {
+          "name": "validation",
+          "isAttr": false,
+          "type": "Validation"
+        }        
+      ]
+    }
+          
           
   ],
   "emumerations": [],
