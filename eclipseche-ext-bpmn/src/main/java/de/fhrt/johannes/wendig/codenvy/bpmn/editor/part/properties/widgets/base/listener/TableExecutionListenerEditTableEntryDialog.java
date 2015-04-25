@@ -57,7 +57,7 @@ public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 
 		setAnimationEnabled(true);
 		setGlassEnabled(true);
-		setWidth("400px");
+		setWidth("600px");
 		setHeight("auto");
 
 		vpRoot = new VerticalPanel();
@@ -120,6 +120,8 @@ public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 		gridContent.setWidget(0, 1, lboxEvent);
 		gridContent.setWidget(1, 1, lboxType);
 		gridContent.setWidget(2, 1, tbClass);
+
+		gridContent.getColumnFormatter().setWidth(0, "150px");
 
 		btnOk = new Button("Save");
 		btnOk.addClickHandler(new ClickHandler() {

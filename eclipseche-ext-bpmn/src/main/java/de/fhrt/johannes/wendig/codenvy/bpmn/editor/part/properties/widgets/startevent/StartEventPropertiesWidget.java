@@ -15,6 +15,7 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.Abstr
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.extensions.TabExtensionsController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.listener.TabListenerController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.event.TabEventController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.formfields.TabFormFieldsController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.general.TabGeneralController;
 
 public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
@@ -25,6 +26,7 @@ public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	private TabEventController tabEventController;
 	private TabListenerController tabListenerController;
 	private TabExtensionsController tabExtensionsController;
+	private TabFormFieldsController tabFormFieldsController;
 
 	// TODO: implement
 	// private TabFormFieldsController tabFormFieldsController;
@@ -36,7 +38,7 @@ public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 		tabGeneralController = new TabGeneralController(delegate);
 		tabEventController = new TabEventController(delegate);
 		tabListenerController = new TabListenerController(delegate);
-		// tabFormFieldsController = new TabFormFieldsController(delegate);
+		tabFormFieldsController = new TabFormFieldsController(delegate);
 		tabExtensionsController = new TabExtensionsController(delegate);
 
 		getTabLpContent().add(tabGeneralController.getView(),
@@ -45,8 +47,8 @@ public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 				tabEventController.getView().getTabName());
 		getTabLpContent().add(tabListenerController.getView(),
 				tabListenerController.getView().getTabName());
-		// getTabLpContent().add(tabFormFieldsController.getView(),
-		// tabFormFieldsController.getView().getTabName());
+		getTabLpContent().add(tabFormFieldsController.getView(),
+				tabFormFieldsController.getView().getTabName());
 		getTabLpContent().add(tabExtensionsController.getView(),
 				tabExtensionsController.getView().getTabName());
 	}
@@ -65,5 +67,6 @@ public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 		tabEventController.updateView();
 		tabListenerController.updateView();
 		tabExtensionsController.updateView();
+		tabFormFieldsController.updateView();
 	}
 }
