@@ -200,7 +200,8 @@ module.exports={
         {
           "name": "class",
           "isAttr": true,
-          "type": "String"
+          "type": "String",
+          "default": ""
         }
       ]
     },
@@ -239,7 +240,8 @@ module.exports={
         {
           "name": "delegateExpression",
           "isAttr": true,
-          "type": "String"
+          "type": "String",
+          "default": ""
         }
       ]
     },
@@ -292,7 +294,8 @@ module.exports={
         {
           "name": "expression",
           "isAttr": true,
-          "type": "String"
+          "type": "String",
+          "default": ""
         }
       ]
     },
@@ -396,22 +399,26 @@ module.exports={
       	{
           "name": "event",
           "isAttr": true,
-          "type": "String"
+          "type": "String",
+          "default": ""
         },
         {
           "name": "class",
           "isAttr": true,
-          "type": "attr_class"
+          "type": "attr_class",
+          "default": ""
         },
         {
           "name": "expression",
           "isAttr": true,
-          "type": "attr_expression"
+          "type": "attr_expression",
+          "default": ""
         },
         {
           "name": "delegateExpression",
           "isAttr": true,
-          "type": "attr_delegateExpression"
+          "type": "attr_delegateExpression",
+          "default": ""
         }
       ]
     },
