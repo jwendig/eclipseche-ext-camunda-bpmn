@@ -9,7 +9,9 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.extensions;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.formfields;
+
+import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.EditTextCell;
@@ -21,9 +23,10 @@ import com.google.gwt.user.client.ui.Button;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnDataTableWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.FormFieldJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.PropertyJso;
 
-public class TableExtensionsWidget extends
+public class EditDialogTablePropertiesWidget extends
 		AbstractBpmnDataTableWidget<PropertyJso> {
 
 	private Column<PropertyJso, String> tcName;
@@ -32,9 +35,31 @@ public class TableExtensionsWidget extends
 	private Column<PropertyJso, String> tcBtnRemove;
 	private Button btnAdd;
 
-	public TableExtensionsWidget(
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+	private FormFieldJso currentFormFieldJso;
+
+	public EditDialogTablePropertiesWidget(
+			BpmnElementPropertiesView.ActionDelegate delegate,
+			FormFieldJso currentFormFieldJso) {
 		super(delegate);
+		Log.info(EditDialogTablePropertiesWidget.class, "constructor");
+		this.currentFormFieldJso = currentFormFieldJso;
+
+		if (null == this.currentFormFieldJso) {
+			Log.info(EditDialogTablePropertiesWidget.class,
+					"constructor: currentFormFieldJso IS NULL");
+		}
+
+		if (null == delegate) {
+			Log.info(EditDialogTablePropertiesWidget.class,
+					"constructor: delegate IS NULL");
+		}
+
+		if (null == getDelegate().getCurrentBpmnIoModelerJso()
+				.nativeGetModdle()) {
+			Log.info(EditDialogTablePropertiesWidget.class,
+					"constructor: moddle IS NULL");
+		}
+
 		tcName = new Column<PropertyJso, String>(new EditTextCell()) {
 
 			@Override
@@ -112,8 +137,8 @@ public class TableExtensionsWidget extends
 
 			@Override
 			public void update(int index, PropertyJso object, String value) {
-				if (getDelegate().getCurrentElementJso()
-						.removeCamundaExt_property(object)) {
+				if (EditDialogTablePropertiesWidget.this.currentFormFieldJso
+						.removeProperty(object)) {
 					getDataProvider().getList().remove(object);
 					getDataProvider().refresh();
 					getTable().redraw();
@@ -134,10 +159,14 @@ public class TableExtensionsWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
-				PropertyJso newDataObject = getDelegate()
-						.getCurrentElementJso().addCamundaExt_property(
-								getDelegate().getCurrentBpmnIoModelerJso()
-										.nativeGetModdle());
+				// TODO: remove after tests
+				if (null == EditDialogTablePropertiesWidget.this.currentFormFieldJso) {
+					Log.info(EditDialogTablePropertiesWidget.class,
+							"onAddRow: currentFormFieldJso IS NULL");
+				}
+				PropertyJso newDataObject = EditDialogTablePropertiesWidget.this.currentFormFieldJso
+						.addProperty(getDelegate().getCurrentBpmnIoModelerJso()
+								.nativeGetModdle());
 				getDataProvider().getList().add(newDataObject);
 				getDataProvider().refresh();
 				getTable().redraw();
@@ -146,14 +175,18 @@ public class TableExtensionsWidget extends
 		});
 
 		getButtonPanel().add(btnAdd);
+
+		update();
 	}
 
 	@Override
 	public void update() {
 		getDataProvider().getList().clear();
-		getDataProvider().getList().addAll(
-				getDelegate().getCurrentElementJso().getCamundaExt_property());
+		getDataProvider().getList().addAll(currentFormFieldJso.getProperties());
 	}
-	
-	
+
+	public void setCurrentFormFieldJso(FormFieldJso currentFormFieldJso) {
+		this.currentFormFieldJso = currentFormFieldJso;
+	}
+
 }

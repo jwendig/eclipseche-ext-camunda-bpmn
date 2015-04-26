@@ -11,6 +11,10 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions;
 
+import java.util.List;
+
+import com.google.gwt.core.client.JavaScriptObject;
+
 public interface FormFieldJso {
 	public String getAttr_id();
 
@@ -27,5 +31,10 @@ public interface FormFieldJso {
 	public String getAttr_defaultValue();
 
 	public void setAttr_defaultValue(String defaultValue);
-	
+
+	public List<PropertyJso> getProperties();
+
+	public PropertyJso addProperty(JavaScriptObject moddle);
+
+	public boolean removeProperty(PropertyJso propertyJso);
 }

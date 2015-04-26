@@ -39,7 +39,7 @@ public class TabFormFieldsView extends AbstractBpmnPropertiesTabWidget {
 		Log.info(TabFormFieldsView.class, "initContent");
 		getGridTabContent().resize(2, 2);
 
-		getGridTabContent().setText(0, 0, "Execution Listeners:");
+		getGridTabContent().setText(0, 0, "Form Fields:");
 		getGridTabContent().setWidget(0, 1, tableFormFields);
 	}
 

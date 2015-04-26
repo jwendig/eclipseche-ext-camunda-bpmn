@@ -28,9 +28,6 @@ public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	private TabExtensionsController tabExtensionsController;
 	private TabFormFieldsController tabFormFieldsController;
 
-	// TODO: implement
-	// private TabFormFieldsController tabFormFieldsController;
-
 	public StartEventPropertiesWidget(
 			BpmnElementPropertiesView.ActionDelegate delegate) {
 		super(LB_ELEMENT_NAME_PREFIX, delegate);

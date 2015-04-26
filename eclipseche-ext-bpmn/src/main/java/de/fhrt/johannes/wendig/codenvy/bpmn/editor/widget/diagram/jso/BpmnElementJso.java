@@ -165,7 +165,7 @@ public class BpmnElementJso extends AbstractBpmnElementJso implements
 	}
 
 	/*
-	 * functions for properties
+	 * functions for formFields
 	 */
 
 	@Override
