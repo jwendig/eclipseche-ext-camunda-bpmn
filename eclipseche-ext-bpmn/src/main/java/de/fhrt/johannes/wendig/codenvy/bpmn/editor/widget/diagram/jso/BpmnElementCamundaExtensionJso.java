@@ -53,6 +53,31 @@ public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
 		}
 	}
 
+	public enum BpmnElementCamundaExtensionArray {
+		CAMUNDA_PROPERTIES("properties");
+
+		private final String arrayName;
+
+		private BpmnElementCamundaExtensionArray(final String arrayName) {
+			this.arrayName = arrayName;
+		}
+
+		@Override
+		public String toString() {
+			return arrayName;
+		}
+
+		public static BpmnElementCamundaExtensionArray findByBpmnIoTypeDefinition(
+				String properties) {
+			for (BpmnElementCamundaExtensionArray t : values()) {
+				if (t.arrayName.equals(properties)) {
+					return t;
+				}
+			}
+			return null;
+		}
+	}
+
 	protected BpmnElementCamundaExtensionJso() {
 	}
 
@@ -110,7 +135,7 @@ public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
 																		this.defaultValue = defaultValue;
 																		}-*/;
 
-	private final native BpmnElementCamundaExtensionJso nativeAddCamundaExtElement(
+	private final native BpmnElementCamundaExtensionJso nativeAddCamundaExtElementToArray(
 			JavaScriptObject moddle, String bpmnExtensionElementType,
 			String arrayName)/*-{
 								console.log("js-native: nativeAddCamundaExtElement");
@@ -122,7 +147,7 @@ public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
 								
 								}-*/;
 
-	private final native JsArray<BpmnElementCamundaExtensionJso> nativeGetCamundaExtElementsByType(
+	private final native JsArray<BpmnElementCamundaExtensionJso> nativeGetElementsByTypeFromArray(
 			String arrayName, String bpmnExtensionElementType) /*-{
 																console.log("js-native: nativeGetCamundaExtElementsByType");
 																if (!this[arrayName] || this[arrayName].values == 'undefined') {
@@ -137,32 +162,7 @@ public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
 																});
 																}-*/;
 
-	private static final native BpmnElementCamundaExtensionJso nativeAddCamundaExtElementToExistingCamundaExtElement(
-			BpmnElementCamundaExtensionJso baseElement,
-			JavaScriptObject moddle, String bpmnExtensionElementType)/*-{
-																		console.log("js-native: nativeAddCamundaExtElementToExistingCamundaExtElement");
-																		var ext = moddle.create(bpmnExtensionElementType);
-																		baseElement.get('values').push(ext);
-																		return ext;
-																		}-*/;
-
-	private final static native boolean nativeRemoveCamundaExtElementFromExistingCamundaExtElement(
-			BpmnElementCamundaExtensionJso baseElement,
-			BpmnElementCamundaExtensionJso elemToRemove)/*-{
-														console.log("js-native: nativeRemoveCamundaExtElementFromExistingCamundaExtElement");
-														var elemToRemoveIndex = baseElement.values.indexOf(elemToRemove);
-														if (elemToRemoveIndex > -1) {
-															console.log("js-native: nativeRemoveCamundaExtElementFromExistingCamundaExtElement: elemToRemove found at index:" + elemToRemoveIndex);
-															baseElement.values.splice(elemToRemoveIndex, 1);
-														
-															return true;
-														}else{
-															console.log("js-native: nativeRemoveCamundaExtElementFromExistingCamundaExtElement: elemToRemove not found");
-															return false;
-														}
-														}-*/;
-
-	private final native boolean nativeRemoveCamundaExtElement(
+	private final native boolean nativeRemoveElementFromArray(
 			BpmnElementCamundaExtensionJso elemToRemove, String arrayName)/*-{
 																			console.log("js-native: nativeRemoveCamundaExtElement");
 																			var elementIndex = this[arrayName].values.indexOf(elemToRemove);
@@ -182,8 +182,8 @@ public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
 		Log.info(BpmnElementCamundaExtensionJso.class,
 				"getProperties: current element=" + getType());
 		List<PropertyJso> list = new ArrayList<PropertyJso>();
-		JsArray<BpmnElementCamundaExtensionJso> baseElements2 = nativeGetCamundaExtElementsByType(
-				"properties",
+		JsArray<BpmnElementCamundaExtensionJso> baseElements2 = nativeGetElementsByTypeFromArray(
+				BpmnElementCamundaExtensionArray.CAMUNDA_PROPERTIES.toString(),
 				BpmnElementCamundaExtensionType.CAMUNDA_PROPERTY.toString());
 		for (int i = 0; i < baseElements2.length(); i++) {
 			list.add(baseElements2.get(i));
@@ -196,56 +196,16 @@ public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
 	public final PropertyJso addProperty(JavaScriptObject moddle) {
 		Log.info(BpmnElementCamundaExtensionJso.class, "addProperty");
 
-		return nativeAddCamundaExtElement(moddle,
+		return nativeAddCamundaExtElementToArray(moddle,
 				BpmnElementCamundaExtensionType.CAMUNDA_PROPERTY.toString(),
-				"properties");
-
-		// BpmnElementCamundaExtensionJso baseElement = null;
-		// JsArray<BpmnElementCamundaExtensionJso> baseElements =
-		// nativeGetCamundaExtElementsByType(
-		// "properties",
-		// BpmnElementCamundaExtensionType.CAMUNDA_PROPERTIES.toString());
-		//
-		// if (baseElements.length() == 0) {
-		// Log.info(BpmnElementCamundaExtensionJso.class,
-		// "addProperty: camunda:properties element do not exists, create it now");
-		// baseElement = nativeAddCamundaExtElement(moddle,
-		// BpmnElementCamundaExtensionType.CAMUNDA_PROPERTIES
-		// .toString(), "properties");
-		// } else {
-		// Log.info(BpmnElementCamundaExtensionJso.class,
-		// "addProperty: camunda:properties element exists");
-		// baseElement = baseElements.get(0);
-		// }
-		// PropertyJso propertry =
-		// nativeAddCamundaExtElementToExistingCamundaExtElement(
-		// baseElement, moddle,
-		// BpmnElementCamundaExtensionType.CAMUNDA_PROPERTY.toString());
-
-		// return propertry;
+				BpmnElementCamundaExtensionArray.CAMUNDA_PROPERTIES.toString());
 	}
 
 	@Override
 	public final boolean removeProperty(PropertyJso propertyJso) {
-		// JsArray<BpmnElementCamundaExtensionJso> baseElements =
-		// nativeGetCamundaExtElementsByType(
-		// "properties",
-		// BpmnElementCamundaExtensionType.CAMUNDA_PROPERTIES.toString());
-		// boolean isDeleted = false;
-		// for (int i = 0; i < baseElements.length(); i++) {
-		// isDeleted =
-		// nativeRemoveCamundaExtElementFromExistingCamundaExtElement(
-		// baseElements.get(i),
-		// (BpmnElementCamundaExtensionJso) propertyJso);
-		// if (isDeleted) {
-		// return true;
-		// }
-		// }
-		//
-		// return false;
-
-		return nativeRemoveCamundaExtElement(
-				(BpmnElementCamundaExtensionJso) propertyJso, "properties");
+		return nativeRemoveElementFromArray(
+				(BpmnElementCamundaExtensionJso) propertyJso,
+				BpmnElementCamundaExtensionArray.CAMUNDA_PROPERTIES.toString());
 
 	}
 

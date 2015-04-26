@@ -159,11 +159,6 @@ public class EditDialogTablePropertiesWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
-				// TODO: remove after tests
-				if (null == EditDialogTablePropertiesWidget.this.currentFormFieldJso) {
-					Log.info(EditDialogTablePropertiesWidget.class,
-							"onAddRow: currentFormFieldJso IS NULL");
-				}
 				PropertyJso newDataObject = EditDialogTablePropertiesWidget.this.currentFormFieldJso
 						.addProperty(getDelegate().getCurrentBpmnIoModelerJso()
 								.nativeGetModdle());
