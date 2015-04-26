@@ -13,6 +13,8 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.star
 
 import java.util.List;
 
+import org.eclipse.che.ide.util.loging.Log;
+
 import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -88,6 +90,11 @@ public class TableFormFieldsWidget extends
 
 			@Override
 			public void update(int index, FormFieldJso object, String value) {
+				// TODO: remove after tests
+				if (null == object) {
+					Log.info(TableFormFieldsWidget.class,
+							"onEditRow: object IS NULL");
+				}
 				new TableFormFieldsEditTableEntryDialog(
 						TableFormFieldsWidget.this, object).center();
 
@@ -104,8 +111,15 @@ public class TableFormFieldsWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
+				FormFieldJso formFieldJso = getDelegate()
+						.getCurrentElementJso().addCamundaExt_formField(
+								getDelegate().getCurrentBpmnIoModelerJso()
+										.nativeGetModdle());
+
+				getDataProvider().getList().add(formFieldJso);
+
 				new TableFormFieldsEditTableEntryDialog(
-						TableFormFieldsWidget.this).center();
+						TableFormFieldsWidget.this, formFieldJso).center();
 
 			}
 		});

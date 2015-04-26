@@ -41,15 +41,145 @@ public class TableFormFieldsEditTableEntryDialog extends DialogBox {
 	private TextBox tbId;
 	private TextBox tbLabel;
 	private TextBox tbDefaultValue;
+	private EditDialogTablePropertiesWidget tableProperties;
 
 	private TableFormFieldsWidget widgetCallback;
 	private FormFieldJso currentFormFieldJso;
 
-	public TableFormFieldsEditTableEntryDialog(
-			final TableFormFieldsWidget widgetCallback) {
-		super();
-		this.widgetCallback = widgetCallback;
+//	public TableFormFieldsEditTableEntryDialog(
+//			final TableFormFieldsWidget widgetCallback) {
+//		super();
+//		this.widgetCallback = widgetCallback;
+//
+//		setTitle("Form Field Details");
+//		setText("Form Field Details");
+//
+//		setAnimationEnabled(true);
+//		setGlassEnabled(true);
+//		setWidth("600px");
+//		setHeight("auto");
+//
+//		vpRoot = new VerticalPanel();
+//		vpRoot.setWidth("100%");
+//
+//		lboxType = new ListBox();
+//		lboxType.setWidth("100%");
+//		lboxType.addItem("string");
+//		lboxType.addItem("long");
+//		lboxType.addItem("boolean");
+//		lboxType.addItem("date");
+//		lboxType.addItem("enum");
+//
+//		tbId = new TextBox();
+//		tbId.setWidth("100%");
+//		tbLabel = new TextBox();
+//		tbLabel.setWidth("100%");
+//		tbDefaultValue = new TextBox();
+//		tbDefaultValue.setWidth("100%");
+//
+//		tableProperties = new EditDialogTablePropertiesWidget(
+//				widgetCallback.getDelegate(), currentFormFieldJso);
+//
+//		gridContent = new Grid(6, 3);
+//		gridContent.setWidth("100%");
+//		gridContent.setText(0, 0, "Id");
+//		gridContent.setText(1, 0, "Label");
+//		gridContent.setText(2, 0, "Default Value");
+//		gridContent.setText(3, 0, "Type");
+//		gridContent.setText(4, 0, "Validation");
+//		gridContent.setText(5, 0, "Properties");
+//
+//		gridContent.setWidget(0, 1, tbId);
+//		gridContent.setWidget(1, 1, tbLabel);
+//		gridContent.setWidget(2, 1, tbDefaultValue);
+//		gridContent.setWidget(3, 1, lboxType);
+//		gridContent.setWidget(5, 1, new Label("TODO"));
+//		gridContent.setWidget(5, 1, tableProperties);
+//
+//		gridContent.getColumnFormatter().setWidth(0, "150px");
+//
+//		btnOk = new Button("Save");
+//		btnOk.addClickHandler(new ClickHandler() {
+//			public void onClick(ClickEvent event) {
+//				FormFieldJso formFieldJso;
+//				if (null != currentFormFieldJso) {
+//					formFieldJso = currentFormFieldJso;
+//				} else {
+//					formFieldJso = widgetCallback
+//							.getDelegate()
+//							.getCurrentElementJso()
+//							.addCamundaExt_formField(
+//									widgetCallback.getDelegate()
+//											.getCurrentBpmnIoModelerJso()
+//											.nativeGetModdle());
+//
+//					widgetCallback.getDataProvider().getList()
+//							.add(formFieldJso);
+//				}
+//
+//				formFieldJso
+//						.setAttr_id(TableFormFieldsEditTableEntryDialog.this.tbId
+//								.getText());
+//				formFieldJso
+//						.setAttr_label(TableFormFieldsEditTableEntryDialog.this.tbLabel
+//								.getText());
+//				formFieldJso
+//						.setAttr_defaultValue(TableFormFieldsEditTableEntryDialog.this.tbDefaultValue
+//								.getText());
+//				formFieldJso
+//						.setAttr_type(TableFormFieldsEditTableEntryDialog.this.lboxType
+//								.getSelectedItemText());
+//
+//				TableFormFieldsEditTableEntryDialog.this.hide();
+//
+//				widgetCallback.getDataProvider().refresh();
+//				widgetCallback.getDelegate().onContentChange();
+//			}
+//		});
+//
+//		btnBack = new Button("Back");
+//		btnBack.addClickHandler(new ClickHandler() {
+//			public void onClick(ClickEvent event) {
+//				TableFormFieldsEditTableEntryDialog.this.hide();
+//			}
+//		});
+//
+//		HorizontalPanel hpOptions = new HorizontalPanel();
+//		hpOptions.add(btnOk);
+//		hpOptions.add(btnBack);
+//
+//		vpRoot.add(gridContent);
+//		vpRoot.add(hpOptions);
+//
+//		setWidget(vpRoot);
+//	}
 
+	public TableFormFieldsEditTableEntryDialog(
+			final TableFormFieldsWidget widgetCallback,
+			FormFieldJso formFieldJso) {
+//		this(widgetCallback);
+		this.widgetCallback = widgetCallback;
+		this.currentFormFieldJso = formFieldJso;
+		
+		initialize();
+		
+		tableProperties.setCurrentFormFieldJso(formFieldJso);
+
+		for (int i = 0; i < lboxType.getItemCount(); i++) {
+			if (lboxType.getItemText(i).equalsIgnoreCase(
+					formFieldJso.getAttr_type())) {
+				lboxType.setSelectedIndex(i);
+				break;
+			}
+		}
+
+		tbId.setText(formFieldJso.getAttr_id());
+		tbLabel.setText(formFieldJso.getAttr_label());
+		tbDefaultValue.setText(formFieldJso.getAttr_defaultValue());
+		tableProperties.update();
+	}
+	
+	public void initialize() {
 		setTitle("Form Field Details");
 		setText("Form Field Details");
 
@@ -76,17 +206,24 @@ public class TableFormFieldsEditTableEntryDialog extends DialogBox {
 		tbDefaultValue = new TextBox();
 		tbDefaultValue.setWidth("100%");
 
-		gridContent = new Grid(4, 3);
+		tableProperties = new EditDialogTablePropertiesWidget(
+				widgetCallback.getDelegate(), currentFormFieldJso);
+
+		gridContent = new Grid(6, 3);
 		gridContent.setWidth("100%");
 		gridContent.setText(0, 0, "Id");
 		gridContent.setText(1, 0, "Label");
 		gridContent.setText(2, 0, "Default Value");
 		gridContent.setText(3, 0, "Type");
+		gridContent.setText(4, 0, "Validation");
+		gridContent.setText(5, 0, "Properties");
 
 		gridContent.setWidget(0, 1, tbId);
 		gridContent.setWidget(1, 1, tbLabel);
 		gridContent.setWidget(2, 1, tbDefaultValue);
 		gridContent.setWidget(3, 1, lboxType);
+		gridContent.setWidget(5, 1, new Label("TODO"));
+		gridContent.setWidget(5, 1, tableProperties);
 
 		gridContent.getColumnFormatter().setWidth(0, "150px");
 
@@ -94,9 +231,10 @@ public class TableFormFieldsEditTableEntryDialog extends DialogBox {
 		btnOk.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				FormFieldJso formFieldJso;
-				if (null != TableFormFieldsEditTableEntryDialog.this.currentFormFieldJso) {
+				if (null != currentFormFieldJso) {
 					formFieldJso = currentFormFieldJso;
 				} else {
+					// TODO: remove
 					formFieldJso = widgetCallback
 							.getDelegate()
 							.getCurrentElementJso()
@@ -104,6 +242,7 @@ public class TableFormFieldsEditTableEntryDialog extends DialogBox {
 									widgetCallback.getDelegate()
 											.getCurrentBpmnIoModelerJso()
 											.nativeGetModdle());
+
 					widgetCallback.getDataProvider().getList()
 							.add(formFieldJso);
 				}
@@ -143,25 +282,6 @@ public class TableFormFieldsEditTableEntryDialog extends DialogBox {
 		vpRoot.add(hpOptions);
 
 		setWidget(vpRoot);
-	}
-
-	public TableFormFieldsEditTableEntryDialog(
-			final TableFormFieldsWidget widgetCallback,
-			FormFieldJso formFieldJso) {
-		this(widgetCallback);
-		this.currentFormFieldJso = formFieldJso;
-
-		for (int i = 0; i < lboxType.getItemCount(); i++) {
-			if (lboxType.getItemText(i).equalsIgnoreCase(
-					formFieldJso.getAttr_type())) {
-				lboxType.setSelectedIndex(i);
-				break;
-			}
-		}
-
-		tbId.setText(formFieldJso.getAttr_id());
-		tbLabel.setText(formFieldJso.getAttr_label());
-		tbDefaultValue.setText(formFieldJso.getAttr_defaultValue());
 	}
 
 }
