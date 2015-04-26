@@ -11,6 +11,12 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces;
 
+import java.util.List;
+
+import com.google.gwt.core.client.JavaScriptObject;
+
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.FormFieldJso;
+
 public interface StartEventJso extends DefaultJso {
 	public boolean getAttr_asyncAfter();
 
@@ -35,4 +41,10 @@ public interface StartEventJso extends DefaultJso {
 	public String getAttr_initiator();
 
 	public void setAttr_initiator(String initiator);
+	
+	public List<FormFieldJso> getCamundaExt_formField();
+	
+	public FormFieldJso addCamundaExt_formField(JavaScriptObject moddle);
+	
+	public boolean removeCamundaExt_formField(FormFieldJso element);
 }
