@@ -46,113 +46,6 @@ public class TableFormFieldsEditTableEntryDialog extends DialogBox {
 	private TableFormFieldsWidget widgetCallback;
 	private FormFieldJso currentFormFieldJso;
 
-//	public TableFormFieldsEditTableEntryDialog(
-//			final TableFormFieldsWidget widgetCallback) {
-//		super();
-//		this.widgetCallback = widgetCallback;
-//
-//		setTitle("Form Field Details");
-//		setText("Form Field Details");
-//
-//		setAnimationEnabled(true);
-//		setGlassEnabled(true);
-//		setWidth("600px");
-//		setHeight("auto");
-//
-//		vpRoot = new VerticalPanel();
-//		vpRoot.setWidth("100%");
-//
-//		lboxType = new ListBox();
-//		lboxType.setWidth("100%");
-//		lboxType.addItem("string");
-//		lboxType.addItem("long");
-//		lboxType.addItem("boolean");
-//		lboxType.addItem("date");
-//		lboxType.addItem("enum");
-//
-//		tbId = new TextBox();
-//		tbId.setWidth("100%");
-//		tbLabel = new TextBox();
-//		tbLabel.setWidth("100%");
-//		tbDefaultValue = new TextBox();
-//		tbDefaultValue.setWidth("100%");
-//
-//		tableProperties = new EditDialogTablePropertiesWidget(
-//				widgetCallback.getDelegate(), currentFormFieldJso);
-//
-//		gridContent = new Grid(6, 3);
-//		gridContent.setWidth("100%");
-//		gridContent.setText(0, 0, "Id");
-//		gridContent.setText(1, 0, "Label");
-//		gridContent.setText(2, 0, "Default Value");
-//		gridContent.setText(3, 0, "Type");
-//		gridContent.setText(4, 0, "Validation");
-//		gridContent.setText(5, 0, "Properties");
-//
-//		gridContent.setWidget(0, 1, tbId);
-//		gridContent.setWidget(1, 1, tbLabel);
-//		gridContent.setWidget(2, 1, tbDefaultValue);
-//		gridContent.setWidget(3, 1, lboxType);
-//		gridContent.setWidget(5, 1, new Label("TODO"));
-//		gridContent.setWidget(5, 1, tableProperties);
-//
-//		gridContent.getColumnFormatter().setWidth(0, "150px");
-//
-//		btnOk = new Button("Save");
-//		btnOk.addClickHandler(new ClickHandler() {
-//			public void onClick(ClickEvent event) {
-//				FormFieldJso formFieldJso;
-//				if (null != currentFormFieldJso) {
-//					formFieldJso = currentFormFieldJso;
-//				} else {
-//					formFieldJso = widgetCallback
-//							.getDelegate()
-//							.getCurrentElementJso()
-//							.addCamundaExt_formField(
-//									widgetCallback.getDelegate()
-//											.getCurrentBpmnIoModelerJso()
-//											.nativeGetModdle());
-//
-//					widgetCallback.getDataProvider().getList()
-//							.add(formFieldJso);
-//				}
-//
-//				formFieldJso
-//						.setAttr_id(TableFormFieldsEditTableEntryDialog.this.tbId
-//								.getText());
-//				formFieldJso
-//						.setAttr_label(TableFormFieldsEditTableEntryDialog.this.tbLabel
-//								.getText());
-//				formFieldJso
-//						.setAttr_defaultValue(TableFormFieldsEditTableEntryDialog.this.tbDefaultValue
-//								.getText());
-//				formFieldJso
-//						.setAttr_type(TableFormFieldsEditTableEntryDialog.this.lboxType
-//								.getSelectedItemText());
-//
-//				TableFormFieldsEditTableEntryDialog.this.hide();
-//
-//				widgetCallback.getDataProvider().refresh();
-//				widgetCallback.getDelegate().onContentChange();
-//			}
-//		});
-//
-//		btnBack = new Button("Back");
-//		btnBack.addClickHandler(new ClickHandler() {
-//			public void onClick(ClickEvent event) {
-//				TableFormFieldsEditTableEntryDialog.this.hide();
-//			}
-//		});
-//
-//		HorizontalPanel hpOptions = new HorizontalPanel();
-//		hpOptions.add(btnOk);
-//		hpOptions.add(btnBack);
-//
-//		vpRoot.add(gridContent);
-//		vpRoot.add(hpOptions);
-//
-//		setWidget(vpRoot);
-//	}
 
 	public TableFormFieldsEditTableEntryDialog(
 			final TableFormFieldsWidget widgetCallback,
@@ -230,33 +123,16 @@ public class TableFormFieldsEditTableEntryDialog extends DialogBox {
 		btnOk = new Button("Save");
 		btnOk.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				FormFieldJso formFieldJso;
-				if (null != currentFormFieldJso) {
-					formFieldJso = currentFormFieldJso;
-				} else {
-					// TODO: remove
-					formFieldJso = widgetCallback
-							.getDelegate()
-							.getCurrentElementJso()
-							.addCamundaExt_formField(
-									widgetCallback.getDelegate()
-											.getCurrentBpmnIoModelerJso()
-											.nativeGetModdle());
-
-					widgetCallback.getDataProvider().getList()
-							.add(formFieldJso);
-				}
-
-				formFieldJso
+				currentFormFieldJso
 						.setAttr_id(TableFormFieldsEditTableEntryDialog.this.tbId
 								.getText());
-				formFieldJso
+				currentFormFieldJso
 						.setAttr_label(TableFormFieldsEditTableEntryDialog.this.tbLabel
 								.getText());
-				formFieldJso
+				currentFormFieldJso
 						.setAttr_defaultValue(TableFormFieldsEditTableEntryDialog.this.tbDefaultValue
 								.getText());
-				formFieldJso
+				currentFormFieldJso
 						.setAttr_type(TableFormFieldsEditTableEntryDialog.this.lboxType
 								.getSelectedItemText());
 

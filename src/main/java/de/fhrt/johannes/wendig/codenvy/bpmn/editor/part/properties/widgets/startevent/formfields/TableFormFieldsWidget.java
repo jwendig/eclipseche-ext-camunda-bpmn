@@ -90,11 +90,6 @@ public class TableFormFieldsWidget extends
 
 			@Override
 			public void update(int index, FormFieldJso object, String value) {
-				// TODO: remove after tests
-				if (null == object) {
-					Log.info(TableFormFieldsWidget.class,
-							"onEditRow: object IS NULL");
-				}
 				new TableFormFieldsEditTableEntryDialog(
 						TableFormFieldsWidget.this, object).center();
 
@@ -104,7 +99,9 @@ public class TableFormFieldsWidget extends
 		getTable().addColumn(tcId, "Id");
 		getTable().addColumn(tcLabel, "Label");
 		getTable().addColumn(tcBtnEdit, "");
+		getTable().setColumnWidth(2, "50px");
 		getTable().addColumn(tcBtnRemove, "");
+		getTable().setColumnWidth(3, "20px");
 
 		btnAdd = new Button("Add");
 		btnAdd.addClickHandler(new ClickHandler() {
