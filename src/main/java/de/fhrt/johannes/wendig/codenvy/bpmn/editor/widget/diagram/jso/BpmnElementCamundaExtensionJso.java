@@ -16,14 +16,15 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ExecutionListenerJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.FormFieldJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.PropertyJso;
 
 public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
-		implements ExecutionListenerJso, PropertyJso {
+		implements ExecutionListenerJso, PropertyJso, FormFieldJso {
 
 	public enum BpmnElementCamundaExtensionType {
 		CAMUNDA_EXECUTION_LISTENER("camunda:ExecutionListener"), CAMUNDA_PROPERTIES(
-				"camunda:Properties"), CAMUNDA_PROPERTY("camunda:Property");
+				"camunda:Properties"), CAMUNDA_PROPERTY("camunda:Property"), CAMUNDA_FORMFIELD("camunda:FormField"), CAMUNDA_FORMDATA("camunda:FormData");
 
 		private final String bpmnIoTypeDefinition;
 
@@ -84,5 +85,25 @@ public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
 	public final native void setAttr_value(String value)/*-{
 														this.value = value;
 														}-*/;
+
+	@Override
+	public final native String getAttr_label() /*-{
+												return this.label;
+												}-*/;
+
+	@Override
+	public final native void setAttr_label(String label) /*-{
+															this.label = label;
+															}-*/;
+
+	@Override
+	public final native String getAttr_defaultValue() /*-{
+														return this.defaultValue;
+														}-*/;
+
+	@Override
+	public final native void setAttr_defaultValue(String defaultValue)/*-{
+																		this.defaultValue = defaultValue;
+																		}-*/;
 
 }

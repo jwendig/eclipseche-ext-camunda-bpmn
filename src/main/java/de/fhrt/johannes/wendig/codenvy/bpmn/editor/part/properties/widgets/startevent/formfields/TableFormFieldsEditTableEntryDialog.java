@@ -97,15 +97,13 @@ public class TableFormFieldsEditTableEntryDialog extends DialogBox {
 				if (null != TableFormFieldsEditTableEntryDialog.this.currentFormFieldJso) {
 					formFieldJso = currentFormFieldJso;
 				} else {
-					// TODO:
-					// executionListenerJso = widgetCallback
-					// .getDelegate()
-					// .getCurrentElementJso()
-					// .addCamundaExt_executionListener(
-					// widgetCallback.getDelegate()
-					// .getCurrentBpmnIoModelerJso()
-					// .nativeGetModdle());
-					formFieldJso = null;
+					formFieldJso = widgetCallback
+							.getDelegate()
+							.getCurrentElementJso()
+							.addCamundaExt_formField(
+									widgetCallback.getDelegate()
+											.getCurrentBpmnIoModelerJso()
+											.nativeGetModdle());
 					widgetCallback.getDataProvider().getList()
 							.add(formFieldJso);
 				}

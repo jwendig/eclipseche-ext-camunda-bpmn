@@ -54,53 +54,45 @@ public class TableFormFieldsWidget extends
 			}
 		};
 
-		tcBtnRemove = new Column<FormFieldJso, String>(
-				new ButtonCell()) {
+		tcBtnRemove = new Column<FormFieldJso, String>(new ButtonCell()) {
 			@Override
 			public String getValue(FormFieldJso object) {
 				return "x";
 			}
 		};
 
-		tcBtnRemove
-				.setFieldUpdater(new FieldUpdater<FormFieldJso, String>() {
+		tcBtnRemove.setFieldUpdater(new FieldUpdater<FormFieldJso, String>() {
 
-					@Override
-					public void update(int index, FormFieldJso object,
-							String value) {
-						// TODO:
-//						if (getDelegate().getCurrentElementJso()
-//								.removeCamundaExt_executionListener(object)) {
-//							getDataProvider().getList().remove(object);
-//							getDataProvider().refresh();
-//							getTable().redraw();
-//							getDelegate().onContentChange();
-//						} else {
-//
-//						}
-					}
-				});
+			@Override
+			public void update(int index, FormFieldJso object, String value) {
+				if (getDelegate().getCurrentElementJso()
+						.removeCamundaExt_formField(object)) {
+					getDataProvider().getList().remove(object);
+					getDataProvider().refresh();
+					getTable().redraw();
+					getDelegate().onContentChange();
+				} else {
 
-		tcBtnEdit = new Column<FormFieldJso, String>(
-				new ButtonCell()) {
+				}
+			}
+		});
+
+		tcBtnEdit = new Column<FormFieldJso, String>(new ButtonCell()) {
 			@Override
 			public String getValue(FormFieldJso object) {
 				return "Edit";
 			}
 		};
 
-		tcBtnEdit
-				.setFieldUpdater(new FieldUpdater<FormFieldJso, String>() {
+		tcBtnEdit.setFieldUpdater(new FieldUpdater<FormFieldJso, String>() {
 
-					@Override
-					public void update(int index, FormFieldJso object,
-							String value) {
-						new TableFormFieldsEditTableEntryDialog(
-								TableFormFieldsWidget.this, object)
-								.center();
+			@Override
+			public void update(int index, FormFieldJso object, String value) {
+				new TableFormFieldsEditTableEntryDialog(
+						TableFormFieldsWidget.this, object).center();
 
-					}
-				});
+			}
+		});
 
 		getTable().addColumn(tcId, "Id");
 		getTable().addColumn(tcLabel, "Label");
@@ -125,9 +117,8 @@ public class TableFormFieldsWidget extends
 	@Override
 	public void update() {
 		getDataProvider().getList().clear();
-		// TODO:
-//		List<FormFieldJso> dataObjects = getDelegate()
-//				.getCurrentElementJso().getCamundaExt_executionListeners();
-//		getDataProvider().getList().addAll(dataObjects);
+		List<FormFieldJso> dataObjects = getDelegate().getCurrentElementJso()
+				.getCamundaExt_formField();
+		getDataProvider().getList().addAll(dataObjects);
 	}
 }
