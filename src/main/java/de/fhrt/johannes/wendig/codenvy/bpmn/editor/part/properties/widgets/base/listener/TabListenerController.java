@@ -15,16 +15,23 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPr
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ExecutionListenerJso;
 
-public class TabListenerController extends
-		AbstractBpmnPropertiesTabController<ExecutionListenerJso> {
+public class TabListenerController<T> extends
+		AbstractBpmnPropertiesTabController<T> {
 
 	private final static String TAB_NAME = "Listener";
 
 	private TabListenerView view;
+	private boolean hasTaskListener;
 
-	public TabListenerController(ActionDelegate delegate) {
+	public TabListenerController(ActionDelegate delegate,
+			boolean hasTaskListener) {
 		super(delegate);
+		this.hasTaskListener = hasTaskListener;
 		this.view = new TabListenerView(TAB_NAME, delegate);
+
+		if (!hasTaskListener) {
+			view.getGridTabContent().removeRow(1);
+		}
 	}
 
 	public TabListenerView getView() {
@@ -34,5 +41,8 @@ public class TabListenerController extends
 	@Override
 	public void updateView() {
 		view.getTableExecutionListener().update();
+		if (hasTaskListener) {
+			view.getTableTaskListener().update();
+		}
 	}
 }

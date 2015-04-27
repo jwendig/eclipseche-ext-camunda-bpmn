@@ -9,7 +9,7 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.formfields;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.formfields;
 
 import org.eclipse.che.ide.util.loging.Log;
 

@@ -9,7 +9,7 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.formfields;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.formfields;
 
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.ChangeEvent;

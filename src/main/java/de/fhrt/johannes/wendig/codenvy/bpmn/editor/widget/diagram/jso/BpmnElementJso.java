@@ -28,6 +28,7 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ExecutionListenerJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.FormFieldJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.PropertyJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.TaskListenerJso;
 
 public class BpmnElementJso extends AbstractBpmnElementJso implements
 		DefaultJso, ProcessJso, UserTaskJso, ServiceTaskJso, ScriptTaskJso,
@@ -166,6 +167,35 @@ public class BpmnElementJso extends AbstractBpmnElementJso implements
 						.toString());
 		return newExtElement;
 	}
+	
+	
+	@Override
+	public final boolean removeCamundaExt_taskListener(
+			TaskListenerJso element) {
+		return nativeRemoveCamundaExtElement((BpmnElementCamundaExtensionJso) element);
+	}
+
+	@Override
+	public final List<TaskListenerJso> getCamundaExt_taskListeners() {
+		JsArray<BpmnElementCamundaExtensionJso> extElements = nativeGetCamundaExtElementsByType(BpmnElementCamundaExtensionType.CAMUNDA_TASK_LISTENER
+				.toString());
+		List<TaskListenerJso> list = new ArrayList<TaskListenerJso>();
+		for (int i = 0; i < extElements.length(); i++) {
+			list.add(extElements.get(i));
+		}
+
+		return list;
+	}
+
+	@Override
+	public final TaskListenerJso addCamundaExt_taskListener(
+			JavaScriptObject moddle) {
+		TaskListenerJso newExtElement = nativeAddCamundaExtElement(moddle,
+				BpmnElementCamundaExtensionType.CAMUNDA_TASK_LISTENER
+						.toString());
+		return newExtElement;
+	}
+	
 
 	/*
 	 * functions for formFields
