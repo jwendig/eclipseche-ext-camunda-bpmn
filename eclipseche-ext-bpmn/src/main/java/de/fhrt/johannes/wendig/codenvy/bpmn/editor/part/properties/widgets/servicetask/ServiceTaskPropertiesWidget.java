@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.servicetask.general.TabGeneralController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.ServiceTaskJso;
 
@@ -28,11 +29,16 @@ public class ServiceTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 
 	private final static String LB_ELEMENT_NAME_PREFIX = "Service Task";
 
+	private TabGeneralController tabGeneralController;
+
 	public ServiceTaskPropertiesWidget(
 			BpmnElementPropertiesView.ActionDelegate delegate) {
 		super(LB_ELEMENT_NAME_PREFIX, delegate);
 
-		getTabLpContent().add(new Label("TODO: tabs - ServiceTaskProperties"));
+		tabGeneralController = new TabGeneralController(delegate);
+		
+		getTabLpContent().add(tabGeneralController.getView(),
+				tabGeneralController.getView().getTabName());
 
 	}
 
@@ -46,5 +52,6 @@ public class ServiceTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	 */
 	@Override
 	public void updateTabs() {
+		tabGeneralController.updateView();
 	}
 }
