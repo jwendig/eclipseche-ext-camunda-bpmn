@@ -10,7 +10,7 @@
  *******************************************************************************/
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.properties.DataObjectJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.bpmn.DataObjectJso;
 
 public class BpmnElementPropertyJso extends AbstractBpmnElementJso implements
 		DataObjectJso {

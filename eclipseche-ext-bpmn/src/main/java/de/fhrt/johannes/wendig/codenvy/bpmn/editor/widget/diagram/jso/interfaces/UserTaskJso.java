@@ -36,6 +36,14 @@ public interface UserTaskJso extends TaskJso {
 
 	public void setAttr_formKey(String formKey);
 
+	public String getAttr_followUpDate();
+
+	public void setAttr_followUpDate(String followUpDate);
+
+	public boolean getAttr_isForCompensation();
+
+	public void setAttr_isForCompensation(boolean isForCompensation);
+
 	public String getAttr_priority();
 
 	public void setAttr_priority(String priority);

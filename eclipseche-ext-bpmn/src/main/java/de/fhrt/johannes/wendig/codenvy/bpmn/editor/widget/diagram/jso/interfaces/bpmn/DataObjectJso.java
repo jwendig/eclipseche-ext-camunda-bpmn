@@ -9,7 +9,7 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.properties;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.bpmn;
 
 public interface DataObjectJso {
 	public String getAttr_id();

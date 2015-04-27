@@ -25,8 +25,6 @@ public interface DefaultJso {
 	 */
 	public String getType();
 
-	public String getBusinessObject();
-
 	public String getAttr_id();
 
 	public void setAttr_id(String id);
@@ -35,6 +33,7 @@ public interface DefaultJso {
 
 	public void setAttr_name(String name);
 
+	
 	/*
 	 * extensions
 	 */

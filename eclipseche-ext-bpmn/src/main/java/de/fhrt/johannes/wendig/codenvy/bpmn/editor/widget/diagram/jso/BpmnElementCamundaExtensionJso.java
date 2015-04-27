@@ -21,14 +21,17 @@ import com.google.gwt.core.client.JsArray;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ExecutionListenerJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.FormFieldJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.PropertyJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ConstraintJso;
 
 public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
-		implements ExecutionListenerJso, PropertyJso, FormFieldJso {
+		implements ExecutionListenerJso, PropertyJso, FormFieldJso,
+		ConstraintJso {
 
 	public enum BpmnElementCamundaExtensionType {
 		CAMUNDA_EXECUTION_LISTENER("camunda:ExecutionListener"), CAMUNDA_PROPERTIES(
 				"camunda:Properties"), CAMUNDA_PROPERTY("camunda:Property"), CAMUNDA_FORMFIELD(
-				"camunda:FormField"), CAMUNDA_FORMDATA("camunda:FormData");
+				"camunda:FormField"), CAMUNDA_FORMDATA("camunda:FormData"), CAMUNDA_CONSTRAINT(
+				"camunda:Constraint");
 
 		private final String bpmnIoTypeDefinition;
 
@@ -54,7 +57,7 @@ public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
 	}
 
 	public enum BpmnElementCamundaExtensionArray {
-		CAMUNDA_PROPERTIES("properties");
+		CAMUNDA_PROPERTIES("properties"), CAMUNDA_VALIDATIONS("validations");
 
 		private final String arrayName;
 
@@ -207,6 +210,47 @@ public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
 				(BpmnElementCamundaExtensionJso) propertyJso,
 				BpmnElementCamundaExtensionArray.CAMUNDA_PROPERTIES.toString());
 
+	}
+
+	@Override
+	public final native String getAttr_config() /*-{
+												return this.config;
+												}-*/;
+
+	@Override
+	public final native void setAttr_config(String config) /*-{
+															this.config = config;
+															}-*/;
+
+	@Override
+	public final List<ConstraintJso> getContraints() {
+		Log.info(BpmnElementCamundaExtensionJso.class,
+				"getContraints: current element=" + getType());
+		List<ConstraintJso> list = new ArrayList<ConstraintJso>();
+		JsArray<BpmnElementCamundaExtensionJso> baseElements2 = nativeGetElementsByTypeFromArray(
+				BpmnElementCamundaExtensionArray.CAMUNDA_VALIDATIONS.toString(),
+				BpmnElementCamundaExtensionType.CAMUNDA_CONSTRAINT.toString());
+		for (int i = 0; i < baseElements2.length(); i++) {
+			list.add(baseElements2.get(i));
+		}
+
+		return list;
+	}
+
+	@Override
+	public final ConstraintJso addConstraint(JavaScriptObject moddle) {
+		Log.info(BpmnElementCamundaExtensionJso.class, "addConstraint");
+
+		return nativeAddCamundaExtElementToArray(moddle,
+				BpmnElementCamundaExtensionType.CAMUNDA_CONSTRAINT.toString(),
+				BpmnElementCamundaExtensionArray.CAMUNDA_VALIDATIONS.toString());
+	}
+
+	@Override
+	public final boolean removeConstraint(ConstraintJso propertyJso) {
+		return nativeRemoveElementFromArray(
+				(BpmnElementCamundaExtensionJso) propertyJso,
+				BpmnElementCamundaExtensionArray.CAMUNDA_VALIDATIONS.toString());
 	}
 
 }
