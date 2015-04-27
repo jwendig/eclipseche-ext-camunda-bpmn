@@ -35,11 +35,6 @@ public abstract class AbstractBpmnElementJso extends JavaScriptObject {
 											}-*/;
 
 	// @Override
-	public final native String getBusinessObject() /*-{
-													return this.businessObject;
-													}-*/;
-
-	// @Override
 	public final native String getAttr_id() /*-{
 											return this.id;
 											}-*/;
@@ -291,6 +286,16 @@ public abstract class AbstractBpmnElementJso extends JavaScriptObject {
 																}-*/;
 
 	// @Override
+	public final native String getAttr_followUpDate() /*-{
+														return this.followUpDate;
+														}-*/;
+
+	// @Override
+	public final native void setAttr_followUpDate(String followUpDate) /*-{
+																		this.followUpDate = followUpDate;
+																		}-*/;
+
+	// @Override
 	public final native String getAttr_initiator() /*-{
 													return this.initiator;
 													}-*/;
@@ -299,6 +304,16 @@ public abstract class AbstractBpmnElementJso extends JavaScriptObject {
 	public final native void setAttr_initiator(String initiator) /*-{
 																	this.initiator = initiator;
 																	}-*/;
+
+	// @Override
+	public final native boolean getAttr_isForCompensation() /*-{
+															return this.isForCompensation;
+															}-*/;
+
+	// @Override
+	public final native void setAttr_isForCompensation(boolean isForCompensation) /*-{
+																					this.isForCompensation = isForCompensation;
+																					}-*/;
 
 	// @Override
 	public final native String getAttr_priority() /*-{

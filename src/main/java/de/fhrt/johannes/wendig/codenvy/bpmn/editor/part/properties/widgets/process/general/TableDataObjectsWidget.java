@@ -34,7 +34,7 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.Abstr
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.listener.TabListenerController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementPropertyJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.properties.DataObjectJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.bpmn.DataObjectJso;
 
 public class TableDataObjectsWidget extends
 		AbstractBpmnDataTableWidget<DataObjectJso> {
@@ -83,7 +83,7 @@ public class TableDataObjectsWidget extends
 			@Override
 			public void update(int index, DataObjectJso object, String value) {
 				if (getDelegate().getCurrentElementJso()
-						.removeBpmnProperty_element(
+						.removeBpmnElement(
 								(BpmnElementPropertyJso) object)) {
 					getDataProvider().getList().remove(object);
 					getDataProvider().refresh();
@@ -104,7 +104,7 @@ public class TableDataObjectsWidget extends
 			@Override
 			public void onClick(ClickEvent event) {
 				BpmnElementPropertyJso newDataObject = getDelegate()
-						.getCurrentElementJso().addProperty_dataObject(getDelegate().getCurrentBpmnIoModelerJso().nativeGetModdle());
+						.getCurrentElementJso().addBpmnDataObject(getDelegate().getCurrentBpmnIoModelerJso().nativeGetModdle());
 				getDataProvider().getList().add(newDataObject);
 				getDataProvider().refresh();
 				getTable().redraw();
@@ -120,7 +120,7 @@ public class TableDataObjectsWidget extends
 	public void update() {
 		getDataProvider().getList().clear();
 		JsArray<BpmnElementPropertyJso> dataObjects = getDelegate()
-				.getCurrentElementJso().getBpmnProperty_dataObjects();
+				.getCurrentElementJso().getBpmnDataObjects();
 		for (int i = 0; i < dataObjects.length(); i++) {
 			getDataProvider().getList().add(dataObjects.get(i));
 		}

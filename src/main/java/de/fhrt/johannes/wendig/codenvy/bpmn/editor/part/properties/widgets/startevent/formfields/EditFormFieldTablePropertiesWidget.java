@@ -26,7 +26,7 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.Abstr
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.FormFieldJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.PropertyJso;
 
-public class EditDialogTablePropertiesWidget extends
+public class EditFormFieldTablePropertiesWidget extends
 		AbstractBpmnDataTableWidget<PropertyJso> {
 
 	private Column<PropertyJso, String> tcName;
@@ -37,26 +37,26 @@ public class EditDialogTablePropertiesWidget extends
 
 	private FormFieldJso currentFormFieldJso;
 
-	public EditDialogTablePropertiesWidget(
+	public EditFormFieldTablePropertiesWidget(
 			BpmnElementPropertiesView.ActionDelegate delegate,
 			FormFieldJso currentFormFieldJso) {
 		super(delegate);
-		Log.info(EditDialogTablePropertiesWidget.class, "constructor");
+		Log.info(EditFormFieldTablePropertiesWidget.class, "constructor");
 		this.currentFormFieldJso = currentFormFieldJso;
 
 		if (null == this.currentFormFieldJso) {
-			Log.info(EditDialogTablePropertiesWidget.class,
+			Log.info(EditFormFieldTablePropertiesWidget.class,
 					"constructor: currentFormFieldJso IS NULL");
 		}
 
 		if (null == delegate) {
-			Log.info(EditDialogTablePropertiesWidget.class,
+			Log.info(EditFormFieldTablePropertiesWidget.class,
 					"constructor: delegate IS NULL");
 		}
 
 		if (null == getDelegate().getCurrentBpmnIoModelerJso()
 				.nativeGetModdle()) {
-			Log.info(EditDialogTablePropertiesWidget.class,
+			Log.info(EditFormFieldTablePropertiesWidget.class,
 					"constructor: moddle IS NULL");
 		}
 
@@ -137,7 +137,7 @@ public class EditDialogTablePropertiesWidget extends
 
 			@Override
 			public void update(int index, PropertyJso object, String value) {
-				if (EditDialogTablePropertiesWidget.this.currentFormFieldJso
+				if (EditFormFieldTablePropertiesWidget.this.currentFormFieldJso
 						.removeProperty(object)) {
 					getDataProvider().getList().remove(object);
 					getDataProvider().refresh();
@@ -159,7 +159,7 @@ public class EditDialogTablePropertiesWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
-				PropertyJso newDataObject = EditDialogTablePropertiesWidget.this.currentFormFieldJso
+				PropertyJso newDataObject = EditFormFieldTablePropertiesWidget.this.currentFormFieldJso
 						.addProperty(getDelegate().getCurrentBpmnIoModelerJso()
 								.nativeGetModdle());
 				getDataProvider().getList().add(newDataObject);

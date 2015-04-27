@@ -15,32 +15,13 @@ import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-public interface FormFieldJso {
-	public String getAttr_id();
+public interface ConstraintJso {
+	public String getAttr_name();
 
-	public void setAttr_id(String id);
+	public void setAttr_name(String name);
 
-	public String getAttr_label();
+	public String getAttr_config();
 
-	public void setAttr_label(String label);
+	public void setAttr_config(String config);
 
-	public String getAttr_type();
-
-	public void setAttr_type(String type);
-
-	public String getAttr_defaultValue();
-
-	public void setAttr_defaultValue(String defaultValue);
-
-	public List<PropertyJso> getProperties();
-
-	public PropertyJso addProperty(JavaScriptObject moddle);
-
-	public boolean removeProperty(PropertyJso propertyJso);
-	
-	public List<ConstraintJso> getContraints();
-
-	public ConstraintJso addConstraint(JavaScriptObject moddle);
-
-	public boolean removeConstraint(ConstraintJso propertyJso);
 }

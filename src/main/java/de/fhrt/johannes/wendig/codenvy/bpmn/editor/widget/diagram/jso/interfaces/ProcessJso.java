@@ -15,7 +15,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementPropertyJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.properties.DataObjectJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.bpmn.DataObjectJso;
 
 public interface ProcessJso extends DefaultJso {
 	public boolean getAttr_isExecutable();
@@ -30,9 +30,9 @@ public interface ProcessJso extends DefaultJso {
 
 	public void setAttr_candidateStarterUsers(String candidateStarterUsers);
 
-	public JsArray<BpmnElementPropertyJso> getBpmnProperty_dataObjects();
+	public JsArray<BpmnElementPropertyJso> getBpmnDataObjects();
 
-	public BpmnElementPropertyJso addProperty_dataObject(JavaScriptObject moddle);
+	public BpmnElementPropertyJso addBpmnDataObject(JavaScriptObject moddle);
 
-	public boolean removeBpmnProperty_element(BpmnElementPropertyJso propElement);
+	public boolean removeBpmnElement(BpmnElementPropertyJso propElement);
 }

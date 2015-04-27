@@ -299,6 +299,20 @@ module.exports={
       ]
     },
     {
+      "name": "attr_followUpDate",
+      "extends": [
+        "bpmn:FlowNode"
+      ],
+      "properties": [
+        {
+          "name": "followUpDate",
+          "isAttr": true,
+          "type": "String",
+          "default": ""
+        }
+      ]
+    },
+    {
       "name": "attr_formHandlerClass",
       "extends": [
         "bpmn:FlowNode"
@@ -525,7 +539,7 @@ module.exports={
           "type": "Properties"
         },
         {
-          "name": "validation",
+          "name": "validations",
           "isAttr": false,
           "type": "Validation"
         }        

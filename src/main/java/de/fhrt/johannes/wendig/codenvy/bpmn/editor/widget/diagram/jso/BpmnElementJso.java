@@ -64,6 +64,9 @@ public class BpmnElementJso extends AbstractBpmnElementJso implements
 	protected BpmnElementJso() {
 	}
 
+	/*
+	 * functions for extension elements
+	 */
 	private final native BpmnElementCamundaExtensionJso nativeAddCamundaExtElement(
 			JavaScriptObject moddle, String bpmnExtensionElementType)/*-{
 																		var ext = moddle.create(bpmnExtensionElementType);
@@ -287,7 +290,7 @@ public class BpmnElementJso extends AbstractBpmnElementJso implements
 	 * real properties ...
 	 */
 
-	private final native JsArray<BpmnElementPropertyJso> getBpmnProperty_elements(
+	private final native JsArray<BpmnElementPropertyJso> getBpmnElementsByType(
 			String bpmnPropertyElementType) /*-{
 											console.log("js-native: getProperty_elements");
 											if (!this.flowElements) {
@@ -302,7 +305,7 @@ public class BpmnElementJso extends AbstractBpmnElementJso implements
 											}-*/;
 
 	@Override
-	public final native boolean removeBpmnProperty_element(
+	public final native boolean removeBpmnElement(
 			BpmnElementPropertyJso propElement)/*-{
 														console.log("js-native: removeProperty_elemenemt");
 														var propElementIndex = this.flowElements.indexOf(propElement);
@@ -317,7 +320,7 @@ public class BpmnElementJso extends AbstractBpmnElementJso implements
 														}
 														}-*/;
 
-	private final native BpmnElementPropertyJso nativeAddBpmnProperty_element(
+	private final native BpmnElementPropertyJso nativeAddBpmnElement(
 			JavaScriptObject moddle, String bpmnPropertyElementType)/*-{
 																	var ext = moddle.create(bpmnPropertyElementType);
 																	this.flowElements = this.flowElements	|| [];
@@ -328,16 +331,16 @@ public class BpmnElementJso extends AbstractBpmnElementJso implements
 																	}-*/;
 
 	@Override
-	public final JsArray<BpmnElementPropertyJso> getBpmnProperty_dataObjects() {
-		JsArray<BpmnElementPropertyJso> extElements = getBpmnProperty_elements(BpmnPropertyElementType.BPMN_DATA_OBJECT
+	public final JsArray<BpmnElementPropertyJso> getBpmnDataObjects() {
+		JsArray<BpmnElementPropertyJso> extElements = getBpmnElementsByType(BpmnPropertyElementType.BPMN_DATA_OBJECT
 				.toString());
 		return extElements;
 	}
 
 	@Override
-	public final BpmnElementPropertyJso addProperty_dataObject(
+	public final BpmnElementPropertyJso addBpmnDataObject(
 			JavaScriptObject moddle) {
-		BpmnElementPropertyJso newExtElement = nativeAddBpmnProperty_element(
+		BpmnElementPropertyJso newExtElement = nativeAddBpmnElement(
 				moddle, BpmnPropertyElementType.BPMN_DATA_OBJECT.toString());
 		return newExtElement;
 	}

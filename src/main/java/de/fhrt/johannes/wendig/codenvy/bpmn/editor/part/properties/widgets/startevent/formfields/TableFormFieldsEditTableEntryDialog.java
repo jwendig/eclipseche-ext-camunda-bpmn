@@ -41,22 +41,22 @@ public class TableFormFieldsEditTableEntryDialog extends DialogBox {
 	private TextBox tbId;
 	private TextBox tbLabel;
 	private TextBox tbDefaultValue;
-	private EditDialogTablePropertiesWidget tableProperties;
+	private EditFormFieldTablePropertiesWidget tableProperties;
+	private EditFormFieldTableValidationWidget tableValidations;
 
 	private TableFormFieldsWidget widgetCallback;
 	private FormFieldJso currentFormFieldJso;
 
-
 	public TableFormFieldsEditTableEntryDialog(
 			final TableFormFieldsWidget widgetCallback,
 			FormFieldJso formFieldJso) {
-//		this(widgetCallback);
 		this.widgetCallback = widgetCallback;
 		this.currentFormFieldJso = formFieldJso;
-		
+
 		initialize();
-		
+
 		tableProperties.setCurrentFormFieldJso(formFieldJso);
+		tableValidations.setCurrentFormFieldJso(formFieldJso);
 
 		for (int i = 0; i < lboxType.getItemCount(); i++) {
 			if (lboxType.getItemText(i).equalsIgnoreCase(
@@ -71,7 +71,7 @@ public class TableFormFieldsEditTableEntryDialog extends DialogBox {
 		tbDefaultValue.setText(formFieldJso.getAttr_defaultValue());
 		tableProperties.update();
 	}
-	
+
 	public void initialize() {
 		setTitle("Form Field Details");
 		setText("Form Field Details");
@@ -99,7 +99,10 @@ public class TableFormFieldsEditTableEntryDialog extends DialogBox {
 		tbDefaultValue = new TextBox();
 		tbDefaultValue.setWidth("100%");
 
-		tableProperties = new EditDialogTablePropertiesWidget(
+		tableProperties = new EditFormFieldTablePropertiesWidget(
+				widgetCallback.getDelegate(), currentFormFieldJso);
+
+		tableValidations = new EditFormFieldTableValidationWidget(
 				widgetCallback.getDelegate(), currentFormFieldJso);
 
 		gridContent = new Grid(6, 3);
@@ -115,7 +118,7 @@ public class TableFormFieldsEditTableEntryDialog extends DialogBox {
 		gridContent.setWidget(1, 1, tbLabel);
 		gridContent.setWidget(2, 1, tbDefaultValue);
 		gridContent.setWidget(3, 1, lboxType);
-		gridContent.setWidget(5, 1, new Label("TODO"));
+		gridContent.setWidget(4, 1, tableValidations);
 		gridContent.setWidget(5, 1, tableProperties);
 
 		gridContent.getColumnFormatter().setWidth(0, "150px");
