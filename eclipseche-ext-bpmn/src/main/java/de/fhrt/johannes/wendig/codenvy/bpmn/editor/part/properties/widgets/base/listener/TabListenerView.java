@@ -27,6 +27,7 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces
 
 public class TabListenerView extends AbstractBpmnPropertiesTabWidget {
 	private TableExecutionListenerWidget tableExecutionListener;
+	private TableTaskListenerWidget tableTastListener;
 
 	public TabListenerView(String tabName,
 			BpmnElementPropertiesView.ActionDelegate delegate) {
@@ -41,6 +42,10 @@ public class TabListenerView extends AbstractBpmnPropertiesTabWidget {
 
 		getGridTabContent().setText(0, 0, "Execution Listeners:");
 		getGridTabContent().setWidget(0, 1, tableExecutionListener);
+
+		getGridTabContent().setText(1, 0, "Task Listeners:");
+		getGridTabContent().setWidget(1, 1, tableTastListener);
+
 	}
 
 	@Override
@@ -48,9 +53,14 @@ public class TabListenerView extends AbstractBpmnPropertiesTabWidget {
 		Log.info(TabListenerView.class, "initContentElements");
 
 		tableExecutionListener = new TableExecutionListenerWidget(getDelegate());
+		tableTastListener = new TableTaskListenerWidget(getDelegate());
 	}
 
 	public TableExecutionListenerWidget getTableExecutionListener() {
 		return tableExecutionListener;
+	}
+
+	public TableTaskListenerWidget getTableTaskListener() {
+		return tableTastListener;
 	}
 }

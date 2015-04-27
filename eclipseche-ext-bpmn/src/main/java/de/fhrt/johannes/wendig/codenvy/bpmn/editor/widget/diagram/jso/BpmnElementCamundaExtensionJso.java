@@ -22,16 +22,17 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.FormFieldJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.PropertyJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ConstraintJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.TaskListenerJso;
 
 public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
 		implements ExecutionListenerJso, PropertyJso, FormFieldJso,
-		ConstraintJso {
+		ConstraintJso, TaskListenerJso {
 
 	public enum BpmnElementCamundaExtensionType {
 		CAMUNDA_EXECUTION_LISTENER("camunda:ExecutionListener"), CAMUNDA_PROPERTIES(
 				"camunda:Properties"), CAMUNDA_PROPERTY("camunda:Property"), CAMUNDA_FORMFIELD(
 				"camunda:FormField"), CAMUNDA_FORMDATA("camunda:FormData"), CAMUNDA_CONSTRAINT(
-				"camunda:Constraint");
+				"camunda:Constraint"), CAMUNDA_TASK_LISTENER("camunda:TaskListener");
 
 		private final String bpmnIoTypeDefinition;
 

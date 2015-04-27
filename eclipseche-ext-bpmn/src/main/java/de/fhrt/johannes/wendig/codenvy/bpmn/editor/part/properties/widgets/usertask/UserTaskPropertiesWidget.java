@@ -14,8 +14,12 @@ import com.google.gwt.user.client.ui.Label;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.extensions.TabExtensionsController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.formfields.TabFormFieldsController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.listener.TabListenerController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.usertask.general.TabGeneralController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.usertask.multiinstance.TabMulitInstanceController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.UserTaskJso;
 
 public class UserTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 
@@ -23,6 +27,9 @@ public class UserTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 
 	private TabGeneralController tabGeneralController;
 	private TabMulitInstanceController tabMultiInstanceController;
+	private TabListenerController<UserTaskJso> tabListenerController;
+	private TabFormFieldsController tabFormFieldsController;
+	private TabExtensionsController<UserTaskJso> tabExtensionsController;
 
 	public UserTaskPropertiesWidget(
 			BpmnElementPropertiesView.ActionDelegate delegate) {
@@ -30,11 +37,22 @@ public class UserTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 
 		tabGeneralController = new TabGeneralController(delegate);
 		tabMultiInstanceController = new TabMulitInstanceController(delegate);
-		
+		tabListenerController = new TabListenerController<UserTaskJso>(
+				delegate, true);
+		tabFormFieldsController = new TabFormFieldsController(delegate);
+		tabExtensionsController = new TabExtensionsController<UserTaskJso>(
+				delegate);
+
 		getTabLpContent().add(tabGeneralController.getView(),
 				tabGeneralController.getView().getTabName());
 		getTabLpContent().add(tabMultiInstanceController.getView(),
 				tabMultiInstanceController.getView().getTabName());
+		getTabLpContent().add(tabListenerController.getView(),
+				tabListenerController.getView().getTabName());
+		getTabLpContent().add(tabFormFieldsController.getView(),
+				tabFormFieldsController.getView().getTabName());
+		getTabLpContent().add(tabExtensionsController.getView(),
+				tabExtensionsController.getView().getTabName());
 	}
 
 	/*
@@ -49,5 +67,8 @@ public class UserTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	public void updateTabs() {
 		tabGeneralController.updateView();
 		tabMultiInstanceController.updateView();
+		tabListenerController.updateView();
+		tabFormFieldsController.updateView();
+		tabExtensionsController.updateView();
 	}
 }

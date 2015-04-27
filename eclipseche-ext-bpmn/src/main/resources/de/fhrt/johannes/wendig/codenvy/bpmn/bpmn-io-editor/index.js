@@ -434,6 +434,35 @@ module.exports={
       ]
     },
     {
+        "name": "TaskListener",
+        "superClass": [ "Element" ],
+        "properties": [
+        	{
+            "name": "event",
+            "isAttr": true,
+            "type": "String"
+          },
+          {
+            "name": "class",
+            "isAttr": true,
+            "type": "attr_class",
+            "default": ""
+          },
+          {
+            "name": "expression",
+            "isAttr": true,
+            "type": "attr_expression",
+            "default": ""
+          },
+          {
+            "name": "delegateExpression",
+            "isAttr": true,
+            "type": "attr_delegateExpression",
+            "default": ""
+          }
+        ]
+    },
+    {
       "name": "Properties",
       "superClass": [ "Element" ],
       "properties": [

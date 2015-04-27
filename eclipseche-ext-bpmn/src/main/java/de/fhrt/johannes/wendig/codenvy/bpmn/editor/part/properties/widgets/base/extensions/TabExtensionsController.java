@@ -13,10 +13,9 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabController;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.StartEventJso;
 
-public class TabExtensionsController extends
-		AbstractBpmnPropertiesTabController<StartEventJso> {
+public class TabExtensionsController<T> extends
+		AbstractBpmnPropertiesTabController<T> {
 	private final static String TAB_NAME = "Extensions";
 	private TabExtensionsView view;
 

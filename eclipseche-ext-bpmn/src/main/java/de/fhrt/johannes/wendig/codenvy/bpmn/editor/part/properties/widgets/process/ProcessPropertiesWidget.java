@@ -19,6 +19,7 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.definitions.TabDefinitionsController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.document.TabDocumentController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.process.general.TabGeneralController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.ProcessJso;
 
 public class ProcessPropertiesWidget extends AbstractBpmnPropertiesWidget {
 
@@ -29,19 +30,20 @@ public class ProcessPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	private TabGeneralController tabGeneralController;
 	private TabDocumentController tabDocumentController;
 	private TabDefinitionsController tabDefinitionsController;
-	private TabListenerController tabListenerController;
-	private TabExtensionsController tabExtensionsController;
+	private TabListenerController<ProcessJso> tabListenerController;
+	private TabExtensionsController<ProcessJso> tabExtensionsController;
 
 	public ProcessPropertiesWidget(
 			BpmnElementPropertiesView.ActionDelegate delegate) {
 		super(LB_ELEMENT_NAME_PREFIX, delegate);
 		Log.info(ProcessPropertiesWidget.class, "constructor");
 
-		tabListenerController = new TabListenerController(delegate);
+		tabListenerController = new TabListenerController<ProcessJso>(delegate, false);
 		tabDocumentController = new TabDocumentController(delegate);
 		tabGeneralController = new TabGeneralController(delegate);
 		tabDefinitionsController = new TabDefinitionsController(delegate);
-		tabExtensionsController = new TabExtensionsController(delegate);
+		tabExtensionsController = new TabExtensionsController<ProcessJso>(
+				delegate);
 
 		getTabLpContent().add(tabGeneralController.getView(),
 				tabGeneralController.getView().getTabName());

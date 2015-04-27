@@ -13,10 +13,11 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.star
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.extensions.TabExtensionsController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.formfields.TabFormFieldsController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.listener.TabListenerController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.event.TabEventController;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.formfields.TabFormFieldsController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.startevent.general.TabGeneralController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.StartEventJso;
 
 public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 
@@ -24,8 +25,8 @@ public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 
 	private TabGeneralController tabGeneralController;
 	private TabEventController tabEventController;
-	private TabListenerController tabListenerController;
-	private TabExtensionsController tabExtensionsController;
+	private TabListenerController<StartEventJso> tabListenerController;
+	private TabExtensionsController<StartEventJso> tabExtensionsController;
 	private TabFormFieldsController tabFormFieldsController;
 
 	public StartEventPropertiesWidget(
@@ -34,9 +35,11 @@ public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 
 		tabGeneralController = new TabGeneralController(delegate);
 		tabEventController = new TabEventController(delegate);
-		tabListenerController = new TabListenerController(delegate);
+		tabListenerController = new TabListenerController<StartEventJso>(
+				delegate, false);
 		tabFormFieldsController = new TabFormFieldsController(delegate);
-		tabExtensionsController = new TabExtensionsController(delegate);
+		tabExtensionsController = new TabExtensionsController<StartEventJso>(
+				delegate);
 
 		getTabLpContent().add(tabGeneralController.getView(),
 				tabGeneralController.getView().getTabName());
