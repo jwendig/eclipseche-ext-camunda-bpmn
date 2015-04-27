@@ -9,14 +9,14 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.usertask.multiinstance;
+package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.multiinstance;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.UserTaskJso;
 
-public class TabMulitInstanceController extends
-		AbstractBpmnPropertiesTabController<UserTaskJso> {
+public class TabMulitInstanceController<T> extends
+		AbstractBpmnPropertiesTabController<T> {
 	private final static String TAB_NAME = "Multi Instance";
 	private TabMultiInstanceView view;
 
@@ -24,7 +24,6 @@ public class TabMulitInstanceController extends
 			BpmnElementPropertiesView.ActionDelegate delegate) {
 		super(delegate);
 		view = new TabMultiInstanceView(TAB_NAME, delegate);
-
 
 	}
 
@@ -34,12 +33,12 @@ public class TabMulitInstanceController extends
 
 	@Override
 	public void updateView() {
-		view.getCbIsLoop().setValue(
-				false);
-		view.getCbIsLoop().setText("Please note, the loop activity is not supported by the Camunda BPM engine.");
+		view.getCbIsLoop().setValue(false);
+		view.getCbIsLoop()
+				.setText(
+						"Please note, the loop activity is not supported by the Camunda BPM engine.");
 		view.getCbIsLoop().setEnabled(false);
-		view.getCbMultiInstance().setValue(
-				false);
+		view.getCbMultiInstance().setValue(false);
 		view.getCbMultiInstance().setText("not implemented: TODO");
 		view.getCbMultiInstance().setEnabled(false);
 	}
