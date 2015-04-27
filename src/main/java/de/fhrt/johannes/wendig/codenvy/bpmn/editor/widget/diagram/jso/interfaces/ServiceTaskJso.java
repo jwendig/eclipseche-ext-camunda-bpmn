@@ -31,4 +31,8 @@ public interface ServiceTaskJso extends TaskJso {
 	public String getAttr_type();
 
 	public void setAttr_type(String type);
+	
+	public boolean getAttr_isForCompensation();
+
+	public void setAttr_isForCompensation(boolean isForCompensation);
 }
