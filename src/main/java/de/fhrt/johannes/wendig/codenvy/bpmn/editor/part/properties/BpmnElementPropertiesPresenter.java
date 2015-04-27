@@ -63,7 +63,7 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 		startEventProperties = new StartEventPropertiesWidget(this);
 		userTaskProperties = new UserTaskPropertiesWidget(this);
 
-		currentProperties = noselectionProperties;
+		view.getDockLpCurrentContent().add(noselectionProperties);
 	}
 
 	@Override
@@ -105,39 +105,44 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 		this.currentBpmnIoModelerJso = modelerJso;
 		this.currentElementJso = elementJso;
 
-		view.getDockLpCurrentContent().remove(currentProperties);
-		if (null == elementJso) {
-			currentProperties = noselectionProperties;
-		} else {
-			switch (BpmnElementType.findByBpmnIoTypeDefinition(elementJso
-					.getType())) {
-			case DEFAULT:
-				currentProperties = unknowItemProperties;
-				break;
-			case PROCESS:
-				currentProperties = processProperties;
-				break;
-			case SCRIPT_TASK:
-				currentProperties = unknowItemProperties;
-				break;
-			case SERVICE_TASK:
-				currentProperties = serviceTaskProperties;
-				break;
-			case START_EVENT:
-				currentProperties = startEventProperties;
-				break;
-			case TASK:
-				currentProperties = unknowItemProperties;
-				break;
-			case USER_TASK:
-				currentProperties = userTaskProperties;
-				break;
-			default:
-				currentProperties = unknowItemProperties;
-			}
+		view.getDockLpCurrentContent().clear();
+
+		switch (BpmnElementType
+				.findByBpmnIoTypeDefinition(elementJso.getType())) {
+		case DEFAULT:
+			currentProperties = unknowItemProperties;
+			break;
+		case PROCESS:
+			currentProperties = processProperties;
+			break;
+		case SCRIPT_TASK:
+			currentProperties = unknowItemProperties;
+			break;
+		case SERVICE_TASK:
+			currentProperties = serviceTaskProperties;
+			break;
+		case START_EVENT:
+			currentProperties = startEventProperties;
+			break;
+		case TASK:
+			currentProperties = unknowItemProperties;
+			break;
+		case USER_TASK:
+			currentProperties = userTaskProperties;
+			break;
+		default:
+			currentProperties = unknowItemProperties;
 		}
+
 		view.getDockLpCurrentContent().add(currentProperties);
 		currentProperties.updatePropertiesView();
+
+	}
+
+	@Override
+	public void noBpmnElementSelected() {
+		view.getDockLpCurrentContent().clear();
+		view.getDockLpCurrentContent().add(noselectionProperties);
 	}
 
 	/*
