@@ -49,10 +49,48 @@ public class TableTaskListenerEditTableEntryDialog extends DialogBox {
 	private TaskListenerJso currentTaskListenerJso;
 
 	public TableTaskListenerEditTableEntryDialog(
-			final TableTaskListenerWidget widgetCallback) {
+			final TableTaskListenerWidget widgetCallback,
+			TaskListenerJso executionListenerModel) {
 		super();
 		this.widgetCallback = widgetCallback;
+		this.currentTaskListenerJso = executionListenerModel;
 
+		initialize();
+
+		for (int i = 0; i < lboxEvent.getItemCount(); i++) {
+			if (lboxEvent.getItemText(i).equalsIgnoreCase(
+					executionListenerModel.getAttr_event())) {
+				lboxEvent.setSelectedIndex(i);
+				break;
+			}
+		}
+
+		String currentType = "";
+		if (executionListenerModel.getAttr_class().length() > 0) {
+			currentType = "Class";
+		} else if (executionListenerModel.getAttr_expression().length() > 0) {
+			currentType = "Expression";
+		} else if (executionListenerModel.getAttr_delegateExpression().length() > 0) {
+			currentType = "Delegate Expression";
+		}
+		// TODO: check if it is script
+
+		for (int i = 0; i < lboxType.getItemCount(); i++) {
+			if (lboxType.getItemText(i).equalsIgnoreCase(currentType)) {
+				lboxType.setSelectedIndex(i);
+				DomEvent.fireNativeEvent(Document.get().createChangeEvent(),
+						lboxType);
+				break;
+			}
+		}
+
+		tbClass.setText(executionListenerModel.getAttr_class());
+		tbExpression.setText(executionListenerModel.getAttr_expression());
+		tbDelegateExpression.setText(executionListenerModel
+				.getAttr_delegateExpression());
+	}
+
+	private void initialize() {
 		setTitle("Task Listener Details");
 		setText("Task Listener Details");
 
@@ -127,31 +165,16 @@ public class TableTaskListenerEditTableEntryDialog extends DialogBox {
 		btnOk = new Button("Save");
 		btnOk.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				TaskListenerJso taskListenerJso;
-				if (null != TableTaskListenerEditTableEntryDialog.this.currentTaskListenerJso) {
-					taskListenerJso = currentTaskListenerJso;
-				} else {
-					taskListenerJso = widgetCallback
-							.getDelegate()
-							.getCurrentElementJso()
-							.addCamundaExt_taskListener(
-									widgetCallback.getDelegate()
-											.getCurrentBpmnIoModelerJso()
-											.nativeGetModdle());
-					widgetCallback.getDataProvider().getList()
-							.add(taskListenerJso);
-				}
-
-				taskListenerJso
+				currentTaskListenerJso
 						.setAttr_event(TableTaskListenerEditTableEntryDialog.this.lboxEvent
 								.getSelectedItemText());
-				taskListenerJso
+				currentTaskListenerJso
 						.setAttr_class(TableTaskListenerEditTableEntryDialog.this.tbClass
 								.getText());
-				taskListenerJso
+				currentTaskListenerJso
 						.setAttr_expression(TableTaskListenerEditTableEntryDialog.this.tbExpression
 								.getText());
-				taskListenerJso
+				currentTaskListenerJso
 						.setAttr_delegateExpression(TableTaskListenerEditTableEntryDialog.this.tbDelegateExpression
 								.getText());
 
@@ -177,45 +200,6 @@ public class TableTaskListenerEditTableEntryDialog extends DialogBox {
 		vpRoot.add(hpOptions);
 
 		setWidget(vpRoot);
-	}
-
-	public TableTaskListenerEditTableEntryDialog(
-			final TableTaskListenerWidget widgetCallback,
-			TaskListenerJso executionListenerModel) {
-		this(widgetCallback);
-		this.currentTaskListenerJso = executionListenerModel;
-
-		for (int i = 0; i < lboxEvent.getItemCount(); i++) {
-			if (lboxEvent.getItemText(i).equalsIgnoreCase(
-					executionListenerModel.getAttr_event())) {
-				lboxEvent.setSelectedIndex(i);
-				break;
-			}
-		}
-
-		String currentType = "";
-		if (executionListenerModel.getAttr_class().length() > 0) {
-			currentType = "Class";
-		} else if (executionListenerModel.getAttr_expression().length() > 0) {
-			currentType = "Expression";
-		} else if (executionListenerModel.getAttr_delegateExpression().length() > 0) {
-			currentType = "Delegate Expression";
-		}
-		// TODO: check if it is script
-
-		for (int i = 0; i < lboxType.getItemCount(); i++) {
-			if (lboxType.getItemText(i).equalsIgnoreCase(currentType)) {
-				lboxType.setSelectedIndex(i);
-				DomEvent.fireNativeEvent(Document.get().createChangeEvent(),
-						lboxType);
-				break;
-			}
-		}
-
-		tbClass.setText(executionListenerModel.getAttr_class());
-		tbExpression.setText(executionListenerModel.getAttr_expression());
-		tbDelegateExpression.setText(executionListenerModel
-				.getAttr_delegateExpression());
 	}
 
 }

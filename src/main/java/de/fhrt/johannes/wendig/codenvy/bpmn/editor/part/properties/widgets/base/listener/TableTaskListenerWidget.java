@@ -131,8 +131,14 @@ public class TableTaskListenerWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
+				TaskListenerJso taskListenerJso = getDelegate()
+						.getCurrentElementJso().addCamundaExt_taskListener(
+								getDelegate().getCurrentBpmnIoModelerJso()
+										.nativeGetModdle());
+
+				getDataProvider().getList().add(taskListenerJso);
 				new TableTaskListenerEditTableEntryDialog(
-						TableTaskListenerWidget.this).center();
+						TableTaskListenerWidget.this, taskListenerJso).center();
 
 			}
 		});

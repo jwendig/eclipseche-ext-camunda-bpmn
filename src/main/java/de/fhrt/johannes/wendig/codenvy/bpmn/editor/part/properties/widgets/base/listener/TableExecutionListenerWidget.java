@@ -131,8 +131,17 @@ public class TableExecutionListenerWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
+				ExecutionListenerJso executionListenerJso = getDelegate()
+						.getCurrentElementJso()
+						.addCamundaExt_executionListener(
+								getDelegate().getCurrentBpmnIoModelerJso()
+										.nativeGetModdle());
+
+				getDataProvider().getList().add(executionListenerJso);
+				
 				new TableExecutionListenerEditTableEntryDialog(
-						TableExecutionListenerWidget.this).center();
+						TableExecutionListenerWidget.this, executionListenerJso)
+						.center();
 
 			}
 		});
