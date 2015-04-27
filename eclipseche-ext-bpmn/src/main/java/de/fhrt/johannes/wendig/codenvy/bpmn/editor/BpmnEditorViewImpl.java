@@ -117,15 +117,14 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	public void activate() {
 		Log.info(BpmnEditorViewImpl.class, "activate");
 
-		bpmnElementPropertiesEditorPresenter.bpmnElementSelected(
-				bpmnDiagramWidget.getBpmnIoModelerJso(), null);
-		
+		// bpmnElementPropertiesEditorPresenter.bpmnElementSelected(
+		// bpmnDiagramWidget.getBpmnIoModelerJso(), null);
+		bpmnElementPropertiesEditorPresenter.noBpmnElementSelected();
+
 		// TODO: find a solution ....
 		// parseProjectForCamundaElements();
 	}
 
-	
-	
 	@Override
 	public void close(boolean save) {
 		Log.info(BpmnEditorViewImpl.class, "close");
@@ -162,8 +161,9 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 			handleClose();
 			callback.onSuccess(null);
 		}
-
-		workspaceAgent.removePart(bpmnElementPropertiesEditorPresenter);
+		if (viewCounter == 0) {
+			workspaceAgent.removePart(bpmnElementPropertiesEditorPresenter);
+		}
 	}
 
 	@Override

@@ -10,41 +10,33 @@
  *******************************************************************************/
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.noselection;
 
+import java.util.Iterator;
+
 import org.eclipse.che.ide.util.loging.Log;
 
-import com.google.gwt.safehtml.shared.SafeHtml;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
+import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RenderableStamper;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.Widget;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.DefaultJso;
 
-public class NoSelectionWidget extends AbstractBpmnPropertiesWidget {
+public class NoSelectionWidget extends Composite {
 
 	private final static String LB_ELEMENT_NAME_PREFIX = "Nothing selected";
+	private BpmnElementPropertiesView.ActionDelegate delegate;
+	private DockLayoutPanel root;
 
 	public NoSelectionWidget(BpmnElementPropertiesView.ActionDelegate delegate) {
-		super(LB_ELEMENT_NAME_PREFIX, delegate);
+		super();
 		Log.info(NoSelectionWidget.class, "constructor");
+		this.delegate = delegate;
 
-		getTabLpContent().add(
-				new Label("Select a BPMN-Element to edit his properties!"));
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.
-	 * AbstractBpmnProperties
-	 * #initSelectedItem(de.fhrt.johannes.wendig.codenvy.bpmn
-	 * .editor.widget.diagram.bpmnelements.BpmnDiagramElementJso)
-	 */
-	@Override
-	public void updateTabs() {
-		// no implementation here
+		root = new DockLayoutPanel(Unit.PCT);
+		root.setSize("100%", "100%");
+		root.add(new Label("Select a BPMN-Element to edit his properties!"));
+		initWidget(root);
 	}
 }

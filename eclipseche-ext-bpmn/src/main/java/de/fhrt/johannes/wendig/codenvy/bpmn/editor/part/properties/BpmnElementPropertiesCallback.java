@@ -17,4 +17,6 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnModele
 public interface BpmnElementPropertiesCallback {
 	public void bpmnElementSelected(BpmnModelerJso modelerJso,
 			BpmnElementJso elementJso);
+	
+	public void noBpmnElementSelected();
 }
