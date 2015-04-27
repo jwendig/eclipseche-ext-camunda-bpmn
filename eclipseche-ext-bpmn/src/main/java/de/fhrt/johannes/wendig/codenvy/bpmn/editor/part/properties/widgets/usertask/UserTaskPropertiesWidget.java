@@ -10,15 +10,13 @@
  *******************************************************************************/
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.usertask;
 
-import com.google.gwt.user.client.ui.Label;
-
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.extensions.TabExtensionsController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.formfields.TabFormFieldsController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.listener.TabListenerController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.multiinstance.TabMulitInstanceController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.usertask.general.TabGeneralController;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.usertask.multiinstance.TabMulitInstanceController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.UserTaskJso;
 
 public class UserTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
@@ -26,17 +24,20 @@ public class UserTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	private final static String LB_ELEMENT_NAME_PREFIX = "User Task";
 
 	private TabGeneralController tabGeneralController;
-	private TabMulitInstanceController tabMultiInstanceController;
+	private TabMulitInstanceController<UserTaskJso> tabMultiInstanceController;
 	private TabListenerController<UserTaskJso> tabListenerController;
 	private TabFormFieldsController tabFormFieldsController;
 	private TabExtensionsController<UserTaskJso> tabExtensionsController;
+	
+	// TODO: TabInputOutput
 
 	public UserTaskPropertiesWidget(
 			BpmnElementPropertiesView.ActionDelegate delegate) {
 		super(LB_ELEMENT_NAME_PREFIX, delegate);
 
 		tabGeneralController = new TabGeneralController(delegate);
-		tabMultiInstanceController = new TabMulitInstanceController(delegate);
+		tabMultiInstanceController = new TabMulitInstanceController<UserTaskJso>(
+				delegate);
 		tabListenerController = new TabListenerController<UserTaskJso>(
 				delegate, true);
 		tabFormFieldsController = new TabFormFieldsController(delegate);
