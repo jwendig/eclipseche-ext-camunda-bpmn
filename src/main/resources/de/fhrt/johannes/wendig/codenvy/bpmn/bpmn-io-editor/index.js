@@ -1,10 +1,9 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 // BEGIN COPY BLOG (copy this to the top of the generated .js document)
 
 var bpmnIo_fkt_createNewModeler;
 
 // END COPY BLOG
-
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 
 bpmnIo_fkt_createNewModeler = function(wrapperId){
 	
@@ -461,7 +460,7 @@ module.exports={
             "default": ""
           }
         ]
-    },
+      },
     {
       "name": "Properties",
       "superClass": [ "Element" ],
@@ -573,9 +572,145 @@ module.exports={
           "type": "Validation"
         }        
       ]
-    }
-          
-          
+    },
+    {
+      "name": "InputOutput",
+      "superClass": [ "Element" ],
+      "properties": [
+      	{
+          "name": "inputParameters",
+          "isMany": true,
+          "type": "InputParameter"
+        },
+        {
+          "name": "outputParameters",
+          "isMany": true,
+          "type": "OutputParameter"
+        }
+      ]
+    },
+    {
+      "name": "InputParameter",      
+      "properties": [
+      	{
+          "name": "name",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "value",
+          "isBody": true,
+          "type": "String"
+        },
+        {
+          "name": "map",
+          "type": "Map"
+        },
+        {
+          "name": "list",
+          "type": "List"
+        },
+        {
+          "name": "script",
+          "type": "Script"
+        }
+      ]
+    },
+    {
+      "name": "OutputParameter",      
+      "properties": [
+      	{
+          "name": "name",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "value",
+          "isBody": true,
+          "type": "String"
+        },
+        {
+          "name": "map",
+          "type": "Map"
+        }, 
+        {
+          "name": "list",
+          "type": "List"
+        },
+        {
+          "name": "script",
+          "type": "Script"
+        }
+      ]
+    },
+    {
+      "name": "Map",      
+      "properties": [
+      	{
+          "name": "values",          
+          "isMany": true,
+          "type": "Entry"
+        }    
+      ]
+    },
+    {
+      "name": "Entry",      
+      "properties": [
+      	{
+          "name": "key",
+          "isAttr": true,
+          "type": "String"
+        },
+        {
+          "name": "value",
+          "isBody": true,
+          "type": "String"
+        }     
+      ]
+    },
+    {
+      "name": "List",      
+      "properties": [
+      	{
+          "name": "values",          
+          "isMany": true,
+          "type": "Value"
+        }    
+      ]
+    },
+    {
+      "name": "Value",      
+      "properties": [      	
+        {
+          "name": "value",
+          "isBody": true,
+          "type": "String"
+        }     
+      ]
+    },
+    {
+      "name": "Script",      
+      "properties": [
+      	{
+          "name": "scriptFormat",          
+          "isAttr": true,
+          "type": "String",
+          "default": ""
+        },    
+        {
+          "name": "resource",          
+          "isAttr": true,
+          "type": "String",
+          "default": ""
+        },
+        {
+          "name": "script",          
+          "isBody": true,
+          "type": "String",
+          "default": ""
+        }
+      ]
+    },
   ],
   "emumerations": [],
   "associations": []
