@@ -36,9 +36,6 @@ public interface BpmnResource extends ClientBundle {
 	@Source("img/bpmn-ico-circle.png")
 	ImageResource bpmnIconXlFile();
 
-	@Source("bpmn-io-editor/index.html")
-	TextResource bpmnIoIndexHtmlFile();
-
 	@Source("bpmn-io-editor/index.js")
 	TextResource bpmnIoIndexJsFile();
 

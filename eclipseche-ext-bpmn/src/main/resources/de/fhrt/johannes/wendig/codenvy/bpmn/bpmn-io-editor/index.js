@@ -430,7 +430,11 @@ module.exports={
           "isAttr": true,
           "type": "attr_delegateExpression",
           "default": ""
-        }
+        },
+	    {
+	      "name": "script",
+	      "type": "Script"
+	    }
       ]
     },
     {
@@ -459,7 +463,11 @@ module.exports={
             "isAttr": true,
             "type": "attr_delegateExpression",
             "default": ""
-          }
+          },
+	      {
+	        "name": "script",
+	        "type": "Script"
+	      }
         ]
       },
     {
