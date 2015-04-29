@@ -63,6 +63,7 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 		startEventProperties = new StartEventPropertiesWidget(this);
 		userTaskProperties = new UserTaskPropertiesWidget(this);
 
+		view.setTitle(TITLE);
 		view.getDockLpCurrentContent().add(noselectionProperties);
 	}
 
