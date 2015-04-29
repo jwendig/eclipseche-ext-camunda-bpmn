@@ -32,6 +32,7 @@ public class TableExecutionListenerWidget extends
 	private TextColumn<ExecutionListenerJso> tcExecutionListenersEvent;
 	private TextColumn<ExecutionListenerJso> tcExecutionListenersExpression;
 	private TextColumn<ExecutionListenerJso> tcExecutionListenersDelegateExpression;
+	private TextColumn<ExecutionListenerJso> tcExecutionListenersScript;
 	private Column<ExecutionListenerJso, String> tcExecutionListenerBtnRemove;
 	private Column<ExecutionListenerJso, String> tcExecutionListenerBtnEdit;
 	private Button btnAddExecutionListener;
@@ -67,6 +68,20 @@ public class TableExecutionListenerWidget extends
 
 			@Override
 			public String getValue(ExecutionListenerJso object) {
+				return object.getAttr_delegateExpression();
+			}
+		};
+
+		tcExecutionListenersScript = new TextColumn<ExecutionListenerJso>() {
+
+			@Override
+			public String getValue(ExecutionListenerJso object) {
+				// TODO:
+				/*
+				 * use: format: xad; resource: text.xml or format: xad; script:
+				 * sdfasdfsöldfksdöf
+				 */
+
 				return object.getAttr_delegateExpression();
 			}
 		};
@@ -122,6 +137,7 @@ public class TableExecutionListenerWidget extends
 		getTable().addColumn(tcExecutionListenersExpression, "Expression");
 		getTable().addColumn(tcExecutionListenersDelegateExpression,
 				"DelegateExpression");
+		getTable().addColumn(tcExecutionListenersScript, "Script");
 		getTable().addColumn(tcExecutionListenersEvent, "Event");
 		getTable().addColumn(tcExecutionListenerBtnEdit, "");
 		getTable().addColumn(tcExecutionListenerBtnRemove, "");
@@ -138,7 +154,7 @@ public class TableExecutionListenerWidget extends
 										.nativeGetModdle());
 
 				getDataProvider().getList().add(executionListenerJso);
-				
+
 				new TableExecutionListenerEditTableEntryDialog(
 						TableExecutionListenerWidget.this, executionListenerJso)
 						.center();
