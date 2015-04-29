@@ -172,7 +172,6 @@ public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 					gridContent.setWidget(2, 1, tbFormat);
 					gridContent.getRowFormatter().setVisible(3, true);
 					gridContent.getRowFormatter().setVisible(4, true);
-
 					break;
 				case "Expression":
 					gridContent.setWidget(2, 1, tbExpression);
@@ -254,6 +253,8 @@ public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 		gridContent.setWidget(4, 1, hPanelScript);
 
 		gridContent.getColumnFormatter().setWidth(0, "150px");
+		gridContent.getRowFormatter().setVisible(3, false);
+		gridContent.getRowFormatter().setVisible(4, false);
 
 		btnOk = new Button("Save");
 		btnOk.addClickHandler(new ClickHandler() {
