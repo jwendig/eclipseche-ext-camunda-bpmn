@@ -24,6 +24,7 @@ import com.google.gwt.user.client.ui.Button;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnDataTableWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ExecutionListenerJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ScriptJso;
 
 public class TableExecutionListenerWidget extends
 		AbstractBpmnDataTableWidget<ExecutionListenerJso> {
@@ -76,13 +77,24 @@ public class TableExecutionListenerWidget extends
 
 			@Override
 			public String getValue(ExecutionListenerJso object) {
-				// TODO:
-				/*
-				 * use: format: xad; resource: text.xml or format: xad; script:
-				 * sdfasdfsöldfksdöf
-				 */
+				if (null != object.getChild_script()) {
+					ScriptJso scriptJso = object.getChild_script();
+					StringBuilder sbValue = new StringBuilder();
+					sbValue.append("format: ");
+					sbValue.append(scriptJso.getAttr_scriptFormat());
 
-				return object.getAttr_delegateExpression();
+					if (scriptJso.getAttr_resource().length() > 0) {
+						sbValue.append(";resource: ");
+						sbValue.append(scriptJso.getAttr_resource());
+					} else {
+						sbValue.append(";script: ");
+						sbValue.append(scriptJso.getAttr_script());
+					}
+
+					return sbValue.toString();
+				} else {
+					return "";
+				}
 			}
 		};
 

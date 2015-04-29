@@ -18,7 +18,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DomEvent;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -30,6 +29,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ExecutionListenerJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ScriptJso;
 
 public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 
@@ -85,7 +85,7 @@ public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 			currentType = "Delegate Expression";
 			gridContent.getRowFormatter().setVisible(3, false);
 			gridContent.getRowFormatter().setVisible(4, false);
-		} else {
+		} else if (executionListenerModel.getChild_script() != null) {
 			currentType = "Script";
 			gridContent.getRowFormatter().setVisible(3, true);
 			gridContent.getRowFormatter().setVisible(4, true);
@@ -104,6 +104,25 @@ public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 		tbExpression.setText(executionListenerModel.getAttr_expression());
 		tbDelegateExpression.setText(executionListenerModel
 				.getAttr_delegateExpression());
+		if (executionListenerModel.getChild_script() != null) {
+			tbFormat.setText(executionListenerModel.getChild_script()
+					.getAttr_scriptFormat());
+			tbResource.setText(executionListenerModel.getChild_script()
+					.getAttr_resource());
+			taScript.setText(executionListenerModel.getChild_script()
+					.getAttr_script());
+
+			if (executionListenerModel.getChild_script().getAttr_resource()
+					.length() > 0) {
+				rbResource.setValue(true);
+				tbResource.setEnabled(true);
+				taScript.setEnabled(false);
+			} else {
+				rbScript.setValue(true);
+				taScript.setEnabled(true);
+				tbResource.setEnabled(false);
+			}
+		}
 	}
 
 	private void initialize() {
@@ -239,18 +258,27 @@ public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 		btnOk = new Button("Save");
 		btnOk.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+				currentExecutionListenerJso.setAttr_event(lboxEvent
+						.getSelectedItemText());
+				currentExecutionListenerJso.setAttr_class(tbClass.getText());
+				currentExecutionListenerJso.setAttr_expression(tbExpression
+						.getText());
 				currentExecutionListenerJso
-						.setAttr_event(TableExecutionListenerEditTableEntryDialog.this.lboxEvent
-								.getSelectedItemText());
-				currentExecutionListenerJso
-						.setAttr_class(TableExecutionListenerEditTableEntryDialog.this.tbClass
+						.setAttr_delegateExpression(tbDelegateExpression
 								.getText());
-				currentExecutionListenerJso
-						.setAttr_expression(TableExecutionListenerEditTableEntryDialog.this.tbExpression
-								.getText());
-				currentExecutionListenerJso
-						.setAttr_delegateExpression(TableExecutionListenerEditTableEntryDialog.this.tbDelegateExpression
-								.getText());
+
+				if (lboxType.getSelectedItemText().equalsIgnoreCase("script")) {
+					ScriptJso scriptJso = currentExecutionListenerJso
+							.addChild_script(widgetCallback.getDelegate()
+									.getCurrentBpmnIoModelerJso()
+									.nativeGetModdle());
+					scriptJso.setAttr_resource(tbResource.getText());
+					scriptJso.setAttr_script(taScript.getText());
+					scriptJso.setAttr_scriptFormat(tbFormat.getText());
+				} else {
+					currentExecutionListenerJso.removeChild_script();
+					
+				}
 
 				// TODO: save script settings
 

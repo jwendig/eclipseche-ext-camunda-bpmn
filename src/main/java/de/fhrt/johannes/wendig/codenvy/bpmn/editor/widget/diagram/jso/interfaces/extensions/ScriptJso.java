@@ -11,28 +11,16 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions;
 
-import com.google.gwt.core.client.JavaScriptObject;
+public interface ScriptJso {
+	public String getAttr_scriptFormat();
 
-public interface ExecutionListenerJso {
-	public String getAttr_class();
+	public void setAttr_scriptFormat(String scriptFormat);
 
-	public void setAttr_class(String clazz);
+	public String getAttr_resource();
 
-	public String getAttr_delegateExpression();
+	public void setAttr_resource(String resource);
 
-	public void setAttr_delegateExpression(String delegateExpression);
+	public String getAttr_script();
 
-	public String getAttr_expression();
-
-	public void setAttr_expression(String expression);
-
-	public String getAttr_event();
-
-	public void setAttr_event(String event);
-
-	public ScriptJso getChild_script();
-
-	public ScriptJso addChild_script(JavaScriptObject moddle);
-
-	public boolean removeChild_script();
+	public void setAttr_script(String script);
 }
