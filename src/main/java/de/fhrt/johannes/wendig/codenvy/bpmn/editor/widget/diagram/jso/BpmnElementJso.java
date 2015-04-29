@@ -96,13 +96,17 @@ public class BpmnElementJso extends AbstractBpmnElementJso implements
 														console.log("js-native: removeExt_elemenemt");
 														var extElementIndex = this.extensionElements.values.indexOf(extElement);
 														if (extElementIndex > -1) {
-														console.log("js-native: removeExt_elemenemt: extElement found at index:" + extElementIndex);
-														this.extensionElements.values.splice(extElementIndex, 1);
+															console.log("js-native: removeExt_elemenemt: extElement found at index:" + extElementIndex);
+															this.extensionElements.values.splice(extElementIndex, 1);
 														
-														return true;
+															if(this.extensionElements.values.length == 0){
+																delete this.extensionElements;
+															}
+														
+															return true;
 														}else{
-														console.log("js-native: removeExt_elemenemt: extElement not found");
-														return false;
+															console.log("js-native: removeExt_elemenemt: extElement not found");
+															return false;
 														}
 														}-*/;
 
@@ -116,6 +120,10 @@ public class BpmnElementJso extends AbstractBpmnElementJso implements
 															console.log("js-native: nativeRemoveCamundaExtElementFromExistingCamundaExtElement: elemToRemove found at index:" + elemToRemoveIndex);
 															baseElement.values.splice(elemToRemoveIndex, 1);
 														
+															if(this.extensionElements.values.length == 0){
+																delete this.extensionElements;
+															}
+														
 															return true;
 														}else{
 															console.log("js-native: nativeRemoveCamundaExtElementFromExistingCamundaExtElement: elemToRemove not found");
@@ -125,10 +133,11 @@ public class BpmnElementJso extends AbstractBpmnElementJso implements
 
 	private final native JsArray<BpmnElementCamundaExtensionJso> nativeGetCamundaExtElementsByType(
 			String bpmnExtensionElementType) /*-{
-												console.log("js-native: getExt_executionListeners");
+												console.log("js-native: nativeGetCamundaExtElementsByType");
+												// TODO: test: if (!this.extensionElements || this.extensionElements === undefined || this.extensionElements.values === undefined) {
 												if (!this.extensionElements || this.extensionElements.values == 'undefined') {
 												console
-												.log("js-native: getExt_executionListeners: no extensionElementsAvailable");
+												.log("js-native: nativeGetCamundaExtElementsByType: no extensionElementsAvailable");
 												return [];
 												}
 

@@ -18,11 +18,14 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DomEvent;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RadioButton;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -43,6 +46,11 @@ public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 	private TextBox tbClass;
 	private TextBox tbExpression;
 	private TextBox tbDelegateExpression;
+	private TextBox tbFormat;
+	private RadioButton rbResource;
+	private RadioButton rbScript;
+	private TextBox tbResource;
+	private TextArea taScript;
 
 	private TableExecutionListenerWidget widgetCallback;
 	private ExecutionListenerJso currentExecutionListenerJso;
@@ -67,12 +75,21 @@ public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 		String currentType = "";
 		if (executionListenerModel.getAttr_class().length() > 0) {
 			currentType = "Class";
+			gridContent.getRowFormatter().setVisible(3, false);
+			gridContent.getRowFormatter().setVisible(4, false);
 		} else if (executionListenerModel.getAttr_expression().length() > 0) {
 			currentType = "Expression";
+			gridContent.getRowFormatter().setVisible(3, false);
+			gridContent.getRowFormatter().setVisible(4, false);
 		} else if (executionListenerModel.getAttr_delegateExpression().length() > 0) {
 			currentType = "Delegate Expression";
+			gridContent.getRowFormatter().setVisible(3, false);
+			gridContent.getRowFormatter().setVisible(4, false);
+		} else {
+			currentType = "Script";
+			gridContent.getRowFormatter().setVisible(3, true);
+			gridContent.getRowFormatter().setVisible(4, true);
 		}
-		// TODO: check if it is script
 
 		for (int i = 0; i < lboxType.getItemCount(); i++) {
 			if (lboxType.getItemText(i).equalsIgnoreCase(currentType)) {
@@ -121,19 +138,32 @@ public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 				tbClass.setText("");
 				tbExpression.setText("");
 				tbDelegateExpression.setText("");
+				tbFormat.setText("");
+				tbResource.setText("");
+				taScript.setText("");
 
 				switch (lboxType.getSelectedItemText()) {
 				case "Class":
 					gridContent.setWidget(2, 1, tbClass);
+					gridContent.getRowFormatter().setVisible(3, false);
+					gridContent.getRowFormatter().setVisible(4, false);
 					break;
 				case "Script":
-					gridContent.setWidget(2, 1, new Label("not implemented"));
+					lbSelectedType.setText("Format");
+					gridContent.setWidget(2, 1, tbFormat);
+					gridContent.getRowFormatter().setVisible(3, true);
+					gridContent.getRowFormatter().setVisible(4, true);
+
 					break;
 				case "Expression":
 					gridContent.setWidget(2, 1, tbExpression);
+					gridContent.getRowFormatter().setVisible(3, false);
+					gridContent.getRowFormatter().setVisible(4, false);
 					break;
 				case "Delegate Expression":
 					gridContent.setWidget(2, 1, tbDelegateExpression);
+					gridContent.getRowFormatter().setVisible(3, false);
+					gridContent.getRowFormatter().setVisible(4, false);
 					break;
 				}
 
@@ -148,16 +178,61 @@ public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 		tbExpression.setWidth("100%");
 		tbDelegateExpression = new TextBox();
 		tbDelegateExpression.setWidth("100%");
+		tbFormat = new TextBox();
+		tbFormat.setWidth("100%");
 
-		gridContent = new Grid(3, 3);
+		tbResource = new TextBox();
+		tbResource.setWidth("100%");
+
+		ClickHandler rbHandler = new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				if (rbResource.getValue() == true) {
+					tbResource.setEnabled(true);
+					taScript.setEnabled(false);
+					taScript.setText("");
+				} else {
+					taScript.setEnabled(true);
+					tbResource.setEnabled(false);
+					tbResource.setText("");
+				}
+
+			}
+		};
+
+		rbResource = new RadioButton("type");
+		rbResource.addClickHandler(rbHandler);
+
+		rbScript = new RadioButton("type");
+		rbScript.addClickHandler(rbHandler);
+
+		taScript = new TextArea();
+		taScript.setWidth("100%");
+
+		HorizontalPanel hPanelResource = new HorizontalPanel();
+		hPanelResource.setWidth("100%");
+		hPanelResource.add(rbResource);
+		hPanelResource.add(tbResource);
+
+		HorizontalPanel hPanelScript = new HorizontalPanel();
+		hPanelScript.setWidth("100%");
+		hPanelScript.add(rbScript);
+		hPanelScript.add(taScript);
+
+		gridContent = new Grid(5, 3);
 		gridContent.setWidth("100%");
 		gridContent.setText(0, 0, "Event");
 		gridContent.setText(1, 0, "Type");
 		gridContent.setWidget(2, 0, lbSelectedType);
+		gridContent.setText(3, 0, "Resource");
+		gridContent.setText(4, 0, "Script");
 
 		gridContent.setWidget(0, 1, lboxEvent);
 		gridContent.setWidget(1, 1, lboxType);
 		gridContent.setWidget(2, 1, tbClass);
+		gridContent.setWidget(3, 1, hPanelResource);
+		gridContent.setWidget(4, 1, hPanelScript);
 
 		gridContent.getColumnFormatter().setWidth(0, "150px");
 
@@ -176,6 +251,8 @@ public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 				currentExecutionListenerJso
 						.setAttr_delegateExpression(TableExecutionListenerEditTableEntryDialog.this.tbDelegateExpression
 								.getText());
+
+				// TODO: save script settings
 
 				TableExecutionListenerEditTableEntryDialog.this.hide();
 
