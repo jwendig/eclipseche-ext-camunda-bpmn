@@ -604,12 +604,14 @@ module.exports={
       	{
           "name": "name",
           "isAttr": true,
-          "type": "String"
+          "type": "String",
+          "default": ""
         },
         {
           "name": "value",
           "isBody": true,
-          "type": "String"
+          "type": "String",
+          "default": ""
         },
         {
           "name": "map",
@@ -631,12 +633,14 @@ module.exports={
       	{
           "name": "name",
           "isAttr": true,
-          "type": "String"
+          "type": "String",
+          "default": ""
         },
         {
           "name": "value",
           "isBody": true,
-          "type": "String"
+          "type": "String",
+          "default": ""
         },
         {
           "name": "map",
