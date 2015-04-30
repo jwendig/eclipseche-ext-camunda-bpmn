@@ -143,6 +143,8 @@ public class TableInputParametersEditEntryDialog extends DialogBox {
 
 		lbSelectedType = new Label("Class");
 
+		tbName = new TextBox();
+		tbName.setWidth("100%");
 		tbTextContent = new TextBox();
 		tbTextContent.setWidth("100%");
 		tbScriptFormat = new TextBox();
