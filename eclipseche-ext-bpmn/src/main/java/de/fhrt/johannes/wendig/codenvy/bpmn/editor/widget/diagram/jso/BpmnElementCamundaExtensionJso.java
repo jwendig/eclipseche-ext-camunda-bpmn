@@ -112,7 +112,7 @@ public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
 																			});
 																}-*/;
 
-	public static final native JsArray<BpmnElementCamundaExtensionJso> nativeGetPropertyListFromPropertiesByArray(
+	public static final native JsArray<BpmnElementCamundaExtensionJso> nativeGetPropertyListFromPropertiesByFieldName(
 			BpmnElementCamundaExtensionJso element, String type,
 			String arrayName)/*-{
 								console.log("js-native: nativeGetPropertyListFromProperties");
