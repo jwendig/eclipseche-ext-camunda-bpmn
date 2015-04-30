@@ -93,6 +93,18 @@ public class BpmnElementJso extends AbstractBpmnElementJso implements
 																		
 																		}-*/;
 
+	private static final native BpmnElementCamundaExtensionJso nativeAddCamundaExtElementToExistingCamundaExtElementByFieldName(
+			BpmnElementCamundaExtensionJso baseElement,
+			JavaScriptObject moddle, String bpmnExtensionElementType,
+			String fieldName)/*-{
+								var ext = moddle.create(bpmnExtensionElementType);
+								baseElement.get(fieldName).push(ext);
+								
+								return ext;
+								
+								
+								}-*/;
+
 	private final native boolean nativeRemoveCamundaExtElement(
 			BpmnElementCamundaExtensionJso extElement)/*-{
 														console.log("js-native: removeExt_elemenemt");
@@ -132,6 +144,31 @@ public class BpmnElementJso extends AbstractBpmnElementJso implements
 															return false;
 														}
 														}-*/;
+
+	private final static native boolean nativeRemoveCamundaExtElementFromExistingCamundaExtElementByFieldName(
+			BpmnElementCamundaExtensionJso baseElement,
+			BpmnElementCamundaExtensionJso elemToRemove, String fieldName)/*-{
+																			console.log("js-native: nativeRemoveCamundaExtElementFromExistingCamundaExtElementByFieldName");
+																			
+																			var elemToRemoveIndex = baseElement[fieldName].indexOf(elemToRemove);
+																			if (elemToRemoveIndex > -1) {
+																			console.log("js-native: nativeRemoveCamundaExtElementFromExistingCamundaExtElementByFieldName: elemToRemove found at index:" + elemToRemoveIndex);
+																			baseElement[fieldName].splice(elemToRemoveIndex, 1);
+																			
+																			if(baseElement[fieldName].length == 0){
+																				baseElement[fieldName] = undefined;
+																			}
+																			
+																			if(baseElement.parent.extensionElements.values.length == 0){
+																			delete baseElement.parent.extensionElements;
+																			}
+																			
+																			return true;
+																			}else{
+																			console.log("js-native: nativeRemoveCamundaExtElementFromExistingCamundaExtElementByFieldName: elemToRemove not found");
+																			return false;
+																			}
+																			}-*/;
 
 	private final native JsArray<BpmnElementCamundaExtensionJso> nativeGetCamundaExtElementsByType(
 			String bpmnExtensionElementType) /*-{
@@ -330,13 +367,18 @@ public class BpmnElementJso extends AbstractBpmnElementJso implements
 	@Override
 	public final boolean removeCamundaExt_inputParameter(
 			InputParameterJso element) {
+		
+		// TODO: remove parents when last inputParameter is removed ...
+		
 		JsArray<BpmnElementCamundaExtensionJso> baseElements = nativeGetCamundaExtElementsByType(BpmnElementCamundaExtensionType.CAMUNDA_INPUT_OUTPUT
 				.toString());
 		boolean isDeleted = false;
 		for (int i = 0; i < baseElements.length(); i++) {
-			isDeleted = nativeRemoveCamundaExtElementFromExistingCamundaExtElement(
+			isDeleted = nativeRemoveCamundaExtElementFromExistingCamundaExtElementByFieldName(
 					baseElements.get(i),
-					(BpmnElementCamundaExtensionJso) element);
+					(BpmnElementCamundaExtensionJso) element,
+					BpmnElementCamundaExtensionField.CAMUNDA_INPUT_PARAMETERS
+							.toString());
 			if (isDeleted) {
 				return true;
 			}
@@ -353,7 +395,7 @@ public class BpmnElementJso extends AbstractBpmnElementJso implements
 				.toString());
 		for (int i = 0; i < baseElements.length(); i++) {
 			JsArray<BpmnElementCamundaExtensionJso> nestedElements = BpmnElementCamundaExtensionJso
-					.nativeGetPropertyListFromPropertiesByArray(
+					.nativeGetPropertyListFromPropertiesByFieldName(
 							baseElements.get(i),
 							BpmnElementCamundaExtensionType.CAMUNDA_INPUT_PARAMETER
 									.toString(),
@@ -381,9 +423,11 @@ public class BpmnElementJso extends AbstractBpmnElementJso implements
 		} else {
 			baseElement = baseElements.get(0);
 		}
-		InputParameterJso inputParameterJso = nativeAddCamundaExtElementToExistingCamundaExtElement(
+		InputParameterJso inputParameterJso = nativeAddCamundaExtElementToExistingCamundaExtElementByFieldName(
 				baseElement, moddle,
 				BpmnElementCamundaExtensionType.CAMUNDA_INPUT_PARAMETER
+						.toString(),
+				BpmnElementCamundaExtensionField.CAMUNDA_INPUT_PARAMETERS
 						.toString());
 
 		return inputParameterJso;
