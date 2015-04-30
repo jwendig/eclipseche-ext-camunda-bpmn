@@ -11,6 +11,13 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces;
 
+import java.util.List;
+
+import com.google.gwt.core.client.JavaScriptObject;
+
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ExecutionListenerJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.InputParameterJso;
+
 public interface ServiceTaskJso extends TaskJso {
 	public String getAttr_class();
 
@@ -31,8 +38,15 @@ public interface ServiceTaskJso extends TaskJso {
 	public String getAttr_type();
 
 	public void setAttr_type(String type);
-	
+
 	public boolean getAttr_isForCompensation();
 
 	public void setAttr_isForCompensation(boolean isForCompensation);
+
+	public boolean removeCamundaExt_inputParameter(InputParameterJso element);
+
+	public List<InputParameterJso> getCamundaExt_inputParameters();
+
+	public InputParameterJso addCamundaExt_inputParameter(
+			JavaScriptObject moddle);
 }

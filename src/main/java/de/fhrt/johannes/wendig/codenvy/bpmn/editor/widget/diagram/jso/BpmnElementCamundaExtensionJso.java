@@ -20,21 +20,30 @@ import com.google.gwt.core.client.JsArray;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ExecutionListenerJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.FormFieldJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.PropertyJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ConstraintJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ScriptJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.InputParameterJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.TaskListenerJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.ConstraintJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.ListJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.ListValueJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.MapEntryJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.MapJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.PropertyJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.ScriptJso;
 
 public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
 		implements ExecutionListenerJso, PropertyJso, FormFieldJso,
-		ConstraintJso, TaskListenerJso, ScriptJso {
+		ConstraintJso, TaskListenerJso, ScriptJso, InputParameterJso, MapJso,
+		ListJso {
 
 	public enum BpmnElementCamundaExtensionType {
 		CAMUNDA_EXECUTION_LISTENER("camunda:ExecutionListener"), CAMUNDA_PROPERTIES(
 				"camunda:Properties"), CAMUNDA_PROPERTY("camunda:Property"), CAMUNDA_FORMFIELD(
 				"camunda:FormField"), CAMUNDA_FORMDATA("camunda:FormData"), CAMUNDA_CONSTRAINT(
 				"camunda:Constraint"), CAMUNDA_TASK_LISTENER(
-				"camunda:TaskListener"), CAMUNDA_SCRIPT("camunda:Script");
+				"camunda:TaskListener"), CAMUNDA_SCRIPT("camunda:Script"), CAMUNDA_INPUT_OUTPUT(
+				"camunda:InputOutput"), CAMUNDA_INPUT_PARAMETER(
+				"camunda:InputParameter"), CAMUNDA_MAP("camunda:Map"), CAMUNDA_LIST(
+				"camunda:List");
 
 		private final String bpmnIoTypeDefinition;
 
@@ -61,7 +70,8 @@ public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
 
 	public enum BpmnElementCamundaExtensionField {
 		CAMUNDA_PROPERTIES("properties"), CAMUNDA_VALIDATIONS("validations"), CAMUNDA_SCRIPT(
-				"script");
+				"script"), CAMUNDA_INPUT_PARAMETERS("inputParameters"), CAMUNDA_MAP(
+				"map"), CAMUNDA_LIST("list");
 
 		private final String arrayName;
 
@@ -101,6 +111,79 @@ public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
 																			return e.$instanceOf(type);
 																			});
 																}-*/;
+
+	public static final native JsArray<BpmnElementCamundaExtensionJso> nativeGetPropertyListFromPropertiesByArray(
+			BpmnElementCamundaExtensionJso element, String type,
+			String arrayName)/*-{
+								console.log("js-native: nativeGetPropertyListFromProperties");
+								if (!element[arrayName] || element[arrayName] == 'undefined') {
+								console
+								.log("js-native: nativeGetPropertyListFromProperties: no elements");
+								return [];
+								}
+
+								return element[arrayName].filter(function(e) {
+								return e.$instanceOf(type);
+								});
+								}-*/;
+
+	private final native BpmnElementCamundaExtensionJso nativeAddCamundaExtElementAsChild(
+			JavaScriptObject moddle, String bpmnExtensionElementType,
+			String field)/*-{
+								console.log("js-native: nativeAddCamundaExtElementAsChild");
+								
+								var ext = moddle.create(bpmnExtensionElementType);
+								this[field] = ext;
+								return ext;
+								
+								}-*/;
+
+	private final native BpmnElementCamundaExtensionJso nativeAddCamundaExtElementToArray(
+			JavaScriptObject moddle, String bpmnExtensionElementType,
+			String arrayName)/*-{
+								console.log("js-native: nativeAddCamundaExtElement");
+								
+								var ext = moddle.create(bpmnExtensionElementType);
+								this[arrayName] = this[arrayName] || moddle.create('camunda:Properties');
+								this[arrayName].get('values').push(ext);
+								return ext;
+								
+								}-*/;
+
+	private final native JsArray<BpmnElementCamundaExtensionJso> nativeGetElementsByTypeFromArray(
+			String arrayName, String bpmnExtensionElementType) /*-{
+																console.log("js-native: nativeGetCamundaExtElementsByType");
+																if (!this[arrayName] || this[arrayName].values == 'undefined') {
+																console
+																.log("js-native: nativeGetCamundaExtElementsByType: no elements in array: " + arrayName);
+																return [];
+																}
+																console.log("js-native: nativeGetCamundaExtElementsByType: size of array (" + arrayName + ")  = " + this[arrayName].values.length);
+
+																return this[arrayName].values.filter(function(e) {
+																return e.$instanceOf(bpmnExtensionElementType);
+																});
+																}-*/;
+
+	private final native void nativeRemoveChildElement(String field)/*-{
+																			console.log("js-native: nativeRemoveChildElement");
+																			this[field] = undefined;
+																			}-*/;
+
+	private final native boolean nativeRemoveChildElementFromArray(
+			BpmnElementCamundaExtensionJso elemToRemove, String arrayName)/*-{
+																			console.log("js-native: nativeRemoveCamundaExtElement");
+																			var elementIndex = this[arrayName].values.indexOf(elemToRemove);
+																			if (elementIndex > -1) {
+																			console.log("js-native: nativeRemoveCamundaExtElement: elemToRemove found at index:" + elementIndex);
+																			this[arrayName].values.splice(elementIndex, 1);
+																			
+																			return true;
+																			}else{
+																			console.log("js-native: nativeRemoveCamundaExtElement: elemToRemove not found");
+																			return false;
+																			}
+																			}-*/;
 
 	@Override
 	public final native String getAttr_config() /*-{
@@ -171,64 +254,6 @@ public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
 	public final native void setAttr_script(String script) /*-{
 															this.script = script;
 															}-*/;
-
-	private final native BpmnElementCamundaExtensionJso nativeAddCamundaExtElementAsChild(
-			JavaScriptObject moddle, String bpmnExtensionElementType,
-			String field)/*-{
-								console.log("js-native: nativeAddCamundaExtElementAsChild");
-								
-								var ext = moddle.create(bpmnExtensionElementType);
-								this[field] = ext;
-								return ext;
-								
-								}-*/;
-
-	private final native BpmnElementCamundaExtensionJso nativeAddCamundaExtElementToArray(
-			JavaScriptObject moddle, String bpmnExtensionElementType,
-			String arrayName)/*-{
-								console.log("js-native: nativeAddCamundaExtElement");
-								
-								var ext = moddle.create(bpmnExtensionElementType);
-								this[arrayName] = this[arrayName] || moddle.create('camunda:Properties');
-								this[arrayName].get('values').push(ext);
-								return ext;
-								
-								}-*/;
-
-	private final native JsArray<BpmnElementCamundaExtensionJso> nativeGetElementsByTypeFromArray(
-			String arrayName, String bpmnExtensionElementType) /*-{
-																console.log("js-native: nativeGetCamundaExtElementsByType");
-																if (!this[arrayName] || this[arrayName].values == 'undefined') {
-																console
-																.log("js-native: nativeGetCamundaExtElementsByType: no elements in array: " + arrayName);
-																return [];
-																}
-																console.log("js-native: nativeGetCamundaExtElementsByType: size of array (" + arrayName + ")  = " + this[arrayName].values.length);
-
-																return this[arrayName].values.filter(function(e) {
-																return e.$instanceOf(bpmnExtensionElementType);
-																});
-																}-*/;
-
-	private final native void nativeRemoveChildElement(String field)/*-{
-																			console.log("js-native: nativeRemoveChildElement");
-																			this[field] = undefined;
-																			}-*/;
-
-	private final native boolean nativeRemoveChildElementFromArray(
-			BpmnElementCamundaExtensionJso elemToRemove, String arrayName)/*-{
-																			console.log("js-native: nativeRemoveCamundaExtElement");
-																			var elementIndex = this[arrayName].values.indexOf(elemToRemove);
-																			if (elementIndex > -1) {
-																			console.log("js-native: nativeRemoveCamundaExtElement: elemToRemove found at index:" + elementIndex);
-																			this[arrayName].values.splice(elementIndex, 1);
-																			
-																			return true;
-																			}else{
-																			console.log("js-native: nativeRemoveCamundaExtElement: elemToRemove not found");
-																			return false;
-																			}
-																			}-*/;
 
 	@Override
 	public final List<PropertyJso> getProperties() {
@@ -312,4 +337,78 @@ public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
 	public final native ScriptJso getChild_script() /*-{
 													return this.script;
 													}-*/;
+
+	@Override
+	public final native MapJso getChild_map() /*-{
+												return this.map;
+												}-*/;
+
+	@Override
+	public final MapJso addChild_map(JavaScriptObject moddle) {
+		return nativeAddCamundaExtElementAsChild(moddle,
+				BpmnElementCamundaExtensionType.CAMUNDA_MAP.toString(),
+				BpmnElementCamundaExtensionField.CAMUNDA_MAP.toString());
+	}
+
+	@Override
+	public final boolean removeChild_map() {
+		nativeRemoveChildElement(BpmnElementCamundaExtensionField.CAMUNDA_MAP
+				.toString());
+		return true;
+	}
+
+	@Override
+	public final native ListJso getChild_list() /*-{
+												return this.list;
+												}-*/;
+
+	@Override
+	public final ListJso addChild_list(JavaScriptObject moddle) {
+		return nativeAddCamundaExtElementAsChild(moddle,
+				BpmnElementCamundaExtensionType.CAMUNDA_LIST.toString(),
+				BpmnElementCamundaExtensionField.CAMUNDA_LIST.toString());
+	}
+
+	@Override
+	public final boolean removeChild_list() {
+		nativeRemoveChildElement(BpmnElementCamundaExtensionField.CAMUNDA_LIST
+				.toString());
+		return true;
+	}
+
+	@Override
+	public final List<ListValueJso> getListValues() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public final ListValueJso addListValue(JavaScriptObject moddle) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public final boolean removeListValue(ListValueJso propertyJso) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public final List<MapEntryJso> getMapEntries() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public final MapEntryJso addMapEntry(JavaScriptObject moddle) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public final boolean removeMapEntry(MapEntryJso propertyJso) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

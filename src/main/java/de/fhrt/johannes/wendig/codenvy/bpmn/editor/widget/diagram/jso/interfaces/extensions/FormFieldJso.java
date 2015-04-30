@@ -15,6 +15,9 @@ import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.ConstraintJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.PropertyJso;
+
 public interface FormFieldJso {
 	public String getAttr_id();
 

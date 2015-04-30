@@ -13,28 +13,34 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interface
 
 import com.google.gwt.core.client.JavaScriptObject;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.ListJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.MapJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.ScriptJso;
 
-public interface ExecutionListenerJso {
-	public String getAttr_class();
+public interface InputParameterJso {
+	public String getAttr_name();
 
-	public void setAttr_class(String clazz);
+	public void setAttr_name(String name);
 
-	public String getAttr_delegateExpression();
+	public String getAttr_value();
 
-	public void setAttr_delegateExpression(String delegateExpression);
-
-	public String getAttr_expression();
-
-	public void setAttr_expression(String expression);
-
-	public String getAttr_event();
-
-	public void setAttr_event(String event);
+	public void setAttr_value(String value);
 
 	public ScriptJso getChild_script();
 
 	public ScriptJso addChild_script(JavaScriptObject moddle);
 
 	public boolean removeChild_script();
+
+	public MapJso getChild_map();
+
+	public MapJso addChild_map(JavaScriptObject moddle);
+
+	public boolean removeChild_map();
+
+	public ListJso getChild_list();
+
+	public ListJso addChild_list(JavaScriptObject moddle);
+
+	public boolean removeChild_list();
 }
