@@ -13,6 +13,7 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.serv
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.extensions.TabExtensionsController;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.inputoutput.TabInputOutputController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.listener.TabListenerController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.multiinstance.TabMulitInstanceController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.servicetask.general.TabGeneralController;
@@ -26,7 +27,8 @@ public class ServiceTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	private TabMulitInstanceController<ServiceTaskJso> tabMultiInstanceController;
 	private TabListenerController<ServiceTaskJso> tabListenerController;
 	private TabExtensionsController<ServiceTaskJso> tabExtensionsController;
-	
+	private TabInputOutputController<ServiceTaskJso> tabInputOutputController;
+
 	// TODO: tabFieldInjections, input/output, connector
 
 	public ServiceTaskPropertiesWidget(
@@ -41,12 +43,17 @@ public class ServiceTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 		tabExtensionsController = new TabExtensionsController<ServiceTaskJso>(
 				delegate);
 
+		tabInputOutputController = new TabInputOutputController<ServiceTaskJso>(
+				delegate);
+
 		getTabLpContent().add(tabGeneralController.getView(),
 				tabGeneralController.getView().getTabName());
 		getTabLpContent().add(tabMultiInstanceController.getView(),
 				tabMultiInstanceController.getView().getTabName());
 		getTabLpContent().add(tabListenerController.getView(),
 				tabListenerController.getView().getTabName());
+		getTabLpContent().add(tabInputOutputController.getView(),
+				tabInputOutputController.getView().getTabName());
 		getTabLpContent().add(tabExtensionsController.getView(),
 				tabExtensionsController.getView().getTabName());
 
@@ -66,5 +73,6 @@ public class ServiceTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 		tabMultiInstanceController.updateView();
 		tabListenerController.updateView();
 		tabExtensionsController.updateView();
+		tabInputOutputController.updateView();
 	}
 }
