@@ -84,10 +84,10 @@ public class TableExecutionListenerWidget extends
 					sbValue.append(scriptJso.getAttr_scriptFormat());
 
 					if (scriptJso.getAttr_resource().length() > 0) {
-						sbValue.append(";resource: ");
+						sbValue.append("; resource: ");
 						sbValue.append(scriptJso.getAttr_resource());
 					} else {
-						sbValue.append(";script: ");
+						sbValue.append("; script: ");
 						sbValue.append(scriptJso.getAttr_script());
 					}
 
