@@ -12,7 +12,7 @@
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions;
 
 
-public interface InputParameterJso extends InputOutputParameterJso {
+public interface OutputParameterJso extends InputOutputParameterJso {
 //	public String getAttr_name();
 //
 //	public void setAttr_name(String name);

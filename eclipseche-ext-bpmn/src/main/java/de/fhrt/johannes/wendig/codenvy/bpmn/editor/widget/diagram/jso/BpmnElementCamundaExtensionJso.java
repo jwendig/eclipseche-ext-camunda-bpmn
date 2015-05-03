@@ -21,6 +21,7 @@ import com.google.gwt.core.client.JsArray;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ExecutionListenerJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.FormFieldJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.InputParameterJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.OutputParameterJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.TaskListenerJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.ConstraintJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.ListValueJso;
@@ -31,7 +32,7 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces
 public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
 		implements ExecutionListenerJso, PropertyJso, FormFieldJso,
 		ConstraintJso, TaskListenerJso, ScriptJso, InputParameterJso,
-		ListValueJso, MapEntryJso {
+		OutputParameterJso, ListValueJso, MapEntryJso {
 
 	public enum BpmnElementCamundaExtensionType {
 		CAMUNDA_EXECUTION_LISTENER("camunda:ExecutionListener"), CAMUNDA_PROPERTIES(
@@ -40,7 +41,8 @@ public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
 				"camunda:Constraint"), CAMUNDA_TASK_LISTENER(
 				"camunda:TaskListener"), CAMUNDA_SCRIPT("camunda:Script"), CAMUNDA_INPUT_OUTPUT(
 				"camunda:InputOutput"), CAMUNDA_INPUT_PARAMETER(
-				"camunda:InputParameter"), CAMUNDA_MAP("camunda:Map"), CAMUNDA_LIST(
+				"camunda:InputParameter"), CAMUNDA_OUTPUT_PARAMETER(
+				"camunda:OutputParameter"), CAMUNDA_MAP("camunda:Map"), CAMUNDA_LIST(
 				"camunda:List"), CAMUNDA_MAP_ENTRY("camunda:Entry"), CAMUNDA_LIST_VALUE(
 				"camunda:Value");
 
@@ -69,8 +71,8 @@ public class BpmnElementCamundaExtensionJso extends AbstractBpmnElementJso
 
 	public enum BpmnElementCamundaExtensionField {
 		CAMUNDA_PROPERTIES("properties"), CAMUNDA_VALIDATIONS("validations"), CAMUNDA_SCRIPT(
-				"script"), CAMUNDA_INPUT_PARAMETERS("inputParameters"), CAMUNDA_MAP(
-				"map"), CAMUNDA_LIST("list");
+				"script"), CAMUNDA_INPUT_PARAMETERS("inputParameters"), CAMUNDA_OUTPUT_PARAMETERS(
+				"outputParameters"), CAMUNDA_MAP("map"), CAMUNDA_LIST("list");
 
 		private final String arrayName;
 

@@ -13,23 +13,13 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base
 
 import org.eclipse.che.ide.util.loging.Log;
 
-import com.google.gwt.cell.client.ButtonCell;
-import com.google.gwt.cell.client.FieldUpdater;
-import com.google.gwt.user.cellview.client.CellTable;
-import com.google.gwt.user.cellview.client.Column;
-import com.google.gwt.user.cellview.client.TextColumn;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnPropertiesTabWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ExecutionListenerJso;
 
 public class TabInputOutputView extends AbstractBpmnPropertiesTabWidget {
 	private TableInputParametersWidget tableInputParameters;
 
-	// TODO: ...
-	// private TableInputParametersWidget tableOutputParameters;
+	private TableOutputParametersWidget tableOutputParameters;
 
 	public TabInputOutputView(String tabName,
 			BpmnElementPropertiesView.ActionDelegate delegate) {
@@ -46,9 +36,7 @@ public class TabInputOutputView extends AbstractBpmnPropertiesTabWidget {
 		getGridTabContent().setWidget(0, 1, tableInputParameters);
 
 		getGridTabContent().setText(1, 0, "Output Parameters:");
-		// TODO: ...
-		// getGridTabContent().setWidget(1, 1, tableOutputParameters);
-		getGridTabContent().setText(1, 1, "TODO");
+		getGridTabContent().setWidget(1, 1, tableOutputParameters);
 
 	}
 
@@ -57,15 +45,15 @@ public class TabInputOutputView extends AbstractBpmnPropertiesTabWidget {
 		Log.info(TabInputOutputView.class, "initContentElements");
 
 		tableInputParameters = new TableInputParametersWidget(getDelegate());
-		// TODO: ...
-		// tableOutputParameters = new
-		// TableInputParametersWidget(getDelegate());
+		tableOutputParameters = new TableOutputParametersWidget(getDelegate());
 	}
 
 	public TableInputParametersWidget getTableInputParameters() {
 		return tableInputParameters;
 	}
 
-	// TODO: generate getter for tableOutputP....
+	public TableOutputParametersWidget getTableOutputParameters() {
+		return tableOutputParameters;
+	}
 
 }

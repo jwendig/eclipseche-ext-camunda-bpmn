@@ -29,6 +29,7 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ExecutionListenerJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.FormFieldJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.InputParameterJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.OutputParameterJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.TaskListenerJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.PropertyJso;
 
@@ -367,9 +368,6 @@ public class BpmnElementJso extends AbstractBpmnElementJso implements
 	@Override
 	public final boolean removeCamundaExt_inputParameter(
 			InputParameterJso element) {
-
-		// TODO: remove parents when last inputParameter is removed ...
-
 		JsArray<BpmnElementCamundaExtensionJso> baseElements = nativeGetCamundaExtElementsByType(BpmnElementCamundaExtensionType.CAMUNDA_INPUT_OUTPUT
 				.toString());
 		boolean isDeleted = false;
@@ -428,6 +426,72 @@ public class BpmnElementJso extends AbstractBpmnElementJso implements
 				BpmnElementCamundaExtensionType.CAMUNDA_INPUT_PARAMETER
 						.toString(),
 				BpmnElementCamundaExtensionField.CAMUNDA_INPUT_PARAMETERS
+						.toString());
+
+		return inputParameterJso;
+	}
+
+	@Override
+	public final boolean removeCamundaExt_outputParameter(
+			OutputParameterJso element) {
+		JsArray<BpmnElementCamundaExtensionJso> baseElements = nativeGetCamundaExtElementsByType(BpmnElementCamundaExtensionType.CAMUNDA_INPUT_OUTPUT
+				.toString());
+		boolean isDeleted = false;
+		for (int i = 0; i < baseElements.length(); i++) {
+			isDeleted = nativeRemoveCamundaExtElementFromExistingCamundaExtElementByFieldName(
+					baseElements.get(i),
+					(BpmnElementCamundaExtensionJso) element,
+					BpmnElementCamundaExtensionField.CAMUNDA_OUTPUT_PARAMETERS
+							.toString());
+			if (isDeleted) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	@Override
+	public final List<OutputParameterJso> getCamundaExt_outputParameters() {
+		List<OutputParameterJso> list = new ArrayList<OutputParameterJso>();
+
+		JsArray<BpmnElementCamundaExtensionJso> baseElements = nativeGetCamundaExtElementsByType(BpmnElementCamundaExtensionType.CAMUNDA_INPUT_OUTPUT
+				.toString());
+		for (int i = 0; i < baseElements.length(); i++) {
+			JsArray<BpmnElementCamundaExtensionJso> nestedElements = BpmnElementCamundaExtensionJso
+					.nativeGetPropertyListFromPropertiesByFieldName(
+							baseElements.get(i),
+							BpmnElementCamundaExtensionType.CAMUNDA_OUTPUT_PARAMETER
+									.toString(),
+							BpmnElementCamundaExtensionField.CAMUNDA_OUTPUT_PARAMETERS
+									.toString());
+			for (int k = 0; k < nestedElements.length(); k++) {
+				list.add(nestedElements.get(k));
+			}
+		}
+
+		return list;
+	}
+
+	@Override
+	public final OutputParameterJso addCamundaExt_outputParameter(
+			JavaScriptObject moddle) {
+		BpmnElementCamundaExtensionJso baseElement = null;
+		JsArray<BpmnElementCamundaExtensionJso> baseElements = nativeGetCamundaExtElementsByType(BpmnElementCamundaExtensionType.CAMUNDA_INPUT_OUTPUT
+				.toString());
+
+		if (baseElements.length() == 0) {
+			baseElement = nativeAddCamundaExtElement(moddle,
+					BpmnElementCamundaExtensionType.CAMUNDA_INPUT_OUTPUT
+							.toString());
+		} else {
+			baseElement = baseElements.get(0);
+		}
+		OutputParameterJso inputParameterJso = nativeAddCamundaExtElementToExistingCamundaExtElementByFieldName(
+				baseElement, moddle,
+				BpmnElementCamundaExtensionType.CAMUNDA_OUTPUT_PARAMETER
+						.toString(),
+				BpmnElementCamundaExtensionField.CAMUNDA_OUTPUT_PARAMETERS
 						.toString());
 
 		return inputParameterJso;

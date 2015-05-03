@@ -23,44 +23,42 @@ import com.google.gwt.user.client.ui.Button;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnDataTableWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ExecutionListenerJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.InputParameterJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.TaskListenerJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.OutputParameterJso;
 
-public class TableInputParametersWidget extends
-		AbstractBpmnDataTableWidget<InputParameterJso> {
+public class TableOutputParametersWidget extends
+		AbstractBpmnDataTableWidget<OutputParameterJso> {
 
-	private TextColumn<InputParameterJso> tcName;
-	private Column<InputParameterJso, String> tcBtnRemove;
-	private Column<InputParameterJso, String> tcBtnEdit;
+	private TextColumn<OutputParameterJso> tcName;
+	private Column<OutputParameterJso, String> tcBtnRemove;
+	private Column<OutputParameterJso, String> tcBtnEdit;
 	private Button btnAdd;
 
-	public TableInputParametersWidget(
+	public TableOutputParametersWidget(
 			BpmnElementPropertiesView.ActionDelegate delegate) {
 		super(delegate);
-		tcName = new TextColumn<InputParameterJso>() {
+		tcName = new TextColumn<OutputParameterJso>() {
 
 			@Override
-			public String getValue(InputParameterJso object) {
+			public String getValue(OutputParameterJso object) {
 				return object.getAttr_name();
 			}
 		};
 
-		tcBtnRemove = new Column<InputParameterJso, String>(new ButtonCell()) {
+		tcBtnRemove = new Column<OutputParameterJso, String>(new ButtonCell()) {
 			@Override
-			public String getValue(InputParameterJso object) {
+			public String getValue(OutputParameterJso object) {
 				return "x";
 			}
 		};
 
 		tcBtnRemove
-				.setFieldUpdater(new FieldUpdater<InputParameterJso, String>() {
+				.setFieldUpdater(new FieldUpdater<OutputParameterJso, String>() {
 
 					@Override
-					public void update(int index, InputParameterJso object,
+					public void update(int index, OutputParameterJso object,
 							String value) {
 						if (getDelegate().getCurrentElementJso()
-								.removeCamundaExt_inputParameter(object)) {
+								.removeCamundaExt_outputParameter(object)) {
 							getDataProvider().getList().remove(object);
 							getDataProvider().refresh();
 							getTable().redraw();
@@ -71,21 +69,21 @@ public class TableInputParametersWidget extends
 					}
 				});
 
-		tcBtnEdit = new Column<InputParameterJso, String>(new ButtonCell()) {
+		tcBtnEdit = new Column<OutputParameterJso, String>(new ButtonCell()) {
 			@Override
-			public String getValue(InputParameterJso object) {
+			public String getValue(OutputParameterJso object) {
 				return "Edit";
 			}
 		};
 
 		tcBtnEdit
-				.setFieldUpdater(new FieldUpdater<InputParameterJso, String>() {
+				.setFieldUpdater(new FieldUpdater<OutputParameterJso, String>() {
 
 					@Override
-					public void update(int index, InputParameterJso object,
+					public void update(int index, OutputParameterJso object,
 							String value) {
-						new TableInputParametersEditEntryDialog(
-								TableInputParametersWidget.this, object)
+						new TableOutputParametersEditEntryDialog(
+								TableOutputParametersWidget.this, object)
 								.center();
 
 					}
@@ -100,14 +98,14 @@ public class TableInputParametersWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
-				InputParameterJso inputParameterJso = getDelegate()
-						.getCurrentElementJso().addCamundaExt_inputParameter(
+				OutputParameterJso inputParameterJso = getDelegate()
+						.getCurrentElementJso().addCamundaExt_outputParameter(
 								getDelegate().getCurrentBpmnIoModelerJso()
 										.nativeGetModdle());
 
 				getDataProvider().getList().add(inputParameterJso);
-				new TableInputParametersEditEntryDialog(
-						TableInputParametersWidget.this, inputParameterJso)
+				new TableOutputParametersEditEntryDialog(
+						TableOutputParametersWidget.this, inputParameterJso)
 						.center();
 
 			}
@@ -120,8 +118,8 @@ public class TableInputParametersWidget extends
 	@Override
 	public void update() {
 		getDataProvider().getList().clear();
-		List<InputParameterJso> dataObjects = getDelegate()
-				.getCurrentElementJso().getCamundaExt_inputParameters();
+		List<OutputParameterJso> dataObjects = getDelegate()
+				.getCurrentElementJso().getCamundaExt_outputParameters();
 		getDataProvider().getList().addAll(dataObjects);
 	}
 }
