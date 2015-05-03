@@ -71,8 +71,6 @@ public class BpmnEditorDiagramWidget extends Composite {
 	}
 
 	private void initDiagramHtmlPanel() {
-		// diagramHtmlPanel = new HTMLPanel(bpmnResource.bpmnIoIndexHtmlFile()
-		// .getText());
 		diagramHtmlPanel = new HTMLPanel(
 				"<div class=\"canvas bpmnDigramWidget-diagramHtmlPanel-wrapper\" id=\""
 						+ diagramHtmlWrapperId + "\"></div>");

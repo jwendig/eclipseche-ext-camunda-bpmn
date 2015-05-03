@@ -30,17 +30,12 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.BpmnExtension;
 import de.fhrt.johannes.wendig.codenvy.bpmn.BpmnResource;
-import de.fhrt.johannes.wendig.codenvy.bpmn.camunda.CamundaFormKeyType;
-import de.fhrt.johannes.wendig.codenvy.bpmn.camunda.CamundaJavaDelegateType;
-import de.fhrt.johannes.wendig.codenvy.bpmn.camunda.CamundaTypeHolder;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesPresenter;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.util.ProjectParser;
 
 public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 		BpmnEditorView {
@@ -250,8 +245,8 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 
 	// public void parseProjectForCamundaElements() {
 	// Log.info(BpmnEditorViewImpl.class, "parseProjectForCamundaElements");
-	// camundaTypeHolder = ProjectParser.parseProjectForCamundaElements(input
-	// .getFile().getProject());
+	// CamundaTypeHolder camundaTypeHolder = ProjectParser
+	// .parseProjectForCamundaElements(input.getFile().getProject());
 	//
 	// Log.info(BpmnEditorViewImpl.class,
 	// "parseProjectForCamundaElements: Found ("
@@ -402,6 +397,7 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 
 		// TODO: find a solution ....
 		// parseProjectForCamundaElements();
+
 	}
 
 	/*

@@ -26,6 +26,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.formfields.EditFormFieldTablePropertiesWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.InputParameterJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.TaskListenerJso;
 
@@ -44,6 +45,9 @@ public class TableInputParametersEditEntryDialog extends DialogBox {
 	private TextBox tbTextContent;
 	private TextBox tbScriptFormat;
 
+	private EditInputParameterTableListWidget tableList;
+	private EditInputParameterTableMapWidget tableMap;
+
 	private TableInputParametersWidget widgetCallback;
 	private InputParameterJso currentInputParameterJso;
 
@@ -56,12 +60,14 @@ public class TableInputParametersEditEntryDialog extends DialogBox {
 
 		initialize();
 
+		tableList.setCurrentListJso(currentInputParameterJso);
+
 		String currentType = "";
 		if (inputParameterJso.getAttr_value().length() > 0) {
 			currentType = "Text";
-		} else if (inputParameterJso.getChild_list() != null) {
+		} else if (inputParameterJso.getListValues().size() > 0) {
 			currentType = "List";
-		} else if (inputParameterJso.getChild_map() != null) {
+		} else if (inputParameterJso.getMapEntries().size() > 0) {
 			currentType = "Map";
 		} else if (inputParameterJso.getChild_script() != null) {
 			currentType = "Script";
@@ -76,12 +82,13 @@ public class TableInputParametersEditEntryDialog extends DialogBox {
 			}
 		}
 
+		tbName.setText(inputParameterJso.getAttr_name());
 		tbTextContent.setText(inputParameterJso.getAttr_value());
-		if (inputParameterJso.getChild_list() != null) {
+		if (inputParameterJso.getListValues().size() > 0) {
 			// TODO:
 		}
 
-		if (inputParameterJso.getChild_map() != null) {
+		if (inputParameterJso.getMapEntries().size() > 0) {
 			// TODO:
 		}
 
@@ -90,6 +97,8 @@ public class TableInputParametersEditEntryDialog extends DialogBox {
 			tbScriptFormat.setText(inputParameterJso.getChild_script()
 					.getAttr_scriptFormat());
 		}
+
+		tableList.update();
 	}
 
 	private void initialize() {
@@ -125,23 +134,23 @@ public class TableInputParametersEditEntryDialog extends DialogBox {
 					gridContent.setWidget(2, 1, tbTextContent);
 					break;
 				case "Script":
-					lbSelectedType.setText("Script Format");
+					lbSelectedType.setText("Script");
 					gridContent.setWidget(2, 1, tbScriptFormat);
 					break;
 				case "List":
 					lbSelectedType.setText("Values");
-					gridContent.setWidget(2, 1, new Label("TODO"));
+					gridContent.setWidget(2, 1, tableList);
 					break;
 				case "Map":
 					lbSelectedType.setText("Entries");
-					gridContent.setWidget(2, 1, new Label("TODO"));
+					gridContent.setWidget(2, 1, tableMap);
 					break;
 				}
 
 			}
 		});
 
-		lbSelectedType = new Label("Class");
+		lbSelectedType = new Label("Content");
 
 		tbName = new TextBox();
 		tbName.setWidth("100%");
@@ -149,6 +158,11 @@ public class TableInputParametersEditEntryDialog extends DialogBox {
 		tbTextContent.setWidth("100%");
 		tbScriptFormat = new TextBox();
 		tbScriptFormat.setWidth("100%");
+
+		tableList = new EditInputParameterTableListWidget(
+				widgetCallback.getDelegate(), currentInputParameterJso);
+		
+		tableMap = new EditInputParameterTableMapWidget(widgetCallback.getDelegate(), currentInputParameterJso);
 
 		gridContent = new Grid(5, 2);
 		gridContent.setWidth("100%");

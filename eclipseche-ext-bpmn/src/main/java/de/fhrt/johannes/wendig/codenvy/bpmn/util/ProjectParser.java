@@ -11,17 +11,13 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.util;
 
-import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.che.ide.api.project.tree.TreeNode;
 import org.eclipse.che.ide.api.project.tree.generic.FileNode;
 import org.eclipse.che.ide.api.project.tree.generic.ItemNode;
 import org.eclipse.che.ide.api.project.tree.generic.ProjectNode;
 import org.eclipse.che.ide.util.loging.Log;
-import org.reflections.serializers.JavaCodeSerializer;
-import org.reflections.serializers.JavassistSerializer;
-
-import com.google.gwt.typedarrays.server.JavaImpl;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.camunda.CamundaFormKeyType;
 import de.fhrt.johannes.wendig.codenvy.bpmn.camunda.CamundaJavaDelegateType;
@@ -62,8 +58,8 @@ public class ProjectParser {
 		Log.info(BpmnEditorViewImpl.class, "parseTreeNode");
 
 		if (treeNode.isLeaf()) {
-			Log.info(BpmnEditorViewImpl.class,
-					"parseTreeNode: leaf:" + treeNode.getDisplayName());
+			Log.info(BpmnEditorViewImpl.class, "parseTreeNode: leaf:"
+					+ treeNode.getDisplayName());
 			ItemNode itemNode = (ItemNode) treeNode;
 			try {
 				Log.info(BpmnEditorViewImpl.class, "parseTreeNode: leaf: url="
@@ -72,16 +68,24 @@ public class ProjectParser {
 
 			}
 
+			for (Entry<String, String> attr : itemNode.getData()
+					.getAttributes().entrySet()) {
+				Log.info(
+						ProjectParser.class,
+						"attributes: " + attr.getKey() + "="
+								+ attr.getValue());
+			}
+			
 			// treeNode is a file, check if is a camunda type
 			if (isChildOfJavaFolder
 					&& itemNode.getData().getName().endsWith(".java")) {
 				/*
-				 * This dont work, need a solution for check the java-classes inside the project
+				 * This dont work, need a solution for check the java-classes
+				 * inside the project
 				 * 
-				 * see CodenvyGoogleGroup-thread
-				 * mabye use ClassLoader and read text
+				 * see CodenvyGoogleGroup-thread mabye use ClassLoader and read
+				 * text
 				 */
-				
 				switch (itemNode.getData().getClass().getSuperclass().getName()) {
 				case CAMUNDA_CLASS_NAME__TEST_EXCEPTION:
 					Log.info(BpmnEditorViewImpl.class, "parseTreeNode: leaf:"
@@ -99,9 +103,8 @@ public class ProjectParser {
 				}
 			} else if (isChildOfWebappFolder
 					&& itemNode.getData().getName().endsWith(".html")) {
-				Log.info(BpmnEditorViewImpl.class,
-						"parseTreeNode: leaf:" + treeNode.getDisplayName()
-								+ " TYPE: " + "HTML");
+				Log.info(BpmnEditorViewImpl.class, "parseTreeNode: leaf:"
+						+ treeNode.getDisplayName() + " TYPE: " + "HTML");
 				CamundaFormKeyType type = new CamundaFormKeyType(
 						itemNode.getPath(), treeNode.getDisplayName());
 				camundaTypeHolder.getFormKeyFiles().add(type);
@@ -109,8 +112,8 @@ public class ProjectParser {
 
 		} else {
 			// treeNode is a folder
-			Log.info(BpmnEditorViewImpl.class,
-					"parseTreeNode: folder:" + treeNode.getDisplayName());
+			Log.info(BpmnEditorViewImpl.class, "parseTreeNode: folder:"
+					+ treeNode.getDisplayName());
 			if (treeNode.getDisplayName().equals("webapp")) {
 				isChildOfWebappFolder = true;
 			}
