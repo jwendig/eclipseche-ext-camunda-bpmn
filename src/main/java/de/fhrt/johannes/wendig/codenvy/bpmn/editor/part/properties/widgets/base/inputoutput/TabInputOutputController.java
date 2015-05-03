@@ -34,7 +34,6 @@ public class TabInputOutputController<T> extends
 	@Override
 	public void updateView() {
 		view.getTableInputParameters().update();
-		// TODO: aktivate when implemented
-		// view.getTableOutputParameters().update();
+		view.getTableOutputParameters().update();
 	}
 }

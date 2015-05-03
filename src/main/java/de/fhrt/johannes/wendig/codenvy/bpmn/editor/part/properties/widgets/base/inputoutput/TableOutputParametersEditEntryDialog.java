@@ -27,10 +27,10 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.ScriptWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.InputParameterJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.OutputParameterJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.ScriptJso;
 
-public class TableInputParametersEditEntryDialog extends DialogBox {
+public class TableOutputParametersEditEntryDialog extends DialogBox {
 
 	private Button btnOk;
 	private Button btnBack;
@@ -48,12 +48,12 @@ public class TableInputParametersEditEntryDialog extends DialogBox {
 	private EditInputOutputParameterTableListWidget tableList;
 	private EditInputOutputParameterTableMapWidget tableMap;
 
-	private TableInputParametersWidget widgetCallback;
-	private InputParameterJso currentInputParameterJso;
+	private TableOutputParametersWidget widgetCallback;
+	private OutputParameterJso currentInputParameterJso;
 
-	public TableInputParametersEditEntryDialog(
-			final TableInputParametersWidget widgetCallback,
-			InputParameterJso inputParameterJso) {
+	public TableOutputParametersEditEntryDialog(
+			final TableOutputParametersWidget widgetCallback,
+			OutputParameterJso inputParameterJso) {
 		super();
 		this.widgetCallback = widgetCallback;
 		this.currentInputParameterJso = inputParameterJso;
@@ -213,7 +213,7 @@ public class TableInputParametersEditEntryDialog extends DialogBox {
 					currentInputParameterJso.removeChild_script();
 				}
 
-				TableInputParametersEditEntryDialog.this.hide();
+				TableOutputParametersEditEntryDialog.this.hide();
 
 				widgetCallback.getDataProvider().refresh();
 				widgetCallback.getDelegate().onContentChange();
@@ -223,7 +223,7 @@ public class TableInputParametersEditEntryDialog extends DialogBox {
 		btnBack = new Button("Back");
 		btnBack.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				TableInputParametersEditEntryDialog.this.hide();
+				TableOutputParametersEditEntryDialog.this.hide();
 			}
 		});
 

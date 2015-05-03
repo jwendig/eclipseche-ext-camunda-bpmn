@@ -93,6 +93,7 @@ public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 		tbExpression.setText(executionListenerModel.getAttr_expression());
 		tbDelegateExpression.setText(executionListenerModel
 				.getAttr_delegateExpression());
+		
 		if (executionListenerModel.getChild_script() != null) {
 			swScript.getTbFormat().setText(
 					executionListenerModel.getChild_script()

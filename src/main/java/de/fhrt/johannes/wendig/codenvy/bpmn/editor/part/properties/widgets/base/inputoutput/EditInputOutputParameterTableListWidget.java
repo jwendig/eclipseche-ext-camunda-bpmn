@@ -23,53 +23,29 @@ import com.google.gwt.user.client.ui.Button;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnDataTableWidget;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.InputParameterJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.InputOutputParameterJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.ListValueJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.MapEntryJso;
 
-public class EditInputParameterTableMapWidget extends
-		AbstractBpmnDataTableWidget<MapEntryJso> {
+public class EditInputOutputParameterTableListWidget extends
+		AbstractBpmnDataTableWidget<ListValueJso> {
 
-	private Column<MapEntryJso, String> tcKey;
-	private Column<MapEntryJso, String> tcValue;
-	private Column<MapEntryJso, String> tcBtnRemove;
+	private Column<ListValueJso, String> tcValue;
+	private Column<ListValueJso, String> tcBtnRemove;
 	private Button btnAdd;
 
-	private InputParameterJso currentInputParameterJso;
+	private InputOutputParameterJso currentInputParameterJso;
 
-	public EditInputParameterTableMapWidget(
+	public EditInputOutputParameterTableListWidget(
 			BpmnElementPropertiesView.ActionDelegate delegate,
-			InputParameterJso currentInputParameterJso) {
+			InputOutputParameterJso currentInputParameterJso) {
 		super(delegate);
-		Log.info(EditInputParameterTableMapWidget.class, "constructor");
+		Log.info(EditInputOutputParameterTableListWidget.class, "constructor");
 		this.currentInputParameterJso = currentInputParameterJso;
 
-		tcKey = new Column<MapEntryJso, String>(new EditTextCell()) {
+		tcValue = new Column<ListValueJso, String>(new EditTextCell()) {
 
 			@Override
-			public String getValue(MapEntryJso object) {
-				if (null == object.getAttr_key()) {
-					return "";
-				}
-				return object.getAttr_value();
-			}
-		};
-
-		tcKey.setFieldUpdater(new FieldUpdater<MapEntryJso, String>() {
-
-			public void update(int index, final MapEntryJso object,
-					final String value) {
-				object.setAttr_key(value);
-				getTable().redraw();
-				getDelegate().onContentChange();
-			}
-
-		});
-
-		tcValue = new Column<MapEntryJso, String>(new EditTextCell()) {
-
-			@Override
-			public String getValue(MapEntryJso object) {
+			public String getValue(ListValueJso object) {
 				if (null == object.getAttr_value()) {
 					return "";
 				}
@@ -77,9 +53,9 @@ public class EditInputParameterTableMapWidget extends
 			}
 		};
 
-		tcValue.setFieldUpdater(new FieldUpdater<MapEntryJso, String>() {
+		tcValue.setFieldUpdater(new FieldUpdater<ListValueJso, String>() {
 
-			public void update(int index, final MapEntryJso object,
+			public void update(int index, final ListValueJso object,
 					final String value) {
 				object.setAttr_value(value);
 				getTable().redraw();
@@ -88,19 +64,19 @@ public class EditInputParameterTableMapWidget extends
 
 		});
 
-		tcBtnRemove = new Column<MapEntryJso, String>(new ButtonCell()) {
+		tcBtnRemove = new Column<ListValueJso, String>(new ButtonCell()) {
 			@Override
-			public String getValue(MapEntryJso object) {
+			public String getValue(ListValueJso object) {
 				return "x";
 			}
 		};
 
-		tcBtnRemove.setFieldUpdater(new FieldUpdater<MapEntryJso, String>() {
+		tcBtnRemove.setFieldUpdater(new FieldUpdater<ListValueJso, String>() {
 
 			@Override
-			public void update(int index, MapEntryJso object, String value) {
-				if (EditInputParameterTableMapWidget.this.currentInputParameterJso
-						.removeMapEntry(object)) {
+			public void update(int index, ListValueJso object, String value) {
+				if (EditInputOutputParameterTableListWidget.this.currentInputParameterJso
+						.removeListValue(object)) {
 					getDataProvider().getList().remove(object);
 					getDataProvider().refresh();
 					getTable().redraw();
@@ -111,7 +87,6 @@ public class EditInputParameterTableMapWidget extends
 			}
 		});
 
-		getTable().addColumn(tcKey, "Key");
 		getTable().addColumn(tcValue, "Value");
 		getTable().addColumn(tcBtnRemove, "");
 
@@ -120,9 +95,9 @@ public class EditInputParameterTableMapWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
-				MapEntryJso newDataObject = EditInputParameterTableMapWidget.this.currentInputParameterJso
-						.addMapEntry(getDelegate().getCurrentBpmnIoModelerJso()
-								.nativeGetModdle());
+				ListValueJso newDataObject = EditInputOutputParameterTableListWidget.this.currentInputParameterJso
+						.addListValue(getDelegate()
+								.getCurrentBpmnIoModelerJso().nativeGetModdle());
 
 				getDataProvider().getList().add(newDataObject);
 				getDataProvider().refresh();
@@ -140,10 +115,11 @@ public class EditInputParameterTableMapWidget extends
 	public void update() {
 		getDataProvider().getList().clear();
 		getDataProvider().getList().addAll(
-				currentInputParameterJso.getMapEntries());
+				currentInputParameterJso.getListValues());
 	}
 
-	public void setCurrentListJso(InputParameterJso currentInputParameterJso) {
+	public void setCurrentListJso(
+			InputOutputParameterJso currentInputParameterJso) {
 		this.currentInputParameterJso = currentInputParameterJso;
 	}
 
