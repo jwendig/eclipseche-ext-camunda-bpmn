@@ -26,8 +26,10 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.base.ScriptWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ExecutionListenerJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.TaskListenerJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.ScriptJso;
 
 public class TableTaskListenerEditTableEntryDialog extends DialogBox {
 
@@ -44,6 +46,7 @@ public class TableTaskListenerEditTableEntryDialog extends DialogBox {
 	private TextBox tbClass;
 	private TextBox tbExpression;
 	private TextBox tbDelegateExpression;
+	private ScriptWidget swScript;
 
 	private TableTaskListenerWidget widgetCallback;
 	private TaskListenerJso currentTaskListenerJso;
@@ -72,8 +75,9 @@ public class TableTaskListenerEditTableEntryDialog extends DialogBox {
 			currentType = "Expression";
 		} else if (executionListenerModel.getAttr_delegateExpression().length() > 0) {
 			currentType = "Delegate Expression";
+		} else if (executionListenerModel.getChild_script() != null) {
+			currentType = "Script";
 		}
-		// TODO: check if it is script
 
 		for (int i = 0; i < lboxType.getItemCount(); i++) {
 			if (lboxType.getItemText(i).equalsIgnoreCase(currentType)) {
@@ -88,6 +92,28 @@ public class TableTaskListenerEditTableEntryDialog extends DialogBox {
 		tbExpression.setText(executionListenerModel.getAttr_expression());
 		tbDelegateExpression.setText(executionListenerModel
 				.getAttr_delegateExpression());
+		if (executionListenerModel.getChild_script() != null) {
+			swScript.getTbFormat().setText(
+					executionListenerModel.getChild_script()
+							.getAttr_scriptFormat());
+			swScript.getTbResource()
+					.setText(
+							executionListenerModel.getChild_script()
+									.getAttr_resource());
+			swScript.getTaScript().setText(
+					executionListenerModel.getChild_script().getAttr_script());
+
+			if (executionListenerModel.getChild_script().getAttr_resource()
+					.length() > 0) {
+				swScript.getRbResource().setValue(true);
+				swScript.getTbResource().setEnabled(true);
+				swScript.getTaScript().setEnabled(false);
+			} else {
+				swScript.getRbScript().setValue(true);
+				swScript.getTaScript().setEnabled(true);
+				swScript.getTbResource().setEnabled(false);
+			}
+		}
 	}
 
 	private void initialize() {
@@ -128,7 +154,7 @@ public class TableTaskListenerEditTableEntryDialog extends DialogBox {
 					gridContent.setWidget(2, 1, tbClass);
 					break;
 				case "Script":
-					gridContent.setWidget(2, 1, new Label("not implemented"));
+					gridContent.setWidget(2, 1, swScript);
 					break;
 				case "Expression":
 					gridContent.setWidget(2, 1, tbExpression);
@@ -149,8 +175,10 @@ public class TableTaskListenerEditTableEntryDialog extends DialogBox {
 		tbExpression.setWidth("100%");
 		tbDelegateExpression = new TextBox();
 		tbDelegateExpression.setWidth("100%");
+		swScript = new ScriptWidget();
+		swScript.setWidth("100%");
 
-		gridContent = new Grid(3, 3);
+		gridContent = new Grid(3, 2);
 		gridContent.setWidth("100%");
 		gridContent.setText(0, 0, "Event");
 		gridContent.setText(1, 0, "Type");
@@ -165,18 +193,28 @@ public class TableTaskListenerEditTableEntryDialog extends DialogBox {
 		btnOk = new Button("Save");
 		btnOk.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+				currentTaskListenerJso.setAttr_event(lboxEvent
+						.getSelectedItemText());
+				currentTaskListenerJso.setAttr_class(tbClass.getText());
+				currentTaskListenerJso.setAttr_expression(tbExpression
+						.getText());
 				currentTaskListenerJso
-						.setAttr_event(TableTaskListenerEditTableEntryDialog.this.lboxEvent
-								.getSelectedItemText());
-				currentTaskListenerJso
-						.setAttr_class(TableTaskListenerEditTableEntryDialog.this.tbClass
+						.setAttr_delegateExpression(tbDelegateExpression
 								.getText());
-				currentTaskListenerJso
-						.setAttr_expression(TableTaskListenerEditTableEntryDialog.this.tbExpression
-								.getText());
-				currentTaskListenerJso
-						.setAttr_delegateExpression(TableTaskListenerEditTableEntryDialog.this.tbDelegateExpression
-								.getText());
+
+				if (lboxType.getSelectedItemText().equalsIgnoreCase("script")) {
+					ScriptJso scriptJso = currentTaskListenerJso
+							.addChild_script(widgetCallback.getDelegate()
+									.getCurrentBpmnIoModelerJso()
+									.nativeGetModdle());
+					scriptJso.setAttr_resource(swScript.getTbResource()
+							.getText());
+					scriptJso.setAttr_script(swScript.getTaScript().getText());
+					scriptJso.setAttr_scriptFormat(swScript.getTbFormat()
+							.getText());
+				} else {
+					currentTaskListenerJso.removeChild_script();
+				}
 
 				TableTaskListenerEditTableEntryDialog.this.hide();
 

@@ -11,6 +11,10 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions;
 
+import com.google.gwt.core.client.JavaScriptObject;
+
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.ScriptJso;
+
 public interface TaskListenerJso {
 	public String getAttr_class();
 
@@ -27,4 +31,10 @@ public interface TaskListenerJso {
 	public String getAttr_event();
 
 	public void setAttr_event(String event);
+	
+	public ScriptJso getChild_script();
+
+	public ScriptJso addChild_script(JavaScriptObject moddle);
+
+	public boolean removeChild_script();
 }

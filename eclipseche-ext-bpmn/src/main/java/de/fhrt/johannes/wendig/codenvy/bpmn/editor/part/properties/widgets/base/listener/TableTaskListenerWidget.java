@@ -25,6 +25,7 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPr
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.widgets.AbstractBpmnDataTableWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ExecutionListenerJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.TaskListenerJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.ScriptJso;
 
 public class TableTaskListenerWidget extends
 		AbstractBpmnDataTableWidget<TaskListenerJso> {
@@ -33,6 +34,7 @@ public class TableTaskListenerWidget extends
 	private TextColumn<TaskListenerJso> tcExecutionListenersEvent;
 	private TextColumn<TaskListenerJso> tcExecutionListenersExpression;
 	private TextColumn<TaskListenerJso> tcExecutionListenersDelegateExpression;
+	private TextColumn<TaskListenerJso> tcExecutionListenersScript;
 	private Column<TaskListenerJso, String> tcExecutionListenerBtnRemove;
 	private Column<TaskListenerJso, String> tcExecutionListenerBtnEdit;
 	private Button btnAddExecutionListener;
@@ -69,6 +71,31 @@ public class TableTaskListenerWidget extends
 			@Override
 			public String getValue(TaskListenerJso object) {
 				return object.getAttr_delegateExpression();
+			}
+		};
+
+		tcExecutionListenersScript = new TextColumn<TaskListenerJso>() {
+
+			@Override
+			public String getValue(TaskListenerJso object) {
+				if (null != object.getChild_script()) {
+					ScriptJso scriptJso = object.getChild_script();
+					StringBuilder sbValue = new StringBuilder();
+					sbValue.append("format: ");
+					sbValue.append(scriptJso.getAttr_scriptFormat());
+
+					if (scriptJso.getAttr_resource().length() > 0) {
+						sbValue.append("; resource: ");
+						sbValue.append(scriptJso.getAttr_resource());
+					} else {
+						sbValue.append("; script: ");
+						sbValue.append(scriptJso.getAttr_script());
+					}
+
+					return sbValue.toString();
+				} else {
+					return "";
+				}
 			}
 		};
 
@@ -122,6 +149,7 @@ public class TableTaskListenerWidget extends
 		getTable().addColumn(tcExecutionListenersExpression, "Expression");
 		getTable().addColumn(tcExecutionListenersDelegateExpression,
 				"DelegateExpression");
+		getTable().addColumn(tcExecutionListenersScript, "Script");
 		getTable().addColumn(tcExecutionListenersEvent, "Event");
 		getTable().addColumn(tcExecutionListenerBtnEdit, "");
 		getTable().addColumn(tcExecutionListenerBtnRemove, "");
