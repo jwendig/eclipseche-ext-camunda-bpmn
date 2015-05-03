@@ -134,7 +134,11 @@ public class BpmnElementJso extends AbstractBpmnElementJso implements
 															console.log("js-native: nativeRemoveCamundaExtElementFromExistingCamundaExtElement: elemToRemove found at index:" + elemToRemoveIndex);
 															baseElement.values.splice(elemToRemoveIndex, 1);
 														
-															if(this.extensionElements.values.length == 0){
+															if(baseElement.values.length == 0){
+																baseElement = undefined;
+															}
+														
+															if(this.extensionElements && this.extensionElements.values.length == 0){
 																delete this.extensionElements;
 															}
 														
@@ -152,21 +156,17 @@ public class BpmnElementJso extends AbstractBpmnElementJso implements
 																			
 																			var elemToRemoveIndex = baseElement[fieldName].indexOf(elemToRemove);
 																			if (elemToRemoveIndex > -1) {
-																			console.log("js-native: nativeRemoveCamundaExtElementFromExistingCamundaExtElementByFieldName: elemToRemove found at index:" + elemToRemoveIndex);
-																			baseElement[fieldName].splice(elemToRemoveIndex, 1);
-																			
-																			if(baseElement[fieldName].length == 0){
-																				baseElement[fieldName] = undefined;
-																			}
-																			
-																			if(baseElement.parent.extensionElements.values.length == 0){
-																			delete baseElement.parent.extensionElements;
-																			}
-																			
-																			return true;
+																				console.log("js-native: nativeRemoveCamundaExtElementFromExistingCamundaExtElementByFieldName: elemToRemove found at index:" + elemToRemoveIndex);
+																				baseElement[fieldName].splice(elemToRemoveIndex, 1);
+																				
+																				if(baseElement[fieldName].length == 0){
+																					baseElement[fieldName] = undefined;
+																				}
+																				
+																				return true;
 																			}else{
-																			console.log("js-native: nativeRemoveCamundaExtElementFromExistingCamundaExtElementByFieldName: elemToRemove not found");
-																			return false;
+																				console.log("js-native: nativeRemoveCamundaExtElementFromExistingCamundaExtElementByFieldName: elemToRemove not found");
+																				return false;
 																			}
 																			}-*/;
 
@@ -367,9 +367,9 @@ public class BpmnElementJso extends AbstractBpmnElementJso implements
 	@Override
 	public final boolean removeCamundaExt_inputParameter(
 			InputParameterJso element) {
-		
+
 		// TODO: remove parents when last inputParameter is removed ...
-		
+
 		JsArray<BpmnElementCamundaExtensionJso> baseElements = nativeGetCamundaExtElementsByType(BpmnElementCamundaExtensionType.CAMUNDA_INPUT_OUTPUT
 				.toString());
 		boolean isDeleted = false;

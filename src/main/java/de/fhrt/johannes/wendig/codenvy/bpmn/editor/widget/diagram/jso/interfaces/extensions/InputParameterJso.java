@@ -11,10 +11,12 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions;
 
+import java.util.List;
+
 import com.google.gwt.core.client.JavaScriptObject;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.ListJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.MapJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.ListValueJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.MapEntryJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.ScriptJso;
 
 public interface InputParameterJso {
@@ -32,15 +34,15 @@ public interface InputParameterJso {
 
 	public boolean removeChild_script();
 
-	public MapJso getChild_map();
+	public List<MapEntryJso> getMapEntries();
 
-	public MapJso addChild_map(JavaScriptObject moddle);
+	public MapEntryJso addMapEntry(JavaScriptObject moddle);
 
-	public boolean removeChild_map();
+	public boolean removeMapEntry(MapEntryJso mapEntryJso);
 
-	public ListJso getChild_list();
+	public List<ListValueJso> getListValues();
 
-	public ListJso addChild_list(JavaScriptObject moddle);
+	public ListValueJso addListValue(JavaScriptObject moddle);
 
-	public boolean removeChild_list();
+	public boolean removeListValue(ListValueJso listValueJso);
 }

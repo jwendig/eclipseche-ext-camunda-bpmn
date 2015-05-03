@@ -10,6 +10,7 @@
  *******************************************************************************/
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties;
 
+import org.eclipse.che.api.project.server.handlers.GetItemHandler;
 import org.eclipse.che.ide.api.parts.PartStackUIResources;
 import org.eclipse.che.ide.api.parts.base.BaseView;
 import org.eclipse.che.ide.util.loging.Log;
@@ -31,7 +32,7 @@ public class BpmnElementPropertiesViewImpl extends
 
 		root = new DockLayoutPanel(Unit.PX);
 		root.setSize("100%", "100%");
-
+		
 		setContentWidget(root);
 	}
 
