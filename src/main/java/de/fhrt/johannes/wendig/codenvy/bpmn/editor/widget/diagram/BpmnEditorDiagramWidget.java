@@ -54,12 +54,12 @@ public class BpmnEditorDiagramWidget extends Composite {
 		diagramHtmlWrapperId = "bpmnIoCanvas_" + viewNumber++;
 
 		loadCss();
-
+		
 		initDiagramHtmlPanel();
 
 		initWidget(diagramHtmlPanel);
+		
 		setStyleName("gwt-bpmnDigramWidget");
-
 	}
 
 	private void loadCss() {
@@ -75,7 +75,8 @@ public class BpmnEditorDiagramWidget extends Composite {
 				"<div class=\"canvas bpmnDigramWidget-diagramHtmlPanel-wrapper\" id=\""
 						+ diagramHtmlWrapperId + "\"></div>");
 		diagramHtmlPanel.setSize("100%", "100%");
-		diagramHtmlPanel.addStyleName("bpmnDigramWidget-diagramHtmlPanel");
+		diagramHtmlPanel.addStyleName("bpmnDigramWidget-diagramHtmlPanel");	
+		
 	}
 
 	@Override
