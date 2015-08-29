@@ -37,19 +37,6 @@ public class BpmnModelerJso extends JavaScriptObject {
 			String wrapperId, BpmnEditorDiagramWidget callback)/*-{
 																var renderer = $wnd.bpmnIo_fkt_createNewModeler(wrapperId);
 																
-																renderer.on('element.click', function(event) {
-																	var element = event.element;
-																	var moddle = renderer.get('moddle');
-																
-																	// do not allow on root element
-																	if (!element.parent) {
-																	callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackContainerSelected(Lde/fhrt/johannes/wendig/codenvy/bpmn/editor/widget/diagram/jso/BpmnElementJso;)(element.businessObject);
-																	return;
-																	}
-																
-																	callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackElementSelected(Lde/fhrt/johannes/wendig/codenvy/bpmn/editor/widget/diagram/jso/BpmnElementJso;)(element.businessObject);
-																});
-																
 																renderer.updateData = function(){
 																	renderer.saveXML({
 																		format : true
@@ -62,6 +49,19 @@ public class BpmnModelerJso extends JavaScriptObject {
 																	});
 																};
 																
+																renderer.on('element.click', function(event) {
+																	var element = event.element;
+																	var moddle = renderer.get('moddle');
+																
+																	// do not allow on root element
+																	if (!element.parent) {
+																	callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackContainerSelected(Lde/fhrt/johannes/wendig/codenvy/bpmn/editor/widget/diagram/jso/BpmnElementJso;)(element.businessObject);
+																	return;
+																	}
+																
+																	callback.@de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackElementSelected(Lde/fhrt/johannes/wendig/codenvy/bpmn/editor/widget/diagram/jso/BpmnElementJso;)(element.businessObject);
+																});
+																																														
 																renderer.on('commandStack.changed', function() {
 																	renderer.saveXML({
 																		format : true
