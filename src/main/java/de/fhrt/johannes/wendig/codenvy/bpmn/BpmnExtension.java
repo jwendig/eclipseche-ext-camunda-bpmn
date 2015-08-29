@@ -28,7 +28,6 @@ import com.google.inject.Singleton;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorProvider;
 import de.fhrt.johannes.wendig.codenvy.bpmn.part.howto.HowToPresenter;
 
-/** Extension used to demonstrate the Editor API. */
 @Singleton
 @Extension(title = "BPMN Extension", version = "1.0.0")
 public class BpmnExtension {
