@@ -46,7 +46,6 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	private ActionDelegate actionDelegate;
 
 	private BpmnElementPropertiesPresenter bpmnElementPropertiesEditorPresenter;
-	private BpmnResource bpmnResource;
 
 	private String currentSvgContent;
 	private String currentXmlContent;
@@ -72,7 +71,6 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 		this.projectServiceClient = projectServiceClient;
 		this.dialogFactory = dialogFactory;
 
-		this.bpmnResource = bpmnResource;
 		this.bpmnElementPropertiesEditorPresenter = bpmnElementPropertiesPresenter;
 
 		bpmnDiagramWidget = new BpmnEditorDiagramWidget(this, bpmnResource,
