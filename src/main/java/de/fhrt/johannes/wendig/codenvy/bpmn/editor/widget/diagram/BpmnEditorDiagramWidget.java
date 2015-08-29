@@ -42,7 +42,6 @@ public class BpmnEditorDiagramWidget extends Composite {
 	 * Layout
 	 */
 	private HTMLPanel diagramHtmlPanel;
-	private GQuery qSelectedItem;
 
 	public BpmnEditorDiagramWidget(BpmnEditorView bpmnEditorView,
 			BpmnResource bpmnResource, int viewNumber) {
