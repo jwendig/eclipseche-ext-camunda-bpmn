@@ -13,16 +13,13 @@ package de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram;
 import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.core.client.ScriptInjector;
-import com.google.gwt.query.client.GQuery;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.BpmnResource;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorView;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.BpmnElementPropertiesCallback;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso.BpmnElementType;
 
 public class BpmnEditorDiagramWidget extends Composite {
 
