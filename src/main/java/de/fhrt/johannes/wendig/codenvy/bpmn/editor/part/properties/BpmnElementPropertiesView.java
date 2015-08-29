@@ -25,8 +25,14 @@ public interface BpmnElementPropertiesView extends
 	public interface ActionDelegate extends BaseActionDelegate {
 		void onContentChange();
 
-		BpmnElementJso getCurrentElementJso();
-		BpmnModelerJso getCurrentBpmnIoModelerJso();
+		public BpmnElementJso getCurrentElementJso();
+
+		public BpmnModelerJso getCurrentBpmnIoModelerJso();
+		
+		public void bpmnElementSelected(BpmnModelerJso modelerJso,
+				BpmnElementJso elementJso);
+
+		public void noBpmnElementSelected();
 	}
 
 	public void setTitle(String title);

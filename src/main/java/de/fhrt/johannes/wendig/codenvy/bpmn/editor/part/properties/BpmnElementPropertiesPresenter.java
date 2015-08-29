@@ -32,7 +32,7 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnModele
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso.BpmnElementType;
 
 public class BpmnElementPropertiesPresenter extends BasePresenter implements
-		BpmnElementPropertiesView.ActionDelegate, BpmnElementPropertiesCallback {
+		BpmnElementPropertiesView.ActionDelegate {
 
 	private BpmnElementPropertiesView view;
 	private final static String TITLE = "BPMN Properties";
