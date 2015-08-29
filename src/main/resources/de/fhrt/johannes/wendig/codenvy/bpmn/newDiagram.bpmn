@@ -1,34 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="sample-diagram" exporter="camunda modeler" exporterVersion="2.5.0" targetNamespace="http://activiti.org/bpmn">
-  <bpmn2:process id="Process_1" isExecutable="false">
-    <bpmn2:serviceTask id="ServiceTask_1">
-      <bpmn2:extensionElements>
-        <camunda:field/>
-        <camunda:connector>
-          <camunda:connectorId>test</camunda:connectorId>
-          <camunda:inputOutput>
-            <camunda:inputParameter name="asdsa">
-              <camunda:script scriptFormat="asdsad" resource="asdsa"/>
-            </camunda:inputParameter>
-            <camunda:inputParameter name="asdsads">
-              <camunda:list>
-                <camunda:value>asdasd</camunda:value>
-                <camunda:value>ddds</camunda:value>
-              </camunda:list>
-            </camunda:inputParameter>
-          </camunda:inputOutput>
-        </camunda:connector>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="aasdsad">sasadsa</camunda:inputParameter>
-        </camunda:inputOutput>
-      </bpmn2:extensionElements>
-    </bpmn2:serviceTask>
-  </bpmn2:process>
+  <bpmn2:process id="Process_1" isExecutable="false"/>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
-      <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_2" bpmnElement="ServiceTask_1">
-        <dc:Bounds height="80.0" width="100.0" x="364.0" y="254.0"/>
-      </bpmndi:BPMNShape>
-    </bpmndi:BPMNPlane>
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1"/>
   </bpmndi:BPMNDiagram>
 </bpmn2:definitions>
