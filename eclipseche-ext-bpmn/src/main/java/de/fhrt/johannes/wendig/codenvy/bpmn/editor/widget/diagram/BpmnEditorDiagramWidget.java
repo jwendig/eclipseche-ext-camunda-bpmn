@@ -112,7 +112,7 @@ public class BpmnEditorDiagramWidget extends Composite {
 		Log.info(BpmnEditorDiagramWidget.class,
 				"jsCallbackElementSelected: id=" + elem.getAttr_id());
 
-		bpmnEditorView.bpmnElementSelected(elem);
+		bpmnEditorView.bpmnElementSelected(bpmnIoModelerJso, elem);
 	};
 
 	public void jsCallbackContainerSelected(BpmnElementJso elem) {
@@ -122,13 +122,6 @@ public class BpmnEditorDiagramWidget extends Composite {
 		Log.info(BpmnEditorDiagramWidget.class,
 				"jsCallbackContainerSelected: id=" + elem.getAttr_id());
 
-		bpmnEditorView.bpmnElementSelected(elem);
+		bpmnEditorView.bpmnElementSelected(bpmnIoModelerJso, elem);
 	};
-
-	/*
-	 * Getter
-	 */
-	public BpmnModelerJso getBpmnIoModelerJso() {
-		return bpmnIoModelerJso;
-	}
 }

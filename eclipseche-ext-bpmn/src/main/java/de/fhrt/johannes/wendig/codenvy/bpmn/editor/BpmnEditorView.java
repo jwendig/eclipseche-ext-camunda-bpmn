@@ -12,6 +12,7 @@
 package de.fhrt.johannes.wendig.codenvy.bpmn.editor;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
 
 public interface BpmnEditorView {
 
@@ -20,7 +21,8 @@ public interface BpmnEditorView {
 
 	public void setContentIsDirty();
 
-	public void bpmnElementSelected(BpmnElementJso elementJso);
+	public void bpmnElementSelected(BpmnModelerJso modelerJso,
+			BpmnElementJso elementJso);
 
 	public void setCurrentXmlContent(String xml);
 
