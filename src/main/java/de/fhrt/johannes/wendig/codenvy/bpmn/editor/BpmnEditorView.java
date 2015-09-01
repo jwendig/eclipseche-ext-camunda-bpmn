@@ -18,8 +18,6 @@ public interface BpmnEditorView {
 	public interface ActionDelegate {
 	}
 
-	public void setActionDelegate(ActionDelegate actionDelegate);
-
 	public void setContentIsDirty();
 
 	public void bpmnElementSelected(BpmnElementJso elementJso);

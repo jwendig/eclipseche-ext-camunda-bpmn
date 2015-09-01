@@ -32,21 +32,21 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.BpmnElementPropertie
  * 
  * @author <a href="mailto:aplotnikov@codenvy.com">Andrey Plotnikov</a>
  */
-public class BpmnEditorProvider implements EditorProvider,
-		BpmnEditorView.ActionDelegate {
+public class BpmnEditorProvider implements EditorProvider {
 
 	private final DefaultEditorProvider defaultEditorProvider;
 	private final NotificationManager notificationManager;
 	private final ProjectServiceClient projectServiceClient;
 	private final DialogFactory dialogFactory;
 	private WorkspaceAgent workspaceAgent;
-	
+
 	private BpmnResource bpmnResource;
 	private BpmnEditorViewImpl bpmnEditorView;
 	private BpmnElementPropertiesPresenter bpmnElementPropertiesEditorPresenter;
 
 	@Inject
-	public BpmnEditorProvider(final DefaultEditorProvider defaultEditorProvider,
+	public BpmnEditorProvider(
+			final DefaultEditorProvider defaultEditorProvider,
 			final NotificationManager notificationManager,
 			BpmnResource bpmnResource,
 			BpmnElementPropertiesPresenter bpmnElementPropertiesEditorPresenter,
@@ -60,7 +60,7 @@ public class BpmnEditorProvider implements EditorProvider,
 		this.projectServiceClient = projectServiceClient;
 		this.dialogFactory = dialogFactory;
 		this.workspaceAgent = workspaceAgent;
-		
+
 		this.bpmnElementPropertiesEditorPresenter = bpmnElementPropertiesEditorPresenter;
 		this.bpmnResource = bpmnResource;
 	}
@@ -74,15 +74,14 @@ public class BpmnEditorProvider implements EditorProvider,
 	public String getDescription() {
 		return "Codenvy BPMN Editor";
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public EditorPartPresenter getEditor() {
-		bpmnEditorView = new BpmnEditorViewImpl(workspaceAgent, projectServiceClient,
-				dialogFactory, bpmnElementPropertiesEditorPresenter,
-				bpmnResource);
-		bpmnEditorView.setActionDelegate(this);
+		bpmnEditorView = new BpmnEditorViewImpl(workspaceAgent,
+				projectServiceClient, dialogFactory,
+				bpmnElementPropertiesEditorPresenter, bpmnResource);
 		return bpmnEditorView;
-		
+
 	}
 }
