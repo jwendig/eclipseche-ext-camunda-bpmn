@@ -123,5 +123,11 @@ public class BpmnEditorDiagramWidget extends Composite {
 				"jsCallbackContainerSelected: id=" + elem.getAttr_id());
 
 		bpmnEditorView.bpmnElementSelected(bpmnIoModelerJso, elem);
+	}
+
+	public BpmnModelerJso getBpmnIoModelerJso() {
+		return bpmnIoModelerJso;
 	};
+	
+	
 }

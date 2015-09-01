@@ -22,8 +22,7 @@ public class TabDocumentView extends AbstractBpmnPropertiesTabWidget {
 
 	private TextBox tbTargetNamespace;
 
-	public TabDocumentView(String tabName,
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+	public TabDocumentView(String tabName, BpmnElementPropertiesView delegate) {
 		super(tabName, delegate);
 		Log.info(TabDocumentView.class, "constructor");
 	}

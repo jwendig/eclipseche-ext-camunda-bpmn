@@ -29,8 +29,7 @@ public class TabListenerView extends AbstractBpmnPropertiesTabWidget {
 	private TableExecutionListenerWidget tableExecutionListener;
 	private TableTaskListenerWidget tableTastListener;
 
-	public TabListenerView(String tabName,
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+	public TabListenerView(String tabName, BpmnElementPropertiesView delegate) {
 		super(tabName, delegate);
 		Log.info(TabListenerView.class, "constructor");
 	}

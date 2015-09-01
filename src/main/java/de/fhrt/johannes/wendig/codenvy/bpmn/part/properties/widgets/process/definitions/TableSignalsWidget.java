@@ -33,7 +33,7 @@ public class TableSignalsWidget extends AbstractBpmnDataTableWidget<SignalJso> {
 	private Column<SignalJso, String> tcBtnRemove;
 	private Button btnAdd;
 
-	public TableSignalsWidget(BpmnElementPropertiesView.ActionDelegate delegate) {
+	public TableSignalsWidget(BpmnElementPropertiesView delegate) {
 		super(delegate);
 		tcName = new Column<SignalJso, String>(new EditTextCell()) {
 

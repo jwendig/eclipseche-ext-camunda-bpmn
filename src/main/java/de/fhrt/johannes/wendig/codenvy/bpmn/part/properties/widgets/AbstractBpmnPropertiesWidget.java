@@ -37,10 +37,10 @@ public abstract class AbstractBpmnPropertiesWidget extends Composite {
 	private FlowPanel flowLpRoot;
 	private Label lbElementName;
 	private TabLayoutPanel tabLpContent;
-	private BpmnElementPropertiesView.ActionDelegate delegate;
+	private BpmnElementPropertiesView delegate;
 
 	public AbstractBpmnPropertiesWidget(String lbElementName_prefixText,
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+			BpmnElementPropertiesView delegate) {
 		super();
 		Log.info(AbstractBpmnPropertiesWidget.class, "constructor");
 

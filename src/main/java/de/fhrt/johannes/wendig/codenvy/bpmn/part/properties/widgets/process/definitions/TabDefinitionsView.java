@@ -25,8 +25,7 @@ public class TabDefinitionsView extends AbstractBpmnPropertiesTabWidget {
 	private TableMessagesWidget ctMessages;
 	private TableSignalsWidget ctSignals;
 
-	public TabDefinitionsView(String tabName,
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+	public TabDefinitionsView(String tabName, BpmnElementPropertiesView delegate) {
 		super(tabName, delegate);
 		Log.info(TabDefinitionsView.class, "constructor");
 	}

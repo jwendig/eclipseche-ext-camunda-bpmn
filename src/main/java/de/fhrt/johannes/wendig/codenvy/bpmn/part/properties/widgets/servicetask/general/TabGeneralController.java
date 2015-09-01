@@ -28,8 +28,7 @@ public class TabGeneralController extends
 	private final static String TAB_NAME = "General";
 	private TabGeneralView view;
 
-	public TabGeneralController(
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+	public TabGeneralController(BpmnElementPropertiesView delegate) {
 		super(delegate);
 		view = new TabGeneralView(TAB_NAME, delegate);
 		view.getTbId().addKeyUpHandler(new KeyUpHandler() {

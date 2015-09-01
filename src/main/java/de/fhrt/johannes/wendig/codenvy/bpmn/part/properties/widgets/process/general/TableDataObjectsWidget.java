@@ -43,8 +43,7 @@ public class TableDataObjectsWidget extends
 	private Column<DataObjectJso, String> tcBtnRemove;
 	private Button btnAdd;
 
-	public TableDataObjectsWidget(
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+	public TableDataObjectsWidget(BpmnElementPropertiesView delegate) {
 		super(delegate);
 		tcDataObjectName = new Column<DataObjectJso, String>(new EditTextCell()) {
 
@@ -82,9 +81,8 @@ public class TableDataObjectsWidget extends
 
 			@Override
 			public void update(int index, DataObjectJso object, String value) {
-				if (getDelegate().getCurrentElementJso()
-						.removeBpmnElement(
-								(BpmnElementPropertyJso) object)) {
+				if (getDelegate().getCurrentElementJso().removeBpmnElement(
+						(BpmnElementPropertyJso) object)) {
 					getDataProvider().getList().remove(object);
 					getDataProvider().refresh();
 					getTable().redraw();
@@ -104,7 +102,9 @@ public class TableDataObjectsWidget extends
 			@Override
 			public void onClick(ClickEvent event) {
 				BpmnElementPropertyJso newDataObject = getDelegate()
-						.getCurrentElementJso().addBpmnDataObject(getDelegate().getCurrentBpmnIoModelerJso().nativeGetModdle());
+						.getCurrentElementJso().addBpmnDataObject(
+								getDelegate().getCurrentBpmnIoModelerJso()
+										.nativeGetModdle());
 				getDataProvider().getList().add(newDataObject);
 				getDataProvider().refresh();
 				getTable().redraw();

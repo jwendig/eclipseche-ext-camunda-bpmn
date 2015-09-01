@@ -26,10 +26,10 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.BpmnElementPropertie
 public class NoSelectionWidget extends Composite {
 
 	private final static String LB_ELEMENT_NAME_PREFIX = "Nothing selected";
-	private BpmnElementPropertiesView.ActionDelegate delegate;
+	private BpmnElementPropertiesView delegate;
 	private DockLayoutPanel root;
 
-	public NoSelectionWidget(BpmnElementPropertiesView.ActionDelegate delegate) {
+	public NoSelectionWidget(BpmnElementPropertiesView delegate) {
 		super();
 		Log.info(NoSelectionWidget.class, "constructor");
 		this.delegate = delegate;

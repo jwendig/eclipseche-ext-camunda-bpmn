@@ -36,7 +36,7 @@ public class EditInputOutputParameterTableListWidget extends
 	private InputOutputParameterJso currentInputParameterJso;
 
 	public EditInputOutputParameterTableListWidget(
-			BpmnElementPropertiesView.ActionDelegate delegate,
+			BpmnElementPropertiesView delegate,
 			InputOutputParameterJso currentInputParameterJso) {
 		super(delegate);
 		Log.info(EditInputOutputParameterTableListWidget.class, "constructor");

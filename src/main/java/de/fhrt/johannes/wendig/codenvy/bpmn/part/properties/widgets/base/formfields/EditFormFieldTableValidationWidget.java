@@ -38,8 +38,7 @@ public class EditFormFieldTableValidationWidget extends
 	private FormFieldJso currentFormFieldJso;
 
 	public EditFormFieldTableValidationWidget(
-			BpmnElementPropertiesView.ActionDelegate delegate,
-			FormFieldJso currentFormFieldJso) {
+			BpmnElementPropertiesView delegate, FormFieldJso currentFormFieldJso) {
 		super(delegate);
 		Log.info(EditFormFieldTableValidationWidget.class, "constructor");
 		this.currentFormFieldJso = currentFormFieldJso;

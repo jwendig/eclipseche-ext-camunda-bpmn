@@ -33,12 +33,12 @@ public class ProcessPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	private TabListenerController<ProcessJso> tabListenerController;
 	private TabExtensionsController<ProcessJso> tabExtensionsController;
 
-	public ProcessPropertiesWidget(
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+	public ProcessPropertiesWidget(BpmnElementPropertiesView delegate) {
 		super(LB_ELEMENT_NAME_PREFIX, delegate);
 		Log.info(ProcessPropertiesWidget.class, "constructor");
 
-		tabListenerController = new TabListenerController<ProcessJso>(delegate, false);
+		tabListenerController = new TabListenerController<ProcessJso>(delegate,
+				false);
 		tabDocumentController = new TabDocumentController(delegate);
 		tabGeneralController = new TabGeneralController(delegate);
 		tabDefinitionsController = new TabDefinitionsController(delegate);

@@ -11,9 +11,8 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.process.definitions;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.ProcessJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.BpmnElementPropertiesView.ActionDelegate;
+import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.AbstractBpmnPropertiesTabController;
 
 public class TabDefinitionsController extends
@@ -21,7 +20,7 @@ public class TabDefinitionsController extends
 	private final static String TAB_NAME = "Definitions";
 	private TabDefinitionsView view;
 
-	public TabDefinitionsController(ActionDelegate delegate) {
+	public TabDefinitionsController(BpmnElementPropertiesView delegate) {
 		super(delegate);
 		this.view = new TabDefinitionsView(TAB_NAME, delegate);
 	}

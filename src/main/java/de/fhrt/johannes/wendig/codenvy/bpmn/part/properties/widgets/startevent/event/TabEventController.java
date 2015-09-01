@@ -23,7 +23,7 @@ public class TabEventController extends
 	private final static String TAB_NAME = "Event";
 	private TabEventView view;
 
-	public TabEventController(BpmnElementPropertiesView.ActionDelegate delegate) {
+	public TabEventController(BpmnElementPropertiesView delegate) {
 		super(delegate);
 		view = new TabEventView(TAB_NAME, delegate);
 		view.getTbInitiator().addKeyUpHandler(new KeyUpHandler() {

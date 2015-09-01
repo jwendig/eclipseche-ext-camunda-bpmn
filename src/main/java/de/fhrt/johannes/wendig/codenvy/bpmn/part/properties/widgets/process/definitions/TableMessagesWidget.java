@@ -33,7 +33,7 @@ public class TableMessagesWidget extends
 	private Column<MessageJso, String> tcBtnRemove;
 	private Button btnAdd;
 
-	public TableMessagesWidget(BpmnElementPropertiesView.ActionDelegate delegate) {
+	public TableMessagesWidget(BpmnElementPropertiesView delegate) {
 		super(delegate);
 		tcName = new Column<MessageJso, String>(new EditTextCell()) {
 

@@ -21,14 +21,14 @@ import com.google.gwt.view.client.ListDataProvider;
 import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.BpmnElementPropertiesView;
 
 public abstract class AbstractBpmnDataTableWidget<T> extends Composite {
-	private BpmnElementPropertiesView.ActionDelegate delegate;
+	private BpmnElementPropertiesView delegate;
 	private ListDataProvider<T> dataProvider;
 	private CellTable<T> table;
 	private VerticalPanel rootPanel;
 	private HorizontalPanel buttonPanel;
 
 	public AbstractBpmnDataTableWidget(
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+			BpmnElementPropertiesView delegate) {
 		this.delegate = delegate;
 
 		table = new CellTable<T>();
@@ -50,7 +50,7 @@ public abstract class AbstractBpmnDataTableWidget<T> extends Composite {
 		dataProvider.addDataDisplay(table);
 	}
 
-	public BpmnElementPropertiesView.ActionDelegate getDelegate() {
+	public BpmnElementPropertiesView getDelegate() {
 		return delegate;
 	}
 

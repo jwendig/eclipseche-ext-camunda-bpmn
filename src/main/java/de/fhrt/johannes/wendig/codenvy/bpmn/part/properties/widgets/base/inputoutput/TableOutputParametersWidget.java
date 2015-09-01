@@ -34,7 +34,7 @@ public class TableOutputParametersWidget extends
 	private Button btnAdd;
 
 	public TableOutputParametersWidget(
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+			BpmnElementPropertiesView delegate) {
 		super(delegate);
 		tcName = new TextColumn<OutputParameterJso>() {
 

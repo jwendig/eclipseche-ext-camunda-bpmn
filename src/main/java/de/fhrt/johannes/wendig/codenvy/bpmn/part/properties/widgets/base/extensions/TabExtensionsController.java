@@ -20,7 +20,7 @@ public class TabExtensionsController<T> extends
 	private TabExtensionsView view;
 
 	public TabExtensionsController(
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+			BpmnElementPropertiesView delegate) {
 		super(delegate);
 		view = new TabExtensionsView(TAB_NAME, delegate);
 	}

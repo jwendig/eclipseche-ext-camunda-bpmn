@@ -36,35 +36,12 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 
 	private BpmnElementPropertiesView view;
 	private final static String TITLE = "BPMN Properties";
-	private BpmnElementJso currentElementJso;
-	private BpmnModelerJso currentBpmnIoModelerJso;
-
-	private UnknownItemWidget unknowItemProperties;
-	private NoSelectionWidget noselectionProperties;
-
-	private ProcessPropertiesWidget processProperties;
-	private ServiceTaskPropertiesWidget serviceTaskProperties;
-	private StartEventPropertiesWidget startEventProperties;
-	private UserTaskPropertiesWidget userTaskProperties;
-
-	private AbstractBpmnPropertiesWidget currentProperties;
-
+	
 	@Inject
 	public BpmnElementPropertiesPresenter(BpmnElementPropertiesView view) {
 		Log.info(BpmnElementPropertiesPresenter.class, "constructor");
 		this.view = view;
 		this.view.setDelegate(this);
-
-		unknowItemProperties = new UnknownItemWidget(this);
-		noselectionProperties = new NoSelectionWidget(this);
-
-		processProperties = new ProcessPropertiesWidget(this);
-		serviceTaskProperties = new ServiceTaskPropertiesWidget(this);
-		startEventProperties = new StartEventPropertiesWidget(this);
-		userTaskProperties = new UserTaskPropertiesWidget(this);
-
-		view.setTitle(TITLE);
-		view.getDockLpCurrentContent().add(noselectionProperties);
 	}
 
 	@Override
@@ -98,83 +75,7 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 		container.setWidget(view);
 	}
 
-	@Override
-	public void bpmnElementSelected(BpmnModelerJso modelerJso,
-			BpmnElementJso elementJso) {
-		Log.info(BpmnElementPropertiesPresenter.class, "bpmnElementSelected");
-
-		this.currentBpmnIoModelerJso = modelerJso;
-		this.currentElementJso = elementJso;
-
-		view.getDockLpCurrentContent().clear();
-
-		switch (BpmnElementType
-				.findByBpmnIoTypeDefinition(elementJso.getType())) {
-		case DEFAULT:
-			currentProperties = unknowItemProperties;
-			break;
-		case PROCESS:
-			currentProperties = processProperties;
-			break;
-		case SCRIPT_TASK:
-			currentProperties = unknowItemProperties;
-			break;
-		case SERVICE_TASK:
-			currentProperties = serviceTaskProperties;
-			break;
-		case START_EVENT:
-			currentProperties = startEventProperties;
-			break;
-		case TASK:
-			currentProperties = unknowItemProperties;
-			break;
-		case USER_TASK:
-			currentProperties = userTaskProperties;
-			break;
-		default:
-			currentProperties = unknowItemProperties;
-		}
-
-		view.getDockLpCurrentContent().add(currentProperties);
-		currentProperties.updatePropertiesView();
-
-	}
-
-	@Override
-	public void noBpmnElementSelected() {
-		view.getDockLpCurrentContent().clear();
-		view.getDockLpCurrentContent().add(noselectionProperties);
-	}
-
-	/*
-	 * Callbacks from view
-	 */
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.
-	 * BpmnElementPropertiesView.ActionDelegate#getCurrentElementJso()
-	 */
-	@Override
-	public BpmnElementJso getCurrentElementJso() {
-		return currentElementJso;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see de.fhrt.johannes.wendig.codenvy.bpmn.editor.part.properties.
-	 * BpmnElementPropertiesView.ActionDelegate#onContentChange()
-	 */
-	@Override
-	public void onContentChange() {
-		Log.info(BpmnElementPropertiesPresenter.class, "onContentChange");
-		currentBpmnIoModelerJso.nativeUpdateData();
-	}
-
-	@Override
-	public BpmnModelerJso getCurrentBpmnIoModelerJso() {
-		return currentBpmnIoModelerJso;
+	public BpmnElementPropertiesView getView() {
+		return view;
 	}
 }

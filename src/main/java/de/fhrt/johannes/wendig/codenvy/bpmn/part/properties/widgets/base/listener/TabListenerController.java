@@ -11,8 +11,7 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.base.listener;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ExecutionListenerJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.BpmnElementPropertiesView.ActionDelegate;
+import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.AbstractBpmnPropertiesTabController;
 
 public class TabListenerController<T> extends
@@ -23,7 +22,7 @@ public class TabListenerController<T> extends
 	private TabListenerView view;
 	private boolean hasTaskListener;
 
-	public TabListenerController(ActionDelegate delegate,
+	public TabListenerController(BpmnElementPropertiesView delegate,
 			boolean hasTaskListener) {
 		super(delegate);
 		this.hasTaskListener = hasTaskListener;

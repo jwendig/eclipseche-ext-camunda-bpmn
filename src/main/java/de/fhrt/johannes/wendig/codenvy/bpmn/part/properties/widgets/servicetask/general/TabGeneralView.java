@@ -41,7 +41,7 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
 	private TextBox tbDocumentation;
 
 	public TabGeneralView(String tabName,
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+			BpmnElementPropertiesView delegate) {
 		super(tabName, delegate);
 		Log.info(TabGeneralView.class, "constructor");
 	}

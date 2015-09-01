@@ -21,8 +21,7 @@ public class TabInputOutputView extends AbstractBpmnPropertiesTabWidget {
 
 	private TableOutputParametersWidget tableOutputParameters;
 
-	public TabInputOutputView(String tabName,
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+	public TabInputOutputView(String tabName, BpmnElementPropertiesView delegate) {
 		super(tabName, delegate);
 		Log.info(TabInputOutputView.class, "constructor");
 	}

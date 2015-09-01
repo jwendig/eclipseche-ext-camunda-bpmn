@@ -38,7 +38,7 @@ public class EditInputOutputParameterTableMapWidget extends
 	private InputOutputParameterJso currentInputParameterJso;
 
 	public EditInputOutputParameterTableMapWidget(
-			BpmnElementPropertiesView.ActionDelegate delegate,
+			BpmnElementPropertiesView delegate,
 			InputOutputParameterJso currentInputParameterJso) {
 		super(delegate);
 		Log.info(EditInputOutputParameterTableMapWidget.class, "constructor");
