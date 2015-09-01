@@ -100,10 +100,10 @@ public class TableFormFieldsEditTableEntryDialog extends DialogBox {
 		tbDefaultValue.setWidth("100%");
 
 		tableProperties = new EditFormFieldTablePropertiesWidget(
-				widgetCallback.getDelegate(), currentFormFieldJso);
+				widgetCallback.getJsoAccess(), currentFormFieldJso);
 
 		tableValidations = new EditFormFieldTableValidationWidget(
-				widgetCallback.getDelegate(), currentFormFieldJso);
+				widgetCallback.getJsoAccess(), currentFormFieldJso);
 
 		gridContent = new Grid(6, 3);
 		gridContent.setWidth("100%");
@@ -142,7 +142,7 @@ public class TableFormFieldsEditTableEntryDialog extends DialogBox {
 				TableFormFieldsEditTableEntryDialog.this.hide();
 
 				widgetCallback.getDataProvider().refresh();
-				widgetCallback.getDelegate().onContentChange();
+				widgetCallback.getJsoAccess().onContentChange();
 			}
 		});
 

@@ -204,7 +204,7 @@ public class TableTaskListenerEditTableEntryDialog extends DialogBox {
 
 				if (lboxType.getSelectedItemText().equalsIgnoreCase("script")) {
 					ScriptJso scriptJso = currentTaskListenerJso
-							.addChild_script(widgetCallback.getDelegate()
+							.addChild_script(widgetCallback.getJsoAccess()
 									.getCurrentBpmnIoModelerJso()
 									.nativeGetModdle());
 					scriptJso.setAttr_resource(swScript.getTbResource()
@@ -219,7 +219,7 @@ public class TableTaskListenerEditTableEntryDialog extends DialogBox {
 				TableTaskListenerEditTableEntryDialog.this.hide();
 
 				widgetCallback.getDataProvider().refresh();
-				widgetCallback.getDelegate().onContentChange();
+				widgetCallback.getJsoAccess().onContentChange();
 			}
 		});
 

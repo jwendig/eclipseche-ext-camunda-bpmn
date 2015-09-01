@@ -33,8 +33,8 @@ public class TableMessagesWidget extends
 	private Column<MessageJso, String> tcBtnRemove;
 	private Button btnAdd;
 
-	public TableMessagesWidget(BpmnElementPropertiesView delegate) {
-		super(delegate);
+	public TableMessagesWidget(BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(jsoAccess);
 		tcName = new Column<MessageJso, String>(new EditTextCell()) {
 
 			@Override
@@ -54,7 +54,7 @@ public class TableMessagesWidget extends
 						"tcDataObjectName-fieldUpdater: update");
 				object.setAttr_name(value);
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 
 		});
@@ -78,7 +78,7 @@ public class TableMessagesWidget extends
 						"tcDataObjectName-fieldUpdater: update");
 				object.setAttr_id(value);
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 
 		});
@@ -94,12 +94,12 @@ public class TableMessagesWidget extends
 
 			@Override
 			public void update(int index, MessageJso object, String value) {
-				if (getDelegate().getCurrentBpmnIoModelerJso()
+				if (getJsoAccess().getCurrentBpmnIoModelerJso()
 						.removeRootElementMessage(object)) {
 					getDataProvider().getList().remove(object);
 					getDataProvider().refresh();
 					getTable().redraw();
-					getDelegate().onContentChange();
+					getJsoAccess().onContentChange();
 				} else {
 
 				}
@@ -115,14 +115,14 @@ public class TableMessagesWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
-				MessageJso newDataObject = getDelegate()
+				MessageJso newDataObject = getJsoAccess()
 						.getCurrentBpmnIoModelerJso().addRootElementMessage(
-								getDelegate().getCurrentBpmnIoModelerJso()
+								getJsoAccess().getCurrentBpmnIoModelerJso()
 										.nativeGetModdle());
 				getDataProvider().getList().add(newDataObject);
 				getDataProvider().refresh();
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 		});
 
@@ -134,7 +134,7 @@ public class TableMessagesWidget extends
 	public void update() {
 		getDataProvider().getList().clear();
 		getDataProvider().getList().addAll(
-				getDelegate().getCurrentBpmnIoModelerJso()
+				getJsoAccess().getCurrentBpmnIoModelerJso()
 						.getRootElementsMessages());
 	}
 }

@@ -20,9 +20,9 @@ public class TabExtensionsController<T> extends
 	private TabExtensionsView view;
 
 	public TabExtensionsController(
-			BpmnElementPropertiesView delegate) {
-		super(delegate);
-		view = new TabExtensionsView(TAB_NAME, delegate);
+			BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(jsoAccess);
+		view = new TabExtensionsView(TAB_NAME, jsoAccess);
 	}
 
 	public TabExtensionsView getView() {

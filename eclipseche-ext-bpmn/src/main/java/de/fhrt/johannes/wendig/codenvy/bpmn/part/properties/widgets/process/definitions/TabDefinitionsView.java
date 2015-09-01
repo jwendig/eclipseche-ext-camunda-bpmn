@@ -25,8 +25,8 @@ public class TabDefinitionsView extends AbstractBpmnPropertiesTabWidget {
 	private TableMessagesWidget ctMessages;
 	private TableSignalsWidget ctSignals;
 
-	public TabDefinitionsView(String tabName, BpmnElementPropertiesView delegate) {
-		super(tabName, delegate);
+	public TabDefinitionsView(String tabName, BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(tabName, jsoAccess);
 		Log.info(TabDefinitionsView.class, "constructor");
 	}
 
@@ -49,10 +49,10 @@ public class TabDefinitionsView extends AbstractBpmnPropertiesTabWidget {
 	@Override
 	public void initContentElements() {
 		Log.info(TabDefinitionsView.class, "initContentElements");
-		ctErrors = new TableErrorsWidget(getDelegate());
-		ctMessages = new TableMessagesWidget(getDelegate());
-		ctSignals = new TableSignalsWidget(getDelegate());
-		ctDataStores = new TableDataStoresWidget(getDelegate());
+		ctErrors = new TableErrorsWidget(getJsoAccess());
+		ctMessages = new TableMessagesWidget(getJsoAccess());
+		ctSignals = new TableSignalsWidget(getJsoAccess());
+		ctDataStores = new TableDataStoresWidget(getJsoAccess());
 	}
 
 	public TableErrorsWidget getCtErrors() {

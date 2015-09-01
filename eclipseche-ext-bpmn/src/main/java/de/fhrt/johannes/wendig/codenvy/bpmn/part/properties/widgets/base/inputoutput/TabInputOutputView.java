@@ -21,8 +21,8 @@ public class TabInputOutputView extends AbstractBpmnPropertiesTabWidget {
 
 	private TableOutputParametersWidget tableOutputParameters;
 
-	public TabInputOutputView(String tabName, BpmnElementPropertiesView delegate) {
-		super(tabName, delegate);
+	public TabInputOutputView(String tabName, BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(tabName, jsoAccess);
 		Log.info(TabInputOutputView.class, "constructor");
 	}
 
@@ -43,8 +43,8 @@ public class TabInputOutputView extends AbstractBpmnPropertiesTabWidget {
 	public void initContentElements() {
 		Log.info(TabInputOutputView.class, "initContentElements");
 
-		tableInputParameters = new TableInputParametersWidget(getDelegate());
-		tableOutputParameters = new TableOutputParametersWidget(getDelegate());
+		tableInputParameters = new TableInputParametersWidget(getJsoAccess());
+		tableOutputParameters = new TableOutputParametersWidget(getJsoAccess());
 	}
 
 	public TableInputParametersWidget getTableInputParameters() {

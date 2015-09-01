@@ -32,8 +32,8 @@ public class TableErrorsWidget extends AbstractBpmnDataTableWidget<ErrorJso> {
 	private Column<ErrorJso, String> tcBtnRemove;
 	private Button btnAdd;
 
-	public TableErrorsWidget(BpmnElementPropertiesView delegate) {
-		super(delegate);
+	public TableErrorsWidget(BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(jsoAccess);
 		tcName = new Column<ErrorJso, String>(new EditTextCell()) {
 
 			@Override
@@ -53,7 +53,7 @@ public class TableErrorsWidget extends AbstractBpmnDataTableWidget<ErrorJso> {
 						"tcDataObjectName-fieldUpdater: update");
 				object.setAttr_name(value);
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 
 		});
@@ -77,7 +77,7 @@ public class TableErrorsWidget extends AbstractBpmnDataTableWidget<ErrorJso> {
 						"tcDataObjectName-fieldUpdater: update");
 				object.setAttr_errorCode(value);
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 
 		});
@@ -93,12 +93,12 @@ public class TableErrorsWidget extends AbstractBpmnDataTableWidget<ErrorJso> {
 
 			@Override
 			public void update(int index, ErrorJso object, String value) {
-				if (getDelegate().getCurrentBpmnIoModelerJso()
+				if (getJsoAccess().getCurrentBpmnIoModelerJso()
 						.removeRootElementErrors(object)) {
 					getDataProvider().getList().remove(object);
 					getDataProvider().refresh();
 					getTable().redraw();
-					getDelegate().onContentChange();
+					getJsoAccess().onContentChange();
 				} else {
 
 				}
@@ -114,14 +114,14 @@ public class TableErrorsWidget extends AbstractBpmnDataTableWidget<ErrorJso> {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				ErrorJso newDataObject = getDelegate()
+				ErrorJso newDataObject = getJsoAccess()
 						.getCurrentBpmnIoModelerJso().addRootElementError(
-								getDelegate().getCurrentBpmnIoModelerJso()
+								getJsoAccess().getCurrentBpmnIoModelerJso()
 										.nativeGetModdle());
 				getDataProvider().getList().add(newDataObject);
 				getDataProvider().refresh();
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 		});
 
@@ -133,7 +133,7 @@ public class TableErrorsWidget extends AbstractBpmnDataTableWidget<ErrorJso> {
 	public void update() {
 		getDataProvider().getList().clear();
 		getDataProvider().getList().addAll(
-				getDelegate().getCurrentBpmnIoModelerJso()
+				getJsoAccess().getCurrentBpmnIoModelerJso()
 						.getRootElementsErrors());
 		// JsArray<BpmnRootPropertyJso> dataObjects = getDelegate()
 		// .getCurrentBpmnIoModelerJso().getRootElements_errors();

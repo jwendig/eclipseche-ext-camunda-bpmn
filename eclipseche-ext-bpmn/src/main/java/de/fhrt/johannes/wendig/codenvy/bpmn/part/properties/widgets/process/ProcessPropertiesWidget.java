@@ -25,25 +25,23 @@ public class ProcessPropertiesWidget extends AbstractBpmnPropertiesWidget {
 
 	private final static String LB_ELEMENT_NAME_PREFIX = "Process";
 
-	// private ProcessJso element;
-
 	private TabGeneralController tabGeneralController;
 	private TabDocumentController tabDocumentController;
 	private TabDefinitionsController tabDefinitionsController;
 	private TabListenerController<ProcessJso> tabListenerController;
 	private TabExtensionsController<ProcessJso> tabExtensionsController;
 
-	public ProcessPropertiesWidget(BpmnElementPropertiesView delegate) {
-		super(LB_ELEMENT_NAME_PREFIX, delegate);
+	public ProcessPropertiesWidget(BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(LB_ELEMENT_NAME_PREFIX, jsoAccess);
 		Log.info(ProcessPropertiesWidget.class, "constructor");
 
-		tabListenerController = new TabListenerController<ProcessJso>(delegate,
+		tabListenerController = new TabListenerController<ProcessJso>(jsoAccess,
 				false);
-		tabDocumentController = new TabDocumentController(delegate);
-		tabGeneralController = new TabGeneralController(delegate);
-		tabDefinitionsController = new TabDefinitionsController(delegate);
+		tabDocumentController = new TabDocumentController(jsoAccess);
+		tabGeneralController = new TabGeneralController(jsoAccess);
+		tabDefinitionsController = new TabDefinitionsController(jsoAccess);
 		tabExtensionsController = new TabExtensionsController<ProcessJso>(
-				delegate);
+				jsoAccess);
 
 		getTabLpContent().add(tabGeneralController.getView(),
 				tabGeneralController.getView().getTabName());

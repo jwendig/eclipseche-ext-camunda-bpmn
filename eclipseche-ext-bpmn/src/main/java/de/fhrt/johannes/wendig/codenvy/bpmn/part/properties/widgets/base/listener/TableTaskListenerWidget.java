@@ -39,8 +39,8 @@ public class TableTaskListenerWidget extends
 	private Column<TaskListenerJso, String> tcExecutionListenerBtnEdit;
 	private Button btnAddExecutionListener;
 
-	public TableTaskListenerWidget(BpmnElementPropertiesView delegate) {
-		super(delegate);
+	public TableTaskListenerWidget(BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(jsoAccess);
 		tcExecutionListenersClass = new TextColumn<TaskListenerJso>() {
 
 			@Override
@@ -112,12 +112,12 @@ public class TableTaskListenerWidget extends
 					@Override
 					public void update(int index, TaskListenerJso object,
 							String value) {
-						if (getDelegate().getCurrentElementJso()
+						if (getJsoAccess().getCurrentElementJso()
 								.removeCamundaExt_taskListener(object)) {
 							getDataProvider().getList().remove(object);
 							getDataProvider().refresh();
 							getTable().redraw();
-							getDelegate().onContentChange();
+							getJsoAccess().onContentChange();
 						} else {
 
 						}
@@ -158,9 +158,9 @@ public class TableTaskListenerWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
-				TaskListenerJso taskListenerJso = getDelegate()
+				TaskListenerJso taskListenerJso = getJsoAccess()
 						.getCurrentElementJso().addCamundaExt_taskListener(
-								getDelegate().getCurrentBpmnIoModelerJso()
+								getJsoAccess().getCurrentBpmnIoModelerJso()
 										.nativeGetModdle());
 
 				getDataProvider().getList().add(taskListenerJso);
@@ -177,7 +177,7 @@ public class TableTaskListenerWidget extends
 	@Override
 	public void update() {
 		getDataProvider().getList().clear();
-		List<TaskListenerJso> dataObjects = getDelegate()
+		List<TaskListenerJso> dataObjects = getJsoAccess()
 				.getCurrentElementJso().getCamundaExt_taskListeners();
 		getDataProvider().getList().addAll(dataObjects);
 	}

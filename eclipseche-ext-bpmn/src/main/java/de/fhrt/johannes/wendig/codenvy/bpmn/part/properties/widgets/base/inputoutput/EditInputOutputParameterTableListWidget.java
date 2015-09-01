@@ -36,9 +36,9 @@ public class EditInputOutputParameterTableListWidget extends
 	private InputOutputParameterJso currentInputParameterJso;
 
 	public EditInputOutputParameterTableListWidget(
-			BpmnElementPropertiesView delegate,
+			BpmnElementPropertiesView.CurrentJsoAccess jsoAccess,
 			InputOutputParameterJso currentInputParameterJso) {
-		super(delegate);
+		super(jsoAccess);
 		Log.info(EditInputOutputParameterTableListWidget.class, "constructor");
 		this.currentInputParameterJso = currentInputParameterJso;
 
@@ -59,7 +59,7 @@ public class EditInputOutputParameterTableListWidget extends
 					final String value) {
 				object.setAttr_value(value);
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 
 		});
@@ -80,7 +80,7 @@ public class EditInputOutputParameterTableListWidget extends
 					getDataProvider().getList().remove(object);
 					getDataProvider().refresh();
 					getTable().redraw();
-					getDelegate().onContentChange();
+					getJsoAccess().onContentChange();
 				} else {
 
 				}
@@ -96,13 +96,13 @@ public class EditInputOutputParameterTableListWidget extends
 			@Override
 			public void onClick(ClickEvent event) {
 				ListValueJso newDataObject = EditInputOutputParameterTableListWidget.this.currentInputParameterJso
-						.addListValue(getDelegate()
+						.addListValue(getJsoAccess()
 								.getCurrentBpmnIoModelerJso().nativeGetModdle());
 
 				getDataProvider().getList().add(newDataObject);
 				getDataProvider().refresh();
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 		});
 

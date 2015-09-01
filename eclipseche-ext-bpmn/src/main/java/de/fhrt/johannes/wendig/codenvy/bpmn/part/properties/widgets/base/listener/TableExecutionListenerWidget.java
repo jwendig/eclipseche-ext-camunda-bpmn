@@ -38,8 +38,8 @@ public class TableExecutionListenerWidget extends
 	private Column<ExecutionListenerJso, String> tcExecutionListenerBtnEdit;
 	private Button btnAddExecutionListener;
 
-	public TableExecutionListenerWidget(BpmnElementPropertiesView delegate) {
-		super(delegate);
+	public TableExecutionListenerWidget(BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(jsoAccess);
 		tcExecutionListenersClass = new TextColumn<ExecutionListenerJso>() {
 
 			@Override
@@ -111,12 +111,12 @@ public class TableExecutionListenerWidget extends
 					@Override
 					public void update(int index, ExecutionListenerJso object,
 							String value) {
-						if (getDelegate().getCurrentElementJso()
+						if (getJsoAccess().getCurrentElementJso()
 								.removeCamundaExt_executionListener(object)) {
 							getDataProvider().getList().remove(object);
 							getDataProvider().refresh();
 							getTable().redraw();
-							getDelegate().onContentChange();
+							getJsoAccess().onContentChange();
 						} else {
 
 						}
@@ -158,10 +158,10 @@ public class TableExecutionListenerWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
-				ExecutionListenerJso executionListenerJso = getDelegate()
+				ExecutionListenerJso executionListenerJso = getJsoAccess()
 						.getCurrentElementJso()
 						.addCamundaExt_executionListener(
-								getDelegate().getCurrentBpmnIoModelerJso()
+								getJsoAccess().getCurrentBpmnIoModelerJso()
 										.nativeGetModdle());
 
 				getDataProvider().getList().add(executionListenerJso);
@@ -180,7 +180,7 @@ public class TableExecutionListenerWidget extends
 	@Override
 	public void update() {
 		getDataProvider().getList().clear();
-		List<ExecutionListenerJso> dataObjects = getDelegate()
+		List<ExecutionListenerJso> dataObjects = getJsoAccess()
 				.getCurrentElementJso().getCamundaExt_executionListeners();
 		getDataProvider().getList().addAll(dataObjects);
 	}

@@ -34,8 +34,8 @@ public class TableDataStoresWidget extends
 	private Column<DataStoreJso, String> tcBtnRemove;
 	private Button btnAdd;
 
-	public TableDataStoresWidget(BpmnElementPropertiesView delegate) {
-		super(delegate);
+	public TableDataStoresWidget(BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(jsoAccess);
 		tcId = new Column<DataStoreJso, String>(new EditTextCell()) {
 
 			@Override
@@ -55,7 +55,7 @@ public class TableDataStoresWidget extends
 						"tcDataObjectName-fieldUpdater: update");
 				object.setAttr_id(value);
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 
 		});
@@ -79,7 +79,7 @@ public class TableDataStoresWidget extends
 						"tcDataObjectName-fieldUpdater: update");
 				object.setAttr_name(value);
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 
 		});
@@ -95,12 +95,12 @@ public class TableDataStoresWidget extends
 
 			@Override
 			public void update(int index, DataStoreJso object, String value) {
-				if (getDelegate().getCurrentBpmnIoModelerJso()
+				if (getJsoAccess().getCurrentBpmnIoModelerJso()
 						.removeRootElementDataStore(object)) {
 					getDataProvider().getList().remove(object);
 					getDataProvider().refresh();
 					getTable().redraw();
-					getDelegate().onContentChange();
+					getJsoAccess().onContentChange();
 				} else {
 
 				}
@@ -116,14 +116,14 @@ public class TableDataStoresWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
-				DataStoreJso newDataObject = getDelegate()
+				DataStoreJso newDataObject = getJsoAccess()
 						.getCurrentBpmnIoModelerJso().addRootElementDataStore(
-								getDelegate().getCurrentBpmnIoModelerJso()
+								getJsoAccess().getCurrentBpmnIoModelerJso()
 										.nativeGetModdle());
 				getDataProvider().getList().add(newDataObject);
 				getDataProvider().refresh();
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 		});
 
@@ -135,7 +135,7 @@ public class TableDataStoresWidget extends
 	public void update() {
 		getDataProvider().getList().clear();
 		getDataProvider().getList().addAll(
-				getDelegate().getCurrentBpmnIoModelerJso()
+				getJsoAccess().getCurrentBpmnIoModelerJso()
 						.getRootElementsDataStores());
 	}
 }

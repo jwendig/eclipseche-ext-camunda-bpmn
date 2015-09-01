@@ -22,9 +22,9 @@ public class TabFormFieldsController extends
 
 	private TabFormFieldsView view;
 
-	public TabFormFieldsController(BpmnElementPropertiesView delegate) {
-		super(delegate);
-		this.view = new TabFormFieldsView(TAB_NAME, delegate);
+	public TabFormFieldsController(BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(jsoAccess);
+		this.view = new TabFormFieldsView(TAB_NAME, jsoAccess);
 	}
 
 	public TabFormFieldsView getView() {

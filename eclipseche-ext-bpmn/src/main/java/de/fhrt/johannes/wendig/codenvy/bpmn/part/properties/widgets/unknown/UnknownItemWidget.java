@@ -27,8 +27,8 @@ public class UnknownItemWidget extends AbstractBpmnPropertiesWidget {
 
 	private final static String LB_ELEMENT_NAME_PREFIX = "Unknown";
 
-	public UnknownItemWidget(BpmnElementPropertiesView delegate) {
-		super(LB_ELEMENT_NAME_PREFIX, delegate);
+	public UnknownItemWidget(BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(LB_ELEMENT_NAME_PREFIX, jsoAccess);
 		Log.info(UnknownItemWidget.class, "constructor");
 
 		getTabLpContent().add(new Label("Unknown Item - no properties"));

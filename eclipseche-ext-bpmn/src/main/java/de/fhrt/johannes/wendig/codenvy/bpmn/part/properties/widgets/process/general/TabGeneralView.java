@@ -28,8 +28,8 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
 	private TableDataObjectsWidget ctDataObjects;
 	private TextBox tbDocumentation;
 
-	public TabGeneralView(String tabName, BpmnElementPropertiesView delegate) {
-		super(tabName, delegate);
+	public TabGeneralView(String tabName, BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(tabName, jsoAccess);
 		Log.info(TabGeneralView.class, "constructor");
 	}
 
@@ -60,7 +60,7 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
 		tbName.setWidth("100%");
 		cbIsExecutable = new CheckBox();
 		cbIsExecutable.setWidth("100%");
-		ctDataObjects = new TableDataObjectsWidget(getDelegate());
+		ctDataObjects = new TableDataObjectsWidget(getJsoAccess());
 		ctDataObjects.setWidth("100%");
 		tbDocumentation = new TextBox();
 		tbDocumentation.setWidth("100%");

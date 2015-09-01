@@ -36,8 +36,8 @@ public class TableInputParametersWidget extends
 	private Button btnAdd;
 
 	public TableInputParametersWidget(
-			BpmnElementPropertiesView delegate) {
-		super(delegate);
+			BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(jsoAccess);
 		tcName = new TextColumn<InputParameterJso>() {
 
 			@Override
@@ -59,12 +59,12 @@ public class TableInputParametersWidget extends
 					@Override
 					public void update(int index, InputParameterJso object,
 							String value) {
-						if (getDelegate().getCurrentElementJso()
+						if (getJsoAccess().getCurrentElementJso()
 								.removeCamundaExt_inputParameter(object)) {
 							getDataProvider().getList().remove(object);
 							getDataProvider().refresh();
 							getTable().redraw();
-							getDelegate().onContentChange();
+							getJsoAccess().onContentChange();
 						} else {
 
 						}
@@ -100,9 +100,9 @@ public class TableInputParametersWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
-				InputParameterJso inputParameterJso = getDelegate()
+				InputParameterJso inputParameterJso = getJsoAccess()
 						.getCurrentElementJso().addCamundaExt_inputParameter(
-								getDelegate().getCurrentBpmnIoModelerJso()
+								getJsoAccess().getCurrentBpmnIoModelerJso()
 										.nativeGetModdle());
 
 				getDataProvider().getList().add(inputParameterJso);
@@ -120,7 +120,7 @@ public class TableInputParametersWidget extends
 	@Override
 	public void update() {
 		getDataProvider().getList().clear();
-		List<InputParameterJso> dataObjects = getDelegate()
+		List<InputParameterJso> dataObjects = getJsoAccess()
 				.getCurrentElementJso().getCamundaExt_inputParameters();
 		getDataProvider().getList().addAll(dataObjects);
 	}

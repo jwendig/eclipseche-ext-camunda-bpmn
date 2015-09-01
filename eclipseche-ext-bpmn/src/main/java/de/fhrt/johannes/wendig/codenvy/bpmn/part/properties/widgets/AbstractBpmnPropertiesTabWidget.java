@@ -21,15 +21,15 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.BpmnElementPropertie
 
 public abstract class AbstractBpmnPropertiesTabWidget extends Composite {
 
-	private BpmnElementPropertiesView delegate;
+	private BpmnElementPropertiesView.CurrentJsoAccess jsoAccess;
 	private String tabName = "Document";
 	private Grid gridTabContent;
 
 	public AbstractBpmnPropertiesTabWidget(String tabName,
-			BpmnElementPropertiesView delegate) {
+			BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
 		super();
 		this.tabName = tabName;
-		this.delegate = delegate;
+		this.jsoAccess = jsoAccess;
 
 		gridTabContent = new Grid();
 		gridTabContent.setSize("100%", "100%");
@@ -69,8 +69,8 @@ public abstract class AbstractBpmnPropertiesTabWidget extends Composite {
 		this.gridTabContent = content;
 	}
 
-	public BpmnElementPropertiesView getDelegate() {
-		return delegate;
+	public BpmnElementPropertiesView.CurrentJsoAccess getJsoAccess() {
+		return jsoAccess;
 	}
 
 	public String getTabName() {

@@ -43,8 +43,8 @@ public class TableDataObjectsWidget extends
 	private Column<DataObjectJso, String> tcBtnRemove;
 	private Button btnAdd;
 
-	public TableDataObjectsWidget(BpmnElementPropertiesView delegate) {
-		super(delegate);
+	public TableDataObjectsWidget(BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(jsoAccess);
 		tcDataObjectName = new Column<DataObjectJso, String>(new EditTextCell()) {
 
 			@Override
@@ -65,7 +65,7 @@ public class TableDataObjectsWidget extends
 								"tcDataObjectName-fieldUpdater: update");
 						object.setAttr_name(value);
 						getTable().redraw();
-						getDelegate().onContentChange();
+						getJsoAccess().onContentChange();
 					}
 
 				});
@@ -81,12 +81,12 @@ public class TableDataObjectsWidget extends
 
 			@Override
 			public void update(int index, DataObjectJso object, String value) {
-				if (getDelegate().getCurrentElementJso().removeBpmnElement(
+				if (getJsoAccess().getCurrentElementJso().removeBpmnElement(
 						(BpmnElementPropertyJso) object)) {
 					getDataProvider().getList().remove(object);
 					getDataProvider().refresh();
 					getTable().redraw();
-					getDelegate().onContentChange();
+					getJsoAccess().onContentChange();
 				} else {
 
 				}
@@ -101,14 +101,14 @@ public class TableDataObjectsWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
-				BpmnElementPropertyJso newDataObject = getDelegate()
+				BpmnElementPropertyJso newDataObject = getJsoAccess()
 						.getCurrentElementJso().addBpmnDataObject(
-								getDelegate().getCurrentBpmnIoModelerJso()
+								getJsoAccess().getCurrentBpmnIoModelerJso()
 										.nativeGetModdle());
 				getDataProvider().getList().add(newDataObject);
 				getDataProvider().refresh();
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 		});
 
@@ -119,7 +119,7 @@ public class TableDataObjectsWidget extends
 	@Override
 	public void update() {
 		getDataProvider().getList().clear();
-		JsArray<BpmnElementPropertyJso> dataObjects = getDelegate()
+		JsArray<BpmnElementPropertyJso> dataObjects = getJsoAccess()
 				.getCurrentElementJso().getBpmnDataObjects();
 		for (int i = 0; i < dataObjects.length(); i++) {
 			getDataProvider().getList().add(dataObjects.get(i));

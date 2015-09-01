@@ -10,20 +10,16 @@
  *******************************************************************************/
 package de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets;
 
-import java.awt.FlowLayout;
+import javax.inject.Inject;
 
 import org.eclipse.che.ide.util.loging.Log;
 
-import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.BpmnElementPropertiesView;
 
 public abstract class AbstractBpmnPropertiesWidget extends Composite {
@@ -37,14 +33,16 @@ public abstract class AbstractBpmnPropertiesWidget extends Composite {
 	private FlowPanel flowLpRoot;
 	private Label lbElementName;
 	private TabLayoutPanel tabLpContent;
-	private BpmnElementPropertiesView delegate;
-
+	
+	
+	private BpmnElementPropertiesView.CurrentJsoAccess jsoAccess;
+	
 	public AbstractBpmnPropertiesWidget(String lbElementName_prefixText,
-			BpmnElementPropertiesView delegate) {
+			BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
 		super();
 		Log.info(AbstractBpmnPropertiesWidget.class, "constructor");
 
-		this.delegate = delegate;
+		this.jsoAccess = jsoAccess;
 		this.lbElementName_prefixText = lbElementName_prefixText;
 
 		initPropertiesRoot();
@@ -71,8 +69,8 @@ public abstract class AbstractBpmnPropertiesWidget extends Composite {
 	public void updatePropertiesView() {
 		Log.info(AbstractBpmnPropertiesWidget.class, "setSelectedItem");
 
-		if (null != delegate.getCurrentElementJso()) {
-			setLbElementNameText(this.delegate.getCurrentElementJso()
+		if (null != jsoAccess.getCurrentElementJso()) {
+			setLbElementNameText(this.jsoAccess.getCurrentElementJso()
 					.getAttr_id());
 		} else {
 			setLbElementNameText("");

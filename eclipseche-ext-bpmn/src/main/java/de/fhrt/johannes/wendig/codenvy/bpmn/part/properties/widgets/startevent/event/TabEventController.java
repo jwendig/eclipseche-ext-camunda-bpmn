@@ -23,9 +23,9 @@ public class TabEventController extends
 	private final static String TAB_NAME = "Event";
 	private TabEventView view;
 
-	public TabEventController(BpmnElementPropertiesView delegate) {
-		super(delegate);
-		view = new TabEventView(TAB_NAME, delegate);
+	public TabEventController(BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(jsoAccess);
+		view = new TabEventView(TAB_NAME, jsoAccess);
 		view.getTbInitiator().addKeyUpHandler(new KeyUpHandler() {
 
 			@Override

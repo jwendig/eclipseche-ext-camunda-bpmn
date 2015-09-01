@@ -34,8 +34,8 @@ public class TableOutputParametersWidget extends
 	private Button btnAdd;
 
 	public TableOutputParametersWidget(
-			BpmnElementPropertiesView delegate) {
-		super(delegate);
+			BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(jsoAccess);
 		tcName = new TextColumn<OutputParameterJso>() {
 
 			@Override
@@ -57,12 +57,12 @@ public class TableOutputParametersWidget extends
 					@Override
 					public void update(int index, OutputParameterJso object,
 							String value) {
-						if (getDelegate().getCurrentElementJso()
+						if (getJsoAccess().getCurrentElementJso()
 								.removeCamundaExt_outputParameter(object)) {
 							getDataProvider().getList().remove(object);
 							getDataProvider().refresh();
 							getTable().redraw();
-							getDelegate().onContentChange();
+							getJsoAccess().onContentChange();
 						} else {
 
 						}
@@ -98,9 +98,9 @@ public class TableOutputParametersWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
-				OutputParameterJso inputParameterJso = getDelegate()
+				OutputParameterJso inputParameterJso = getJsoAccess()
 						.getCurrentElementJso().addCamundaExt_outputParameter(
-								getDelegate().getCurrentBpmnIoModelerJso()
+								getJsoAccess().getCurrentBpmnIoModelerJso()
 										.nativeGetModdle());
 
 				getDataProvider().getList().add(inputParameterJso);
@@ -118,7 +118,7 @@ public class TableOutputParametersWidget extends
 	@Override
 	public void update() {
 		getDataProvider().getList().clear();
-		List<OutputParameterJso> dataObjects = getDelegate()
+		List<OutputParameterJso> dataObjects = getJsoAccess()
 				.getCurrentElementJso().getCamundaExt_outputParameters();
 		getDataProvider().getList().addAll(dataObjects);
 	}

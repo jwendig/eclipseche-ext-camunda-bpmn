@@ -38,8 +38,8 @@ public class EditFormFieldTableValidationWidget extends
 	private FormFieldJso currentFormFieldJso;
 
 	public EditFormFieldTableValidationWidget(
-			BpmnElementPropertiesView delegate, FormFieldJso currentFormFieldJso) {
-		super(delegate);
+			BpmnElementPropertiesView.CurrentJsoAccess jsoAccess, FormFieldJso currentFormFieldJso) {
+		super(jsoAccess);
 		Log.info(EditFormFieldTableValidationWidget.class, "constructor");
 		this.currentFormFieldJso = currentFormFieldJso;
 
@@ -60,7 +60,7 @@ public class EditFormFieldTableValidationWidget extends
 					final String value) {
 				object.setAttr_name(value);
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 
 		});
@@ -82,7 +82,7 @@ public class EditFormFieldTableValidationWidget extends
 					final String value) {
 				object.setAttr_config(value);
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 
 		});
@@ -103,7 +103,7 @@ public class EditFormFieldTableValidationWidget extends
 					getDataProvider().getList().remove(object);
 					getDataProvider().refresh();
 					getTable().redraw();
-					getDelegate().onContentChange();
+					getJsoAccess().onContentChange();
 				} else {
 
 				}
@@ -120,12 +120,12 @@ public class EditFormFieldTableValidationWidget extends
 			@Override
 			public void onClick(ClickEvent event) {
 				ConstraintJso newDataObject = EditFormFieldTableValidationWidget.this.currentFormFieldJso
-						.addConstraint(getDelegate()
+						.addConstraint(getJsoAccess()
 								.getCurrentBpmnIoModelerJso().nativeGetModdle());
 				getDataProvider().getList().add(newDataObject);
 				getDataProvider().refresh();
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 		});
 

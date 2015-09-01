@@ -70,12 +70,10 @@ public class ProjectParser {
 
 			for (Entry<String, String> attr : itemNode.getData()
 					.getAttributes().entrySet()) {
-				Log.info(
-						ProjectParser.class,
-						"attributes: " + attr.getKey() + "="
-								+ attr.getValue());
+				Log.info(ProjectParser.class, "attributes: " + attr.getKey()
+						+ "=" + attr.getValue());
 			}
-			
+
 			// treeNode is a file, check if is a camunda type
 			if (isChildOfJavaFolder
 					&& itemNode.getData().getName().endsWith(".java")) {

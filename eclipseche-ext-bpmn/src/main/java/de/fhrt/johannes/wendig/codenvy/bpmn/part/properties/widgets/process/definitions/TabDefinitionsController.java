@@ -20,9 +20,9 @@ public class TabDefinitionsController extends
 	private final static String TAB_NAME = "Definitions";
 	private TabDefinitionsView view;
 
-	public TabDefinitionsController(BpmnElementPropertiesView delegate) {
-		super(delegate);
-		this.view = new TabDefinitionsView(TAB_NAME, delegate);
+	public TabDefinitionsController(BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(jsoAccess);
+		this.view = new TabDefinitionsView(TAB_NAME, jsoAccess);
 	}
 
 	public TabDefinitionsView getView() {
