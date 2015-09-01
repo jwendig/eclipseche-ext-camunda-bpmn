@@ -27,7 +27,7 @@ public class UnknownItemWidget extends AbstractBpmnPropertiesWidget {
 
 	private final static String LB_ELEMENT_NAME_PREFIX = "Unknown";
 
-	public UnknownItemWidget(BpmnElementPropertiesView.ActionDelegate delegate) {
+	public UnknownItemWidget(BpmnElementPropertiesView delegate) {
 		super(LB_ELEMENT_NAME_PREFIX, delegate);
 		Log.info(UnknownItemWidget.class, "constructor");
 

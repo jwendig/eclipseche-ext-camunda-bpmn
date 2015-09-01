@@ -23,19 +23,18 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnModele
 public interface BpmnElementPropertiesView extends
 		View<BpmnElementPropertiesView.ActionDelegate> {
 	public interface ActionDelegate extends BaseActionDelegate {
-		void onContentChange();
-
-		public BpmnElementJso getCurrentElementJso();
-
-		public BpmnModelerJso getCurrentBpmnIoModelerJso();
-		
-		public void bpmnElementSelected(BpmnModelerJso modelerJso,
-				BpmnElementJso elementJso);
-
-		public void noBpmnElementSelected();
 	}
+
+	void onContentChange();
+
+	public BpmnElementJso getCurrentElementJso();
+
+	public BpmnModelerJso getCurrentBpmnIoModelerJso();
 
 	public void setTitle(String title);
 
-	public DockLayoutPanel getDockLpCurrentContent();
+	public void loadWidgetForSelectedBpmnElement(BpmnModelerJso modelerJso,
+			BpmnElementJso elementJso);
+
+	public void clearView();
 }

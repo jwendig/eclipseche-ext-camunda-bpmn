@@ -12,7 +12,7 @@
 package de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.base.formfields;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.FormFieldJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.BpmnElementPropertiesView.ActionDelegate;
+import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.AbstractBpmnPropertiesTabController;
 
 public class TabFormFieldsController extends
@@ -22,7 +22,7 @@ public class TabFormFieldsController extends
 
 	private TabFormFieldsView view;
 
-	public TabFormFieldsController(ActionDelegate delegate) {
+	public TabFormFieldsController(BpmnElementPropertiesView delegate) {
 		super(delegate);
 		this.view = new TabFormFieldsView(TAB_NAME, delegate);
 	}

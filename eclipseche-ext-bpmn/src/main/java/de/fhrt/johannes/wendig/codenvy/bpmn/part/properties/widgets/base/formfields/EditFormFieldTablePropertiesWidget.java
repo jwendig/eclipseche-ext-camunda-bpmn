@@ -38,7 +38,7 @@ public class EditFormFieldTablePropertiesWidget extends
 	private FormFieldJso currentFormFieldJso;
 
 	public EditFormFieldTablePropertiesWidget(
-			BpmnElementPropertiesView.ActionDelegate delegate,
+			BpmnElementPropertiesView delegate,
 			FormFieldJso currentFormFieldJso) {
 		super(delegate);
 		Log.info(EditFormFieldTablePropertiesWidget.class, "constructor");

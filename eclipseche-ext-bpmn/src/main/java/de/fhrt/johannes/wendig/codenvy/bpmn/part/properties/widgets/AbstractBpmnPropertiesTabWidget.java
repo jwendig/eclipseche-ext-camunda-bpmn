@@ -21,12 +21,12 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.BpmnElementPropertie
 
 public abstract class AbstractBpmnPropertiesTabWidget extends Composite {
 
-	private BpmnElementPropertiesView.ActionDelegate delegate;
+	private BpmnElementPropertiesView delegate;
 	private String tabName = "Document";
 	private Grid gridTabContent;
 
 	public AbstractBpmnPropertiesTabWidget(String tabName,
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+			BpmnElementPropertiesView delegate) {
 		super();
 		this.tabName = tabName;
 		this.delegate = delegate;
@@ -37,13 +37,11 @@ public abstract class AbstractBpmnPropertiesTabWidget extends Composite {
 		initContentElements();
 		initContent();
 
-
 		ScrollPanel scrollLpContentWrapper = new ScrollPanel(gridTabContent);
 		scrollLpContentWrapper.setSize("100%", "100%");
 
 		initWidget(scrollLpContentWrapper);
-		
-		
+
 		if (gridTabContent.getColumnCount() > 1) {
 			gridTabContent.getColumnFormatter().setWidth(0, "100px");
 			gridTabContent.getColumnFormatter().setWidth(1, "auto");
@@ -71,7 +69,7 @@ public abstract class AbstractBpmnPropertiesTabWidget extends Composite {
 		this.gridTabContent = content;
 	}
 
-	public BpmnElementPropertiesView.ActionDelegate getDelegate() {
+	public BpmnElementPropertiesView getDelegate() {
 		return delegate;
 	}
 

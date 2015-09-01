@@ -20,26 +20,57 @@ import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.inject.Inject;
 
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorViewImpl;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso.BpmnElementType;
+import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.AbstractBpmnPropertiesWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.noselection.NoSelectionWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.process.ProcessPropertiesWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.servicetask.ServiceTaskPropertiesWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.startevent.StartEventPropertiesWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.unknown.UnknownItemWidget;
+import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.usertask.UserTaskPropertiesWidget;
+
 public class BpmnElementPropertiesViewImpl extends
 		BaseView<BpmnElementPropertiesView.ActionDelegate> implements
 		BpmnElementPropertiesView {
 
+	private final static String TITLE = "BPMN Properties";
+
 	private DockLayoutPanel root;
+
+	private BpmnElementJso currentElementJso;
+	private BpmnModelerJso currentBpmnIoModelerJso;
+	private AbstractBpmnPropertiesWidget currentProperties;
+
+	private UnknownItemWidget unknowItemProperties;
+	private NoSelectionWidget noselectionProperties;
+
+	private ProcessPropertiesWidget processProperties;
+	private ServiceTaskPropertiesWidget serviceTaskProperties;
+	private StartEventPropertiesWidget startEventProperties;
+	private UserTaskPropertiesWidget userTaskProperties;
 
 	@Inject
 	public BpmnElementPropertiesViewImpl(PartStackUIResources resources) {
 		super(resources);
+		unknowItemProperties = new UnknownItemWidget(this);
+		noselectionProperties = new NoSelectionWidget(this);
+
+		processProperties = new ProcessPropertiesWidget(this);
+		serviceTaskProperties = new ServiceTaskPropertiesWidget(this);
+		startEventProperties = new StartEventPropertiesWidget(this);
+		userTaskProperties = new UserTaskPropertiesWidget(this);
+
+		
 
 		root = new DockLayoutPanel(Unit.PX);
 		root.setSize("100%", "100%");
-		
-		setContentWidget(root);
-	}
+		root.add(noselectionProperties);
 
-	@Override
-	public String getTitle() {
-		Log.info(BpmnElementPropertiesViewImpl.class, "getTitle");
-		return "test";
+		setTitle(TITLE);
+		setContentWidget(root);
 	}
 
 	@Override
@@ -50,7 +81,66 @@ public class BpmnElementPropertiesViewImpl extends
 	}
 
 	@Override
-	public DockLayoutPanel getDockLpCurrentContent() {
-		return root;
+	public void loadWidgetForSelectedBpmnElement(BpmnModelerJso modelerJso,
+			BpmnElementJso elementJso) {
+		Log.info(BpmnElementPropertiesViewImpl.class,
+				"loadWidgetForSelectedBpmnElement");
+		currentElementJso = elementJso;
+		currentBpmnIoModelerJso = modelerJso;
+
+		root.clear();
+
+		switch (BpmnElementType
+				.findByBpmnIoTypeDefinition(elementJso.getType())) {
+		case DEFAULT:
+			currentProperties = unknowItemProperties;
+			break;
+		case PROCESS:
+			currentProperties = processProperties;
+			break;
+		case SCRIPT_TASK:
+			currentProperties = unknowItemProperties;
+			break;
+		case SERVICE_TASK:
+			currentProperties = serviceTaskProperties;
+			break;
+		case START_EVENT:
+			currentProperties = startEventProperties;
+			break;
+		case TASK:
+			currentProperties = unknowItemProperties;
+			break;
+		case USER_TASK:
+			currentProperties = userTaskProperties;
+			break;
+		default:
+			currentProperties = unknowItemProperties;
+		}
+
+		root.add(currentProperties);
+		currentProperties.updatePropertiesView();
+
+	}
+
+	@Override
+	public void clearView() {
+		Log.info(BpmnElementPropertiesViewImpl.class, "clearView");
+		root.clear();
+		root.add(noselectionProperties);
+	}
+
+	@Override
+	public void onContentChange() {
+		currentBpmnIoModelerJso.nativeUpdateData();
+	}
+
+	@Override
+	public BpmnElementJso getCurrentElementJso() {
+		return currentElementJso;
+	}
+
+	@Override
+	public BpmnModelerJso getCurrentBpmnIoModelerJso() {
+		return currentBpmnIoModelerJso;
 	}
 }

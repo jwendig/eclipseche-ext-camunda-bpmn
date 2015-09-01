@@ -28,11 +28,10 @@ public class UserTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	private TabListenerController<UserTaskJso> tabListenerController;
 	private TabFormFieldsController tabFormFieldsController;
 	private TabExtensionsController<UserTaskJso> tabExtensionsController;
-	
+
 	// TODO: TabInputOutput
 
-	public UserTaskPropertiesWidget(
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+	public UserTaskPropertiesWidget(BpmnElementPropertiesView delegate) {
 		super(LB_ELEMENT_NAME_PREFIX, delegate);
 
 		tabGeneralController = new TabGeneralController(delegate);

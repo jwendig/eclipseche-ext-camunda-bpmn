@@ -38,7 +38,7 @@ public class TableFormFieldsWidget extends
 	private Button btnAdd;
 
 	public TableFormFieldsWidget(
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+			BpmnElementPropertiesView delegate) {
 		super(delegate);
 		tcId = new TextColumn<FormFieldJso>() {
 

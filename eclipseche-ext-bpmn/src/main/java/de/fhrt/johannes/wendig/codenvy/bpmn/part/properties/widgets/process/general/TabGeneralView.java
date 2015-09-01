@@ -28,8 +28,7 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
 	private TableDataObjectsWidget ctDataObjects;
 	private TextBox tbDocumentation;
 
-	public TabGeneralView(String tabName,
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+	public TabGeneralView(String tabName, BpmnElementPropertiesView delegate) {
 		super(tabName, delegate);
 		Log.info(TabGeneralView.class, "constructor");
 	}

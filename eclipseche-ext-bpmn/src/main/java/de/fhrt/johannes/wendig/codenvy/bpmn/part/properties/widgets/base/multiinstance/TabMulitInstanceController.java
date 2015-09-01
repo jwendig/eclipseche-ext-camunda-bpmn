@@ -21,7 +21,7 @@ public class TabMulitInstanceController<T> extends
 	private TabMultiInstanceView view;
 
 	public TabMulitInstanceController(
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+			BpmnElementPropertiesView delegate) {
 		super(delegate);
 		view = new TabMultiInstanceView(TAB_NAME, delegate);
 

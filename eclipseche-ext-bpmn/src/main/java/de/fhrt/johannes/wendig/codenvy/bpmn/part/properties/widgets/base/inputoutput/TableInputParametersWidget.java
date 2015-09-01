@@ -36,7 +36,7 @@ public class TableInputParametersWidget extends
 	private Button btnAdd;
 
 	public TableInputParametersWidget(
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+			BpmnElementPropertiesView delegate) {
 		super(delegate);
 		tcName = new TextColumn<InputParameterJso>() {
 

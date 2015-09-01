@@ -29,7 +29,7 @@ public class TabGeneralController extends
 	private TabGeneralView view;
 
 	public TabGeneralController(
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+			BpmnElementPropertiesView delegate) {
 		super(delegate);
 		view = new TabGeneralView(TAB_NAME, delegate);
 		view.getTbProcessId().addKeyUpHandler(new KeyUpHandler() {

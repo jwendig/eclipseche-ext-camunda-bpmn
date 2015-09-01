@@ -16,9 +16,8 @@ import org.eclipse.che.ide.util.loging.Log;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.ProcessJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.BpmnElementPropertiesView.ActionDelegate;
+import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.AbstractBpmnPropertiesTabController;
 import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.process.general.TabGeneralController;
 
@@ -27,7 +26,7 @@ public class TabDocumentController extends
 	private final static String TAB_NAME = "Document";
 	private TabDocumentView view;
 
-	public TabDocumentController(ActionDelegate delegate) {
+	public TabDocumentController(BpmnElementPropertiesView delegate) {
 		super(delegate);
 		this.view = new TabDocumentView(TAB_NAME, delegate);
 

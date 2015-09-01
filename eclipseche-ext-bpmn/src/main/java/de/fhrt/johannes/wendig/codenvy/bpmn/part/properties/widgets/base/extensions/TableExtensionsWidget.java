@@ -33,7 +33,7 @@ public class TableExtensionsWidget extends
 	private Button btnAdd;
 
 	public TableExtensionsWidget(
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+			BpmnElementPropertiesView delegate) {
 		super(delegate);
 		tcName = new Column<PropertyJso, String>(new EditTextCell()) {
 

@@ -11,8 +11,7 @@
 
 package de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.base.inputoutput;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.ExecutionListenerJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.BpmnElementPropertiesView.ActionDelegate;
+import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.AbstractBpmnPropertiesTabController;
 
 public class TabInputOutputController<T> extends
@@ -22,7 +21,7 @@ public class TabInputOutputController<T> extends
 
 	private TabInputOutputView view;
 
-	public TabInputOutputController(ActionDelegate delegate) {
+	public TabInputOutputController(BpmnElementPropertiesView delegate) {
 		super(delegate);
 		this.view = new TabInputOutputView(TAB_NAME, delegate);
 	}

@@ -31,8 +31,7 @@ public class ServiceTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 
 	// TODO: tabFieldInjections, input/output, connector
 
-	public ServiceTaskPropertiesWidget(
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+	public ServiceTaskPropertiesWidget(BpmnElementPropertiesView delegate) {
 		super(LB_ELEMENT_NAME_PREFIX, delegate);
 
 		tabGeneralController = new TabGeneralController(delegate);

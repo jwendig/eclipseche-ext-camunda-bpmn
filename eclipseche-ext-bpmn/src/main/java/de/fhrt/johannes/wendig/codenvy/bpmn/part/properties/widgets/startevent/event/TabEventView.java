@@ -25,7 +25,7 @@ public class TabEventView extends AbstractBpmnPropertiesTabWidget {
 	private TextBox tbInitiator;
 
 	public TabEventView(String tabName,
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+			BpmnElementPropertiesView delegate) {
 		super(tabName, delegate);
 		Log.info(TabEventView.class, "constructor");
 	}

@@ -16,10 +16,10 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnModele
 import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.BpmnElementPropertiesView;
 
 public abstract class AbstractBpmnPropertiesTabController<T> {
-	private BpmnElementPropertiesView.ActionDelegate actionDelegate;
+	private BpmnElementPropertiesView actionDelegate;
 
 	public AbstractBpmnPropertiesTabController(
-			BpmnElementPropertiesView.ActionDelegate actionDelegate) {
+			BpmnElementPropertiesView actionDelegate) {
 		this.actionDelegate = actionDelegate;
 	}
 

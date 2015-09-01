@@ -26,7 +26,7 @@ public class TabExtensionsView extends AbstractBpmnPropertiesTabWidget {
 	private TableExtensionsWidget ctExtensions;
 
 	public TabExtensionsView(String tabName,
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+			BpmnElementPropertiesView delegate) {
 		super(tabName, delegate);
 		Log.info(TabExtensionsView.class, "constructor");
 	}

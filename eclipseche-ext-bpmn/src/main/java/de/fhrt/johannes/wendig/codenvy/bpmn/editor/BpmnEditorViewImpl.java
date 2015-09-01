@@ -109,7 +109,8 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 
 		// bpmnElementPropertiesEditorPresenter.bpmnElementSelected(
 		// bpmnDiagramWidget.getBpmnIoModelerJso(), null);
-		bpmnElementPropertiesEditorPresenter.noBpmnElementSelected();
+//		bpmnElementPropertiesEditorPresenter.noBpmnElementSelected();
+		bpmnElementPropertiesEditorPresenter.getView().clearView();
 
 	}
 
@@ -380,7 +381,11 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	 */
 	@Override
 	public void bpmnElementSelected(BpmnModelerJso modelerJso, BpmnElementJso elementJso) {
-		bpmnElementPropertiesEditorPresenter.bpmnElementSelected(
-				modelerJso, elementJso);
+//		bpmnElementPropertiesEditorPresenter.bpmnElementSelected(
+//				modelerJso, elementJso);
+		
+		bpmnElementPropertiesEditorPresenter.getView().loadWidgetForSelectedBpmnElement(modelerJso, elementJso);
 	}
+	
+	
 }

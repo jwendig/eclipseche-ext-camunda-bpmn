@@ -39,8 +39,7 @@ public class TableTaskListenerWidget extends
 	private Column<TaskListenerJso, String> tcExecutionListenerBtnEdit;
 	private Button btnAddExecutionListener;
 
-	public TableTaskListenerWidget(
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+	public TableTaskListenerWidget(BpmnElementPropertiesView delegate) {
 		super(delegate);
 		tcExecutionListenersClass = new TextColumn<TaskListenerJso>() {
 

@@ -34,8 +34,7 @@ public class TableDataStoresWidget extends
 	private Column<DataStoreJso, String> tcBtnRemove;
 	private Button btnAdd;
 
-	public TableDataStoresWidget(
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+	public TableDataStoresWidget(BpmnElementPropertiesView delegate) {
 		super(delegate);
 		tcId = new Column<DataStoreJso, String>(new EditTextCell()) {
 

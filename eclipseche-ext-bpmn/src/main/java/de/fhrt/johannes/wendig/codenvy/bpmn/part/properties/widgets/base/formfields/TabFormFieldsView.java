@@ -28,8 +28,7 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.AbstractBpmn
 public class TabFormFieldsView extends AbstractBpmnPropertiesTabWidget {
 	private TableFormFieldsWidget tableFormFields;
 
-	public TabFormFieldsView(String tabName,
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+	public TabFormFieldsView(String tabName, BpmnElementPropertiesView delegate) {
 		super(tabName, delegate);
 		Log.info(TabFormFieldsView.class, "constructor");
 	}

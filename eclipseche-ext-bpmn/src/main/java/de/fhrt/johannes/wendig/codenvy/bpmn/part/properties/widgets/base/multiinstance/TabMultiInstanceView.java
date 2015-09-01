@@ -26,7 +26,7 @@ public class TabMultiInstanceView extends AbstractBpmnPropertiesTabWidget {
 	private CheckBox cbMultiInstance;
 
 	public TabMultiInstanceView(String tabName,
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+			BpmnElementPropertiesView delegate) {
 		super(tabName, delegate);
 		Log.info(TabMultiInstanceView.class, "constructor");
 	}
@@ -61,6 +61,5 @@ public class TabMultiInstanceView extends AbstractBpmnPropertiesTabWidget {
 	public CheckBox getCbMultiInstance() {
 		return cbMultiInstance;
 	}
-
 
 }

@@ -29,8 +29,7 @@ public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	private TabExtensionsController<StartEventJso> tabExtensionsController;
 	private TabFormFieldsController tabFormFieldsController;
 
-	public StartEventPropertiesWidget(
-			BpmnElementPropertiesView.ActionDelegate delegate) {
+	public StartEventPropertiesWidget(BpmnElementPropertiesView delegate) {
 		super(LB_ELEMENT_NAME_PREFIX, delegate);
 
 		tabGeneralController = new TabGeneralController(delegate);

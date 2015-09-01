@@ -32,7 +32,7 @@ public class TableErrorsWidget extends AbstractBpmnDataTableWidget<ErrorJso> {
 	private Column<ErrorJso, String> tcBtnRemove;
 	private Button btnAdd;
 
-	public TableErrorsWidget(BpmnElementPropertiesView.ActionDelegate delegate) {
+	public TableErrorsWidget(BpmnElementPropertiesView delegate) {
 		super(delegate);
 		tcName = new Column<ErrorJso, String>(new EditTextCell()) {
 
