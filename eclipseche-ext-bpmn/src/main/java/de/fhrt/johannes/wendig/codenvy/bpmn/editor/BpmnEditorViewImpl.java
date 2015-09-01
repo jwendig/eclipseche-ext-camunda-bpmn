@@ -43,8 +43,6 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	private WorkspaceAgent workspaceAgent;
 	private final DialogFactory dialogFactory;
 
-	private ActionDelegate actionDelegate;
-
 	private BpmnElementPropertiesPresenter bpmnElementPropertiesEditorPresenter;
 
 	private String currentSvgContent;
@@ -55,8 +53,6 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	private String svgFileName;
 
 	private static int viewCounter = 0;
-
-	// private CamundaTypeHolder camundaTypeHolder;
 
 	@Inject
 	public BpmnEditorViewImpl(WorkspaceAgent workspaceAgent,
@@ -114,8 +110,6 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 		// bpmnDiagramWidget.getBpmnIoModelerJso(), null);
 		bpmnElementPropertiesEditorPresenter.noBpmnElementSelected();
 
-		// TODO: find a solution ....
-		// parseProjectForCamundaElements();
 	}
 
 	@Override
@@ -240,41 +234,6 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 		svgFileParentPath = input.getFile().getPath()
 				.replace(input.getFile().getName(), "");
 	}
-
-	// public void parseProjectForCamundaElements() {
-	// Log.info(BpmnEditorViewImpl.class, "parseProjectForCamundaElements");
-	// CamundaTypeHolder camundaTypeHolder = ProjectParser
-	// .parseProjectForCamundaElements(input.getFile().getProject());
-	//
-	// Log.info(BpmnEditorViewImpl.class,
-	// "parseProjectForCamundaElements: Found ("
-	// + CamundaJavaDelegateType.class.getSimpleName() + ")");
-	// for (CamundaJavaDelegateType cjdt : camundaTypeHolder
-	// .getJavaDelegateClasses()) {
-	// Log.info(BpmnEditorViewImpl.class,
-	// "parseProjectForCamundaElements: Found ("
-	// + CamundaJavaDelegateType.class.getSimpleName()
-	// + "): FileName=" + cjdt.getFilename());
-	// Log.info(BpmnEditorViewImpl.class,
-	// "parseProjectForCamundaElements: Found ("
-	// + CamundaJavaDelegateType.class.getSimpleName()
-	// + "): Path=" + cjdt.getPath());
-	// }
-	//
-	// Log.info(BpmnEditorViewImpl.class,
-	// "parseProjectForCamundaElements: Found ("
-	// + CamundaFormKeyType.class.getSimpleName() + ")");
-	// for (CamundaFormKeyType cjdt : camundaTypeHolder.getFormKeyFiles()) {
-	// Log.info(BpmnEditorViewImpl.class,
-	// "parseProjectForCamundaElements: Found ("
-	// + CamundaFormKeyType.class.getSimpleName()
-	// + "): FileName=" + cjdt.getFilename());
-	// Log.info(BpmnEditorViewImpl.class,
-	// "parseProjectForCamundaElements: Found ("
-	// + CamundaFormKeyType.class.getSimpleName()
-	// + "): Path=" + cjdt.getPath());
-	// }
-	// }
 
 	private void updateXmlFile() {
 		Log.info(BpmnEditorViewImpl.class, "updateXmlFile");
@@ -422,14 +381,5 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	public void bpmnElementSelected(BpmnElementJso elementJso) {
 		bpmnElementPropertiesEditorPresenter.bpmnElementSelected(
 				bpmnDiagramWidget.getBpmnIoModelerJso(), elementJso);
-	}
-
-	/*
-	 * Getter & Setter
-	 */
-
-	@Override
-	public void setActionDelegate(ActionDelegate actionDelegate) {
-		this.actionDelegate = actionDelegate;
 	}
 }
