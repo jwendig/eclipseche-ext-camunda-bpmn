@@ -31,17 +31,17 @@ public class UserTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 
 	// TODO: TabInputOutput
 
-	public UserTaskPropertiesWidget(BpmnElementPropertiesView delegate) {
-		super(LB_ELEMENT_NAME_PREFIX, delegate);
+	public UserTaskPropertiesWidget(BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(LB_ELEMENT_NAME_PREFIX, jsoAccess);
 
-		tabGeneralController = new TabGeneralController(delegate);
+		tabGeneralController = new TabGeneralController(jsoAccess);
 		tabMultiInstanceController = new TabMulitInstanceController<UserTaskJso>(
-				delegate);
+				jsoAccess);
 		tabListenerController = new TabListenerController<UserTaskJso>(
-				delegate, true);
-		tabFormFieldsController = new TabFormFieldsController(delegate);
+				jsoAccess, true);
+		tabFormFieldsController = new TabFormFieldsController(jsoAccess);
 		tabExtensionsController = new TabExtensionsController<UserTaskJso>(
-				delegate);
+				jsoAccess);
 
 		getTabLpContent().add(tabGeneralController.getView(),
 				tabGeneralController.getView().getTabName());

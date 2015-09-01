@@ -22,11 +22,11 @@ public class TabListenerController<T> extends
 	private TabListenerView view;
 	private boolean hasTaskListener;
 
-	public TabListenerController(BpmnElementPropertiesView delegate,
+	public TabListenerController(BpmnElementPropertiesView.CurrentJsoAccess jsoAccess,
 			boolean hasTaskListener) {
-		super(delegate);
+		super(jsoAccess);
 		this.hasTaskListener = hasTaskListener;
-		this.view = new TabListenerView(TAB_NAME, delegate);
+		this.view = new TabListenerView(TAB_NAME, jsoAccess);
 
 		if (!hasTaskListener) {
 			view.getGridTabContent().removeRow(1);

@@ -29,8 +29,8 @@ public class TabListenerView extends AbstractBpmnPropertiesTabWidget {
 	private TableExecutionListenerWidget tableExecutionListener;
 	private TableTaskListenerWidget tableTastListener;
 
-	public TabListenerView(String tabName, BpmnElementPropertiesView delegate) {
-		super(tabName, delegate);
+	public TabListenerView(String tabName, BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(tabName, jsoAccess);
 		Log.info(TabListenerView.class, "constructor");
 	}
 
@@ -51,8 +51,8 @@ public class TabListenerView extends AbstractBpmnPropertiesTabWidget {
 	public void initContentElements() {
 		Log.info(TabListenerView.class, "initContentElements");
 
-		tableExecutionListener = new TableExecutionListenerWidget(getDelegate());
-		tableTastListener = new TableTaskListenerWidget(getDelegate());
+		tableExecutionListener = new TableExecutionListenerWidget(getJsoAccess());
+		tableTastListener = new TableTaskListenerWidget(getJsoAccess());
 	}
 
 	public TableExecutionListenerWidget getTableExecutionListener() {

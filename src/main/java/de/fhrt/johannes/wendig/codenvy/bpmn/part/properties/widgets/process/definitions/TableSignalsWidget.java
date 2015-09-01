@@ -33,8 +33,8 @@ public class TableSignalsWidget extends AbstractBpmnDataTableWidget<SignalJso> {
 	private Column<SignalJso, String> tcBtnRemove;
 	private Button btnAdd;
 
-	public TableSignalsWidget(BpmnElementPropertiesView delegate) {
-		super(delegate);
+	public TableSignalsWidget(BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(jsoAccess);
 		tcName = new Column<SignalJso, String>(new EditTextCell()) {
 
 			@Override
@@ -52,7 +52,7 @@ public class TableSignalsWidget extends AbstractBpmnDataTableWidget<SignalJso> {
 					final String value) {
 				object.setAttr_name(value);
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 
 		});
@@ -74,7 +74,7 @@ public class TableSignalsWidget extends AbstractBpmnDataTableWidget<SignalJso> {
 					final String value) {
 				object.setAttr_id(value);
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 
 		});
@@ -90,12 +90,12 @@ public class TableSignalsWidget extends AbstractBpmnDataTableWidget<SignalJso> {
 
 			@Override
 			public void update(int index, SignalJso object, String value) {
-				if (getDelegate().getCurrentBpmnIoModelerJso()
+				if (getJsoAccess().getCurrentBpmnIoModelerJso()
 						.removeRootElementSignal(object)) {
 					getDataProvider().getList().remove(object);
 					getDataProvider().refresh();
 					getTable().redraw();
-					getDelegate().onContentChange();
+					getJsoAccess().onContentChange();
 				} else {
 
 				}
@@ -111,14 +111,14 @@ public class TableSignalsWidget extends AbstractBpmnDataTableWidget<SignalJso> {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				SignalJso newDataObject = getDelegate()
+				SignalJso newDataObject = getJsoAccess()
 						.getCurrentBpmnIoModelerJso().addRootElementSignalJso(
-								getDelegate().getCurrentBpmnIoModelerJso()
+								getJsoAccess().getCurrentBpmnIoModelerJso()
 										.nativeGetModdle());
 				getDataProvider().getList().add(newDataObject);
 				getDataProvider().refresh();
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 		});
 
@@ -130,7 +130,7 @@ public class TableSignalsWidget extends AbstractBpmnDataTableWidget<SignalJso> {
 	public void update() {
 		getDataProvider().getList().clear();
 		getDataProvider().getList().addAll(
-				getDelegate().getCurrentBpmnIoModelerJso()
+				getJsoAccess().getCurrentBpmnIoModelerJso()
 						.getRootElementsSignals());
 	}
 }

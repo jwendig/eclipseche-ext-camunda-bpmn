@@ -26,8 +26,8 @@ public class TabExtensionsView extends AbstractBpmnPropertiesTabWidget {
 	private TableExtensionsWidget ctExtensions;
 
 	public TabExtensionsView(String tabName,
-			BpmnElementPropertiesView delegate) {
-		super(tabName, delegate);
+			BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(tabName, jsoAccess);
 		Log.info(TabExtensionsView.class, "constructor");
 	}
 
@@ -44,7 +44,7 @@ public class TabExtensionsView extends AbstractBpmnPropertiesTabWidget {
 	@Override
 	public void initContentElements() {
 		Log.info(TabExtensionsView.class, "initContentElements");
-		ctExtensions = new TableExtensionsWidget(getDelegate());
+		ctExtensions = new TableExtensionsWidget(getJsoAccess());
 		ctExtensions.setWidth("100%");
 	}
 

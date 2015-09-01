@@ -33,8 +33,8 @@ public class TableExtensionsWidget extends
 	private Button btnAdd;
 
 	public TableExtensionsWidget(
-			BpmnElementPropertiesView delegate) {
-		super(delegate);
+			BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(jsoAccess);
 		tcName = new Column<PropertyJso, String>(new EditTextCell()) {
 
 			@Override
@@ -52,7 +52,7 @@ public class TableExtensionsWidget extends
 					final String value) {
 				object.setAttr_name(value);
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 
 		});
@@ -74,7 +74,7 @@ public class TableExtensionsWidget extends
 					final String value) {
 				object.setAttr_value(value);
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 
 		});
@@ -96,7 +96,7 @@ public class TableExtensionsWidget extends
 					final String value) {
 				object.setAttr_id(value);
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 
 		});
@@ -112,12 +112,12 @@ public class TableExtensionsWidget extends
 
 			@Override
 			public void update(int index, PropertyJso object, String value) {
-				if (getDelegate().getCurrentElementJso()
+				if (getJsoAccess().getCurrentElementJso()
 						.removeCamundaExt_property(object)) {
 					getDataProvider().getList().remove(object);
 					getDataProvider().refresh();
 					getTable().redraw();
-					getDelegate().onContentChange();
+					getJsoAccess().onContentChange();
 				} else {
 
 				}
@@ -134,14 +134,14 @@ public class TableExtensionsWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
-				PropertyJso newDataObject = getDelegate()
+				PropertyJso newDataObject = getJsoAccess()
 						.getCurrentElementJso().addCamundaExt_property(
-								getDelegate().getCurrentBpmnIoModelerJso()
+								getJsoAccess().getCurrentBpmnIoModelerJso()
 										.nativeGetModdle());
 				getDataProvider().getList().add(newDataObject);
 				getDataProvider().refresh();
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 		});
 
@@ -152,7 +152,7 @@ public class TableExtensionsWidget extends
 	public void update() {
 		getDataProvider().getList().clear();
 		getDataProvider().getList().addAll(
-				getDelegate().getCurrentElementJso().getCamundaExt_property());
+				getJsoAccess().getCurrentElementJso().getCamundaExt_property());
 	}
 	
 	

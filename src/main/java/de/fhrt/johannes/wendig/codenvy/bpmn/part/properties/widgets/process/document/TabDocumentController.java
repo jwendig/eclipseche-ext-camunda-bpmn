@@ -26,9 +26,9 @@ public class TabDocumentController extends
 	private final static String TAB_NAME = "Document";
 	private TabDocumentView view;
 
-	public TabDocumentController(BpmnElementPropertiesView delegate) {
-		super(delegate);
-		this.view = new TabDocumentView(TAB_NAME, delegate);
+	public TabDocumentController(BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(jsoAccess);
+		this.view = new TabDocumentView(TAB_NAME, jsoAccess);
 
 		view.getTbTargetNamespace().addKeyUpHandler(new KeyUpHandler() {
 

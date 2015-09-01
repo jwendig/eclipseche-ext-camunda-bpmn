@@ -21,9 +21,9 @@ public class TabInputOutputController<T> extends
 
 	private TabInputOutputView view;
 
-	public TabInputOutputController(BpmnElementPropertiesView delegate) {
-		super(delegate);
-		this.view = new TabInputOutputView(TAB_NAME, delegate);
+	public TabInputOutputController(BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(jsoAccess);
+		this.view = new TabInputOutputView(TAB_NAME, jsoAccess);
 	}
 
 	public TabInputOutputView getView() {

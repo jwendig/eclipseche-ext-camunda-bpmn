@@ -38,8 +38,8 @@ public class TableFormFieldsWidget extends
 	private Button btnAdd;
 
 	public TableFormFieldsWidget(
-			BpmnElementPropertiesView delegate) {
-		super(delegate);
+			BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(jsoAccess);
 		tcId = new TextColumn<FormFieldJso>() {
 
 			@Override
@@ -67,12 +67,12 @@ public class TableFormFieldsWidget extends
 
 			@Override
 			public void update(int index, FormFieldJso object, String value) {
-				if (getDelegate().getCurrentElementJso()
+				if (getJsoAccess().getCurrentElementJso()
 						.removeCamundaExt_formField(object)) {
 					getDataProvider().getList().remove(object);
 					getDataProvider().refresh();
 					getTable().redraw();
-					getDelegate().onContentChange();
+					getJsoAccess().onContentChange();
 				} else {
 
 				}
@@ -108,9 +108,9 @@ public class TableFormFieldsWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
-				FormFieldJso formFieldJso = getDelegate()
+				FormFieldJso formFieldJso = getJsoAccess()
 						.getCurrentElementJso().addCamundaExt_formField(
-								getDelegate().getCurrentBpmnIoModelerJso()
+								getJsoAccess().getCurrentBpmnIoModelerJso()
 										.nativeGetModdle());
 
 				getDataProvider().getList().add(formFieldJso);
@@ -128,7 +128,7 @@ public class TableFormFieldsWidget extends
 	@Override
 	public void update() {
 		getDataProvider().getList().clear();
-		List<FormFieldJso> dataObjects = getDelegate().getCurrentElementJso()
+		List<FormFieldJso> dataObjects = getJsoAccess().getCurrentElementJso()
 				.getCamundaExt_formField();
 		getDataProvider().getList().addAll(dataObjects);
 	}

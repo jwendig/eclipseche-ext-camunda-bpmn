@@ -172,10 +172,10 @@ public class TableInputParametersEditEntryDialog extends DialogBox {
 		swScript.setWidth("100%");
 
 		tableList = new EditInputOutputParameterTableListWidget(
-				widgetCallback.getDelegate(), currentInputParameterJso);
+				widgetCallback.getJsoAccess(), currentInputParameterJso);
 
 		tableMap = new EditInputOutputParameterTableMapWidget(
-				widgetCallback.getDelegate(), currentInputParameterJso);
+				widgetCallback.getJsoAccess(), currentInputParameterJso);
 
 		gridContent = new Grid(5, 2);
 		gridContent.setWidth("100%");
@@ -201,7 +201,7 @@ public class TableInputParametersEditEntryDialog extends DialogBox {
 
 				if (lboxType.getSelectedItemText().equalsIgnoreCase("script")) {
 					ScriptJso scriptJso = currentInputParameterJso
-							.addChild_script(widgetCallback.getDelegate()
+							.addChild_script(widgetCallback.getJsoAccess()
 									.getCurrentBpmnIoModelerJso()
 									.nativeGetModdle());
 					scriptJso.setAttr_resource(swScript.getTbResource()
@@ -216,7 +216,7 @@ public class TableInputParametersEditEntryDialog extends DialogBox {
 				TableInputParametersEditEntryDialog.this.hide();
 
 				widgetCallback.getDataProvider().refresh();
-				widgetCallback.getDelegate().onContentChange();
+				widgetCallback.getJsoAccess().onContentChange();
 			}
 		});
 

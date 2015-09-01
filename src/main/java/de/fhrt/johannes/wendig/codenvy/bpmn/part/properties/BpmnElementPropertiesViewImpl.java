@@ -10,20 +10,17 @@
  *******************************************************************************/
 package de.fhrt.johannes.wendig.codenvy.bpmn.part.properties;
 
-import org.eclipse.che.api.project.server.handlers.GetItemHandler;
 import org.eclipse.che.ide.api.parts.PartStackUIResources;
 import org.eclipse.che.ide.api.parts.base.BaseView;
 import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
-import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.inject.Inject;
 
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.BpmnEditorViewImpl;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
-import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso.BpmnElementType;
+import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.AbstractBpmnPropertiesWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.noselection.NoSelectionWidget;
 import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.process.ProcessPropertiesWidget;
@@ -34,7 +31,7 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.usertask.Use
 
 public class BpmnElementPropertiesViewImpl extends
 		BaseView<BpmnElementPropertiesView.ActionDelegate> implements
-		BpmnElementPropertiesView {
+		BpmnElementPropertiesView, BpmnElementPropertiesView.CurrentJsoAccess {
 
 	private final static String TITLE = "BPMN Properties";
 
@@ -46,7 +43,6 @@ public class BpmnElementPropertiesViewImpl extends
 
 	private UnknownItemWidget unknowItemProperties;
 	private NoSelectionWidget noselectionProperties;
-
 	private ProcessPropertiesWidget processProperties;
 	private ServiceTaskPropertiesWidget serviceTaskProperties;
 	private StartEventPropertiesWidget startEventProperties;
@@ -55,15 +51,12 @@ public class BpmnElementPropertiesViewImpl extends
 	@Inject
 	public BpmnElementPropertiesViewImpl(PartStackUIResources resources) {
 		super(resources);
+		noselectionProperties = new NoSelectionWidget();
 		unknowItemProperties = new UnknownItemWidget(this);
-		noselectionProperties = new NoSelectionWidget(this);
-
 		processProperties = new ProcessPropertiesWidget(this);
 		serviceTaskProperties = new ServiceTaskPropertiesWidget(this);
 		startEventProperties = new StartEventPropertiesWidget(this);
 		userTaskProperties = new UserTaskPropertiesWidget(this);
-
-		
 
 		root = new DockLayoutPanel(Unit.PX);
 		root.setSize("100%", "100%");

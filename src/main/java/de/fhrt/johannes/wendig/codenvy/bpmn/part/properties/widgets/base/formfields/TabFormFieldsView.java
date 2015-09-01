@@ -28,8 +28,8 @@ import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.AbstractBpmn
 public class TabFormFieldsView extends AbstractBpmnPropertiesTabWidget {
 	private TableFormFieldsWidget tableFormFields;
 
-	public TabFormFieldsView(String tabName, BpmnElementPropertiesView delegate) {
-		super(tabName, delegate);
+	public TabFormFieldsView(String tabName, BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(tabName, jsoAccess);
 		Log.info(TabFormFieldsView.class, "constructor");
 	}
 
@@ -46,7 +46,7 @@ public class TabFormFieldsView extends AbstractBpmnPropertiesTabWidget {
 	public void initContentElements() {
 		Log.info(TabFormFieldsView.class, "initContentElements");
 
-		tableFormFields = new TableFormFieldsWidget(getDelegate());
+		tableFormFields = new TableFormFieldsWidget(getJsoAccess());
 	}
 
 	public TableFormFieldsWidget getTableFormFields() {

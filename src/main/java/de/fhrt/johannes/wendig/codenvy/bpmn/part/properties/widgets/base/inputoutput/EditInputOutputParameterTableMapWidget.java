@@ -38,9 +38,9 @@ public class EditInputOutputParameterTableMapWidget extends
 	private InputOutputParameterJso currentInputParameterJso;
 
 	public EditInputOutputParameterTableMapWidget(
-			BpmnElementPropertiesView delegate,
+			BpmnElementPropertiesView.CurrentJsoAccess jsoAccess,
 			InputOutputParameterJso currentInputParameterJso) {
-		super(delegate);
+		super(jsoAccess);
 		Log.info(EditInputOutputParameterTableMapWidget.class, "constructor");
 		this.currentInputParameterJso = currentInputParameterJso;
 
@@ -61,7 +61,7 @@ public class EditInputOutputParameterTableMapWidget extends
 					final String value) {
 				object.setAttr_key(value);
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 
 		});
@@ -83,7 +83,7 @@ public class EditInputOutputParameterTableMapWidget extends
 					final String value) {
 				object.setAttr_value(value);
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 
 		});
@@ -104,7 +104,7 @@ public class EditInputOutputParameterTableMapWidget extends
 					getDataProvider().getList().remove(object);
 					getDataProvider().refresh();
 					getTable().redraw();
-					getDelegate().onContentChange();
+					getJsoAccess().onContentChange();
 				} else {
 
 				}
@@ -121,13 +121,13 @@ public class EditInputOutputParameterTableMapWidget extends
 			@Override
 			public void onClick(ClickEvent event) {
 				MapEntryJso newDataObject = EditInputOutputParameterTableMapWidget.this.currentInputParameterJso
-						.addMapEntry(getDelegate().getCurrentBpmnIoModelerJso()
+						.addMapEntry(getJsoAccess().getCurrentBpmnIoModelerJso()
 								.nativeGetModdle());
 
 				getDataProvider().getList().add(newDataObject);
 				getDataProvider().refresh();
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 		});
 

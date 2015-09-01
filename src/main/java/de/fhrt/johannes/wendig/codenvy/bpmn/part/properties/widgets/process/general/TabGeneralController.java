@@ -29,9 +29,9 @@ public class TabGeneralController extends
 	private TabGeneralView view;
 
 	public TabGeneralController(
-			BpmnElementPropertiesView delegate) {
-		super(delegate);
-		view = new TabGeneralView(TAB_NAME, delegate);
+			BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(jsoAccess);
+		view = new TabGeneralView(TAB_NAME, jsoAccess);
 		view.getTbProcessId().addKeyUpHandler(new KeyUpHandler() {
 
 			@Override

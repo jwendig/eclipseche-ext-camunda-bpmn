@@ -38,9 +38,9 @@ public class EditFormFieldTablePropertiesWidget extends
 	private FormFieldJso currentFormFieldJso;
 
 	public EditFormFieldTablePropertiesWidget(
-			BpmnElementPropertiesView delegate,
+			BpmnElementPropertiesView.CurrentJsoAccess jsoAccess,
 			FormFieldJso currentFormFieldJso) {
-		super(delegate);
+		super(jsoAccess);
 		Log.info(EditFormFieldTablePropertiesWidget.class, "constructor");
 		this.currentFormFieldJso = currentFormFieldJso;
 
@@ -49,12 +49,12 @@ public class EditFormFieldTablePropertiesWidget extends
 					"constructor: currentFormFieldJso IS NULL");
 		}
 
-		if (null == delegate) {
+		if (null == jsoAccess) {
 			Log.info(EditFormFieldTablePropertiesWidget.class,
 					"constructor: delegate IS NULL");
 		}
 
-		if (null == getDelegate().getCurrentBpmnIoModelerJso()
+		if (null == getJsoAccess().getCurrentBpmnIoModelerJso()
 				.nativeGetModdle()) {
 			Log.info(EditFormFieldTablePropertiesWidget.class,
 					"constructor: moddle IS NULL");
@@ -77,7 +77,7 @@ public class EditFormFieldTablePropertiesWidget extends
 					final String value) {
 				object.setAttr_name(value);
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 
 		});
@@ -99,7 +99,7 @@ public class EditFormFieldTablePropertiesWidget extends
 					final String value) {
 				object.setAttr_value(value);
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 
 		});
@@ -121,7 +121,7 @@ public class EditFormFieldTablePropertiesWidget extends
 					final String value) {
 				object.setAttr_id(value);
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 
 		});
@@ -142,7 +142,7 @@ public class EditFormFieldTablePropertiesWidget extends
 					getDataProvider().getList().remove(object);
 					getDataProvider().refresh();
 					getTable().redraw();
-					getDelegate().onContentChange();
+					getJsoAccess().onContentChange();
 				} else {
 
 				}
@@ -160,12 +160,12 @@ public class EditFormFieldTablePropertiesWidget extends
 			@Override
 			public void onClick(ClickEvent event) {
 				PropertyJso newDataObject = EditFormFieldTablePropertiesWidget.this.currentFormFieldJso
-						.addProperty(getDelegate().getCurrentBpmnIoModelerJso()
+						.addProperty(getJsoAccess().getCurrentBpmnIoModelerJso()
 								.nativeGetModdle());
 				getDataProvider().getList().add(newDataObject);
 				getDataProvider().refresh();
 				getTable().redraw();
-				getDelegate().onContentChange();
+				getJsoAccess().onContentChange();
 			}
 		});
 

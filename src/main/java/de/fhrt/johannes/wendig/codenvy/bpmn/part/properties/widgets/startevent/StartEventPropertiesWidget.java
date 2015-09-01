@@ -29,16 +29,16 @@ public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	private TabExtensionsController<StartEventJso> tabExtensionsController;
 	private TabFormFieldsController tabFormFieldsController;
 
-	public StartEventPropertiesWidget(BpmnElementPropertiesView delegate) {
-		super(LB_ELEMENT_NAME_PREFIX, delegate);
+	public StartEventPropertiesWidget(BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(LB_ELEMENT_NAME_PREFIX, jsoAccess);
 
-		tabGeneralController = new TabGeneralController(delegate);
-		tabEventController = new TabEventController(delegate);
+		tabGeneralController = new TabGeneralController(jsoAccess);
+		tabEventController = new TabEventController(jsoAccess);
 		tabListenerController = new TabListenerController<StartEventJso>(
-				delegate, false);
-		tabFormFieldsController = new TabFormFieldsController(delegate);
+				jsoAccess, false);
+		tabFormFieldsController = new TabFormFieldsController(jsoAccess);
 		tabExtensionsController = new TabExtensionsController<StartEventJso>(
-				delegate);
+				jsoAccess);
 
 		getTabLpContent().add(tabGeneralController.getView(),
 				tabGeneralController.getView().getTabName());

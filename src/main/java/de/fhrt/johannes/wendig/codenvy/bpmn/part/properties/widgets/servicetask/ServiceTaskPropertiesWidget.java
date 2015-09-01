@@ -10,6 +10,8 @@
  *******************************************************************************/
 package de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.servicetask;
 
+import com.google.inject.Inject;
+
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.interfaces.ServiceTaskJso;
 import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.BpmnElementPropertiesView;
 import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.widgets.AbstractBpmnPropertiesWidget;
@@ -31,19 +33,19 @@ public class ServiceTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 
 	// TODO: tabFieldInjections, input/output, connector
 
-	public ServiceTaskPropertiesWidget(BpmnElementPropertiesView delegate) {
-		super(LB_ELEMENT_NAME_PREFIX, delegate);
+	public ServiceTaskPropertiesWidget(BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(LB_ELEMENT_NAME_PREFIX, jsoAccess);
 
-		tabGeneralController = new TabGeneralController(delegate);
+		tabGeneralController = new TabGeneralController(jsoAccess);
 		tabMultiInstanceController = new TabMulitInstanceController<ServiceTaskJso>(
-				delegate);
+				jsoAccess);
 		tabListenerController = new TabListenerController<ServiceTaskJso>(
-				delegate, false);
+				jsoAccess, false);
 		tabExtensionsController = new TabExtensionsController<ServiceTaskJso>(
-				delegate);
+				jsoAccess);
 
 		tabInputOutputController = new TabInputOutputController<ServiceTaskJso>(
-				delegate);
+				jsoAccess);
 
 		getTabLpContent().add(tabGeneralController.getView(),
 				tabGeneralController.getView().getTabName());

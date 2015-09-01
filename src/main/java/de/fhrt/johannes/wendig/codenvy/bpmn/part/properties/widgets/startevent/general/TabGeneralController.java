@@ -29,16 +29,13 @@ public class TabGeneralController extends
 	private TabGeneralView view;
 
 	public TabGeneralController(
-			BpmnElementPropertiesView delegate) {
-		super(delegate);
-		view = new TabGeneralView(TAB_NAME, delegate);
+			BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(jsoAccess);
+		view = new TabGeneralView(TAB_NAME, jsoAccess);
 		view.getTbId().addKeyUpHandler(new KeyUpHandler() {
 
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
-				// getActionDelegate().getCurrentElementJso().setAttr_id(
-				// view.getTbId().getText());
-				// getActionDelegate().onContentChange();
 				getCurrentBpmnElement().setAttr_id(view.getTbId().getText());
 				contentChanged();
 			}
@@ -48,9 +45,6 @@ public class TabGeneralController extends
 
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
-				// getActionDelegate().getCurrentElementJso().setAttr_name(
-				// view.getTbName().getText());
-				// getActionDelegate().onContentChange();
 				getCurrentBpmnElement()
 						.setAttr_name(view.getTbName().getText());
 				contentChanged();
@@ -61,9 +55,6 @@ public class TabGeneralController extends
 
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
-				// getActionDelegate().getCurrentElementJso().setAttr_formKey(
-				// view.getTbFormKey().getText());
-				// getActionDelegate().onContentChange();
 				getCurrentBpmnElement().setAttr_formKey(
 						view.getTbFormKey().getText());
 				contentChanged();
@@ -77,9 +68,6 @@ public class TabGeneralController extends
 					public void onValueChange(ValueChangeEvent<Boolean> event) {
 						Log.info(TabGeneralController.class,
 								"isExecuteable-changed");
-						// getActionDelegate().getCurrentElementJso()
-						// .setAttr_asyncAfter(event.getValue());
-						// getActionDelegate().onContentChange();
 						getCurrentBpmnElement().setAttr_asyncAfter(
 								event.getValue());
 						contentChanged();
@@ -94,9 +82,6 @@ public class TabGeneralController extends
 					public void onValueChange(ValueChangeEvent<Boolean> event) {
 						Log.info(TabGeneralController.class,
 								"isExecuteable-changed");
-						// getActionDelegate().getCurrentElementJso()
-						// .setAttr_asyncBefore(event.getValue());
-						// getActionDelegate().onContentChange();
 						getCurrentBpmnElement().setAttr_asyncBefore(
 								event.getValue());
 						contentChanged();
@@ -128,22 +113,6 @@ public class TabGeneralController extends
 
 	@Override
 	public void updateView() {
-		// view.getTbId().setText(
-		// getActionDelegate().getCurrentElementJso().getAttr_id());
-		//
-		// view.getTbName().setText(
-		// getActionDelegate().getCurrentElementJso().getAttr_name());
-		// view.getTbFormKey().setText(
-		// getActionDelegate().getCurrentElementJso().getAttr_formKey());
-		//
-		// view.getCbAsycAfter()
-		// .setValue(
-		// getActionDelegate().getCurrentElementJso()
-		// .getAttr_asyncAfter());
-		// view.getCbAsycBefore().setValue(
-		// getActionDelegate().getCurrentElementJso()
-		// .getAttr_asyncBefore());
-
 		view.getTbId().setText(getCurrentBpmnElement().getAttr_id());
 
 		view.getTbName().setText(getCurrentBpmnElement().getAttr_name());

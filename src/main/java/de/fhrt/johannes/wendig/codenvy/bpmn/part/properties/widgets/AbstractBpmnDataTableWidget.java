@@ -21,22 +21,22 @@ import com.google.gwt.view.client.ListDataProvider;
 import de.fhrt.johannes.wendig.codenvy.bpmn.part.properties.BpmnElementPropertiesView;
 
 public abstract class AbstractBpmnDataTableWidget<T> extends Composite {
-	private BpmnElementPropertiesView delegate;
+	private BpmnElementPropertiesView.CurrentJsoAccess jsoAccess;
 	private ListDataProvider<T> dataProvider;
 	private CellTable<T> table;
 	private VerticalPanel rootPanel;
 	private HorizontalPanel buttonPanel;
 
 	public AbstractBpmnDataTableWidget(
-			BpmnElementPropertiesView delegate) {
-		this.delegate = delegate;
+			BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		this.jsoAccess = jsoAccess;
 
 		table = new CellTable<T>();
 		table.addStyleName("bpmnPropertiesWidget-cellTable");
 		table.setWidth("100%");
 
 		buttonPanel = new HorizontalPanel();
-		
+
 		buttonPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
 
 		rootPanel = new VerticalPanel();
@@ -50,8 +50,8 @@ public abstract class AbstractBpmnDataTableWidget<T> extends Composite {
 		dataProvider.addDataDisplay(table);
 	}
 
-	public BpmnElementPropertiesView getDelegate() {
-		return delegate;
+	public BpmnElementPropertiesView.CurrentJsoAccess getJsoAccess() {
+		return jsoAccess;
 	}
 
 	public ListDataProvider<T> getDataProvider() {
@@ -69,7 +69,7 @@ public abstract class AbstractBpmnDataTableWidget<T> extends Composite {
 	public HorizontalPanel getButtonPanel() {
 		return buttonPanel;
 	}
-	
+
 	public abstract void update();
 
 }

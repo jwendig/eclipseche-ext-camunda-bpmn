@@ -26,8 +26,8 @@ public class TabMultiInstanceView extends AbstractBpmnPropertiesTabWidget {
 	private CheckBox cbMultiInstance;
 
 	public TabMultiInstanceView(String tabName,
-			BpmnElementPropertiesView delegate) {
-		super(tabName, delegate);
+			BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+		super(tabName, jsoAccess);
 		Log.info(TabMultiInstanceView.class, "constructor");
 	}
 
