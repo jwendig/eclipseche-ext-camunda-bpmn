@@ -13,7 +13,13 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'>
     <g:HTMLPanel>
-        <p>Todo...</p>
+        <p>This BPMN extension was developed as a part of a Bachelor-Thesis for the University in Reutlingen, Germany</p>
+        <p>It includes the BPMN-Framework, developed by <a href="http://bpmn.io">bpmn.io</a>, as BPMN-Editor and provides the configuration of some BPMN-Elements for the <a href="http://camunda.org">Camunda-BPM-Engine</a>.</p>
+        <p>Small function overview</p>
+        <ul>
+            <li>create or edit an BPMN-File</li>
+            <li>edit the properties of BPMN-Elements for the Camunda-BPM-Engine</li>            
+        </ul>
+        <p>If you want to run your BPMN-Application at eclipse-che, you need to wait for the runner-implementation.</p>
     </g:HTMLPanel>
-
 </ui:UiBinder>
