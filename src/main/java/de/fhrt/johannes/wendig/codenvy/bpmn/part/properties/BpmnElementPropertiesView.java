@@ -33,8 +33,6 @@ public interface BpmnElementPropertiesView extends
 		void onContentChange();
 	}
 
-	public void setTitle(String title);
-
 	public void loadWidgetForSelectedBpmnElement(BpmnModelerJso modelerJso,
 			BpmnElementJso elementJso);
 
