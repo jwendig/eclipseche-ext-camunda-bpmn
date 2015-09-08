@@ -26,17 +26,12 @@ public abstract class AbstractBpmnPropertiesWidget extends Composite {
 
 	private static final String LABEL_ELEMENT_NAME__DEFAULT_CONTENT = "No BPMN-Element selected";
 	private String lbElementName_prefixText;
+	private String lbElementText;
 
-	/*
-	 * root elements
-	 */
-	private FlowPanel flowLpRoot;
-	private Label lbElementName;
 	private TabLayoutPanel tabLpContent;
-	
-	
+
 	private BpmnElementPropertiesView.CurrentJsoAccess jsoAccess;
-	
+
 	public AbstractBpmnPropertiesWidget(String lbElementName_prefixText,
 			BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
 		super();
@@ -47,33 +42,23 @@ public abstract class AbstractBpmnPropertiesWidget extends Composite {
 
 		initPropertiesRoot();
 
-		initWidget(flowLpRoot);
+		initWidget(tabLpContent);
 
 	}
 
 	private void initPropertiesRoot() {
-		flowLpRoot = new FlowPanel();
-		flowLpRoot.setSize("100%", "100%");
-
-		lbElementName = new Label(LABEL_ELEMENT_NAME__DEFAULT_CONTENT);
-		lbElementName.setSize("100%", "auto");
-
 		tabLpContent = new TabLayoutPanel(1, Unit.EM);
 		tabLpContent.setSize("100%", "100%");
 		tabLpContent.addStyleName("bpmnPropertiesWidget-tabLayoutPanel");
-
-		flowLpRoot.add(lbElementName);
-		flowLpRoot.add(tabLpContent);
 	}
 
 	public void updatePropertiesView() {
 		Log.info(AbstractBpmnPropertiesWidget.class, "setSelectedItem");
 
+		lbElementText = lbElementName_prefixText;
 		if (null != jsoAccess.getCurrentElementJso()) {
-			setLbElementNameText(this.jsoAccess.getCurrentElementJso()
-					.getAttr_id());
-		} else {
-			setLbElementNameText("");
+			lbElementText += " : "
+					+ this.jsoAccess.getCurrentElementJso().getAttr_id();
 		}
 		updateTabs();
 	}
@@ -84,11 +69,21 @@ public abstract class AbstractBpmnPropertiesWidget extends Composite {
 	 * Getter & Setter
 	 */
 
-	public void setLbElementNameText(String elementName) {
-		lbElementName.setText(lbElementName_prefixText + ": " + elementName);
+	public void getTitleText() {
+
 	}
 
 	public TabLayoutPanel getTabLpContent() {
 		return tabLpContent;
 	}
+
+	public String getLbElementName_prefixText() {
+		return lbElementName_prefixText;
+	}
+
+	public String getLbElementText() {
+		return lbElementText;
+	}
+	
+	
 }
