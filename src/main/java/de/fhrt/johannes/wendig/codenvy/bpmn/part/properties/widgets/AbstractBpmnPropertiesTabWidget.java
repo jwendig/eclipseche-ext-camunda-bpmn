@@ -51,11 +51,9 @@ public abstract class AbstractBpmnPropertiesTabWidget extends Composite {
 	/*
 	 * abstract functions
 	 */
-	public void initContentElements() {
-	}
+	public abstract void initContentElements();
 
-	public void initContent() {
-	}
+	public abstract void initContent();
 
 	/*
 	 * getter & setter
