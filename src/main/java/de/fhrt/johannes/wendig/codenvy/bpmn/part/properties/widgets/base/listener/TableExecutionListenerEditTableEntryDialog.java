@@ -133,7 +133,7 @@ public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 		lboxEvent = new ListBox();
 		lboxEvent.setWidth("100%");
 		lboxEvent.addItem("start");
-		lboxEvent.addItem("stop");
+		lboxEvent.addItem("end");
 
 		lboxType = new ListBox();
 		lboxType.setWidth("100%");
