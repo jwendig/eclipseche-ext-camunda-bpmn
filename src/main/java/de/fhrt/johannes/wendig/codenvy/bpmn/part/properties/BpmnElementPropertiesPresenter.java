@@ -78,4 +78,6 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 	public BpmnElementPropertiesView getView() {
 		return view;
 	}
+	
+	
 }
