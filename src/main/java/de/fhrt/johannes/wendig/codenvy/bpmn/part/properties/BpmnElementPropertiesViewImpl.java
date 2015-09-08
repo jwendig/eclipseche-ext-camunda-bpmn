@@ -16,6 +16,7 @@ import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.inject.Inject;
 
 import de.fhrt.johannes.wendig.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
@@ -35,18 +36,18 @@ public class BpmnElementPropertiesViewImpl extends
 
 	private final static String TITLE = "BPMN Properties";
 
-	private DockLayoutPanel root;
+	private LayoutPanel widgetContainer;
 
 	private BpmnElementJso currentElementJso;
 	private BpmnModelerJso currentBpmnIoModelerJso;
 	private AbstractBpmnPropertiesWidget currentProperties;
 
-	private UnknownItemWidget unknowItemProperties;
 	private NoSelectionWidget noselectionProperties;
 	private ProcessPropertiesWidget processProperties;
 	private ServiceTaskPropertiesWidget serviceTaskProperties;
 	private StartEventPropertiesWidget startEventProperties;
 	private UserTaskPropertiesWidget userTaskProperties;
+	private UnknownItemWidget unknowItemProperties;
 
 	@Inject
 	public BpmnElementPropertiesViewImpl(PartStackUIResources resources) {
@@ -58,19 +59,12 @@ public class BpmnElementPropertiesViewImpl extends
 		startEventProperties = new StartEventPropertiesWidget(this);
 		userTaskProperties = new UserTaskPropertiesWidget(this);
 
-		root = new DockLayoutPanel(Unit.PX);
-		root.setSize("100%", "100%");
-		root.add(noselectionProperties);
+		widgetContainer = new LayoutPanel();
+		widgetContainer.setSize("100%", "100%");
+		widgetContainer.add(noselectionProperties);
 
 		setTitle(TITLE);
-		setContentWidget(root);
-	}
-
-	@Override
-	public void setTitle(String title) {
-		Log.info(BpmnElementPropertiesViewImpl.class,
-				"setTitle: title before = " + title);
-		super.setTitle(title);
+		setContentWidget(widgetContainer);
 	}
 
 	@Override
@@ -81,7 +75,7 @@ public class BpmnElementPropertiesViewImpl extends
 		currentElementJso = elementJso;
 		currentBpmnIoModelerJso = modelerJso;
 
-		root.clear();
+		widgetContainer.clear();
 
 		switch (BpmnElementType
 				.findByBpmnIoTypeDefinition(elementJso.getType())) {
@@ -110,16 +104,16 @@ public class BpmnElementPropertiesViewImpl extends
 			currentProperties = unknowItemProperties;
 		}
 
-		root.add(currentProperties);
+		widgetContainer.add(currentProperties);
 		currentProperties.updatePropertiesView();
-
+		setTitle(TITLE + " (" + currentProperties.getLbElementText() + ")");
 	}
 
 	@Override
 	public void clearView() {
 		Log.info(BpmnElementPropertiesViewImpl.class, "clearView");
-		root.clear();
-		root.add(noselectionProperties);
+		widgetContainer.clear();
+		widgetContainer.add(noselectionProperties);
 	}
 
 	@Override
