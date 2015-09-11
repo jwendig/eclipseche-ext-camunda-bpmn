@@ -6,18 +6,18 @@ But at the current version, the configuration for BPMN-Elements isn't implemente
 
 ## HowTo run this extension
 
-### Install eclipseChe
+#### Install eclipseChe
 
 * [installation tutorial] (https://eclipse-che.readme.io/docs/install-from-source) 
 * [eclipseChe Sources] (https://github.com/codenvy/che.git)
 
 * Extension is works with the tag-version 3.12.0 from the master branch. For now it doesn´t works with tag-versions upper 3.12.0, there are some problems at loading the bpmn.io library. 
 
-### Add this extension to a local eclipseChe installation:
+#### Add this extension to a local eclipseChe installation:
 
 Take a look at the [eclipseChe documentation] (https://eclipse-che.readme.io/docs/extension-development-workflow#author-extensions-using-the-eclipse-ide)
 
-#### Add extension dependency
+###### Add extension dependency
 *File:* assembly-sdk-war/pom.xml
     
    	<dependency>
@@ -28,11 +28,11 @@ Take a look at the [eclipseChe documentation] (https://eclipse-che.readme.io/doc
       
 run 'mvn sortpom:sort' to sort the pom after adding the dependency
 
-#### Add the gwt-module
+###### Add the gwt-module
 *File:* assembly-sdk-war/src/main/resources/org/eclipse/che/ide/IDE.gwt.xml
 	<inherits name="de.fhrt.codenvy.bpmn.BpmnExtension" />
 	    	
-#### Enable gwt-superdevmode at the gwt-module
+###### Enable gwt-superdevmode at the gwt-module
 [eclipseChe documentation to run the superdevmode] (https://eclipse-he.readme.io/docs/extension-development-workflow#setup-superdev-mode-for-eclipse)
 
 *File:* assembly-sdk-war/src/main/resources/org/eclipse/che/ide/IDE.gwt.xml
@@ -50,7 +50,7 @@ If you want to test the a application create with this extension, e.g. the Camun
 To import the project, you only have to zip your project.
 Imported into codenvy you can run the application with the following Docker-Image. 
 
-### Camunda 7.3 Wildfly Docker Image
+#### Camunda 7.3 Wildfly Docker Image
 
 For now 'quick and dirty'
 
