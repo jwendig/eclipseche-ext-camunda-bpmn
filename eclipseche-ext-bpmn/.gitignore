@@ -8,6 +8,9 @@ target/
 bin/
 test-output/
 
+# Eclipse addon Findbugs #
+.fbExcludeFilterFile
+
 # Idea #
 ##################
 *.iml
