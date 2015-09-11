@@ -95,7 +95,6 @@ For now 'quick and dirty'
 	CMD ./standalone.sh
 
 
-        
-			        
-
-			        
+## License
+ 
+Eclipse Public License 1.0.       
