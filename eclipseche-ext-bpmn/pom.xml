@@ -11,53 +11,45 @@
       Codenvy, S.A. - initial API and implementation
 
 -->
+<!-- This POM is for che version 3.12.3 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>codenvy-plugin-sdk-parent</artifactId>
-		<groupId>com.codenvy.plugin-sdk</groupId>
-		<version>1.8.0</version>
-		<relativePath>../../pom.xml</relativePath>
+		<groupId>org.eclipse.che.depmgt</groupId>
+		<artifactId>maven-depmgt-pom</artifactId>
+		<version>3.12.0</version>
 	</parent>
-	<artifactId>eclipseche-ext-bpmn</artifactId>
+	<groupId>de.fhrt</groupId>
+	<artifactId>codenvy.bpmn</artifactId>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	<name>Codenvy Tutorial :: Editor API</name>
 	<properties>
-		<chesdk.created-jar-target-folder>../../../eclipse-che/assembly-sdk/target/tomcat-ide/ext</chesdk.created-jar-target-folder>
+		<chesdk.created-jar-target-folder>../../../che/assembly-sdk/target/tomcat-ide/ext</chesdk.created-jar-target-folder>
 	</properties>
-<!-- 	<dependencyManagement> -->
-<!-- 		<dependencies> -->
-<!-- 			<dependency> -->
-<!-- 				<groupId>org.camunda.bpm</groupId> -->
-<!-- 				<artifactId>camunda-bom</artifactId> -->
-<!-- 				<version>7.2.0</version> -->
-<!-- 				<scope>compile</scope> -->
-<!-- 				<type>pom</type> -->
-<!-- 			</dependency> -->
-<!-- 		</dependencies> -->
-<!-- 	</dependencyManagement> -->
 	<dependencies>
 		<dependency>
-			<groupId>com.codenvy.ide</groupId>
-			<artifactId>codenvy-ide-api</artifactId>
-			<version>${codenvy.ide.version}</version>
+			<groupId>org.eclipse.che.core</groupId>
+			<artifactId>che-core-ide-api</artifactId>
+			<version>${che.core.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.codenvy.ide</groupId>
-			<artifactId>codenvy-ide-core</artifactId>
-			<version>${codenvy.ide.version}</version>
-		</dependency>
+            <groupId>org.eclipse.che.core</groupId>
+            <artifactId>che-core-ide-ui</artifactId>
+            <version>${che.core.version}</version>
+        </dependency>		
 		<dependency>
-			<groupId>com.codenvy.ide</groupId>
-			<artifactId>codenvy-ide-jseditor</artifactId>
-			<version>${codenvy.ide.version}</version>
-		</dependency>
-		<dependency>
-            <groupId>com.codenvy.plugin-java</groupId>
-            <artifactId>codenvy-ext-ant</artifactId>
-            <version>${codenvy.plugin-java.version}</version>
+            <groupId>org.eclipse.che.core</groupId>
+            <artifactId>che-core-ide-app</artifactId>
+            <version>${che.core.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse.che.core</groupId>
+            <artifactId>che-core-ide-jseditor</artifactId>
+            <version>${che.core.version}</version>
+        </dependency>
+		
 		<dependency>
 			<groupId>com.google.gwt.inject</groupId>
 			<artifactId>gin</artifactId>
@@ -74,16 +66,6 @@
 			<artifactId>gwtquery</artifactId>
 			<version>1.4.2</version>
 		</dependency>
-		
-
-		<!-- Camunda Begin -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.camunda.bpm</groupId> -->
-<!-- 			<artifactId>camunda-engine</artifactId> -->
-<!-- 			<version>7.2.0</version> -->
-<!-- 			<scope>compile</scope> -->
-<!-- 		</dependency> -->
-		<!-- Camunda End -->
 	</dependencies>
 	<repositories>
 		<repository>
@@ -103,28 +85,7 @@
 				<directory>src/main/resources</directory>
 			</resource>
 		</resources>
-		<plugins>
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<executions>
-					<!-- Create the distribution zip and attach it to maven -->
-					<execution>
-						<id>${project.artifactId}</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-						<configuration>
-							<appendAssemblyId>false</appendAssemblyId>
-							<updateOnly>false</updateOnly>
-							<descriptors>
-								<descriptor>${project.basedir}/src/main/assembly/tutorial-archive.xml</descriptor>
-							</descriptors>
-							<finalName>${project.artifactId}-${project.version}</finalName>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+		<plugins>			
 			<plugin>
 				<groupId>com.google.code.sortpom</groupId>
 				<artifactId>maven-sortpom-plugin</artifactId>
@@ -153,29 +114,30 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-					<executions>
-					    <execution>
-					        <id>copy-resources</id>
-					        <phase>install</phase>
-					        <goals>
-					            <goal>copy-resources</goal>
-					        </goals>
-					        <configuration>
-					            <outputDirectory>${chesdk.created-jar-target-folder}</outputDirectory>
-					            <overwrite>true</overwrite>
-					            <resources>
-					                <resource>
-					                    <directory>${project.basedir}/target</directory>
-					                    <includes>
-					                        <include>${project.artifactId}-${project.version}.jar</include>
-					                    </includes>
-					                </resource>
-					            </resources>
-					        </configuration>
-					    </execution>
-					</executions>
-				</plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.10</version>
+				<executions>
+					<execution>
+						<id>copy-installed</id>
+						<phase>install</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<skip>true</skip>
+							<artifactItems>
+								<artifactItem>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>${project.artifactId}</artifactId>
+									<version>${project.version}</version>
+									<type>${project.packaging}</type>
+								</artifactItem>
+							</artifactItems>
+							<outputDirectory>${chesdk.created-jar-target-folder}</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>
