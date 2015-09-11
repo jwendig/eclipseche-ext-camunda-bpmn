@@ -18,26 +18,24 @@ But at the current version, the configuration for BPMN-Elements isn't implemente
 Take a look at the [eclipseChe documentation] (https://eclipse-che.readme.io/docs/extension-development-workflow#author-extensions-using-the-eclipse-ide)
 
 #### how to do this with this extension
-* **Add extension dependency**
-    * assembly-sdk-war/pom.xml
-    * 
-    	<dependency>
-			<groupId>de.fhrt</groupId>
-		    <artifactId>codenvy.bpmn</artifactId>
-		    <version>1.0.0</version>
-		</dependency>
+##### Add extension dependency
+**File** assembly-sdk-war/pom.xml
+    
+   	<dependency>
+		<groupId>de.fhrt</groupId>
+	    <artifactId>codenvy.bpmn</artifactId>
+	    <version>1.0.0</version>
+	</dependency>
       
-    * run 'mvn sortpom:sort' to sort the pom after adding the dependency
-* **Add the gwt-module**
-	* src/main/resources/org/eclipse/che/ide/IDE.gwt.xml
-    * '<inherits name="de.fhrt.codenvy.bpmn.BpmnExtension" />'    	
-* **Enable gwt-superdevmode at the gwt-module**
-	* [eclipseChe documentation to run the superdevmode] (https://eclipse-che.readme.io/docs/extension-development-workflow#setup-superdev-mode-for-eclipse)
-	* src/main/resources/org/eclipse/che/ide/IDE.gwt.xml
-    * 
-    	<add-linker name="xsiframe"/>
-		<set-configuration-property name="devModeRedirectEnabled" value="true"/>
-      
+run 'mvn sortpom:sort' to sort the pom after adding the dependency
+##### Add the gwt-module
+**File** src/main/resources/org/eclipse/che/ide/IDE.gwt.xml
+	<inherits name="de.fhrt.codenvy.bpmn.BpmnExtension" />    	
+##### Enable gwt-superdevmode at the gwt-module
+[eclipseChe documentation to run the superdevmode] (https://eclipse-che.readme.io/docs/extension-development-workflow#setup-superdev-mode-for-eclipse)
+**File** src/main/resources/org/eclipse/che/ide/IDE.gwt.xml
+    <add-linker name="xsiframe"/>
+	<set-configuration-property name="devModeRedirectEnabled" value="true"/>      
 
 ## Sub-Projects
 
