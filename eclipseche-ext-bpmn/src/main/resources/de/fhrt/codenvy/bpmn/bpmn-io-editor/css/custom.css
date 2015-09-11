@@ -1,4 +1,4 @@
-@external .djs-context-pad, .open, .entry, .djs-popup;
+@external .djs-*, .open, .entry;
 
 .djs-context-pad.open {
 	color: #000;
@@ -13,4 +13,8 @@
 	left: auto !important;
 	right: 15px !important;
 	bottom: auto !important;
+}
+
+.djs-popup-body {
+	color: #000;
 }
