@@ -18,7 +18,7 @@ But at the current version, the configuration for BPMN-Elements isn't implemente
 Take a look at the [eclipseChe documentation] (https://eclipse-che.readme.io/docs/extension-development-workflow#author-extensions-using-the-eclipse-ide)
 
 #### Add extension dependency
-*File* assembly-sdk-war/pom.xml
+*File:* assembly-sdk-war/pom.xml
     
    	<dependency>
 		<groupId>de.fhrt</groupId>
@@ -29,12 +29,13 @@ Take a look at the [eclipseChe documentation] (https://eclipse-che.readme.io/doc
 run 'mvn sortpom:sort' to sort the pom after adding the dependency
 
 #### Add the gwt-module
-*File* assembly-sdk-war/src/main/resources/org/eclipse/che/ide/IDE.gwt.xml
+*File:* assembly-sdk-war/src/main/resources/org/eclipse/che/ide/IDE.gwt.xml
 	<inherits name="de.fhrt.codenvy.bpmn.BpmnExtension" />
 	    	
 #### Enable gwt-superdevmode at the gwt-module
-[eclipseChe documentation to run the superdevmode] (https://eclipse-che.readme.io/docs/extension-development-workflow#setup-superdev-mode-for-eclipse)
-*File* assembly-sdk-war/src/main/resources/org/eclipse/che/ide/IDE.gwt.xml
+[eclipseChe documentation to run the superdevmode] (https://eclipse-he.readme.io/docs/extension-development-workflow#setup-superdev-mode-for-eclipse)
+
+*File:* assembly-sdk-war/src/main/resources/org/eclipse/che/ide/IDE.gwt.xml
     
     <add-linker name="xsiframe"/>
 	<set-configuration-property name="devModeRedirectEnabled" value="true"/>      
@@ -46,7 +47,7 @@ A custom bpmn.io-Project, which extends the bpmn.io meta-model with camunda-spec
 ## Test your custom Camunda-BPM-Application
 
 If you want to test the a application create with this extension, e.g. the Camunda-Get-Started application [loan approval] (http://docs.camunda.org/get-started/), you have to import the created project into eclipseChe hosted at [codenvy.com] (https://codenvy.com/).
-To import the project there, you only have to zip your project.
+To import the project, you only have to zip your project.
 Imported into codenvy you can run the application with the following Docker-Image. 
 
 ### Camunda 7.3 Wildfly Docker Image
