@@ -1,9 +1,8 @@
 # Camunda-BPMN extension for [eclipseChe] (http://www.eclipse.org/che/)
 
-The extension includes the [bpmn.io] (http://bpmn.io) BPMN-Editor and a view to configure the BPMN-Elements into eclipseChe.
-It allows you to create a BPMN-Process and configure it for the [Camunda-BPM-Engine] (http://camunda.org).
-But at the current version, the configuration for BPMN-Elements isn't implemented for all BPMN-Element-Types. 
-
+Extension for eclipse-che to design and configure BPMN 2.0 diagrams for the Camunda BPMN Suite.
+It allows you to create a BPMN-Process with the [bpmn.io] (http://bpmn.io) BPMN-Editor  and configure it for the [Camunda-BPM-Engine] (http://camunda.org).
+But at the current version, the configuration for BPMN-Elements isn't implemented for all BPMN-Element-Types.
 
 ## HowTo run this extension
 
@@ -12,8 +11,7 @@ But at the current version, the configuration for BPMN-Elements isn't implemente
 * [installation tutorial] (https://eclipse-che.readme.io/docs/install-from-source) 
 * [eclipseChe Sources] (https://github.com/codenvy/che.git)
 
-* Extension is works with the tag-version 3.12.0 from the master branch
-* For now it doesn´t works with tag-versions upper 3.12.0, there are some problems at loading the bpmn.io library. 
+* Extension is works with the tag-version 3.12.0 from the master branch. For now it doesn´t works with tag-versions upper 3.12.0, there are some problems at loading the bpmn.io library. 
 
 ### Add this extension to a local eclipseChe installation:
 
@@ -22,13 +20,13 @@ Take a look at the [eclipseChe documentation] (https://eclipse-che.readme.io/doc
 #### how to do this with this extension
 * **Add extension dependency**
     * assembly-sdk-war/pom.xml
-    * '''
+    * 
     	<dependency>
 			<groupId>de.fhrt</groupId>
 		    <artifactId>codenvy.bpmn</artifactId>
 		    <version>1.0.0</version>
 		</dependency>
-      '''
+      
     * run 'mvn sortpom:sort' to sort the pom after adding the dependency
 * **Add the gwt-module**
 	* src/main/resources/org/eclipse/che/ide/IDE.gwt.xml
@@ -36,10 +34,10 @@ Take a look at the [eclipseChe documentation] (https://eclipse-che.readme.io/doc
 * **Enable gwt-superdevmode at the gwt-module**
 	* [eclipseChe documentation to run the superdevmode] (https://eclipse-che.readme.io/docs/extension-development-workflow#setup-superdev-mode-for-eclipse)
 	* src/main/resources/org/eclipse/che/ide/IDE.gwt.xml
-    * '''
+    * 
     	<add-linker name="xsiframe"/>
 		<set-configuration-property name="devModeRedirectEnabled" value="true"/>
-      '''
+      
 
 ## Sub-Projects
 
@@ -55,47 +53,46 @@ Imported into codenvy you can run the application with the following Docker-Imag
 
 For now 'quick and dirty'
 
-'''
-# Base Docker-Image
-# ===
-FROM codenvy/jdk7
+	# Base Docker-Image
+	# ===
+	FROM codenvy/jdk7
+	
+	# Verzeichnis für Camunda-Installation erstellen
+	# Camunda-Wildfly-Dist herunterladen und entpacken
+	# ===
+	RUN mkdir /home/user/camunda && \
+	wget \
+	-qO- \
+	"http://camunda.org/release/camunda-bpm/wildfly/7.3/camunda-bpm-wildfly-7.3.0.tar.gz" | tar -zx -C /home/user/camunda/
+	
+	# Wildfly-Config anpassen
+	# ===
+	RUN cd /home/user/camunda/server/wildfly-8.2.0.Final/standalone/configuration/ && \
+	sed -i 's/enable-welcome-root="true"/enable-welcome-root="false"/g' standalone.xml && \
+	sed -i 's/127.0.0.1/0.0.0.0/g' standalone.xml && \
+	sed -i 's/<deployment-scanner/<deployment-scanner auto-deploy-exploded="true"/g' standalone.xml
+	
+	# Wildfly-Port bei Codenvy registrieren 
+	# ===
+	
+	# DEFAULT MODE
+	# ---
+	EXPOSE 8080
+	ENV CODENVY_APP_PORT_8080_HTTP 8080
+	
+	# DEBUG MODE
+	# ---
+	# EXPOSE 8000
+	# ENV CODENVY_APP_PORT_8000_DEBUG 8000
+	# ENV JAVA_OPTS "-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n"
+	
+	# Anwendung auf Server Kopieren
+	ADD $build$ /home/user/camunda/server/wildfly-8.2.0.Final/standalone/deployments/
+	
+	# Server starten
+	WORKDIR /home/user/camunda/server/wildfly-8.2.0.Final/bin/
+	CMD ./standalone.sh
 
-# Verzeichnis für Camunda-Installation erstellen
-# Camunda-Wildfly-Dist herunterladen und entpacken
-# ===
-RUN mkdir /home/user/camunda && \
-wget \
--qO- \
-"http://camunda.org/release/camunda-bpm/wildfly/7.3/camunda-bpm-wildfly-7.3.0.tar.gz" | tar -zx -C /home/user/camunda/
-
-# Wildfly-Config anpassen
-# ===
-RUN cd /home/user/camunda/server/wildfly-8.2.0.Final/standalone/configuration/ && \
-sed -i 's/enable-welcome-root="true"/enable-welcome-root="false"/g' standalone.xml && \
-sed -i 's/127.0.0.1/0.0.0.0/g' standalone.xml && \
-sed -i 's/<deployment-scanner/<deployment-scanner auto-deploy-exploded="true"/g' standalone.xml
-
-# Wildfly-Port bei Codenvy registrieren 
-# ===
-
-# DEFAULT MODE
-# ---
-EXPOSE 8080
-ENV CODENVY_APP_PORT_8080_HTTP 8080
-
-# DEBUG MODE
-# ---
-# EXPOSE 8000
-# ENV CODENVY_APP_PORT_8000_DEBUG 8000
-# ENV JAVA_OPTS "-Xdebug -Xnoagent -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n"
-
-# Anwendung auf Server Kopieren
-ADD $build$ /home/user/camunda/server/wildfly-8.2.0.Final/standalone/deployments/
-
-# Server starten
-WORKDIR /home/user/camunda/server/wildfly-8.2.0.Final/bin/
-CMD ./standalone.sh
-'''
 
         
 			        
