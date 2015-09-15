@@ -51,14 +51,6 @@ public class BpmnModelerJso extends JavaScriptObject {
 																
 																renderer.on('element.click', function(event) {
 																	var element = event.element;
-																	var moddle = renderer.get('moddle');
-																
-																	// do not allow on root element
-																	if (!element.parent) {
-																	callback.@de.fhrt.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackContainerSelected(Lde/fhrt/codenvy/bpmn/editor/widget/diagram/jso/BpmnElementJso;)(element.businessObject);
-																	return;
-																	}
-																
 																	callback.@de.fhrt.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackElementSelected(Lde/fhrt/codenvy/bpmn/editor/widget/diagram/jso/BpmnElementJso;)(element.businessObject);
 																});
 																																														
