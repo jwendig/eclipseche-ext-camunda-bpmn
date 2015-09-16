@@ -136,8 +136,14 @@ public class BpmnEditorDiagramWidget extends Composite {
 		bpmnEditorView.bpmnElementSelected(bpmnIoModelerJso, elem);
 	};
 
+	public void openDiagram(String xml){
+		cmWidget.setValue(xml);
+		bpmnIoModelerJso.nativeOpenDiagram(xml);
+	}
+	
 	public BpmnModelerJso getBpmnIoModelerJso() {
 		return bpmnIoModelerJso;
 	};
+	
 
 }
