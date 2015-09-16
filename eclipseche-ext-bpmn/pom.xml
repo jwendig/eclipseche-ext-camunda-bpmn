@@ -66,6 +66,11 @@
 			<artifactId>gwtquery</artifactId>
 			<version>1.4.2</version>
 		</dependency>
+		<dependency>
+		  	<groupId>edu.stanford.protege</groupId>
+		  	<artifactId>codemirror-gwt</artifactId>
+		  	<version>2.0.0</version>
+		</dependency>
 	</dependencies>
 	<repositories>
 		<repository>

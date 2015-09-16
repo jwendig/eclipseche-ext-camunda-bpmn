@@ -15,5 +15,6 @@
     <inherits name="org.eclipse.che.ide.Api"/>
     <inherits name="com.google.gwt.inject.Inject"/>
     <inherits name='com.google.gwt.query.Query'/>
+    <inherits name="edu.stanford.bmir.gwtcodemirror.CodeMirror"/>
     <source path=""/>
 </module>

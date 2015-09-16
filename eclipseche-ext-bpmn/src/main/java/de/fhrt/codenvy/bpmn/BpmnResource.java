@@ -36,21 +36,28 @@ public interface BpmnResource extends ClientBundle {
 	@Source("img/bpmn-ico-circle.png")
 	ImageResource bpmnIconXlFile();
 
-	@Source("bpmn-io-editor/index.js")
+	@Source("bpmn-io-editor/bpmn-io/index.js")
 	TextResource bpmnIoIndexJsFile();
 
-	@Source("bpmn-io-editor/css/diagram-js.css")
+	@Source("bpmn-io-editor/bpmn-io/css/diagram-js.css")
 	CssResource getBpmnDiagramJsCss();
 
-	@Source("bpmn-io-editor/css/custom.css")
+	@Source("bpmn-io-editor/bpmn-io/css/custom.css")
 	CssResource getBpmnDiagramJsCustomCss();
 
-	@Source("bpmn-io-editor/css/app.css")
+	@Source("bpmn-io-editor/bpmn-io/css/app.css")
 	CssResource getBpmnAppCss();
 
-	@Source("bpmn-io-editor/vendor/bpmn-font/css/bpmn-embedded.css")
+	@Source("bpmn-io-editor/bpmn-io/vendor/bpmn-font/css/bpmn-embedded.css")
 	CssResource getBpmnFontCss();
 
+	@Source("bpmn-io-editor/codemirror/mode/xml/xml.js")
+	TextResource codemirrorModeXml();
+	
+	@Source("bpmn-io-editor/gwt-custom.css")
+	CssResource getBpmnEditorCustomCss();
+	
 	@Source("bpmn-io-properties/css/gwt-custom.css")
 	CssResource getBpmnPropertiesTabCss();
+	
 }

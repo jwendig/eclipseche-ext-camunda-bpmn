@@ -13,13 +13,16 @@ package de.fhrt.codenvy.bpmn.editor.widget.diagram;
 import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.core.client.ScriptInjector;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.TabLayoutPanel;
 
 import de.fhrt.codenvy.bpmn.BpmnResource;
 import de.fhrt.codenvy.bpmn.editor.BpmnEditorView;
 import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
 import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
+import edu.stanford.bmir.gwtcodemirror.client.GWTCodeMirror;
 
 public class BpmnEditorDiagramWidget extends Composite {
 
@@ -38,6 +41,9 @@ public class BpmnEditorDiagramWidget extends Composite {
 	/*
 	 * Layout
 	 */
+
+	// TODO: find a solution for using the eclipseche codemirror editor
+	private GWTCodeMirror cmWidget;
 	private HTMLPanel diagramHtmlPanel;
 
 	public BpmnEditorDiagramWidget(BpmnEditorView bpmnEditorView,
@@ -50,20 +56,38 @@ public class BpmnEditorDiagramWidget extends Composite {
 		diagramHtmlWrapperId = "bpmnIoCanvas_" + viewNumber++;
 
 		loadCss();
-		
+
+		initDiagramSourceWidget();
 		initDiagramHtmlPanel();
 
-		initWidget(diagramHtmlPanel);
-		
-		setStyleName("gwt-bpmnDigramWidget");
+		TabLayoutPanel root = new TabLayoutPanel(0, Unit.PX);
+		root.setSize("100%", "100%");
+		root.add(diagramHtmlPanel, "Design");
+		root.add(cmWidget, "Source");
+		root.addStyleName("bpmnDigramWidget-tabLayoutPanel");
+
+		initWidget(root);
+
+		diagramHtmlPanel.addStyleName("gwt-bpmnDigramWidget");
+		cmWidget.addStyleName("gwt-bpmnSourceWidget");
+	}
+
+	private void initDiagramSourceWidget() {
+		// TODO: use the xml mode from eclipseche codemirror extension
+		ScriptInjector.fromString(bpmnResource.codemirrorModeXml().getText())
+				.setWindow(ScriptInjector.TOP_WINDOW).inject();
+
+		cmWidget = new GWTCodeMirror("xml", "codenvy");
+		cmWidget.setEnabled(false);
 	}
 
 	private void loadCss() {
 		bpmnResource.getBpmnDiagramJsCss().ensureInjected();
 		bpmnResource.getBpmnAppCss().ensureInjected();
 		bpmnResource.getBpmnFontCss().ensureInjected();
-		bpmnResource.getBpmnPropertiesTabCss().ensureInjected();
 		bpmnResource.getBpmnDiagramJsCustomCss().ensureInjected();
+		bpmnResource.getBpmnEditorCustomCss().ensureInjected();
+		bpmnResource.getBpmnPropertiesTabCss().ensureInjected();
 	}
 
 	private void initDiagramHtmlPanel() {
@@ -71,8 +95,8 @@ public class BpmnEditorDiagramWidget extends Composite {
 				"<div class=\"canvas bpmnDigramWidget-diagramHtmlPanel-wrapper\" id=\""
 						+ diagramHtmlWrapperId + "\"></div>");
 		diagramHtmlPanel.setSize("100%", "100%");
-		diagramHtmlPanel.addStyleName("bpmnDigramWidget-diagramHtmlPanel");	
-		
+		diagramHtmlPanel.addStyleName("bpmnDigramWidget-diagramHtmlPanel");
+
 	}
 
 	@Override
@@ -87,16 +111,13 @@ public class BpmnEditorDiagramWidget extends Composite {
 				diagramHtmlWrapperId, this);
 	}
 
-	/*
-	 * Javascript Callbacks
-	 */
-
 	public void jsCallbackSaveDiagram(String xml) {
 		Log.info(BpmnEditorDiagramWidget.class, "jsCallbackSaveDiagram");
 		Log.info(BpmnEditorDiagramWidget.class, "jsCallbackSaveDiagram: xml = "
 				+ xml);
 		bpmnEditorView.setCurrentXmlContent(xml);
 		bpmnEditorView.setContentIsDirty();
+		cmWidget.setValue(xml);
 	};
 
 	public void jsCallbackSaveSVG(String svg) {
@@ -118,6 +139,5 @@ public class BpmnEditorDiagramWidget extends Composite {
 	public BpmnModelerJso getBpmnIoModelerJso() {
 		return bpmnIoModelerJso;
 	};
-	
-	
+
 }

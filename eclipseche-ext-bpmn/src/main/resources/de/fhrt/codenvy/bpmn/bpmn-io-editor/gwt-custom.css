@@ -1,0 +1,40 @@
+@external .gwt-*, .CodeMirror, .CodeMirror-wrap, .bpmnDigramWidget-*;
+
+.bpmnDigramWidget-tabLayoutPanel.gwt-TabLayoutPanel>div {
+	position: static !important;
+}
+
+.bpmnDigramWidget-tabLayoutPanel .gwt-TabLayoutPanelContent {
+	padding: 0px;
+}
+
+.bpmnDigramWidget-tabLayoutPanel .gwt-TabLayoutPanelTabs
+	{
+	bottom: 0px !important;
+	top: auto !important;
+	padding-bottom: 5px;
+}
+
+.bpmnDigramWidget-tabLayoutPanel .gwt-TabLayoutPanelTab
+	{
+	padding: 2px 3px !important;
+}
+
+
+.bpmnDigramWidget-tabLayoutPanel .gwt-TabLayoutPanelContentContainer
+	{
+	bottom: 25px !important;
+	top: 0 !important;
+	padding: 2px;
+	border-width: 0px 0px 2px 0px;
+}
+.bpmnDigramWidget-tabLayoutPanel .gwt-TabLayoutPanelContent {
+	border: 0px;
+}
+
+
+
+.bpmnDigramWidget-tabLayoutPanel .CodeMirror.CodeMirror-wrap {
+	width: 100%;
+	height: 100%;
+}
