@@ -10,11 +10,8 @@
  *******************************************************************************/
 package de.fhrt.codenvy.bpmn.editor.widget.diagram;
 
-import java.awt.event.ComponentEvent;
-
 import org.eclipse.che.ide.util.loging.Log;
 
-import com.google.common.util.concurrent.Service.Listener;
 import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.logical.shared.SelectionEvent;
@@ -47,15 +44,8 @@ public class BpmnEditorDiagramWidget extends Composite {
 	 * Layout
 	 */
 
-	// TODO: find a solution for using the eclipseche codemirror editor
 	private BpmnEditorSourceWidget cmWidget;
 	private HTMLPanel diagramHtmlPanel;
-
-	public final native void test() /*-{
-									$wnd.$('.CodeMirror').each(function(i, el){
-									el.CodeMirror.refresh();
-									});
-									}-*/;
 
 	public BpmnEditorDiagramWidget(BpmnEditorView bpmnEditorView,
 			BpmnResource bpmnResource, int viewNumber) {
@@ -101,7 +91,6 @@ public class BpmnEditorDiagramWidget extends Composite {
 	}
 
 	private void initDiagramSourceWidget() {
-		// TODO: use the xml mode from eclipseche codemirror extension
 		ScriptInjector.fromString(bpmnResource.codemirrorModeXml().getText())
 				.setWindow(ScriptInjector.TOP_WINDOW).inject();
 
