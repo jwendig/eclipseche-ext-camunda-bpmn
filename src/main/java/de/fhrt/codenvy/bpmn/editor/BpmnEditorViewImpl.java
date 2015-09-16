@@ -196,8 +196,7 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 						Log.info(BpmnEditorViewImpl.class,
 								"initializeEditor:getFileContent:onSuccess: diagramWidget ready");
 
-						bpmnDiagramWidget.getBpmnIoModelerJso()
-								.nativeOpenDiagram(result);
+						bpmnDiagramWidget.openDiagram(result);
 					}
 
 					@Override
