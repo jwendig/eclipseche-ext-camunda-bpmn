@@ -1,10 +1,10 @@
-@external gwt-TabLayoutPanel,.bpmnPropertiesWidget-tabLayoutPanel,.bpmnPropertiesWidget-cellTable;
+@external gwt-*, .bpmnPropertiesWidget-tabLayoutPanel, .bpmnPropertiesWidget-cellTable;
 
-.gwt-TabLayoutPanel.bpmnPropertiesWidget-tabLayoutPanel>div {
+.bpmnPropertiesWidget-tabLayoutPanel.gwt-TabLayoutPanel>div {
 	position: static !important;
 }
 
-.gwt-TabLayoutPanel.bpmnPropertiesWidget-tabLayoutPanel {
+.bpmnPropertiesWidget-tabLayoutPanel.gwt-TabLayoutPanel {
 	margin-left: 0px;
 	height: 100%;
 }
@@ -13,29 +13,29 @@
 	font-size: 11px;
 }
 
-@external gwt-TabLayoutPanelTabs ; .bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelTabs
+.bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelTabs
 	{
 	top: 0 !important;
 	width: 140px !important;
 }
 
-@external gwt-TabLayoutPanelTab ; .bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelTab
+.bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelTab
 	{
 	display: block !important;
 	margin-top: 2px;
 	padding: 2px 3px !important;
 }
 
-@external gwt-TabLayoutPanelContentContainer ;
-	.bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelContentContainer
+
+.bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelContentContainer
 	{
 	left: 140px !important;
 	top: 0 !important;
 	padding: 2px;
 }
 
-@external gwt-TabLayoutPanelContent ;
-	.bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelContent {
+
+.bpmnPropertiesWidget-tabLayoutPanel .gwt-TabLayoutPanelContent {
 	padding: 0px;
 }
 
