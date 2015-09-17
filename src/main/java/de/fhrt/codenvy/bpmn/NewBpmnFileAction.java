@@ -34,7 +34,7 @@ public class NewBpmnFileAction extends AbstractNewResourceAction {
 
 	@Inject
 	public NewBpmnFileAction(BpmnResource resource) {
-		super("BPMN file", "Creates new BPMN file", null);
+		super("BPMN file", "Creates new BPMN file", resource.bpmnIconSvgFile());
 		Log.info(NewBpmnFileAction.class, "constructor");
 		this.resource = resource;
 	}
