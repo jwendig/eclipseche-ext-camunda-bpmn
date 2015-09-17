@@ -10,40 +10,27 @@
  *******************************************************************************/
 package de.fhrt.codenvy.bpmn.part.properties.widgets;
 
-import javax.inject.Inject;
-
-import org.eclipse.che.ide.util.loging.Log;
-
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 
 import de.fhrt.codenvy.bpmn.part.properties.BpmnElementPropertiesView;
 
 public abstract class AbstractBpmnPropertiesWidget extends Composite {
 
-	private static final String LABEL_ELEMENT_NAME__DEFAULT_CONTENT = "No BPMN-Element selected";
 	private String lbElementName_prefixText;
 	private String lbElementText;
-
 	private TabLayoutPanel tabLpContent;
-
 	private BpmnElementPropertiesView.CurrentJsoAccess jsoAccess;
 
 	public AbstractBpmnPropertiesWidget(String lbElementName_prefixText,
 			BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
 		super();
-		Log.info(AbstractBpmnPropertiesWidget.class, "constructor");
-
 		this.jsoAccess = jsoAccess;
 		this.lbElementName_prefixText = lbElementName_prefixText;
 
 		initPropertiesRoot();
-
 		initWidget(tabLpContent);
-
 	}
 
 	private void initPropertiesRoot() {
@@ -53,8 +40,6 @@ public abstract class AbstractBpmnPropertiesWidget extends Composite {
 	}
 
 	public void updatePropertiesView() {
-		Log.info(AbstractBpmnPropertiesWidget.class, "setSelectedItem");
-
 		lbElementText = lbElementName_prefixText;
 		if (null != jsoAccess.getCurrentElementJso()) {
 			lbElementText += " : "
@@ -64,14 +49,6 @@ public abstract class AbstractBpmnPropertiesWidget extends Composite {
 	}
 
 	public abstract void updateTabs();
-
-	/*
-	 * Getter & Setter
-	 */
-
-	public void getTitleText() {
-
-	}
 
 	public TabLayoutPanel getTabLpContent() {
 		return tabLpContent;
@@ -84,6 +61,4 @@ public abstract class AbstractBpmnPropertiesWidget extends Composite {
 	public String getLbElementText() {
 		return lbElementText;
 	}
-	
-	
 }
