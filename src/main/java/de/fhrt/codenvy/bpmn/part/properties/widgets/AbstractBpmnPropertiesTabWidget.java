@@ -11,8 +11,6 @@
 
 package de.fhrt.codenvy.bpmn.part.properties.widgets;
 
-import org.eclipse.che.ide.util.loging.Log;
-
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.ScrollPanel;
