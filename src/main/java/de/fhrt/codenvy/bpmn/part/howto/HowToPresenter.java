@@ -39,7 +39,7 @@ public class HowToPresenter extends AbstractPartPresenter implements HowToView.A
     @Nonnull
     @Override
     public String getTitle() {
-        return "Editor API";
+        return "Codenvy BPMN";
     }
 
     /** {@inheritDoc} */
