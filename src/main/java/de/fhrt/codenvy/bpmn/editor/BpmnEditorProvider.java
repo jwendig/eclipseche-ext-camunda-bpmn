@@ -17,14 +17,12 @@ import org.eclipse.che.ide.api.notification.NotificationManager;
 import org.eclipse.che.ide.api.parts.WorkspaceAgent;
 import org.eclipse.che.ide.jseditor.client.defaulteditor.DefaultEditorProvider;
 import org.eclipse.che.ide.ui.dialogs.DialogFactory;
-import org.vectomatic.dom.svg.ui.SVGResource;
 
-import com.google.gwt.resources.client.ImageResource;
 import com.google.inject.Inject;
 
 import de.fhrt.codenvy.bpmn.BpmnExtension;
 import de.fhrt.codenvy.bpmn.BpmnResource;
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.BpmnPropertiesPresenter;
 import de.fhrt.codenvy.bpmn.part.properties.BpmnElementPropertiesPresenter;
 
 /**
@@ -42,14 +40,14 @@ public class BpmnEditorProvider implements EditorProvider {
 
 	private BpmnResource bpmnResource;
 	private BpmnEditorViewImpl bpmnEditorView;
-	private BpmnElementPropertiesPresenter bpmnElementPropertiesEditorPresenter;
+	private BpmnPropertiesPresenter bpmnPropertiesEditorPresenter;
 
 	@Inject
 	public BpmnEditorProvider(
 			final DefaultEditorProvider defaultEditorProvider,
 			final NotificationManager notificationManager,
 			BpmnResource bpmnResource,
-			BpmnElementPropertiesPresenter bpmnElementPropertiesEditorPresenter,
+			BpmnPropertiesPresenter bpmnPropertiesEditorPresenter,
 			WorkspaceAgent workspaceAgent,
 			ProjectServiceClient projectServiceClient,
 			DialogFactory dialogFactory) {
@@ -61,7 +59,7 @@ public class BpmnEditorProvider implements EditorProvider {
 		this.dialogFactory = dialogFactory;
 		this.workspaceAgent = workspaceAgent;
 
-		this.bpmnElementPropertiesEditorPresenter = bpmnElementPropertiesEditorPresenter;
+		this.bpmnPropertiesEditorPresenter = bpmnPropertiesEditorPresenter;
 		this.bpmnResource = bpmnResource;
 	}
 
@@ -80,7 +78,7 @@ public class BpmnEditorProvider implements EditorProvider {
 	public EditorPartPresenter getEditor() {
 		bpmnEditorView = new BpmnEditorViewImpl(workspaceAgent,
 				projectServiceClient, dialogFactory,
-				bpmnElementPropertiesEditorPresenter, bpmnResource);
+				bpmnPropertiesEditorPresenter, bpmnResource);
 		return bpmnEditorView;
 
 	}

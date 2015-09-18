@@ -36,7 +36,7 @@ import de.fhrt.codenvy.bpmn.BpmnResource;
 import de.fhrt.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
 import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
 import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
-import de.fhrt.codenvy.bpmn.part.properties.BpmnElementPropertiesPresenter;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.BpmnPropertiesPresenter;
 
 public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 		BpmnEditorView {
@@ -44,7 +44,7 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	private WorkspaceAgent workspaceAgent;
 	private final DialogFactory dialogFactory;
 
-	private BpmnElementPropertiesPresenter bpmnElementPropertiesEditorPresenter;
+	private BpmnPropertiesPresenter bpmnPropertiesPresenter;
 
 	private String currentSvgContent;
 	private String currentXmlContent;
@@ -59,7 +59,7 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	public BpmnEditorViewImpl(WorkspaceAgent workspaceAgent,
 			ProjectServiceClient projectServiceClient,
 			DialogFactory dialogFactory,
-			BpmnElementPropertiesPresenter bpmnElementPropertiesPresenter,
+			BpmnPropertiesPresenter bpmnPropertiesPresenter,
 			BpmnResource bpmnResource) {
 
 		viewCounter++;
@@ -68,7 +68,7 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 		this.projectServiceClient = projectServiceClient;
 		this.dialogFactory = dialogFactory;
 
-		this.bpmnElementPropertiesEditorPresenter = bpmnElementPropertiesPresenter;
+		this.bpmnPropertiesPresenter = bpmnPropertiesPresenter;
 
 		bpmnDiagramWidget = new BpmnEditorDiagramWidget(this, bpmnResource,
 				viewCounter);
@@ -109,8 +109,8 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 
 		// bpmnElementPropertiesEditorPresenter.bpmnElementSelected(
 		// bpmnDiagramWidget.getBpmnIoModelerJso(), null);
-//		bpmnElementPropertiesEditorPresenter.noBpmnElementSelected();
-		bpmnElementPropertiesEditorPresenter.getView().clearView();
+		// bpmnElementPropertiesEditorPresenter.noBpmnElementSelected();
+		bpmnPropertiesPresenter.getView().clearView();
 
 	}
 
@@ -151,7 +151,7 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 			callback.onSuccess(null);
 		}
 		if (viewCounter == 0) {
-			workspaceAgent.removePart(bpmnElementPropertiesEditorPresenter);
+			workspaceAgent.removePart(bpmnPropertiesPresenter);
 		}
 	}
 
@@ -210,7 +210,7 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 
 		initSvgFileVariables();
 
-		workspaceAgent.openPart(bpmnElementPropertiesEditorPresenter,
+		workspaceAgent.openPart(bpmnPropertiesPresenter,
 				PartStackType.INFORMATION);
 	}
 
@@ -379,12 +379,13 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	 * .bpmnelements.BpmnDiagramElementJso)
 	 */
 	@Override
-	public void bpmnElementSelected(BpmnModelerJso modelerJso, BpmnElementJso elementJso) {
-//		bpmnElementPropertiesEditorPresenter.bpmnElementSelected(
-//				modelerJso, elementJso);
-		
-		bpmnElementPropertiesEditorPresenter.getView().loadWidgetForSelectedBpmnElement(modelerJso, elementJso);
+	public void bpmnElementSelected(BpmnModelerJso modelerJso,
+			BpmnElementJso elementJso) {
+		// bpmnElementPropertiesEditorPresenter.bpmnElementSelected(
+		// modelerJso, elementJso);
+
+		bpmnPropertiesPresenter.getView().loadWidgetForSelectedBpmnElement(
+				modelerJso, elementJso);
 	}
-	
-	
+
 }
