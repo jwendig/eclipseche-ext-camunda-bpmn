@@ -8,7 +8,7 @@
  * Contributors:
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
-package de.fhrt.codenvy.bpmn.part.properties.widgets;
+package de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets;
 
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Composite;
@@ -22,10 +22,10 @@ public abstract class AbstractBpmnPropertiesWidget extends Composite {
 	private String lbElementName_prefixText;
 	private String lbElementText;
 	private TabLayoutPanel tabLpContent;
-	private BpmnElementPropertiesView.CurrentJsoAccess jsoAccess;
+	private BpmnPropertiesView.CurrentJsoAccess jsoAccess;
 
 	public AbstractBpmnPropertiesWidget(String lbElementName_prefixText,
-			BpmnElementPropertiesView.CurrentJsoAccess jsoAccess) {
+			BpmnPropertiesView.CurrentJsoAccess jsoAccess) {
 		super();
 		this.jsoAccess = jsoAccess;
 		this.lbElementName_prefixText = lbElementName_prefixText;
