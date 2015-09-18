@@ -72,15 +72,15 @@ public class TableDataObjectsWidget extends
 
 			@Override
 			public void update(int index, DataObjectJso object, String value) {
-				if (getJsoAccess().getCurrentElementJso().removeBpmnElement(
-						(BpmnElementPropertyJso) object)) {
-					getDataProvider().getList().remove(object);
-					getDataProvider().refresh();
-					getTable().redraw();
-					getJsoAccess().onContentChange();
-				} else {
-
-				}
+//				if (getJsoAccess().getCurrentElementJso().removeBpmnElement(
+//						(BpmnElementPropertyJso) object)) {
+//					getDataProvider().getList().remove(object);
+//					getDataProvider().refresh();
+//					getTable().redraw();
+//					getJsoAccess().onContentChange();
+//				} else {
+//
+//				}
 			}
 		});
 
@@ -92,14 +92,14 @@ public class TableDataObjectsWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
-				BpmnElementPropertyJso newDataObject = getJsoAccess()
-						.getCurrentElementJso().addBpmnDataObject(
-								getJsoAccess().getCurrentBpmnIoModelerJso()
-										.nativeGetModdle());
-				getDataProvider().getList().add(newDataObject);
-				getDataProvider().refresh();
-				getTable().redraw();
-				getJsoAccess().onContentChange();
+//				BpmnElementPropertyJso newDataObject = getJsoAccess()
+//						.getCurrentElementJso().addBpmnDataObject(
+//								getJsoAccess().getCurrentBpmnIoModelerJso()
+//										.nativeGetModdle());
+//				getDataProvider().getList().add(newDataObject);
+//				getDataProvider().refresh();
+//				getTable().redraw();
+//				getJsoAccess().onContentChange();
 			}
 		});
 
@@ -109,11 +109,11 @@ public class TableDataObjectsWidget extends
 
 	@Override
 	public void update() {
-		getDataProvider().getList().clear();
-		JsArray<BpmnElementPropertyJso> dataObjects = getJsoAccess()
-				.getCurrentElementJso().getBpmnDataObjects();
-		for (int i = 0; i < dataObjects.length(); i++) {
-			getDataProvider().getList().add(dataObjects.get(i));
-		}
+//		getDataProvider().getList().clear();
+//		JsArray<BpmnElementPropertyJso> dataObjects = getJsoAccess()
+//				.getCurrentElementJso().getBpmnDataObjects();
+//		for (int i = 0; i < dataObjects.length(); i++) {
+//			getDataProvider().getList().add(dataObjects.get(i));
+//		}
 	}
 }

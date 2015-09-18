@@ -13,11 +13,10 @@ package de.fhrt.codenvy.bpmn.part.bpmnProperties;
 import org.eclipse.che.ide.api.mvp.View;
 import org.eclipse.che.ide.api.parts.base.BaseActionDelegate;
 
-import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.inject.ImplementedBy;
 
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
 import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoElementJso;
 
 @ImplementedBy(BpmnPropertiesViewImpl.class)
 public interface BpmnPropertiesView extends
@@ -26,7 +25,7 @@ public interface BpmnPropertiesView extends
 	}
 
 	public interface CurrentJsoAccess {
-		public BpmnElementJso getCurrentElementJso();
+		public BpmnIoElementJso getCurrentElementJso();
 
 		public BpmnModelerJso getCurrentBpmnIoModelerJso();
 
@@ -34,7 +33,7 @@ public interface BpmnPropertiesView extends
 	}
 
 	public void loadWidgetForSelectedBpmnElement(BpmnModelerJso modelerJso,
-			BpmnElementJso elementJso);
+			BpmnIoElementJso elementJso);
 
 	public void clearView();
 }

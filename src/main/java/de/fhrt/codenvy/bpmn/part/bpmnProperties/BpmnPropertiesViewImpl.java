@@ -20,6 +20,7 @@ import com.google.inject.Inject;
 import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
 import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso.BpmnElementType;
 import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoElementJso;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.AbstractBpmnPropertiesWidget;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.process.ProcessPropertiesWidget;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.noselection.NoSelectionWidget;
@@ -33,7 +34,7 @@ public class BpmnPropertiesViewImpl extends
 
 	private LayoutPanel widgetContainer;
 
-	private BpmnElementJso currentElementJso;
+	private BpmnIoElementJso currentElementJso;
 	private BpmnModelerJso currentBpmnIoModelerJso;
 	private AbstractBpmnPropertiesWidget currentProperties;
 
@@ -58,7 +59,7 @@ public class BpmnPropertiesViewImpl extends
 
 	@Override
 	public void loadWidgetForSelectedBpmnElement(BpmnModelerJso modelerJso,
-			BpmnElementJso elementJso) {
+			BpmnIoElementJso elementJso) {
 		Log.info(BpmnPropertiesViewImpl.class,
 				"loadWidgetForSelectedBpmnElement");
 		currentElementJso = elementJso;
@@ -111,7 +112,7 @@ public class BpmnPropertiesViewImpl extends
 	}
 
 	@Override
-	public BpmnElementJso getCurrentElementJso() {
+	public BpmnIoElementJso getCurrentElementJso() {
 		return currentElementJso;
 	}
 
