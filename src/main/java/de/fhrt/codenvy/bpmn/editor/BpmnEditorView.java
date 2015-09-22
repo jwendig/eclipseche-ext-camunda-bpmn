@@ -11,8 +11,8 @@
 
 package de.fhrt.codenvy.bpmn.editor;
 
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoElementJso;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoModelerJso;
 
 public interface BpmnEditorView {
 
@@ -21,8 +21,8 @@ public interface BpmnEditorView {
 
 	public void setContentIsDirty();
 
-	public void bpmnElementSelected(BpmnModelerJso modelerJso,
-			BpmnElementJso elementJso);
+	public void bpmnElementSelected(BpmnIoModelerJso modelerJso,
+			BpmnIoElementJso elementJso);
 
 	public void setCurrentXmlContent(String xml);
 

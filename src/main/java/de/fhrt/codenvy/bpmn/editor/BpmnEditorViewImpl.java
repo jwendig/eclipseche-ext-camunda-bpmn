@@ -34,9 +34,9 @@ import com.google.inject.Inject;
 import de.fhrt.codenvy.bpmn.BpmnExtension;
 import de.fhrt.codenvy.bpmn.BpmnResource;
 import de.fhrt.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget;
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.BpmnPropertiesPresenter;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoElementJso;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoModelerJso;
 
 public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 		BpmnEditorView {
@@ -379,8 +379,8 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	 * .bpmnelements.BpmnDiagramElementJso)
 	 */
 	@Override
-	public void bpmnElementSelected(BpmnModelerJso modelerJso,
-			BpmnElementJso elementJso) {
+	public void bpmnElementSelected(BpmnIoModelerJso modelerJso,
+			BpmnIoElementJso elementJso) {
 		// bpmnElementPropertiesEditorPresenter.bpmnElementSelected(
 		// modelerJso, elementJso);
 

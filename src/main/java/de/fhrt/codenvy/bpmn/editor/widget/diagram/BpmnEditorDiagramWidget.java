@@ -23,8 +23,9 @@ import com.google.gwt.user.client.ui.TabLayoutPanel;
 
 import de.fhrt.codenvy.bpmn.BpmnResource;
 import de.fhrt.codenvy.bpmn.editor.BpmnEditorView;
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
 import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoElementJso;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoModelerJso;
 
 public class BpmnEditorDiagramWidget extends Composite {
 
@@ -37,7 +38,7 @@ public class BpmnEditorDiagramWidget extends Composite {
 	 */
 	private BpmnResource bpmnResource;
 	private BpmnEditorView bpmnEditorView;
-	private BpmnModelerJso bpmnIoModelerJso;
+	private BpmnIoModelerJso bpmnIoModelerJso;
 	private String diagramHtmlWrapperId;
 
 	/*
@@ -122,9 +123,9 @@ public class BpmnEditorDiagramWidget extends Composite {
 		Log.info(BpmnEditorDiagramWidget.class, "onAttach");
 
 		ScriptInjector.fromString(bpmnResource.bpmnIoIndexJsFile().getText())
-				.setWindow(ScriptInjector.TOP_WINDOW).inject();
+				.setWindow(ScriptInjector.TOP_WINDOW).setRemoveTag(false).inject();
 
-		bpmnIoModelerJso = BpmnModelerJso.nativeCreateInstance(
+		bpmnIoModelerJso = BpmnIoModelerJso.nativeCreateInstance(
 				diagramHtmlWrapperId, this);
 	}
 
@@ -143,13 +144,8 @@ public class BpmnEditorDiagramWidget extends Composite {
 		bpmnEditorView.setContentIsDirty();
 	};
 
-	public void jsCallbackElementSelected(BpmnElementJso elem) {
+	public void jsCallbackElementSelected(BpmnIoElementJso elem) {
 		Log.info(BpmnEditorDiagramWidget.class, "jsCallbackElementSelected");
-		Log.info(BpmnEditorDiagramWidget.class,
-				"jsCallbackElementSelected: type=" + elem.getType());
-		Log.info(BpmnEditorDiagramWidget.class,
-				"jsCallbackElementSelected: id=" + elem.getAttr_id());
-
 		bpmnEditorView.bpmnElementSelected(bpmnIoModelerJso, elem);
 	};
 
@@ -158,7 +154,7 @@ public class BpmnEditorDiagramWidget extends Composite {
 		bpmnIoModelerJso.nativeOpenDiagram(xml);
 	}
 
-	public BpmnModelerJso getBpmnIoModelerJso() {
+	public BpmnIoModelerJso getBpmnIoModelerJso() {
 		return bpmnIoModelerJso;
 	};
 

@@ -51,7 +51,7 @@ public class BpmnModelerJso extends JavaScriptObject {
 																
 																renderer.on('element.click', function(event) {
 																	var element = event.element;
-																	callback.@de.fhrt.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackElementSelected(Lde/fhrt/codenvy/bpmn/editor/widget/diagram/jso/BpmnElementJso;)(element.businessObject);
+																	callback.@de.fhrt.codenvy.bpmn.editor.widget.diagram.BpmnEditorDiagramWidget::jsCallbackElementSelected(Lde/fhrt/codenvy/bpmn/part/bpmnProperties/jso/BpmnIoElementJso;)(element);
 																});
 																																														
 																renderer.on('commandStack.changed', function() {
