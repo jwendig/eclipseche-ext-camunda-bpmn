@@ -17,14 +17,16 @@ import org.eclipse.che.ide.util.loging.Log;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.inject.Inject;
 
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
 import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso.BpmnElementType;
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.BpmnIoElementWrapper;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoElementJso;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoModelerJso;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.AbstractBpmnPropertiesWidget;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.NoSelectionWidget;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.UnknownItemWidget;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.process.ProcessPropertiesWidget;
-import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.noselection.NoSelectionWidget;
-import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.unknown.UnknownItemWidget;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.startevent.StartEventPropertiesWidget;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.usertask.UserTaskPropertiesWidget;
 
 public class BpmnPropertiesViewImpl extends
 		BaseView<BpmnPropertiesView.ActionDelegate> implements
@@ -34,13 +36,14 @@ public class BpmnPropertiesViewImpl extends
 
 	private LayoutPanel widgetContainer;
 
-	private BpmnIoElementJso currentElementJso;
-	private BpmnModelerJso currentBpmnIoModelerJso;
+	private BpmnIoElementWrapper currentElement;
 	private AbstractBpmnPropertiesWidget currentProperties;
 
 	private UnknownItemWidget unknowItemProperties;
 	private NoSelectionWidget noselectionProperties;
 	private ProcessPropertiesWidget processProperties;
+	private StartEventPropertiesWidget startEventProperties;
+	private UserTaskPropertiesWidget userTaskProperties;
 
 	@Inject
 	public BpmnPropertiesViewImpl(PartStackUIResources resources) {
@@ -48,6 +51,8 @@ public class BpmnPropertiesViewImpl extends
 		noselectionProperties = new NoSelectionWidget();
 		unknowItemProperties = new UnknownItemWidget(this);
 		processProperties = new ProcessPropertiesWidget(this);
+		startEventProperties = new StartEventPropertiesWidget(this);
+		userTaskProperties = new UserTaskPropertiesWidget(this);
 
 		widgetContainer = new LayoutPanel();
 		widgetContainer.setSize("100%", "100%");
@@ -58,13 +63,12 @@ public class BpmnPropertiesViewImpl extends
 	}
 
 	@Override
-	public void loadWidgetForSelectedBpmnElement(BpmnModelerJso modelerJso,
+	public void loadWidgetForSelectedBpmnElement(BpmnIoModelerJso modelerJso,
 			BpmnIoElementJso elementJso) {
 		Log.info(BpmnPropertiesViewImpl.class,
 				"loadWidgetForSelectedBpmnElement");
-		currentElementJso = elementJso;
-		currentBpmnIoModelerJso = modelerJso;
 
+		currentElement = new BpmnIoElementWrapper(elementJso, modelerJso);
 		widgetContainer.clear();
 
 		switch (BpmnElementType
@@ -81,15 +85,15 @@ public class BpmnPropertiesViewImpl extends
 		// case SERVICE_TASK:
 		// currentProperties = serviceTaskProperties;
 		// break;
-		// case START_EVENT:
-		// currentProperties = startEventProperties;
-		// break;
+		case START_EVENT:
+			currentProperties = startEventProperties;
+			break;
 		// case TASK:
 		// currentProperties = unknowItemProperties;
 		// break;
-		// case USER_TASK:
-		// currentProperties = userTaskProperties;
-		// break;
+		case USER_TASK:
+			currentProperties = userTaskProperties;
+			break;
 		default:
 			currentProperties = unknowItemProperties;
 		}
@@ -108,16 +112,12 @@ public class BpmnPropertiesViewImpl extends
 
 	@Override
 	public void onContentChange() {
-		currentBpmnIoModelerJso.nativeUpdateData();
+		currentElement.getModeler().nativeUpdateData();
 	}
 
 	@Override
-	public BpmnIoElementJso getCurrentElementJso() {
-		return currentElementJso;
+	public BpmnIoElementWrapper getCurrentElement() {
+		return currentElement;
 	}
 
-	@Override
-	public BpmnModelerJso getCurrentBpmnIoModelerJso() {
-		return currentBpmnIoModelerJso;
-	}
 }

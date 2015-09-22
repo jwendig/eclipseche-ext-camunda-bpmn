@@ -15,8 +15,9 @@ import org.eclipse.che.ide.api.parts.base.BaseActionDelegate;
 
 import com.google.inject.ImplementedBy;
 
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.BpmnIoElementWrapper;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoElementJso;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoModelerJso;
 
 @ImplementedBy(BpmnPropertiesViewImpl.class)
 public interface BpmnPropertiesView extends
@@ -25,14 +26,12 @@ public interface BpmnPropertiesView extends
 	}
 
 	public interface CurrentJsoAccess {
-		public BpmnIoElementJso getCurrentElementJso();
-
-		public BpmnModelerJso getCurrentBpmnIoModelerJso();
+		BpmnIoElementWrapper getCurrentElement();
 
 		void onContentChange();
 	}
 
-	public void loadWidgetForSelectedBpmnElement(BpmnModelerJso modelerJso,
+	public void loadWidgetForSelectedBpmnElement(BpmnIoModelerJso modelerJso,
 			BpmnIoElementJso elementJso);
 
 	public void clearView();

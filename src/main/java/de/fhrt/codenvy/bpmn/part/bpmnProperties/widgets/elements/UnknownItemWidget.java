@@ -8,7 +8,7 @@
  * Contributors:
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
-package de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.unknown;
+package de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements;
 
 import org.eclipse.che.ide.util.loging.Log;
 

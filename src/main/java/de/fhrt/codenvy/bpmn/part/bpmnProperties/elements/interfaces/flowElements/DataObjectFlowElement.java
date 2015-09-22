@@ -9,19 +9,9 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.interfaces;
+package de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.flowElements;
 
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces._BaseElement;
 
-public interface ProcessJso extends _BaseElementJso {
-	public boolean getAttr_isExecutable();
-
-	public void setAttr_isExecutable(boolean isExecutable);
-
-	public String getAttr_candidateStarterGroups();
-
-	public void setAttr_candidateStarterGroups(String candidateStarterGroups);
-
-	public String getAttr_candidateStarterUsers();
-
-	public void setAttr_candidateStarterUsers(String candidateStarterUsers);
+public interface DataObjectFlowElement extends _BaseElement {
 }

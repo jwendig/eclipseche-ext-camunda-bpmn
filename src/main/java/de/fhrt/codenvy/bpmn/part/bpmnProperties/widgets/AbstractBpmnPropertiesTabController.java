@@ -11,8 +11,11 @@
 
 package de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets;
 
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
+import org.eclipse.che.ide.util.loging.Log;
+
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.BpmnPropertiesView;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces._BaseElement;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoModelerJso;
 
 public abstract class AbstractBpmnPropertiesTabController<T> {
 	private BpmnPropertiesView.CurrentJsoAccess jsoAccess;
@@ -25,11 +28,13 @@ public abstract class AbstractBpmnPropertiesTabController<T> {
 	public abstract void updateView();
 
 	public T getCurrentBpmnElement() {
-		return (T) jsoAccess.getCurrentElementJso();
+		Log.info(AbstractBpmnPropertiesTabController.class,
+				"getCurrentBpmnElement()");
+		return (T) jsoAccess.getCurrentElement();
 	}
 
-	public BpmnModelerJso getCurrentBpmnModeler() {
-		return jsoAccess.getCurrentBpmnIoModelerJso();
+	public BpmnIoModelerJso getCurrentBpmnModeler() {
+		return jsoAccess.getCurrentElement().getModeler();
 	}
 
 	public void contentChanged() {

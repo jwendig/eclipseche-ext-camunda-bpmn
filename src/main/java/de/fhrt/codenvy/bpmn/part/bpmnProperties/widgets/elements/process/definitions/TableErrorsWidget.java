@@ -9,7 +9,7 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.process.general;
+package de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.process.definitions;
 
 import org.eclipse.che.ide.util.loging.Log;
 
@@ -21,27 +21,25 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.ui.Button;
 
+import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.interfaces.root.ErrorJso;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.BpmnPropertiesView;
-import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.flowElements.DataObjectFlowElement;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.rootElements.ErrorRootElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.AbstractBpmnDataTableWidget;
 
-public class TableDataObjectsWidget extends
-		AbstractBpmnDataTableWidget<DataObjectFlowElement> {
+public class TableErrorsWidget extends
+		AbstractBpmnDataTableWidget<ErrorRootElement> {
 
-	private Column<DataObjectFlowElement, String> tcDataObjectName;
-	private Column<DataObjectFlowElement, String> tcBtnRemove;
+	private Column<ErrorRootElement, String> tcName;
+	private Column<ErrorRootElement, String> tcErrorCode;
+	private Column<ErrorRootElement, String> tcBtnRemove;
 	private Button btnAdd;
 
-	// TODO: handle id generation
-
-	public TableDataObjectsWidget(BpmnPropertiesView.CurrentJsoAccess jsoAccess) {
+	public TableErrorsWidget(BpmnPropertiesView.CurrentJsoAccess jsoAccess) {
 		super(jsoAccess);
-		Log.info(TableDataObjectsWidget.class, "constructor()");
-		tcDataObjectName = new Column<DataObjectFlowElement, String>(
-				new EditTextCell()) {
+		tcName = new Column<ErrorRootElement, String>(new EditTextCell()) {
 
 			@Override
-			public String getValue(DataObjectFlowElement object) {
+			public String getValue(ErrorRootElement object) {
 				if (null == object.getAttr_name()) {
 					return "";
 				}
@@ -49,37 +47,59 @@ public class TableDataObjectsWidget extends
 			}
 		};
 
-		tcDataObjectName
-				.setFieldUpdater(new FieldUpdater<DataObjectFlowElement, String>() {
+		tcName.setFieldUpdater(new FieldUpdater<ErrorRootElement, String>() {
+
+			public void update(int index, final ErrorRootElement object,
+					final String value) {
+				Log.info(TableErrorsWidget.class,
+						"tcDataObjectName-fieldUpdater: update");
+				object.setAttr_name(value);
+				getTable().redraw();
+				getJsoAccess().onContentChange();
+			}
+
+		});
+
+		tcErrorCode = new Column<ErrorRootElement, String>(new EditTextCell()) {
+
+			@Override
+			public String getValue(ErrorRootElement object) {
+				if (null == object.getAttr_errorCode()) {
+					return "";
+				}
+				return object.getAttr_errorCode();
+			}
+		};
+
+		tcErrorCode
+				.setFieldUpdater(new FieldUpdater<ErrorRootElement, String>() {
 
 					public void update(int index,
-							final DataObjectFlowElement object,
-							final String value) {
-						Log.info(TableDataObjectsWidget.class,
+							final ErrorRootElement object, final String value) {
+						Log.info(TableErrorsWidget.class,
 								"tcDataObjectName-fieldUpdater: update");
-						object.setAttr_name(value);
+						object.setAttr_errorCode(value);
 						getTable().redraw();
 						getJsoAccess().onContentChange();
 					}
 
 				});
 
-		tcBtnRemove = new Column<DataObjectFlowElement, String>(
-				new ButtonCell()) {
+		tcBtnRemove = new Column<ErrorRootElement, String>(new ButtonCell()) {
 			@Override
-			public String getValue(DataObjectFlowElement object) {
+			public String getValue(ErrorRootElement object) {
 				return "x";
 			}
 		};
 
 		tcBtnRemove
-				.setFieldUpdater(new FieldUpdater<DataObjectFlowElement, String>() {
+				.setFieldUpdater(new FieldUpdater<ErrorRootElement, String>() {
 
 					@Override
-					public void update(int index, DataObjectFlowElement object,
+					public void update(int index, ErrorRootElement object,
 							String value) {
 						getJsoAccess().getCurrentElement()
-								.removeDataObjectFlowElement(object);
+								.removeRootElementError(object);
 						getDataProvider().getList().remove(object);
 						getDataProvider().refresh();
 						getTable().redraw();
@@ -87,7 +107,8 @@ public class TableDataObjectsWidget extends
 					}
 				});
 
-		getTable().addColumn(tcDataObjectName, "Name");
+		getTable().addColumn(tcName, "Name");
+		getTable().addColumn(tcErrorCode, "Error Code");
 		getTable().addColumn(tcBtnRemove, "");
 
 		btnAdd = new Button("Add");
@@ -95,8 +116,8 @@ public class TableDataObjectsWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
-				DataObjectFlowElement newDataObject = getJsoAccess()
-						.getCurrentElement().addDataObjectFlowElement();
+				ErrorRootElement newDataObject = getJsoAccess()
+						.getCurrentElement().addRootElementError();
 				getDataProvider().getList().add(newDataObject);
 				getDataProvider().refresh();
 				getTable().redraw();
@@ -111,8 +132,7 @@ public class TableDataObjectsWidget extends
 	@Override
 	public void update() {
 		getDataProvider().getList().clear();
-		getDataProvider().getList()
-				.addAll(getJsoAccess().getCurrentElement()
-						.getDataObjectsFlowElements());
+		getDataProvider().getList().addAll(
+				getJsoAccess().getCurrentElement().getRootElementsError());
 	}
 }

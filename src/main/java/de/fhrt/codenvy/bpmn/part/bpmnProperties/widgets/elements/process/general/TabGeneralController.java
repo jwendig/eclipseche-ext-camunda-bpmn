@@ -11,7 +11,6 @@
 
 package de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.process.general;
 
-
 import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.event.dom.client.KeyUpEvent;
@@ -19,17 +18,16 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.interfaces.ProcessJso;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.BpmnPropertiesView;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements.ProcessElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.AbstractBpmnPropertiesTabController;
 
 public class TabGeneralController extends
-		AbstractBpmnPropertiesTabController<ProcessJso> {
+		AbstractBpmnPropertiesTabController<ProcessElement> {
 	private final static String TAB_NAME = "General";
 	private TabGeneralView view;
 
-	public TabGeneralController(
-			BpmnPropertiesView.CurrentJsoAccess jsoAccess) {
+	public TabGeneralController(BpmnPropertiesView.CurrentJsoAccess jsoAccess) {
 		super(jsoAccess);
 		view = new TabGeneralView(TAB_NAME, jsoAccess);
 		view.getTbProcessId().addKeyUpHandler(new KeyUpHandler() {
@@ -37,9 +35,6 @@ public class TabGeneralController extends
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
 				Log.info(TabGeneralController.class, "processId-changed");
-				// getActionDelegate().getCurrentElementJso().setAttr_id(
-				// view.getTbProcessId().getText());
-				// getActionDelegate().onContentChange();
 				getCurrentBpmnElement().setAttr_id(
 						view.getTbProcessId().getText());
 				contentChanged();
@@ -51,9 +46,6 @@ public class TabGeneralController extends
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
 				Log.info(TabGeneralController.class, "name-changed");
-				// getActionDelegate().getCurrentElementJso().setAttr_name(
-				// view.getTbName().getText());
-				// getActionDelegate().onContentChange();
 				getCurrentBpmnElement()
 						.setAttr_name(view.getTbName().getText());
 				contentChanged();
@@ -67,9 +59,6 @@ public class TabGeneralController extends
 					public void onValueChange(ValueChangeEvent<Boolean> event) {
 						Log.info(TabGeneralController.class,
 								"isExecuteable-changed");
-						// getActionDelegate().getCurrentElementJso()
-						// .setAttr_isExecutable(event.getValue());
-						// getActionDelegate().onContentChange();
 						getCurrentBpmnElement().setAttr_isExecutable(
 								event.getValue());
 						contentChanged();
@@ -83,16 +72,7 @@ public class TabGeneralController extends
 
 	@Override
 	public void updateView() {
-
-		// view.getTbProcessId().setText(
-		// getActionDelegate().getCurrentElementJso().getAttr_id());
-		// view.getTbName().setText(
-		// getActionDelegate().getCurrentElementJso().getAttr_name());
-		//
-		// view.getCbIsExecutable().setValue(
-		// getActionDelegate().getCurrentElementJso()
-		// .getAttr_isExecutable());
-
+		Log.info(TabGeneralController.class, "updateView()");
 		view.getTbProcessId().setText(getCurrentBpmnElement().getAttr_id());
 		view.getTbName().setText(getCurrentBpmnElement().getAttr_name());
 

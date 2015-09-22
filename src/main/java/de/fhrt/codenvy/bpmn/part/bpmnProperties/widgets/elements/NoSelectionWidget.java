@@ -8,7 +8,7 @@
  * Contributors:
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
-package de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.noselection;
+package de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements;
 
 import java.util.Iterator;
 

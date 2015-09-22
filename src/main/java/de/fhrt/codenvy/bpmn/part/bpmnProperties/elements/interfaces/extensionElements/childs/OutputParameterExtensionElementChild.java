@@ -9,19 +9,8 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.interfaces;
+package de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs;
 
-
-public interface TaskJso extends _BaseElementJso {
-	public boolean getAttr_asyncAfter();
-
-	public void setAttr_asyncAfter(boolean asyncAfter);
-
-	public boolean getAttr_asyncBefore();
-
-	public void setAttr_asyncBefore(boolean asyncBefore);
-
-	public boolean getAttr_exclusive();
-
-	public void setAttr_exclusive(boolean exclusive);
+public interface OutputParameterExtensionElementChild extends
+		InputOutputParameterExtensionElementChild {
 }

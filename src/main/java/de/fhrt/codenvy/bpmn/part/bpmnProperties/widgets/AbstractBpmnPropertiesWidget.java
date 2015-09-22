@@ -10,12 +10,13 @@
  *******************************************************************************/
 package de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets;
 
+import org.eclipse.che.ide.util.loging.Log;
+
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.BpmnPropertiesView;
-import de.fhrt.codenvy.bpmn.part.properties.BpmnElementPropertiesView;
 
 public abstract class AbstractBpmnPropertiesWidget extends Composite {
 
@@ -41,10 +42,10 @@ public abstract class AbstractBpmnPropertiesWidget extends Composite {
 	}
 
 	public void updatePropertiesView() {
+		Log.info(AbstractBpmnPropertiesWidget.class, "updatePropertiesView()");
 		lbElementText = lbElementName_prefixText;
-		if (null != jsoAccess.getCurrentElementJso()) {
-			lbElementText += " : "
-					+ this.jsoAccess.getCurrentElementJso().getAttr_id();
+		if (null != jsoAccess.getCurrentElement()) {
+			lbElementText += " : " + jsoAccess.getCurrentElement().getAttr_id();
 		}
 		updateTabs();
 	}

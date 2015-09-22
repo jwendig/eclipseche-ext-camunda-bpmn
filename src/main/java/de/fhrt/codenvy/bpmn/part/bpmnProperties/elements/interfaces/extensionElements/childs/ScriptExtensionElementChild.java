@@ -9,19 +9,20 @@
  *   Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 
-package de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.interfaces;
+package de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs;
 
-public interface _BaseElementJso {
-	/*
-	 * attributes
-	 */
-	public String getType();
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces._BaseElement;
 
-	public String getAttr_id();
+public interface ScriptExtensionElementChild extends _BaseElement {
+	public String getAttr_scriptFormat();
 
-	public void setAttr_id(String id);
+	public void setAttr_scriptFormat(String scriptFormat);
 
-	public String getAttr_name();
+	public String getAttr_resource();
 
-	public void setAttr_name(String name);
+	public void setAttr_resource(String resource);
+
+	public String getAttr_script();
+
+	public void setAttr_script(String script);
 }

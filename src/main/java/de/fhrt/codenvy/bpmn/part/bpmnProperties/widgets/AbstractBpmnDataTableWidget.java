@@ -11,6 +11,8 @@
 
 package de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets;
 
+import org.eclipse.che.ide.util.loging.Log;
+
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -29,6 +31,7 @@ public abstract class AbstractBpmnDataTableWidget<T> extends Composite {
 
 	public AbstractBpmnDataTableWidget(
 			BpmnPropertiesView.CurrentJsoAccess jsoAccess) {
+		Log.info(AbstractBpmnDataTableWidget.class, "constructor()");
 		this.jsoAccess = jsoAccess;
 
 		table = new CellTable<T>();
