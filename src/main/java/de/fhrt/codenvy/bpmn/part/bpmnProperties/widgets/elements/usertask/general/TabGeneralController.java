@@ -124,6 +124,9 @@ public class TabGeneralController extends
 					public void onValueChange(ValueChangeEvent<Boolean> event) {
 						getCurrentBpmnElement().setAttr_asyncAfter(
 								event.getValue());
+
+						refreshDependentFields();
+
 						contentChanged();
 
 					}
@@ -136,6 +139,9 @@ public class TabGeneralController extends
 					public void onValueChange(ValueChangeEvent<Boolean> event) {
 						getCurrentBpmnElement().setAttr_asyncBefore(
 								event.getValue());
+
+						refreshDependentFields();
+
 						contentChanged();
 					}
 				});
@@ -207,14 +213,26 @@ public class TabGeneralController extends
 				getCurrentBpmnElement().getAttr_asyncBefore());
 		view.getCbExclusive().setValue(
 				getCurrentBpmnElement().getAttr_exclusive());
-		view.getTbRetryTimeCycle().setText("not implemented");
 		view.getCbForCompensation().setValue(
 				getCurrentBpmnElement().getAttr_isForCompensation());
 		view.getTbDocumentation().setText("not implemented");
 
-		view.getTbRetryTimeCycle().setEnabled(false);
-
+		refreshDependentFields();
+		
 		// TODO: implement
 		view.getTbDocumentation().setEnabled(false);
+	}
+
+	private void refreshDependentFields() {
+		if (view.getCbAsycAfter().getValue()
+				|| view.getCbAsycBefore().getValue()) {
+			view.getCbExclusive().setEnabled(true);
+			view.getTbRetryTimeCycle().setEnabled(true);
+		} else {
+			view.getCbExclusive().setEnabled(false);
+			view.getCbExclusive().setValue(true);
+			view.getTbRetryTimeCycle().setEnabled(false);
+			view.getTbRetryTimeCycle().setText("");
+		}
 	}
 }
