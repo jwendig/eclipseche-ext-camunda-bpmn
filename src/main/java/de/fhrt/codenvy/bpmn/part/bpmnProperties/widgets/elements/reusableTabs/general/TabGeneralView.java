@@ -14,6 +14,8 @@ package de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.reusableTabs.g
 import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.BpmnPropertiesView;
@@ -39,6 +41,17 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
 	private CheckBox cbForCompensation;
 	private TextBox tbDocumentation;
 
+	/*
+	 * elements for ServiceTask
+	 */
+	private RadioButton rbClass;
+	private TextBox tbClass;
+	private RadioButton rbExpression;
+	private TextBox tbExpression;
+	private RadioButton rbExpressionDelegate;
+	private TextBox tbExpressionDelegate;
+	private TextBox tbResultVariable;
+
 	public TabGeneralView(String tabName,
 			BpmnPropertiesView.CurrentJsoAccess jsoAccess) {
 		super(tabName, jsoAccess);
@@ -48,50 +61,103 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
 	@Override
 	public void initContent() {
 		Log.info(TabGeneralView.class, "initContent");
-		getGridTabContent().resize(15, 2);
+		getGridTabContent().resize(19, 2);
 
 		getGridTabContent().setText(0, 0, "Id:");
-		getGridTabContent().setText(1, 0, "Name:");
-		getGridTabContent().setText(2, 0, "Assignee:");
-		getGridTabContent().setText(3, 0, "Candidate Users:");
-		getGridTabContent().setText(4, 0, "Candidate Groups:");
-		getGridTabContent().setText(5, 0, "Form Key:");
-		getGridTabContent().setText(6, 0, "Due Date:");
-		getGridTabContent().setText(7, 0, "Follow Up Date:");
-		getGridTabContent().setText(8, 0, "Priority:");
-		getGridTabContent().setText(9, 0, "Asynchronous Before:");
-		getGridTabContent().setText(10, 0, "Asynchronous After:");
-		getGridTabContent().setText(11, 0, "Exclusive:");
-		getGridTabContent().setText(12, 0, "Retry Time Cycle:");
-		getGridTabContent().setText(13, 0, "For Compensation:");
-		getGridTabContent().setText(14, 0, "Documentation:");
-
 		getGridTabContent().setWidget(0, 1, tbId);
+
+		getGridTabContent().setText(1, 0, "Name:");
 		getGridTabContent().setWidget(1, 1, tbName);
+		/*
+		 * elements for userTask
+		 */
+		getGridTabContent().setText(2, 0, "Assignee:");
 		getGridTabContent().setWidget(2, 1, tbAssignee);
+
+		getGridTabContent().setText(3, 0, "Candidate Users:");
 		getGridTabContent().setWidget(3, 1, tbCandidateUsers);
+
+		getGridTabContent().setText(4, 0, "Candidate Groups:");
 		getGridTabContent().setWidget(4, 1, tbCandidateGroups);
+
+		getGridTabContent().setText(5, 0, "Form Key:");
 		getGridTabContent().setWidget(5, 1, tbFormKey);
+
+		getGridTabContent().setText(6, 0, "Due Date:");
 		getGridTabContent().setWidget(6, 1, tbDueDate);
+
+		getGridTabContent().setText(7, 0, "Follow Up Date:");
 		getGridTabContent().setWidget(7, 1, tbFollowUpDate);
+
+		getGridTabContent().setText(8, 0, "Priority:");
 		getGridTabContent().setWidget(8, 1, tbPriority);
-		getGridTabContent().setWidget(9, 1, cbAsycBefore);
-		getGridTabContent().setWidget(10, 1, cbAsycAfter);
-		getGridTabContent().setWidget(11, 1, cbExclusive);
-		getGridTabContent().setWidget(12, 1, tbRetryTimeCycle);
-		getGridTabContent().setWidget(13, 1, cbForCompensation);
-		getGridTabContent().setWidget(14, 1, tbDocumentation);
+
+		/*
+		 * elements for ServiceTask
+		 */
+		getGridTabContent().setText(9, 0, "Class:");
+		HorizontalPanel hPanelClass = new HorizontalPanel();
+		hPanelClass.setWidth("100%");
+		hPanelClass.add(rbClass);
+		hPanelClass.add(tbClass);
+		getGridTabContent().setWidget(9, 1, hPanelClass);
+
+		getGridTabContent().setText(10, 0, "Expression:");
+		HorizontalPanel hPanelExpression = new HorizontalPanel();
+		hPanelExpression.setWidth("100%");
+		hPanelExpression.add(rbExpression);
+		hPanelExpression.add(tbExpression);
+		getGridTabContent().setWidget(10, 1, hPanelExpression);
+
+		getGridTabContent().setText(11, 0, "Expression Delegate:");
+		HorizontalPanel hPanelExpressionDelegate = new HorizontalPanel();
+		hPanelExpressionDelegate.setWidth("100%");
+		hPanelExpressionDelegate.add(rbExpressionDelegate);
+		hPanelExpressionDelegate.add(tbExpressionDelegate);
+		getGridTabContent().setWidget(11, 1, hPanelExpressionDelegate);
+
+		getGridTabContent().setText(12, 0, "Result Variable:");
+		getGridTabContent().setWidget(12, 1, tbResultVariable);
+
+		/*
+		 * default elements
+		 */
+		getGridTabContent().setText(13, 0, "Asynchronous Before:");
+		getGridTabContent().setWidget(13, 1, cbAsycBefore);
+
+		getGridTabContent().setText(14, 0, "Asynchronous After:");
+		getGridTabContent().setWidget(14, 1, cbAsycAfter);
+
+		getGridTabContent().setText(15, 0, "Exclusive:");
+		getGridTabContent().setWidget(15, 1, cbExclusive);
+
+		getGridTabContent().setText(16, 0, "Retry Time Cycle:");
+		getGridTabContent().setWidget(16, 1, tbRetryTimeCycle);
+
+		getGridTabContent().setText(17, 0, "For Compensation:");
+		getGridTabContent().setWidget(17, 1, cbForCompensation);
+
+		getGridTabContent().setText(18, 0, "Documentation:");
+		getGridTabContent().setWidget(18, 1, tbDocumentation);
+
 	}
 
 	@Override
 	public void initContentElements() {
 		Log.info(TabGeneralView.class, "initContentElements");
+		
+		/*
+		 * default elements
+		 */
 		tbId = new TextBox();
 		tbId.setWidth("100%");
 
 		tbName = new TextBox();
 		tbName.setWidth("100%");
-
+		
+		/*
+		 * elements for UserTask
+		 */
 		tbAssignee = new TextBox();
 		tbAssignee.setWidth("100%");
 
@@ -113,6 +179,30 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
 		tbPriority = new TextBox();
 		tbPriority.setWidth("100%");
 
+		/*
+		 * elements for ServiceTask
+		 */
+		rbClass = new RadioButton("type");
+		rbClass.setWidth("30px");
+		tbClass = new TextBox();
+		tbClass.setWidth("100%");
+
+		rbExpression = new RadioButton("type");
+		rbExpression.setWidth("30px");
+		tbExpression = new TextBox();
+		tbExpression.setWidth("100%");
+
+		rbExpressionDelegate = new RadioButton("type");
+		rbExpressionDelegate.setWidth("30px");
+		tbExpressionDelegate = new TextBox();
+		tbExpressionDelegate.setWidth("100%");
+
+		tbResultVariable = new TextBox();
+		tbResultVariable.setWidth("100%");
+		
+		/*
+		 * default elements
+		 */
 		cbAsycBefore = new CheckBox();
 		cbAsycBefore.setWidth("100%");
 
@@ -191,5 +281,35 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
 	public TextBox getTbDocumentation() {
 		return tbDocumentation;
 	}
+
+	public RadioButton getRbClass() {
+		return rbClass;
+	}
+
+	public TextBox getTbClass() {
+		return tbClass;
+	}
+
+	public RadioButton getRbExpression() {
+		return rbExpression;
+	}
+
+	public TextBox getTbExpression() {
+		return tbExpression;
+	}
+
+	public RadioButton getRbExpressionDelegate() {
+		return rbExpressionDelegate;
+	}
+
+	public TextBox getTbExpressionDelegate() {
+		return tbExpressionDelegate;
+	}
+
+	public TextBox getTbResultVariable() {
+		return tbResultVariable;
+	}
+	
+	
 
 }
