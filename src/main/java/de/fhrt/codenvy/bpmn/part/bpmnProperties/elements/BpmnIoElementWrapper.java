@@ -11,10 +11,10 @@
 
 package de.fhrt.codenvy.bpmn.part.bpmnProperties.elements;
 
-import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.ExecutionListenerExtensionElement;
@@ -31,6 +31,7 @@ import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements.P
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements.StartEventElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements.TaskElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements.UserTaskElement;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.enums.BpmnIoChildElementType;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.enums.BpmnIoExtensionChildElementType;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.enums.BpmnIoExtensionElementArrayType;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.enums.BpmnIoExtensionElementType;
@@ -265,6 +266,34 @@ public class BpmnIoElementWrapper implements ProcessElement, StartEventElement,
 	public void setAttr_priority(String priority) {
 		modeling.updateProperty(element, "priority", priority);
 
+	}
+
+	@Override
+	public void setStandardLoopCharacteristics(boolean enabled) {
+		if (enabled) {
+			JavaScriptObject elem = moddle
+					.create(BpmnIoChildElementType.BPMN_STANDARD_LOOP_CHARACTERISTICS
+							.getType());
+			modeling.updateProperty(element,
+					BpmnIoChildElementType.BPMN_STANDARD_LOOP_CHARACTERISTICS
+							.getField(), elem);
+		} else {
+			modeling.updateProperty(element,
+					BpmnIoChildElementType.BPMN_STANDARD_LOOP_CHARACTERISTICS
+							.getField(), null);
+		}
+
+	}
+
+	@Override
+	public boolean getStandardLoopCharacteristics() {
+		if (element
+				.getObjectAttribute(BpmnIoChildElementType.BPMN_STANDARD_LOOP_CHARACTERISTICS
+						.getField()) == null) {
+			return false;
+		}
+
+		return true;
 	}
 
 	/*

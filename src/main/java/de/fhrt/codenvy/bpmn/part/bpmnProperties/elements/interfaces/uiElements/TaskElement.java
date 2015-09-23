@@ -28,4 +28,9 @@ public interface TaskElement extends _BaseElement {
 	public boolean getAttr_exclusive();
 
 	public void setAttr_exclusive(boolean exclusive);
+
+	public void setStandardLoopCharacteristics(boolean enabled);
+
+	public boolean getStandardLoopCharacteristics();
+
 }

@@ -11,10 +11,17 @@
 
 package de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.reusableTabs.multiinstance;
 
-import de.fhrt.codenvy.bpmn.part.bpmnProperties.BpmnPropertiesView;
-import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.AbstractBpmnPropertiesTabController;
+import org.eclipse.che.ide.util.loging.Log;
 
-public class TabMulitInstanceController<T> extends
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.BpmnPropertiesView;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements.TaskElement;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.AbstractBpmnPropertiesTabController;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.startevent.general.TabGeneralController;
+
+public class TabMulitInstanceController<T extends TaskElement> extends
 		AbstractBpmnPropertiesTabController<T> {
 	private final static String TAB_NAME = "Multi Instance";
 	private TabMultiInstanceView view;
@@ -24,6 +31,19 @@ public class TabMulitInstanceController<T> extends
 		super(jsoAccess);
 		view = new TabMultiInstanceView(TAB_NAME, jsoAccess);
 
+		view.getCbIsLoop().addValueChangeHandler(
+				new ValueChangeHandler<Boolean>() {
+
+					@Override
+					public void onValueChange(ValueChangeEvent<Boolean> event) {
+						Log.info(TabGeneralController.class,
+								"isExecuteable-changed");
+						getCurrentBpmnElement().setStandardLoopCharacteristics(
+								event.getValue());
+						contentChanged();
+					}
+				});
+
 	}
 
 	public TabMultiInstanceView getView() {
@@ -32,13 +52,12 @@ public class TabMulitInstanceController<T> extends
 
 	@Override
 	public void updateView() {
-		view.getCbIsLoop().setValue(false);
+		view.getCbIsLoop().setValue(
+				getCurrentBpmnElement().getStandardLoopCharacteristics());
 		view.getCbIsLoop()
 				.setText(
 						"Please note, the loop activity is not supported by the Camunda BPM engine.");
-		view.getCbIsLoop().setEnabled(false);
 		view.getCbMultiInstance().setValue(false);
 		view.getCbMultiInstance().setText("not implemented: TODO");
-		view.getCbMultiInstance().setEnabled(false);
 	}
 }
