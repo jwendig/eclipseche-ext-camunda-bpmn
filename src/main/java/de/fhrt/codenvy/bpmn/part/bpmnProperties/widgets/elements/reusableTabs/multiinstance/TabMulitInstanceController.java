@@ -82,8 +82,8 @@ public class TabMulitInstanceController<T extends TaskElement> extends
 		}
 
 		view.getCbIsLoop()
-				.setText(
-						"Please note, the loop activity is not supported by the Camunda BPM engine.");
+				.setHTML(
+						"Please note, the loop activity is not supported by the Camunda BPM engine. See for more information the <a href='http://docs.camunda.org/manual/7.3/api-references/bpmn20/#tasks-task-markers-loops' target='_blank' >Camunda user guide</a>.");
 
 		MultiInstanceLoopCharacteristicsChildElement multiInstanceLoopCharacteristics = getCurrentBpmnElement()
 				.getMultiInstanceLoopCharacteristicsChildElement();
@@ -93,6 +93,6 @@ public class TabMulitInstanceController<T extends TaskElement> extends
 			view.getCbMultiInstance().setValue(true);
 		}
 
-		view.getCbMultiInstance().setText("not implemented: TODO");
+		view.getCbMultiInstance().setHTML("Please refer to the <a href='http://docs.camunda.org/manual/7.3/api-references/bpmn20/#tasks-task-markers-multiple-instance' target='_blank'>Camunda documentation</a> for multi instance.");
 	}
 }
