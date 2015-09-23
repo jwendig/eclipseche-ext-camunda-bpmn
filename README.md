@@ -30,6 +30,7 @@ run 'mvn sortpom:sort' to sort the pom after adding the dependency
 
 ###### Add the gwt-module
 *File:* assembly-sdk-war/src/main/resources/org/eclipse/che/ide/IDE.gwt.xml
+
 	<inherits name="de.fhrt.codenvy.bpmn.BpmnExtension" />
 	    	
 ###### Enable gwt-superdevmode at the gwt-module
