@@ -23,11 +23,26 @@ import com.google.gwt.user.client.ui.TabLayoutPanel;
 
 import de.fhrt.codenvy.bpmn.BpmnResource;
 import de.fhrt.codenvy.bpmn.editor.BpmnEditorView;
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoElementJso;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoModelerJso;
+import edu.stanford.bmir.gwtcodemirror.client.GWTCodeMirror;
 
 public class BpmnEditorDiagramWidget extends Composite {
+
+	public class BpmnEditorSourceWidget extends GWTCodeMirror {
+
+		public BpmnEditorSourceWidget(String mode, String theme) {
+			super(mode, theme);
+		}
+
+		public native void refresh()/*-{
+											var cms = $doc.querySelectorAll('.CodeMirror');
+											for(var i = 0; i < cms.length; i++){
+											    var cm = cms[i]; // element
+												cm.CodeMirror.refresh();
+											}
+											}-*/;
+	}
 
 	public enum ElementType {
 		UNKNOWN, START_EVENT, USER_TASK, SERVICE_TASK;
@@ -123,7 +138,8 @@ public class BpmnEditorDiagramWidget extends Composite {
 		Log.info(BpmnEditorDiagramWidget.class, "onAttach");
 
 		ScriptInjector.fromString(bpmnResource.bpmnIoIndexJsFile().getText())
-				.setWindow(ScriptInjector.TOP_WINDOW).setRemoveTag(false).inject();
+				.setWindow(ScriptInjector.TOP_WINDOW).setRemoveTag(false)
+				.inject();
 
 		bpmnIoModelerJso = BpmnIoModelerJso.nativeCreateInstance(
 				diagramHtmlWrapperId, this);
