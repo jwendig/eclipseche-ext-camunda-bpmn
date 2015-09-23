@@ -107,10 +107,7 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	public void activate() {
 		Log.info(BpmnEditorViewImpl.class, "activate");
 
-		// bpmnElementPropertiesEditorPresenter.bpmnElementSelected(
-		// bpmnDiagramWidget.getBpmnIoModelerJso(), null);
-		// bpmnElementPropertiesEditorPresenter.noBpmnElementSelected();
-		bpmnPropertiesPresenter.getView().clearView();
+//		bpmnPropertiesPresenter.getView().clearView();
 
 	}
 
