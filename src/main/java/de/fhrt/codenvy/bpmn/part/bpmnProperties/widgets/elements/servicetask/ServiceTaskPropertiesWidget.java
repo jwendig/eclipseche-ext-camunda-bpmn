@@ -14,16 +14,23 @@ import de.fhrt.codenvy.bpmn.part.bpmnProperties.BpmnPropertiesView;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements.ServiceTaskElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.AbstractBpmnPropertiesWidget;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.reusableTabs.extensions.TabExtensionsController;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.reusableTabs.general.TabGeneralController;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.reusableTabs.general.TabGeneralView;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.reusableTabs.inputoutput.TabInputOutputController;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.reusableTabs.listener.TabListenerController;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.reusableTabs.multiinstance.TabMulitInstanceController;
-import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.servicetask.general.TabGeneralController;
+
+//import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.servicetask.general.TabGeneralController;
 
 public class ServiceTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 
 	private final static String LB_ELEMENT_NAME_PREFIX = "Service Task";
+	private final static Integer[] TAB_GENERAL_FIELDS = { TabGeneralView.ROW_CLASS,
+			TabGeneralView.ROW_EXPRESSION,
+			TabGeneralView.ROW_EXPRESSION_DELEGATE,
+			TabGeneralView.ROW_RESULT_VARIABLE, };
 
-	private TabGeneralController tabGeneralController;
+	private TabGeneralController<ServiceTaskElement> tabGeneralController;
 	private TabMulitInstanceController<ServiceTaskElement> tabMultiInstanceController;
 	private TabListenerController<ServiceTaskElement> tabListenerController;
 	private TabExtensionsController<ServiceTaskElement> tabExtensionsController;
@@ -35,7 +42,8 @@ public class ServiceTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 			BpmnPropertiesView.CurrentJsoAccess jsoAccess) {
 		super(LB_ELEMENT_NAME_PREFIX, jsoAccess);
 
-		tabGeneralController = new TabGeneralController(jsoAccess);
+		tabGeneralController = new TabGeneralController<ServiceTaskElement>(
+				jsoAccess, TAB_GENERAL_FIELDS);
 		tabMultiInstanceController = new TabMulitInstanceController<ServiceTaskElement>(
 				jsoAccess);
 		tabListenerController = new TabListenerController<ServiceTaskElement>(

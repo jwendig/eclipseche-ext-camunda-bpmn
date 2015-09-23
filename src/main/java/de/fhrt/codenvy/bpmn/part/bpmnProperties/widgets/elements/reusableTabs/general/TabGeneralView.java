@@ -25,8 +25,30 @@ import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.AbstractBpmnPropertiesTa
 //TODO: include servicetask elements
 
 public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
+	public final static int ROW_ASSIGNEE = 2;
+	public final static int ROW_CANDIDATE_USERS = 3;
+	public final static int ROW_CANDIDATE_GROUPS = 4;
+	public final static int ROW_FORM_KEY = 5;
+	public final static int ROW_DUE_DATE = 6;
+	public final static int ROW_FOLLOW_UP_DATE = 7;
+	public final static int ROW_PRIORITY = 8;
+	public final static int ROW_CLASS = 9;
+	public final static int ROW_EXPRESSION = 10;
+	public final static int ROW_EXPRESSION_DELEGATE = 11;
+	public final static int ROW_RESULT_VARIABLE = 12;
+
 	private TextBox tbId;
 	private TextBox tbName;
+	private CheckBox cbAsycBefore;
+	private CheckBox cbAsycAfter;
+	private CheckBox cbExclusive;
+	private TextBox tbRetryTimeCycle;
+	private CheckBox cbForCompensation;
+	private TextBox tbDocumentation;
+
+	/*
+	 * elements for UserTask
+	 */
 	private TextBox tbAssignee;
 	private TextBox tbCandidateUsers;
 	private TextBox tbCandidateGroups;
@@ -34,12 +56,6 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
 	private TextBox tbDueDate;
 	private TextBox tbFollowUpDate;
 	private TextBox tbPriority;
-	private CheckBox cbAsycBefore;
-	private CheckBox cbAsycAfter;
-	private CheckBox cbExclusive;
-	private TextBox tbRetryTimeCycle;
-	private CheckBox cbForCompensation;
-	private TextBox tbDocumentation;
 
 	/*
 	 * elements for ServiceTask
@@ -140,12 +156,16 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
 		getGridTabContent().setText(18, 0, "Documentation:");
 		getGridTabContent().setWidget(18, 1, tbDocumentation);
 
+		for (int i = 2; i <= 13; i++) {
+			getGridTabContent().getRowFormatter().setVisible(i, false);
+		}
+
 	}
 
 	@Override
 	public void initContentElements() {
 		Log.info(TabGeneralView.class, "initContentElements");
-		
+
 		/*
 		 * default elements
 		 */
@@ -154,7 +174,7 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
 
 		tbName = new TextBox();
 		tbName.setWidth("100%");
-		
+
 		/*
 		 * elements for UserTask
 		 */
@@ -199,7 +219,7 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
 
 		tbResultVariable = new TextBox();
 		tbResultVariable.setWidth("100%");
-		
+
 		/*
 		 * default elements
 		 */
@@ -309,7 +329,5 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
 	public TextBox getTbResultVariable() {
 		return tbResultVariable;
 	}
-	
-	
 
 }
