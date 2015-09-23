@@ -293,7 +293,7 @@ public class BpmnIoElementWrapper implements ProcessElement, StartEventElement,
 		BpmnIoChildElementJso childJso = element
 				.getChildElement(BpmnIoChildElementType.BPMN_STANDARD_LOOP_CHARACTERISTICS
 						.getField());
-		if (childJso.getType().equalsIgnoreCase(
+		if (null != childJso && childJso.getType().equalsIgnoreCase(
 				BpmnIoChildElementType.BPMN_STANDARD_LOOP_CHARACTERISTICS
 						.getType())) {
 			return new BpmnIoChildElementWrapper(childJso, modeler);
@@ -325,7 +325,7 @@ public class BpmnIoElementWrapper implements ProcessElement, StartEventElement,
 		BpmnIoChildElementJso childJso = element
 				.getChildElement(BpmnIoChildElementType.BPMN_MULIT_INSTANCE_LOOP_CHARACTERISTICS
 						.getField());
-		if (childJso.getType().equalsIgnoreCase(
+		if (null != childJso && childJso.getType().equalsIgnoreCase(
 				BpmnIoChildElementType.BPMN_MULIT_INSTANCE_LOOP_CHARACTERISTICS
 						.getType())) {
 			return new BpmnIoChildElementWrapper(childJso, modeler);
