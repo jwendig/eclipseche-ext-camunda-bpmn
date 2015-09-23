@@ -17,6 +17,8 @@ import java.util.List;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.childElements.MultiInstanceLoopCharacteristicsChildElement;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.childElements.StandardLoopCharacteristicsChildElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.ExecutionListenerExtensionElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.TaskListenerExtensionElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.FormFieldExtensionElementChild;
@@ -37,6 +39,7 @@ import de.fhrt.codenvy.bpmn.part.bpmnProperties.enums.BpmnIoExtensionElementArra
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.enums.BpmnIoExtensionElementType;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.enums.BpmnIoFlowElementType;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.enums.BpmnIoRootElementType;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoChildElementJso;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoElementJso;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoExtensionElementJso;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoFlowElementJso;
@@ -286,14 +289,49 @@ public class BpmnIoElementWrapper implements ProcessElement, StartEventElement,
 	}
 
 	@Override
-	public boolean getStandardLoopCharacteristics() {
-		if (element
-				.getObjectAttribute(BpmnIoChildElementType.BPMN_STANDARD_LOOP_CHARACTERISTICS
-						.getField()) == null) {
-			return false;
+	public StandardLoopCharacteristicsChildElement getStandardLoopCharacteristicsChildElement() {
+		BpmnIoChildElementJso childJso = element
+				.getChildElement(BpmnIoChildElementType.BPMN_STANDARD_LOOP_CHARACTERISTICS
+						.getField());
+		if (childJso.getType().equalsIgnoreCase(
+				BpmnIoChildElementType.BPMN_STANDARD_LOOP_CHARACTERISTICS
+						.getType())) {
+			return new BpmnIoChildElementWrapper(childJso, modeler);
 		}
 
-		return true;
+		return null;
+	}
+
+	@Override
+	public void setMultiInstanceLoopCharacteristics(boolean enabled) {
+		if (enabled) {
+			JavaScriptObject elem = moddle
+					.create(BpmnIoChildElementType.BPMN_MULIT_INSTANCE_LOOP_CHARACTERISTICS
+							.getType());
+			modeling.updateProperty(
+					element,
+					BpmnIoChildElementType.BPMN_MULIT_INSTANCE_LOOP_CHARACTERISTICS
+							.getField(), elem);
+		} else {
+			modeling.updateProperty(
+					element,
+					BpmnIoChildElementType.BPMN_MULIT_INSTANCE_LOOP_CHARACTERISTICS
+							.getField(), null);
+		}
+	}
+
+	@Override
+	public MultiInstanceLoopCharacteristicsChildElement getMultiInstanceLoopCharacteristicsChildElement() {
+		BpmnIoChildElementJso childJso = element
+				.getChildElement(BpmnIoChildElementType.BPMN_MULIT_INSTANCE_LOOP_CHARACTERISTICS
+						.getField());
+		if (childJso.getType().equalsIgnoreCase(
+				BpmnIoChildElementType.BPMN_MULIT_INSTANCE_LOOP_CHARACTERISTICS
+						.getType())) {
+			return new BpmnIoChildElementWrapper(childJso, modeler);
+		}
+
+		return null;
 	}
 
 	/*

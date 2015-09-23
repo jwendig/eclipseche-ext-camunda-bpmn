@@ -12,7 +12,8 @@ package de.fhrt.codenvy.bpmn.part.bpmnProperties.enums;
 
 public enum BpmnIoChildElementType {
 	BPMN_STANDARD_LOOP_CHARACTERISTICS("bpmn:StandardLoopCharacteristics",
-			"loopCharacteristics");
+			"loopCharacteristics"), BPMN_MULIT_INSTANCE_LOOP_CHARACTERISTICS("bpmn:MultiInstanceLoopCharacteristics",
+					"loopCharacteristics");
 
 	private final String type;
 	private final String field;

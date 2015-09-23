@@ -37,6 +37,10 @@ public class BpmnIoElementJso extends JavaScriptObject {
 																return this.businessObject[key];
 																}-*/;
 
+	public final native BpmnIoChildElementJso getChildElement(String field)/*-{
+																			return this.businessObject[field];
+																			}-*/;
+
 	public final native void addFlowElement(BpmnIoFlowElementJso flowElement)/*-{
 																				this.businessObject.flowElements = this.businessObject.flowElements	|| [];
 																				this.businessObject.flowElements.push(flowElement);
@@ -92,54 +96,56 @@ public class BpmnIoElementJso extends JavaScriptObject {
 						});
 						}-*/;
 
-	public final native void addExtensionElementToParent(String parentType, String parentField,
-			BpmnIoExtensionElementJso extensionElement, BpmnIoModdleJso moddle)/*-{
-																				var parents, parent;
-																				var that = this;
-																				this.businessObject.extensionElements = this.businessObject.extensionElements || moddle.create('bpmn:ExtensionElements');
-																				parents = this.businessObject.extensionElements.get('values').filter(function(e) {
-																					return e.$instanceOf(parentType);
-																				});
-																				
-																				if(parents.length == 0){
-																					parent = moddle.create(parentType);
-																					this.businessObject.extensionElements.get('values').push(parent);
-																				}else{
-																					parent = parents[0];
-																				}
-																				parent.get(parentField).push(extensionElement);
-																				}-*/;
+	public final native void addExtensionElementToParent(String parentType,
+			String parentField, BpmnIoExtensionElementJso extensionElement,
+			BpmnIoModdleJso moddle)/*-{
+									var parents, parent;
+									var that = this;
+									this.businessObject.extensionElements = this.businessObject.extensionElements || moddle.create('bpmn:ExtensionElements');
+									parents = this.businessObject.extensionElements.get('values').filter(function(e) {
+										return e.$instanceOf(parentType);
+									});
+									
+									if(parents.length == 0){
+										parent = moddle.create(parentType);
+										this.businessObject.extensionElements.get('values').push(parent);
+									}else{
+										parent = parents[0];
+									}
+									parent.get(parentField).push(extensionElement);
+									}-*/;
 
 	public final native void removeExtensionElementFromParent(
-			String parentType, String parentField, BpmnIoExtensionElementJso extensionElement)/*-{
-																			var parents, parent, elementIndex;
-																			var extElements = this.businessObject.extensionElements;
-																			var that = this;																		
-																			parents = this.businessObject.extensionElements.get('values').filter(function(e) {
-																				return e.$instanceOf(parentType);
-																			}); 
-																			
-																			if(parents.length > 0){
-																				parent = parents[0];
-																				elementIndex = parent.get(parentField).indexOf(extensionElement);
-																				if (elementIndex > -1) {
-																					parent.get(parentField).splice(elementIndex, 1);
-																				}
-																			}
-																			
-																			if(parent.get(parentField).length == 0){
-																				elementIndex = this.businessObject.extensionElements.values.indexOf(parent);
-																				if (elementIndex > -1) {
-																					this.businessObject.extensionElements.values.splice(elementIndex, 1);
-																				}
-																			}
-																			
-																			if(this.businessObject.extensionElements.values.length == 0){
-  																					this.businessObject.extensionElements = undefined;
-																			}
-																			
-																			}-*/;
-	
+			String parentType, String parentField,
+			BpmnIoExtensionElementJso extensionElement)/*-{
+														var parents, parent, elementIndex;
+														var extElements = this.businessObject.extensionElements;
+														var that = this;																		
+														parents = this.businessObject.extensionElements.get('values').filter(function(e) {
+														return e.$instanceOf(parentType);
+														}); 
+														
+														if(parents.length > 0){
+														parent = parents[0];
+														elementIndex = parent.get(parentField).indexOf(extensionElement);
+														if (elementIndex > -1) {
+														parent.get(parentField).splice(elementIndex, 1);
+														}
+														}
+														
+														if(parent.get(parentField).length == 0){
+														elementIndex = this.businessObject.extensionElements.values.indexOf(parent);
+														if (elementIndex > -1) {
+														this.businessObject.extensionElements.values.splice(elementIndex, 1);
+														}
+														}
+														
+														if(this.businessObject.extensionElements.values.length == 0){
+														this.businessObject.extensionElements = undefined;
+														}
+														
+														}-*/;
+
 	public final native JsArray<BpmnIoExtensionElementJso> getExtensionElementFromParent(
 			String parentType, String parentField, String elementType)/*-{
 																			var parents, parent, elementIndex;

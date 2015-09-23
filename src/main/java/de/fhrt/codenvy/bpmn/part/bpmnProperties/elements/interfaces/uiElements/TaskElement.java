@@ -12,6 +12,8 @@
 package de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements;
 
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces._BaseElement;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.childElements.MultiInstanceLoopCharacteristicsChildElement;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.childElements.StandardLoopCharacteristicsChildElement;
 
 /*
  * attribute access for all bpmn-io task elements
@@ -29,8 +31,16 @@ public interface TaskElement extends _BaseElement {
 
 	public void setAttr_exclusive(boolean exclusive);
 
+	/*
+	 * child elements
+	 */
+
 	public void setStandardLoopCharacteristics(boolean enabled);
 
-	public boolean getStandardLoopCharacteristics();
+	public StandardLoopCharacteristicsChildElement getStandardLoopCharacteristicsChildElement();
+
+	public void setMultiInstanceLoopCharacteristics(boolean enabled);
+
+	public MultiInstanceLoopCharacteristicsChildElement getMultiInstanceLoopCharacteristicsChildElement();
 
 }

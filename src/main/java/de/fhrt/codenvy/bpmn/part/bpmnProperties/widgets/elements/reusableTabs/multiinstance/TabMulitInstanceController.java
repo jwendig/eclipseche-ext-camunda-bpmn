@@ -17,6 +17,8 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.BpmnPropertiesView;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.childElements.MultiInstanceLoopCharacteristicsChildElement;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.childElements.StandardLoopCharacteristicsChildElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements.TaskElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.AbstractBpmnPropertiesTabController;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.startevent.general.TabGeneralController;
@@ -36,10 +38,29 @@ public class TabMulitInstanceController<T extends TaskElement> extends
 
 					@Override
 					public void onValueChange(ValueChangeEvent<Boolean> event) {
-						Log.info(TabGeneralController.class,
-								"isExecuteable-changed");
+						if (event.getValue()) {
+							view.getCbMultiInstance().setValue(false);
+						}
+
 						getCurrentBpmnElement().setStandardLoopCharacteristics(
 								event.getValue());
+						contentChanged();
+					}
+				});
+
+		view.getCbMultiInstance().addValueChangeHandler(
+				new ValueChangeHandler<Boolean>() {
+
+					@Override
+					public void onValueChange(ValueChangeEvent<Boolean> event) {
+						if (event.getValue()) {
+							view.getCbIsLoop().setValue(false);
+						}
+
+						getCurrentBpmnElement()
+								.setMultiInstanceLoopCharacteristics(
+										event.getValue());
+
 						contentChanged();
 					}
 				});
@@ -52,12 +73,26 @@ public class TabMulitInstanceController<T extends TaskElement> extends
 
 	@Override
 	public void updateView() {
-		view.getCbIsLoop().setValue(
-				getCurrentBpmnElement().getStandardLoopCharacteristics());
+		StandardLoopCharacteristicsChildElement standardLoopCharacteristics = getCurrentBpmnElement()
+				.getStandardLoopCharacteristicsChildElement();
+		if (null == standardLoopCharacteristics) {
+			view.getCbIsLoop().setValue(false);
+		} else {
+			view.getCbIsLoop().setValue(true);
+		}
+
 		view.getCbIsLoop()
 				.setText(
 						"Please note, the loop activity is not supported by the Camunda BPM engine.");
-		view.getCbMultiInstance().setValue(false);
+
+		MultiInstanceLoopCharacteristicsChildElement multiInstanceLoopCharacteristics = getCurrentBpmnElement()
+				.getMultiInstanceLoopCharacteristicsChildElement();
+		if (null == multiInstanceLoopCharacteristics) {
+			view.getCbMultiInstance().setValue(false);
+		} else {
+			view.getCbMultiInstance().setValue(true);
+		}
+
 		view.getCbMultiInstance().setText("not implemented: TODO");
 	}
 }
