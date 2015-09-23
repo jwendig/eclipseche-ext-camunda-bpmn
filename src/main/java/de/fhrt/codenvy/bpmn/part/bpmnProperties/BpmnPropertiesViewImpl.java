@@ -25,6 +25,7 @@ import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.AbstractBpmnPropertiesWi
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.NoSelectionWidget;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.UnknownItemWidget;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.process.ProcessPropertiesWidget;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.servicetask.ServiceTaskPropertiesWidget;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.startevent.StartEventPropertiesWidget;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.usertask.UserTaskPropertiesWidget;
 
@@ -44,6 +45,7 @@ public class BpmnPropertiesViewImpl extends
 	private ProcessPropertiesWidget processProperties;
 	private StartEventPropertiesWidget startEventProperties;
 	private UserTaskPropertiesWidget userTaskProperties;
+	private ServiceTaskPropertiesWidget serviceTaskProperties;
 
 	@Inject
 	public BpmnPropertiesViewImpl(PartStackUIResources resources) {
@@ -53,6 +55,7 @@ public class BpmnPropertiesViewImpl extends
 		processProperties = new ProcessPropertiesWidget(this);
 		startEventProperties = new StartEventPropertiesWidget(this);
 		userTaskProperties = new UserTaskPropertiesWidget(this);
+		serviceTaskProperties = new ServiceTaskPropertiesWidget(this);
 
 		widgetContainer = new LayoutPanel();
 		widgetContainer.setSize("100%", "100%");
@@ -82,9 +85,9 @@ public class BpmnPropertiesViewImpl extends
 		// case SCRIPT_TASK:
 		// currentProperties = unknowItemProperties;
 		// break;
-		// case SERVICE_TASK:
-		// currentProperties = serviceTaskProperties;
-		// break;
+		case SERVICE_TASK:
+			currentProperties = serviceTaskProperties;
+			break;
 		case START_EVENT:
 			currentProperties = startEventProperties;
 			break;
