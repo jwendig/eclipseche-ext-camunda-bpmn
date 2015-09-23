@@ -17,8 +17,8 @@ import org.eclipse.che.ide.util.loging.Log;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.inject.Inject;
 
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso.BpmnElementType;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.BpmnIoElementWrapper;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.enums.BpmnIoElementType;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoElementJso;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoModelerJso;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.AbstractBpmnPropertiesWidget;
@@ -74,8 +74,8 @@ public class BpmnPropertiesViewImpl extends
 		currentElement = new BpmnIoElementWrapper(elementJso, modelerJso);
 		widgetContainer.clear();
 
-		switch (BpmnElementType
-				.findByBpmnIoTypeDefinition(elementJso.getType())) {
+		switch (BpmnIoElementType.findByBpmnIoTypeDefinition(elementJso
+				.getType())) {
 		case DEFAULT:
 			currentProperties = unknowItemProperties;
 			break;

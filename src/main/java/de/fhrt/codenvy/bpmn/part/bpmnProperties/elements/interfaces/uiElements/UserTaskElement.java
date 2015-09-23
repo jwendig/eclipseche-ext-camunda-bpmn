@@ -13,11 +13,6 @@ package de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements;
 
 import java.util.List;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.InputParameterJso;
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.OutputParameterJso;
-import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.FormFieldExtensionElementChild;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.InputParameterExtensionElementChild;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.OutputParameterExtensionElementChild;
 

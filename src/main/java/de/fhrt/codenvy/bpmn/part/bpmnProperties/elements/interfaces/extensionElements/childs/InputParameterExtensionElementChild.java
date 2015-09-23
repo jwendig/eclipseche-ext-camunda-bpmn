@@ -11,15 +11,6 @@
 
 package de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs;
 
-import java.util.List;
-
-import com.google.gwt.core.client.JavaScriptObject;
-
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.ListValueJso;
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.MapEntryJso;
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.ScriptJso;
-import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces._BaseElement;
-
 public interface InputParameterExtensionElementChild extends
 		InputOutputParameterExtensionElementChild {
 }

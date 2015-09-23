@@ -18,7 +18,6 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.interfaces.StartEventJso;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.BpmnPropertiesView;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements.StartEventElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.AbstractBpmnPropertiesTabController;
@@ -28,8 +27,7 @@ public class TabGeneralController extends
 	private final static String TAB_NAME = "General";
 	private TabGeneralView view;
 
-	public TabGeneralController(
-			BpmnPropertiesView.CurrentJsoAccess jsoAccess) {
+	public TabGeneralController(BpmnPropertiesView.CurrentJsoAccess jsoAccess) {
 		super(jsoAccess);
 		view = new TabGeneralView(TAB_NAME, jsoAccess);
 		view.getTbId().addKeyUpHandler(new KeyUpHandler() {

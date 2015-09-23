@@ -13,9 +13,6 @@ package de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionEl
 
 import java.util.List;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.PropertyJso;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces._BaseElement;
 
 public interface FormFieldExtensionElementChild extends _BaseElement {

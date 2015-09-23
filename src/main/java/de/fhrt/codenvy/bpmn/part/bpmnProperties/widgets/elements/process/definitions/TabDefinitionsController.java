@@ -11,12 +11,12 @@
 
 package de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.process.definitions;
 
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.interfaces.ProcessJso;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.BpmnPropertiesView;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements.ProcessElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.AbstractBpmnPropertiesTabController;
 
 public class TabDefinitionsController extends
-		AbstractBpmnPropertiesTabController<ProcessJso> {
+		AbstractBpmnPropertiesTabController<ProcessElement> {
 	private final static String TAB_NAME = "Definitions";
 	private TabDefinitionsView view;
 

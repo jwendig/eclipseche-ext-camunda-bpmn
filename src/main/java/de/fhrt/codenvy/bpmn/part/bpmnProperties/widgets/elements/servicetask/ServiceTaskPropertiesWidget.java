@@ -10,7 +10,6 @@
  *******************************************************************************/
 package de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.servicetask;
 
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.interfaces.ServiceTaskJso;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.BpmnPropertiesView;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements.ServiceTaskElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.AbstractBpmnPropertiesWidget;
