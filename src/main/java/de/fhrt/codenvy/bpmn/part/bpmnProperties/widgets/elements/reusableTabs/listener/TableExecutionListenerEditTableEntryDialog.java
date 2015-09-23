@@ -26,10 +26,9 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.childs.ScriptJso;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.ExecutionListenerExtensionElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.ScriptExtensionElementChild;
-import de.fhrt.codenvy.bpmn.part.properties.widgets.base.ScriptWidget;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.reusableTabs.ScriptWidget;
 
 public class TableExecutionListenerEditTableEntryDialog extends DialogBox {
 

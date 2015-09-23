@@ -28,7 +28,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.TaskListenerExtensionElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.ScriptExtensionElementChild;
-import de.fhrt.codenvy.bpmn.part.properties.widgets.base.ScriptWidget;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.reusableTabs.ScriptWidget;
 
 public class TableTaskListenerEditTableEntryDialog extends DialogBox {
 

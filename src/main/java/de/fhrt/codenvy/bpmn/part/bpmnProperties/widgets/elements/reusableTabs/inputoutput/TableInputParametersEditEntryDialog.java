@@ -11,8 +11,6 @@
 
 package de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.reusableTabs.inputoutput;
 
-import org.eclipse.che.ide.util.loging.Log;
-
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -30,7 +28,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.InputParameterExtensionElementChild;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.ScriptExtensionElementChild;
-import de.fhrt.codenvy.bpmn.part.properties.widgets.base.ScriptWidget;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.reusableTabs.ScriptWidget;
 
 public class TableInputParametersEditEntryDialog extends DialogBox {
 

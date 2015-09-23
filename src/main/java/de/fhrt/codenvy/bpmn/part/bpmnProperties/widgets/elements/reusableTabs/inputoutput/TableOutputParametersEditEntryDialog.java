@@ -27,7 +27,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.OutputParameterExtensionElementChild;
-import de.fhrt.codenvy.bpmn.part.properties.widgets.base.ScriptWidget;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.reusableTabs.ScriptWidget;
 
 public class TableOutputParametersEditEntryDialog extends DialogBox {
 
