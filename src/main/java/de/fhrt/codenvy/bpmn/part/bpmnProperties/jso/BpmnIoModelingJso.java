@@ -20,12 +20,14 @@ public class BpmnIoModelingJso extends JavaScriptObject {
 
 	public final native void updateProperty(JavaScriptObject element,
 			String key, Object value)/*-{
-										console.log("test");
 										var property = {};
-										console.log("test1");
-										property[key] = value;
-										console.log("test2 " + property[key]);
+										
+										if(value == null){
+											property[key] = undefined;
+										}else{
+											property[key] = value;
+										}
+										
 										this.updateProperties(element, property);
-										console.log("test3");
 										}-*/;
 }
