@@ -40,6 +40,7 @@ public class TabMulitInstanceController<T extends TaskElement> extends
 					public void onValueChange(ValueChangeEvent<Boolean> event) {
 						if (event.getValue()) {
 							view.getCbMultiInstance().setValue(false);
+							hideMultiInstanceLoopCharacteristicsFields();
 						}
 
 						getCurrentBpmnElement().setStandardLoopCharacteristics(
@@ -55,6 +56,9 @@ public class TabMulitInstanceController<T extends TaskElement> extends
 					public void onValueChange(ValueChangeEvent<Boolean> event) {
 						if (event.getValue()) {
 							view.getCbIsLoop().setValue(false);
+							showMultiInstanceLoopCharacteristicsFields();
+						}else{
+							hideMultiInstanceLoopCharacteristicsFields();
 						}
 
 						getCurrentBpmnElement()
@@ -89,10 +93,33 @@ public class TabMulitInstanceController<T extends TaskElement> extends
 				.getMultiInstanceLoopCharacteristicsChildElement();
 		if (null == multiInstanceLoopCharacteristics) {
 			view.getCbMultiInstance().setValue(false);
+
+			hideMultiInstanceLoopCharacteristicsFields();
+
 		} else {
 			view.getCbMultiInstance().setValue(true);
+
+			showMultiInstanceLoopCharacteristicsFields();
 		}
 
-		view.getCbMultiInstance().setHTML("Please refer to the <a href='http://docs.camunda.org/manual/7.3/api-references/bpmn20/#tasks-task-markers-multiple-instance' target='_blank'>Camunda documentation</a> for multi instance.");
+		view.getCbMultiInstance()
+				.setHTML(
+						"Please refer to the <a href='http://docs.camunda.org/manual/7.3/api-references/bpmn20/#tasks-task-markers-multiple-instance' target='_blank'>Camunda documentation</a> for multi instance.");
+	}
+
+	private void showMultiInstanceLoopCharacteristicsFields() {
+		view.getGridTabContent().getRowFormatter().setVisible(2, true);
+		view.getGridTabContent().getRowFormatter().setVisible(3, true);
+		view.getGridTabContent().getRowFormatter().setVisible(4, true);
+		view.getGridTabContent().getRowFormatter().setVisible(5, true);
+		view.getGridTabContent().getRowFormatter().setVisible(6, true);
+	}
+
+	private void hideMultiInstanceLoopCharacteristicsFields() {
+		view.getGridTabContent().getRowFormatter().setVisible(2, false);
+		view.getGridTabContent().getRowFormatter().setVisible(3, false);
+		view.getGridTabContent().getRowFormatter().setVisible(4, false);
+		view.getGridTabContent().getRowFormatter().setVisible(5, false);
+		view.getGridTabContent().getRowFormatter().setVisible(6, false);
 	}
 }
