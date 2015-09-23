@@ -55011,7 +55011,7 @@ module.exports={
     {
       "name": "attr_collection",
       "extends": [
-        "bpmn:FlowNode"
+         "bpmn:FlowNode", "bpmn:MultiInstanceLoopCharacteristics"
       ],
       "properties": [
         {
@@ -55020,20 +55020,7 @@ module.exports={
           "type": "String"
         }
       ]
-    },
-    {
-      "name": "attr_collection",
-      "extends": [
-        "bpmn:FlowNode"
-      ],
-      "properties": [
-        {
-          "name": "collection",
-          "isAttr": true,
-          "type": "String"
-        }
-      ]
-    },
+    },    
     {
       "name": "attr_delegateExpression",
       "extends": [
@@ -55064,7 +55051,7 @@ module.exports={
     {
       "name": "attr_elementVariable",
       "extends": [
-        "bpmn:FlowNode"
+        "bpmn:FlowNode", "bpmn:MultiInstanceLoopCharacteristics"
       ],
       "properties": [
         {
