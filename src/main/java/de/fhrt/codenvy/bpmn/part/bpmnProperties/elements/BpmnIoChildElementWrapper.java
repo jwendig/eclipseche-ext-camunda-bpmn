@@ -47,4 +47,44 @@ public class BpmnIoChildElementWrapper implements
 	public String getType() {
 		return element.getType();
 	}
+
+	@Override
+	public void setAttr_collection(String collection) {
+		element.setAttribute("collection", collection);
+
+	}
+
+	@Override
+	public String getAttr_collection() {
+		return element.getStringAttribute("collection");
+	}
+
+	@Override
+	public void setAttr_elementVariable(String elementVariable) {
+		element.setAttribute("elementVariable", elementVariable);
+
+	}
+
+	@Override
+	public String getAttr_elementVariable() {
+		return element.getStringAttribute("elementVariable");
+	}
+
+	@Override
+	public void setAttr_isSequential(boolean isSequential) {
+		element.setAttribute("isSequential", isSequential);
+		/*
+		 * TODO: find a way to use a updateProperty-Function to set this
+		 * attribute, this is needed to refresh the ui. The existing function
+		 * updatePropeties at the modeling element accepts only elements that
+		 * have an businessObject.
+		 */
+//		modeling.updateProperty(element, "isSequential", isSequential);
+
+	}
+
+	@Override
+	public boolean getAttr_isSequential() {
+		return element.getBooleanAttribute("isSequential");
+	}
 }
