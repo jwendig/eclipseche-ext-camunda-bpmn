@@ -29,4 +29,16 @@ public interface MultiInstanceLoopCharacteristicsChildElement {
 	public void setAttr_isSequential(boolean isSequential);
 
 	public boolean getAttr_isSequential();
+
+	public FormalExpressionChildElement getChildElementLoopCardinality();
+
+	public FormalExpressionChildElement createChildElementLoopCardinality();
+
+	public void removeChildElementLoopCardinality();
+
+	public FormalExpressionChildElement createChildElementCompletionCondition();
+
+	public FormalExpressionChildElement getChildElementCompletionCondition();
+
+	public void removeChildElementCompletionCondition();
 }

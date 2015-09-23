@@ -36,4 +36,25 @@ public class BpmnIoChildElementJso extends JavaScriptObject {
 	public final native void setAttribute(String key, Object value)/*-{
 																	this[key] = value;
 																	}-*/;
+
+	public final native void setChildElement(String key,
+			BpmnIoChildElementJso extensionChildElement)/*-{
+																				this[key] = extensionChildElement;
+																				}-*/;
+
+	public final native BpmnIoChildElementJso getChildElement(String key)/*-{
+																				return this[key];
+																				}-*/;
+
+	public final native BpmnIoChildElementJso getChildElement(String key,
+			String type, BpmnIoModdleJso moddle)/*-{
+												if(this[key] == undefined){
+												this[key] = moddle.create(type);
+												}
+												return this[key];
+												}-*/;
+
+	public final native void clearChildElement(String field)/*-{
+															this[field] = undefined;
+															}-*/;
 }

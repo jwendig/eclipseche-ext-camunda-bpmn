@@ -11,6 +11,7 @@
 
 package de.fhrt.codenvy.bpmn.part.bpmnProperties.elements;
 
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.childElements.FormalExpressionChildElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.childElements.MultiInstanceLoopCharacteristicsChildElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.childElements.StandardLoopCharacteristicsChildElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoChildElementJso;
@@ -20,7 +21,8 @@ import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoModelingJso;
 
 public class BpmnIoChildElementWrapper implements
 		StandardLoopCharacteristicsChildElement,
-		MultiInstanceLoopCharacteristicsChildElement {
+		MultiInstanceLoopCharacteristicsChildElement,
+		FormalExpressionChildElement {
 	private BpmnIoChildElementJso element;
 	private BpmnIoModelerJso modeler;
 	private BpmnIoModelingJso modeling;
@@ -79,12 +81,71 @@ public class BpmnIoChildElementWrapper implements
 		 * updatePropeties at the modeling element accepts only elements that
 		 * have an businessObject.
 		 */
-//		modeling.updateProperty(element, "isSequential", isSequential);
+		// modeling.updateProperty(element, "isSequential", isSequential);
 
 	}
 
 	@Override
 	public boolean getAttr_isSequential() {
 		return element.getBooleanAttribute("isSequential");
+	}
+
+	@Override
+	public void setAttr_body(String body) {
+		element.setAttribute("body", body);
+
+	}
+
+	@Override
+	public String getAttr_body() {
+		return element.getStringAttribute("body");
+	}
+
+	@Override
+	public FormalExpressionChildElement createChildElementLoopCardinality() {
+		BpmnIoChildElementJso obj = (BpmnIoChildElementJso) element
+				.getChildElement("loopCardinality", "bpmn:FormalExpression",
+						moddle);
+		return new BpmnIoChildElementWrapper(obj, modeler);
+
+	}
+
+	@Override
+	public FormalExpressionChildElement getChildElementLoopCardinality() {
+		BpmnIoChildElementJso obj = (BpmnIoChildElementJso) element
+				.getChildElement("loopCardinality");
+		if (obj == null) {
+			return null;
+		}
+		return new BpmnIoChildElementWrapper(obj, modeler);
+	}
+
+	@Override
+	public void removeChildElementLoopCardinality() {
+		element.clearChildElement("loopCardinality");
+
+	}
+
+	@Override
+	public FormalExpressionChildElement createChildElementCompletionCondition() {
+		BpmnIoChildElementJso obj = (BpmnIoChildElementJso) element
+				.getChildElement("completionCondition",
+						"bpmn:FormalExpression", moddle);
+		return new BpmnIoChildElementWrapper(obj, modeler);
+	}
+
+	@Override
+	public FormalExpressionChildElement getChildElementCompletionCondition() {
+		BpmnIoChildElementJso obj = (BpmnIoChildElementJso) element
+				.getChildElement("completionCondition");
+		if (obj == null) {
+			return null;
+		}
+		return new BpmnIoChildElementWrapper(obj, modeler);
+	}
+
+	@Override
+	public void removeChildElementCompletionCondition() {
+		element.clearChildElement("completionCondition");
 	}
 }

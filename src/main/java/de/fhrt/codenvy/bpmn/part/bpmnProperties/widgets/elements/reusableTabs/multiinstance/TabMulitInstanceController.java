@@ -17,6 +17,7 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.BpmnPropertiesView;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.childElements.FormalExpressionChildElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.childElements.MultiInstanceLoopCharacteristicsChildElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements.TaskElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.AbstractBpmnPropertiesTabController;
@@ -27,6 +28,8 @@ public class TabMulitInstanceController<T extends TaskElement> extends
 	private TabMultiInstanceView view;
 
 	private MultiInstanceLoopCharacteristicsChildElement multiInstanceLoopCharacteristics;
+	private FormalExpressionChildElement mutliInstanceCompletionCondition;
+	private FormalExpressionChildElement mutliInstanceLoopCardinality;
 
 	public TabMulitInstanceController(
 			BpmnPropertiesView.CurrentJsoAccess jsoAccess) {
@@ -41,7 +44,7 @@ public class TabMulitInstanceController<T extends TaskElement> extends
 						if (event.getValue()) {
 							view.getCbMultiInstance().setValue(false, true);
 						}
-						
+
 						getCurrentBpmnElement().setStandardLoopCharacteristics(
 								event.getValue());
 
@@ -85,7 +88,21 @@ public class TabMulitInstanceController<T extends TaskElement> extends
 
 					@Override
 					public void onKeyUp(KeyUpEvent event) {
-						// getCurrentBpmnElement().setAttr_id(view.getTbId().getText());
+						if (view.getTbMultiInstanceLoopCardinality().getText()
+								.length() == 0) {
+							multiInstanceLoopCharacteristics
+									.removeChildElementLoopCardinality();
+							mutliInstanceLoopCardinality = null;
+						} else {
+							if (mutliInstanceLoopCardinality == null) {
+								mutliInstanceLoopCardinality = multiInstanceLoopCharacteristics
+										.createChildElementLoopCardinality();
+							}
+							mutliInstanceLoopCardinality.setAttr_body(view
+									.getTbMultiInstanceLoopCardinality()
+									.getText());
+						}
+
 						contentChanged();
 					}
 				});
@@ -116,8 +133,22 @@ public class TabMulitInstanceController<T extends TaskElement> extends
 
 					@Override
 					public void onKeyUp(KeyUpEvent event) {
-						// getCurrentBpmnElement().setAttr_id(view.getTbId().getText());
-						// contentChanged();
+						if (view.getTbMultiInstanceCompletionCondition()
+								.getText().length() == 0) {
+							multiInstanceLoopCharacteristics
+									.removeChildElementCompletionCondition();
+							mutliInstanceCompletionCondition = null;
+						} else {
+							if (mutliInstanceCompletionCondition == null) {
+								mutliInstanceCompletionCondition = multiInstanceLoopCharacteristics
+										.createChildElementCompletionCondition();
+							}
+							mutliInstanceCompletionCondition.setAttr_body(view
+									.getTbMultiInstanceCompletionCondition()
+									.getText());
+						}
+
+						contentChanged();
 					}
 				});
 
@@ -159,15 +190,30 @@ public class TabMulitInstanceController<T extends TaskElement> extends
 		} else {
 			view.getCbMultiInstance().setValue(true);
 
-			// TODO: set values of fields
 			view.getCbMultiInstanceIsSequential().setValue(
 					multiInstanceLoopCharacteristics.getAttr_isSequential());
 			view.getTbMultiInstanceCollection().setValue(
 					multiInstanceLoopCharacteristics.getAttr_collection());
 			view.getTbMultiInstanceElementVariable().setValue(
 					multiInstanceLoopCharacteristics.getAttr_elementVariable());
-			// view.getTbMultiInstanceCompletionCondition().setValue(value);
-			// view.getTbMultiInstanceLoopCardinality().setValue(value);
+
+			mutliInstanceCompletionCondition = multiInstanceLoopCharacteristics
+					.getChildElementCompletionCondition();
+			if (null == mutliInstanceCompletionCondition) {
+				view.getTbMultiInstanceCompletionCondition().setValue("");
+			} else {
+				view.getTbMultiInstanceCompletionCondition().setValue(
+						mutliInstanceCompletionCondition.getAttr_body());
+			}
+
+			mutliInstanceLoopCardinality = multiInstanceLoopCharacteristics
+					.getChildElementLoopCardinality();
+			if (null == mutliInstanceLoopCardinality) {
+				view.getTbMultiInstanceLoopCardinality().setValue("");
+			} else {
+				view.getTbMultiInstanceLoopCardinality().setValue(
+						mutliInstanceLoopCardinality.getAttr_body());
+			}
 
 			showMultiInstanceLoopCharacteristicsFields();
 		}
