@@ -55,7 +55,7 @@ public class TabMultiInstanceView extends AbstractBpmnPropertiesTabWidget {
 		getGridTabContent().setWidget(4, 1, tbMultiInstanceCollection);
 		getGridTabContent().setWidget(5, 1, tbMultiInstanceElementVariable);
 		getGridTabContent().setWidget(6, 1, tbMultiInstanceCompletionCondition);
-		
+
 	}
 
 	@Override
@@ -63,9 +63,12 @@ public class TabMultiInstanceView extends AbstractBpmnPropertiesTabWidget {
 		Log.info(TabMultiInstanceView.class, "initContentElements");
 		cbIsLoop = new CheckBox();
 		cbIsLoop.setWidth("100%");
+		cbIsLoop.setHTML("Please note, the loop activity is not supported by the Camunda BPM engine. See for more information the <a href='http://docs.camunda.org/manual/7.3/api-references/bpmn20/#tasks-task-markers-loops' target='_blank' >Camunda user guide</a>.");
 
 		cbMultiInstance = new CheckBox();
 		cbMultiInstance.setWidth("100%");
+		cbMultiInstance
+				.setHTML("Please refer to the <a href='http://docs.camunda.org/manual/7.3/api-references/bpmn20/#tasks-task-markers-multiple-instance' target='_blank'>Camunda documentation</a> for multi instance.");
 
 		tbMultiInstanceLoopCardinality = new TextBox();
 		tbMultiInstanceLoopCardinality.setWidth("100%");
