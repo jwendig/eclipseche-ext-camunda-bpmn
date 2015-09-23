@@ -10,18 +10,12 @@
  *******************************************************************************/
 package de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements;
 
-import java.util.Iterator;
-
 import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.Widget;
-
-import de.fhrt.codenvy.bpmn.part.properties.BpmnElementPropertiesView;
 
 public class NoSelectionWidget extends Composite {
 
