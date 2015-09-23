@@ -21,7 +21,7 @@ import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces._BaseElement
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.InputParameterExtensionElementChild;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.OutputParameterExtensionElementChild;
 
-public interface ServiceTaskElement extends _BaseElement {
+public interface ServiceTaskElement extends TaskElement {
 	public String getAttr_class();
 
 	public void setAttr_class(String clazz);
