@@ -19,6 +19,7 @@ import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.Inpu
 import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.interfaces.extensions.OutputParameterJso;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.FormFieldExtensionElementChild;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.InputParameterExtensionElementChild;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.OutputParameterExtensionElementChild;
 
 public interface UserTaskElement extends TaskElement {
 	public String getAttr_assignee();
@@ -68,10 +69,10 @@ public interface UserTaskElement extends TaskElement {
 
 	public InputParameterExtensionElementChild addExtensionChildElementInputParameter();
 
-	// public void removeCamundaExt_outputParameter(OutputParameterJso element);
-	//
-	// public List<OutputParameterJso> getCamundaExt_outputParameters();
-	//
-	// public OutputParameterJso addCamundaExt_outputParameter(
-	// JavaScriptObject moddle);
+	public void removeExtensionChildElementOutputParameter(
+			OutputParameterExtensionElementChild outputParameterElement);
+
+	public List<OutputParameterExtensionElementChild> getExtensionChildElementsOutputParameters();
+
+	public OutputParameterExtensionElementChild addExtensionChildElementOutputParameter();
 }

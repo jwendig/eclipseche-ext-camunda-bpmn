@@ -20,6 +20,7 @@ import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Button;
 
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.BpmnPropertiesView;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.InputParameterExtensionElementChild;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.OutputParameterExtensionElementChild;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.AbstractBpmnDataTableWidget;
 
@@ -42,7 +43,8 @@ public class TableOutputParametersWidget extends
 			}
 		};
 
-		tcBtnRemove = new Column<OutputParameterExtensionElementChild, String>(new ButtonCell()) {
+		tcBtnRemove = new Column<OutputParameterExtensionElementChild, String>(
+				new ButtonCell()) {
 			@Override
 			public String getValue(OutputParameterExtensionElementChild object) {
 				return "x";
@@ -53,21 +55,21 @@ public class TableOutputParametersWidget extends
 				.setFieldUpdater(new FieldUpdater<OutputParameterExtensionElementChild, String>() {
 
 					@Override
-					public void update(int index, OutputParameterExtensionElementChild object,
+					public void update(int index,
+							OutputParameterExtensionElementChild object,
 							String value) {
-//						if (getJsoAccess().getCurrentElementJso()
-//								.removeCamundaExt_outputParameter(object)) {
-//							getDataProvider().getList().remove(object);
-//							getDataProvider().refresh();
-//							getTable().redraw();
-//							getJsoAccess().onContentChange();
-//						} else {
-//
-//						}
+						getJsoAccess().getCurrentElement()
+								.removeExtensionChildElementOutputParameter(
+										object);
+						getDataProvider().getList().remove(object);
+						getDataProvider().refresh();
+						getTable().redraw();
+						getJsoAccess().onContentChange();
 					}
 				});
 
-		tcBtnEdit = new Column<OutputParameterExtensionElementChild, String>(new ButtonCell()) {
+		tcBtnEdit = new Column<OutputParameterExtensionElementChild, String>(
+				new ButtonCell()) {
 			@Override
 			public String getValue(OutputParameterExtensionElementChild object) {
 				return "Edit";
@@ -78,11 +80,12 @@ public class TableOutputParametersWidget extends
 				.setFieldUpdater(new FieldUpdater<OutputParameterExtensionElementChild, String>() {
 
 					@Override
-					public void update(int index, OutputParameterExtensionElementChild object,
+					public void update(int index,
+							OutputParameterExtensionElementChild object,
 							String value) {
-//						new TableOutputParametersEditEntryDialog(
-//								TableOutputParametersWidget.this, object)
-//								.center();
+						new TableOutputParametersEditEntryDialog(
+								TableOutputParametersWidget.this, object)
+								.center();
 
 					}
 				});
@@ -96,15 +99,14 @@ public class TableOutputParametersWidget extends
 
 			@Override
 			public void onClick(ClickEvent event) {
-//				OutputParameterExtensionElementChild inputParameterJso = getJsoAccess()
-//						.getCurrentElementJso().addCamundaExt_outputParameter(
-//								getJsoAccess().getCurrentBpmnIoModelerJso()
-//										.nativeGetModdle());
-//
-//				getDataProvider().getList().add(inputParameterJso);
-//				new TableOutputParametersEditEntryDialog(
-//						TableOutputParametersWidget.this, inputParameterJso)
-//						.center();
+				OutputParameterExtensionElementChild outputParameter = getJsoAccess()
+						.getCurrentElement()
+						.addExtensionChildElementOutputParameter();
+
+				getDataProvider().getList().add(outputParameter);
+				new TableOutputParametersEditEntryDialog(
+						TableOutputParametersWidget.this, outputParameter)
+						.center();
 
 			}
 		});
@@ -116,8 +118,8 @@ public class TableOutputParametersWidget extends
 	@Override
 	public void update() {
 		getDataProvider().getList().clear();
-//		List<OutputParameterExtensionElementChild> dataObjects = getJsoAccess()
-//				.getCurrentElementJso().getCamundaExt_outputParameters();
-//		getDataProvider().getList().addAll(dataObjects);
+		getDataProvider().getList().addAll(
+				getJsoAccess().getCurrentElement()
+						.getExtensionChildElementsOutputParameters());
 	}
 }

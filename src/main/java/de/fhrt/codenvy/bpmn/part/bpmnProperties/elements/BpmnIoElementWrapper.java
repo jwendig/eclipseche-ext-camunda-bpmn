@@ -23,6 +23,7 @@ import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionEle
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.TaskListenerExtensionElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.FormFieldExtensionElementChild;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.InputParameterExtensionElementChild;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.OutputParameterExtensionElementChild;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.PropertyExtensionElementChild;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.flowElements.DataObjectFlowElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.rootElements.DataStoreRootElement;
@@ -30,6 +31,7 @@ import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.rootElements
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.rootElements.MessageRootElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.rootElements.SignalRootElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements.ProcessElement;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements.ServiceTaskElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements.StartEventElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements.TaskElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements.UserTaskElement;
@@ -293,9 +295,12 @@ public class BpmnIoElementWrapper implements ProcessElement, StartEventElement,
 		BpmnIoChildElementJso childJso = element
 				.getChildElement(BpmnIoChildElementType.BPMN_STANDARD_LOOP_CHARACTERISTICS
 						.getField());
-		if (null != childJso && childJso.getType().equalsIgnoreCase(
-				BpmnIoChildElementType.BPMN_STANDARD_LOOP_CHARACTERISTICS
-						.getType())) {
+		if (null != childJso
+				&& childJso
+						.getType()
+						.equalsIgnoreCase(
+								BpmnIoChildElementType.BPMN_STANDARD_LOOP_CHARACTERISTICS
+										.getType())) {
 			return new BpmnIoChildElementWrapper(childJso, modeler);
 		}
 
@@ -325,9 +330,12 @@ public class BpmnIoElementWrapper implements ProcessElement, StartEventElement,
 		BpmnIoChildElementJso childJso = element
 				.getChildElement(BpmnIoChildElementType.BPMN_MULIT_INSTANCE_LOOP_CHARACTERISTICS
 						.getField());
-		if (null != childJso && childJso.getType().equalsIgnoreCase(
-				BpmnIoChildElementType.BPMN_MULIT_INSTANCE_LOOP_CHARACTERISTICS
-						.getType())) {
+		if (null != childJso
+				&& childJso
+						.getType()
+						.equalsIgnoreCase(
+								BpmnIoChildElementType.BPMN_MULIT_INSTANCE_LOOP_CHARACTERISTICS
+										.getType())) {
 			return new BpmnIoChildElementWrapper(childJso, modeler);
 		}
 
@@ -550,6 +558,47 @@ public class BpmnIoElementWrapper implements ProcessElement, StartEventElement,
 		return new BpmnIoExtensionElementWrapper(executionListenerJso, modeler);
 	}
 
+	@Override
+	public void removeExtensionChildElementOutputParameter(
+			OutputParameterExtensionElementChild outputParameterElement) {
+		element.removeExtensionElementFromParent(
+				BpmnIoExtensionElementArrayType.CAMUNDA_OUTPUT.getType(),
+				BpmnIoExtensionElementArrayType.CAMUNDA_OUTPUT.getField(),
+				(BpmnIoExtensionElementJso) outputParameterElement.getElement());
+	}
+
+	@Override
+	public List<OutputParameterExtensionElementChild> getExtensionChildElementsOutputParameters() {
+		List<OutputParameterExtensionElementChild> executionListenerElements = new ArrayList<OutputParameterExtensionElementChild>();
+		JsArray<BpmnIoExtensionElementJso> childs = element
+				.getExtensionElementFromParent(
+						BpmnIoExtensionElementArrayType.CAMUNDA_OUTPUT
+								.getType(),
+						BpmnIoExtensionElementArrayType.CAMUNDA_OUTPUT
+								.getField(),
+						BpmnIoExtensionChildElementType.CAMUNDA_OUTPUT_PARAMETER
+								.getType());
+
+		for (int i = 0; i < childs.length(); i++) {
+			executionListenerElements.add(new BpmnIoExtensionElementWrapper(
+					childs.get(i), modeler));
+		}
+
+		return executionListenerElements;
+	}
+
+	@Override
+	public OutputParameterExtensionElementChild addExtensionChildElementOutputParameter() {
+		BpmnIoExtensionElementJso executionListenerJso = (BpmnIoExtensionElementJso) moddle
+				.create(BpmnIoExtensionChildElementType.CAMUNDA_OUTPUT_PARAMETER
+						.getType());
+		element.addExtensionElementToParent(
+				BpmnIoExtensionElementArrayType.CAMUNDA_OUTPUT.getType(),
+				BpmnIoExtensionElementArrayType.CAMUNDA_OUTPUT.getField(),
+				executionListenerJso, moddle);
+		return new BpmnIoExtensionElementWrapper(executionListenerJso, modeler);
+	}
+
 	/*
 	 * rootElements
 	 */
@@ -664,4 +713,5 @@ public class BpmnIoElementWrapper implements ProcessElement, StartEventElement,
 		}
 		return rootElements;
 	}
+
 }

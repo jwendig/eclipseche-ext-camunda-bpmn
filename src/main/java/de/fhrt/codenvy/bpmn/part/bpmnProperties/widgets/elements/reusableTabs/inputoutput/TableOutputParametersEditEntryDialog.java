@@ -27,6 +27,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.OutputParameterExtensionElementChild;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.ScriptExtensionElementChild;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.reusableTabs.ScriptWidget;
 
 public class TableOutputParametersEditEntryDialog extends DialogBox {
@@ -61,13 +62,14 @@ public class TableOutputParametersEditEntryDialog extends DialogBox {
 
 		tableList.setCurrentListJso(currentInputParameterJso);
 
-		String currentType = "";
-		if (inputParameterJso.getAttr_value().length() > 0) {
+		String currentType = "Text";
+		if (inputParameterJso.getAttr_value() != null
+				&& inputParameterJso.getAttr_value().length() > 0) {
 			currentType = "Text";
-			// } else if (inputParameterJso.getListValues().size() > 0) {
-			// currentType = "List";
-			// } else if (inputParameterJso.getMapEntrieChilds().size() > 0) {
-			// currentType = "Map";
+		} else if (inputParameterJso.getListValueChilds().size() > 0) {
+			currentType = "List";
+		} else if (inputParameterJso.getMapEntryChilds().size() > 0) {
+			currentType = "Map";
 		} else if (inputParameterJso.getScriptChild() != null) {
 			currentType = "Script";
 		}
@@ -197,15 +199,13 @@ public class TableOutputParametersEditEntryDialog extends DialogBox {
 				}
 
 				if (lboxType.getSelectedItemText().equalsIgnoreCase("script")) {
-					// ScriptJso scriptJso = currentInputParameterJso
-					// .addChild_script(widgetCallback.getJsoAccess()
-					// .getCurrentBpmnIoModelerJso()
-					// .nativeGetModdle());
-					// scriptJso.setAttr_resource(swScript.getTbResource()
-					// .getText());
-					// scriptJso.setAttr_script(swScript.getTaScript().getText());
-					// scriptJso.setAttr_scriptFormat(swScript.getTbFormat()
-					// .getText());
+					ScriptExtensionElementChild scriptJso = currentInputParameterJso
+							.setScriptChild();
+					scriptJso.setAttr_resource(swScript.getTbResource()
+							.getText());
+					scriptJso.setAttr_script(swScript.getTaScript().getText());
+					scriptJso.setAttr_scriptFormat(swScript.getTbFormat()
+							.getText());
 				} else {
 					currentInputParameterJso.removeScriptChild();
 				}
