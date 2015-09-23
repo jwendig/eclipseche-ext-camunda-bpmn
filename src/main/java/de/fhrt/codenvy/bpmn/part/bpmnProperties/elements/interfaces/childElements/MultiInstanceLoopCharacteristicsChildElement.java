@@ -26,7 +26,7 @@ public interface MultiInstanceLoopCharacteristicsChildElement {
 
 	public String getAttr_elementVariable();
 
-	public void setAttr_isSequential(String isSequential);
+	public void setAttr_isSequential(boolean isSequential);
 
-	public String getAttr_isSequential();
+	public boolean getAttr_isSequential();
 }
