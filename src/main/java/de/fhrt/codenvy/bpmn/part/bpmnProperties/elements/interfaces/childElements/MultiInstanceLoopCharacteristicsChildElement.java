@@ -17,4 +17,16 @@ public interface MultiInstanceLoopCharacteristicsChildElement {
 	public JavaScriptObject getElement();
 
 	public String getType();
+
+	public void setAttr_collection(String collection);
+
+	public String getAttr_collection();
+
+	public void setAttr_elementVariable(String elementVariable);
+
+	public String getAttr_elementVariable();
+
+	public void setAttr_isSequential(String isSequential);
+
+	public String getAttr_isSequential();
 }
