@@ -51,7 +51,7 @@ import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoModelingJso;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.jso.BpmnIoRootElementJso;
 
 public class BpmnIoElementWrapper implements ProcessElement, StartEventElement,
-		TaskElement, UserTaskElement {
+		TaskElement, UserTaskElement, ServiceTaskElement {
 	private BpmnIoElementJso element;
 	private BpmnIoModelerJso modeler;
 	private BpmnIoModelingJso modeling;
@@ -270,7 +270,58 @@ public class BpmnIoElementWrapper implements ProcessElement, StartEventElement,
 	@Override
 	public void setAttr_priority(String priority) {
 		modeling.updateProperty(element, "priority", priority);
+	}
 
+	@Override
+	public String getAttr_class() {
+		return element.getStringAttribute("class");
+	}
+
+	@Override
+	public void setAttr_class(String clazz) {
+		modeling.updateProperty(element, "class", clazz);
+
+	}
+
+	@Override
+	public String getAttr_delegateExpression() {
+		return element.getStringAttribute("delegateExpression");
+	}
+
+	@Override
+	public void setAttr_delegateExpression(String delegateExpression) {
+		modeling.updateProperty(element, "delegateExpression",
+				delegateExpression);
+	}
+
+	@Override
+	public String getAttr_expression() {
+		return element.getStringAttribute("expression");
+	}
+
+	@Override
+	public void setAttr_expression(String expression) {
+		modeling.updateProperty(element, "expression", expression);
+	}
+
+	@Override
+	public String getAttr_resultVariable() {
+		return element.getStringAttribute("resultVariable");
+	}
+
+	@Override
+	public void setAttr_resultVariable(String resultVariable) {
+		modeling.updateProperty(element, "resultVariable", resultVariable);
+	}
+
+	@Override
+	public String getAttr_type() {
+		return element.getStringAttribute("type");
+	}
+
+	@Override
+	public void setAttr_type(String type) {
+		modeling.updateProperty(element, "type", type);
 	}
 
 	@Override
@@ -717,5 +768,4 @@ public class BpmnIoElementWrapper implements ProcessElement, StartEventElement,
 		}
 		return rootElements;
 	}
-
 }
