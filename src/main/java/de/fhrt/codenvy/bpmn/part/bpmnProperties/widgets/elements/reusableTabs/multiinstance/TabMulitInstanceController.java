@@ -11,22 +11,22 @@
 
 package de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.reusableTabs.multiinstance;
 
-import org.eclipse.che.ide.util.loging.Log;
-
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.BpmnPropertiesView;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.childElements.MultiInstanceLoopCharacteristicsChildElement;
-import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.childElements.StandardLoopCharacteristicsChildElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements.TaskElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.AbstractBpmnPropertiesTabController;
-import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.startevent.general.TabGeneralController;
 
 public class TabMulitInstanceController<T extends TaskElement> extends
 		AbstractBpmnPropertiesTabController<T> {
 	private final static String TAB_NAME = "Multi Instance";
 	private TabMultiInstanceView view;
+
+	private MultiInstanceLoopCharacteristicsChildElement multiInstanceLoopCharacteristics;
 
 	public TabMulitInstanceController(
 			BpmnPropertiesView.CurrentJsoAccess jsoAccess) {
@@ -39,12 +39,12 @@ public class TabMulitInstanceController<T extends TaskElement> extends
 					@Override
 					public void onValueChange(ValueChangeEvent<Boolean> event) {
 						if (event.getValue()) {
-							view.getCbMultiInstance().setValue(false);
-							hideMultiInstanceLoopCharacteristicsFields();
+							view.getCbMultiInstance().setValue(false, true);
 						}
-
+						
 						getCurrentBpmnElement().setStandardLoopCharacteristics(
 								event.getValue());
+
 						contentChanged();
 					}
 				});
@@ -54,17 +54,82 @@ public class TabMulitInstanceController<T extends TaskElement> extends
 
 					@Override
 					public void onValueChange(ValueChangeEvent<Boolean> event) {
-						if (event.getValue()) {
-							view.getCbIsLoop().setValue(false);
-							showMultiInstanceLoopCharacteristicsFields();
-						}else{
-							hideMultiInstanceLoopCharacteristicsFields();
-						}
-
 						getCurrentBpmnElement()
 								.setMultiInstanceLoopCharacteristics(
 										event.getValue());
 
+						if (event.getValue()) {
+							view.getCbIsLoop().setValue(false);
+							multiInstanceLoopCharacteristics = getCurrentBpmnElement()
+									.getMultiInstanceLoopCharacteristicsChildElement();
+							showMultiInstanceLoopCharacteristicsFields();
+						} else {
+							hideMultiInstanceLoopCharacteristicsFields();
+							view.getCbMultiInstanceIsSequential().setValue(
+									false);
+							view.getTbMultiInstanceCollection().setValue("");
+							view.getTbMultiInstanceElementVariable().setValue(
+									"");
+							view.getTbMultiInstanceCompletionCondition()
+									.setValue("");
+							view.getTbMultiInstanceLoopCardinality().setValue(
+									"");
+						}
+
+						contentChanged();
+					}
+				});
+
+		view.getTbMultiInstanceLoopCardinality().addKeyUpHandler(
+				new KeyUpHandler() {
+
+					@Override
+					public void onKeyUp(KeyUpEvent event) {
+						// getCurrentBpmnElement().setAttr_id(view.getTbId().getText());
+						contentChanged();
+					}
+				});
+
+		view.getCbMultiInstanceIsSequential().addValueChangeHandler(
+				new ValueChangeHandler<Boolean>() {
+
+					@Override
+					public void onValueChange(ValueChangeEvent<Boolean> event) {
+						multiInstanceLoopCharacteristics
+								.setAttr_isSequential(event.getValue());
+						contentChanged();
+					}
+				});
+
+		view.getTbMultiInstanceCollection().addKeyUpHandler(new KeyUpHandler() {
+
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+				multiInstanceLoopCharacteristics.setAttr_collection(view
+						.getTbMultiInstanceCollection().getText());
+				contentChanged();
+			}
+		});
+
+		view.getTbMultiInstanceCompletionCondition().addKeyUpHandler(
+				new KeyUpHandler() {
+
+					@Override
+					public void onKeyUp(KeyUpEvent event) {
+						// getCurrentBpmnElement().setAttr_id(view.getTbId().getText());
+						// contentChanged();
+					}
+				});
+
+		view.getTbMultiInstanceElementVariable().addKeyUpHandler(
+				new KeyUpHandler() {
+
+					@Override
+					public void onKeyUp(KeyUpEvent event) {
+						multiInstanceLoopCharacteristics
+								.setAttr_elementVariable(view
+										.getTbMultiInstanceElementVariable()
+										.getText());
 						contentChanged();
 					}
 				});
@@ -77,15 +142,14 @@ public class TabMulitInstanceController<T extends TaskElement> extends
 
 	@Override
 	public void updateView() {
-		StandardLoopCharacteristicsChildElement standardLoopCharacteristics = getCurrentBpmnElement()
-				.getStandardLoopCharacteristicsChildElement();
-		if (null == standardLoopCharacteristics) {
+		if (null == getCurrentBpmnElement()
+				.getStandardLoopCharacteristicsChildElement()) {
 			view.getCbIsLoop().setValue(false);
 		} else {
 			view.getCbIsLoop().setValue(true);
 		}
 
-		MultiInstanceLoopCharacteristicsChildElement multiInstanceLoopCharacteristics = getCurrentBpmnElement()
+		multiInstanceLoopCharacteristics = getCurrentBpmnElement()
 				.getMultiInstanceLoopCharacteristicsChildElement();
 		if (null == multiInstanceLoopCharacteristics) {
 			view.getCbMultiInstance().setValue(false);
@@ -94,6 +158,16 @@ public class TabMulitInstanceController<T extends TaskElement> extends
 
 		} else {
 			view.getCbMultiInstance().setValue(true);
+
+			// TODO: set values of fields
+			view.getCbMultiInstanceIsSequential().setValue(
+					multiInstanceLoopCharacteristics.getAttr_isSequential());
+			view.getTbMultiInstanceCollection().setValue(
+					multiInstanceLoopCharacteristics.getAttr_collection());
+			view.getTbMultiInstanceElementVariable().setValue(
+					multiInstanceLoopCharacteristics.getAttr_elementVariable());
+			// view.getTbMultiInstanceCompletionCondition().setValue(value);
+			// view.getTbMultiInstanceLoopCardinality().setValue(value);
 
 			showMultiInstanceLoopCharacteristicsFields();
 		}
