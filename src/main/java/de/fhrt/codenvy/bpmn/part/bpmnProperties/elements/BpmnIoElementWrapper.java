@@ -521,9 +521,13 @@ public class BpmnIoElementWrapper implements ProcessElement, StartEventElement,
 	@Override
 	public void removeExtensionChildElementInputParameter(
 			InputParameterExtensionElementChild inputParameterElement) {
+		String[] parentFieldsForDeleteCheck = {
+				BpmnIoExtensionElementArrayType.CAMUNDA_INPUT.getField(),
+				BpmnIoExtensionElementArrayType.CAMUNDA_OUTPUT.getField() };
 		element.removeExtensionElementFromParent(
 				BpmnIoExtensionElementArrayType.CAMUNDA_INPUT.getType(),
 				BpmnIoExtensionElementArrayType.CAMUNDA_INPUT.getField(),
+				parentFieldsForDeleteCheck,
 				(BpmnIoExtensionElementJso) inputParameterElement.getElement());
 	}
 

@@ -145,6 +145,44 @@ public class BpmnIoElementJso extends JavaScriptObject {
 														}
 														
 														}-*/;
+	
+	public final native void removeExtensionElementFromParent(
+			String parentType, String parentField, String[] parentFieldsForParentDeleteCheck,
+			BpmnIoExtensionElementJso extensionElement)/*-{
+														var parents, parent, elementIndex, deleteParent = true;
+														var extElements = this.businessObject.extensionElements;
+														var that = this;																		
+														parents = this.businessObject.extensionElements.get('values').filter(function(e) {
+															return e.$instanceOf(parentType);
+														}); 
+														
+														if(parents.length > 0){
+															parent = parents[0];
+															elementIndex = parent.get(parentField).indexOf(extensionElement);
+															if (elementIndex > -1) {
+																parent.get(parentField).splice(elementIndex, 1);
+															}
+														}
+														
+														parentFieldsForParentDeleteCheck.forEach(function(value, index, array) {
+														    var xx=parent.get(value);
+														  	if(parent.get(value) != undefined && parent.get(value).length > 0){
+														  		deleteParent = false;
+														  	}
+														});
+														
+														if(deleteParent){
+															elementIndex = this.businessObject.extensionElements.values.indexOf(parent);
+															if (elementIndex > -1) {
+																this.businessObject.extensionElements.values.splice(elementIndex, 1);
+															}
+														}
+														
+														if(this.businessObject.extensionElements.values.length == 0){
+														this.businessObject.extensionElements = undefined;
+														}
+														
+														}-*/;
 
 	public final native JsArray<BpmnIoExtensionElementJso> getExtensionElementFromParent(
 			String parentType, String parentField, String elementType)/*-{
