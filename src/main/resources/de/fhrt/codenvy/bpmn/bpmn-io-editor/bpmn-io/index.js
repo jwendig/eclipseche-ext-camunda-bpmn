@@ -1,33 +1,27 @@
 // BEGIN COPY BLOG (copy this to the top of the generated .js document)
-
 var bpmnIo_fkt_createNewModeler;
-
 // END COPY BLOG
 
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict';
 
-bpmnIo_fkt_createNewModeler = function(wrapperId){
-	
+bpmnIo_fkt_createNewModeler = function(wrapperId) {
+
 	var renderer = new BpmnModeler({
-		container : $('#'+wrapperId),
+		container : $('#' + wrapperId),
 		moddleExtensions : {
-			camunda : camundaMetaModel
-		}	
+			camunda : camundaMetaModel,
+			fox : foxMetaModel
+		}
 	});
-	
+
 	return renderer;
 };
 
 var $ = require('jquery'), BpmnModeler = require('bpmn-js/lib/Modeler');
 var camundaMetaModel = require('../resources/camunda');
+var foxMetaModel = require('../resources/fox');
 
-
-
-
-
-
-},{"../resources/camunda":385,"bpmn-js/lib/Modeler":2,"jquery":241}],2:[function(require,module,exports){
+},{"../resources/camunda":385,"../resources/fox":386,"bpmn-js/lib/Modeler":2,"jquery":241}],2:[function(require,module,exports){
 'use strict';
 
 var inherits = require('inherits');
@@ -54830,7 +54824,7 @@ module.exports = property;
 },{"../internal/baseProperty":304,"../internal/basePropertyDeep":305,"../internal/isKey":345}],385:[function(require,module,exports){
 module.exports={
   "name": "CamundaBpmn",
-  "uri": "http://some-company/schema/bpmn/qa",
+  "uri": "http://activiti.org/bpmn",
   "prefix": "camunda",
   "xml": {
     "tagAlias": "lowerCase"
@@ -55011,7 +55005,7 @@ module.exports={
     {
       "name": "attr_collection",
       "extends": [
-         "bpmn:FlowNode", "bpmn:MultiInstanceLoopCharacteristics"
+        "bpmn:FlowNode", "bpmn:MultiInstanceLoopCharacteristics"
       ],
       "properties": [
         {
@@ -55020,7 +55014,7 @@ module.exports={
           "type": "String"
         }
       ]
-    },    
+    },
     {
       "name": "attr_delegateExpression",
       "extends": [
@@ -55511,6 +55505,34 @@ module.exports={
         }
       ]
     },
+  ],
+  "emumerations": [],
+  "associations": []
+}
+
+},{}],386:[function(require,module,exports){
+module.exports={
+  "name": "FoxBpmn",
+  "uri": "http://www.camunda.com/fox",
+  "prefix": "fox",
+  "xml": {
+    "tagAlias": "lowerCase"
+  },
+  "types": [
+    {
+      "name": "FailedJobRetryTimeCycle",
+      "extends": [
+        "bpmn:FlowNode"
+      ],
+      "properties": [
+        {
+          "name": "body",
+          "isAttr": false,
+          "isBody": true,
+          "type": "String"
+        }
+      ]
+    }
   ],
   "emumerations": [],
   "associations": []
