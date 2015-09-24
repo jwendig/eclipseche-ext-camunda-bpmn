@@ -28,7 +28,7 @@ public class ServiceTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 	private final static Integer[] TAB_GENERAL_FIELDS = { TabGeneralView.ROW_CLASS,
 			TabGeneralView.ROW_EXPRESSION,
 			TabGeneralView.ROW_EXPRESSION_DELEGATE,
-			TabGeneralView.ROW_RESULT_VARIABLE, };
+			TabGeneralView.ROW_RESULT_VARIABLE, TabGeneralView.ROW_EXCLUSIVE, TabGeneralView.ROW_FOR_COMPENSATION};
 
 	private TabGeneralController<ServiceTaskElement> tabGeneralController;
 	private TabMulitInstanceController<ServiceTaskElement> tabMultiInstanceController;

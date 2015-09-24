@@ -15,15 +15,17 @@ import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements.S
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.AbstractBpmnPropertiesWidget;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.reusableTabs.extensions.TabExtensionsController;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.reusableTabs.formfields.TabFormFieldsController;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.reusableTabs.general.TabGeneralController;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.reusableTabs.general.TabGeneralView;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.reusableTabs.listener.TabListenerController;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.startevent.event.TabEventController;
-import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.elements.startevent.general.TabGeneralController;
 
 public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 
 	private final static String LB_ELEMENT_NAME_PREFIX = "Start Event";
+	private final static Integer[] TAB_GENERAL_FIELDS = { TabGeneralView.ROW_FORM_KEY };
 
-	private TabGeneralController tabGeneralController;
+	private TabGeneralController<StartEventElement> tabGeneralController;
 	private TabEventController tabEventController;
 	private TabListenerController<StartEventElement> tabListenerController;
 	private TabExtensionsController<StartEventElement> tabExtensionsController;
@@ -33,7 +35,8 @@ public class StartEventPropertiesWidget extends AbstractBpmnPropertiesWidget {
 			BpmnPropertiesView.CurrentJsoAccess jsoAccess) {
 		super(LB_ELEMENT_NAME_PREFIX, jsoAccess);
 
-		tabGeneralController = new TabGeneralController(jsoAccess);
+		tabGeneralController = new TabGeneralController<StartEventElement>(
+				jsoAccess, TAB_GENERAL_FIELDS);
 		tabEventController = new TabEventController(jsoAccess);
 		tabListenerController = new TabListenerController<StartEventElement>(
 				jsoAccess, false);

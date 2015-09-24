@@ -28,7 +28,8 @@ public class UserTaskPropertiesWidget extends AbstractBpmnPropertiesWidget {
 			TabGeneralView.ROW_CANDIDATE_GROUPS,
 			TabGeneralView.ROW_CANDIDATE_USERS, TabGeneralView.ROW_DUE_DATE,
 			TabGeneralView.ROW_FOLLOW_UP_DATE, TabGeneralView.ROW_FORM_KEY,
-			TabGeneralView.ROW_PRIORITY };
+			TabGeneralView.ROW_PRIORITY, TabGeneralView.ROW_EXCLUSIVE,
+			TabGeneralView.ROW_FOR_COMPENSATION };
 
 	// private TabGeneralController tabGeneralController;
 	private TabGeneralController<UserTaskElement> tabGeneralController;

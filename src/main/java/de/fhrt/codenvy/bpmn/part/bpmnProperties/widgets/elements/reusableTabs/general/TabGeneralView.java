@@ -36,6 +36,8 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
 	public final static int ROW_EXPRESSION = 10;
 	public final static int ROW_EXPRESSION_DELEGATE = 11;
 	public final static int ROW_RESULT_VARIABLE = 12;
+	public final static int ROW_EXCLUSIVE = 15;
+	public final static int ROW_FOR_COMPENSATION = 17;
 
 	private TextBox tbId;
 	private TextBox tbName;
@@ -156,9 +158,12 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
 		getGridTabContent().setText(18, 0, "Documentation:");
 		getGridTabContent().setWidget(18, 1, tbDocumentation);
 
-		for (int i = 2; i <= 13; i++) {
+		for (int i = 2; i <= 12; i++) {
 			getGridTabContent().getRowFormatter().setVisible(i, false);
 		}
+
+		getGridTabContent().getRowFormatter().setVisible(ROW_EXCLUSIVE, false);
+		getGridTabContent().getRowFormatter().setVisible(ROW_FOR_COMPENSATION, false);
 
 	}
 
