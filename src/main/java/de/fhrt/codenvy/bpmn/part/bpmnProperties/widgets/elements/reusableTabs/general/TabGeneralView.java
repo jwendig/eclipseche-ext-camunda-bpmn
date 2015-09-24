@@ -15,8 +15,10 @@ import org.eclipse.che.ide.util.loging.Log;
 
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.BpmnPropertiesView;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.AbstractBpmnPropertiesTabWidget;
@@ -102,9 +104,17 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
 		getGridTabContent().setWidget(5, 1, tbFormKey);
 
 		getGridTabContent().setText(6, 0, "Due Date:");
-		getGridTabContent().setWidget(6, 1, tbDueDate);
+		HorizontalPanel hPanelDueDate = new HorizontalPanel();
+		hPanelDueDate.setWidth("100%");
+		hPanelDueDate.add(tbDueDate);
+		hPanelDueDate.add(new Label("The due date as an EL expression (e.g. ${someDate}) or an ISO date (e.g. 2015-08-01T10:30:00). See for more information the <a href='http://docs.camunda.org/manual/7.3/api-references/bpmn20/#tasks-user-task-due-date' target='_blank'>Camunda user guide</a>"));
+		getGridTabContent().setWidget(6, 1, hPanelDueDate);
 
 		getGridTabContent().setText(7, 0, "Follow Up Date:");
+		HorizontalPanel hPanelFollowUpDate = new HorizontalPanel();
+		hPanelFollowUpDate.setWidth("100%");
+		hPanelFollowUpDate.add(tbFollowUpDate);
+		hPanelFollowUpDate.add(new Label("The follow date as an EL expression (e.g. ${someDate}) or an ISO date (e.g. 2015-08-01T10:30:00). See for more information the <a href='http://docs.camunda.org/manual/7.3/api-references/bpmn20/#tasks-user-task-follow-up-date' target='_blank'>Camunda user guide</a>"));
 		getGridTabContent().setWidget(7, 1, tbFollowUpDate);
 
 		getGridTabContent().setText(8, 0, "Priority:");
@@ -144,13 +154,21 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
 		getGridTabContent().setWidget(13, 1, cbAsycBefore);
 
 		getGridTabContent().setText(14, 0, "Asynchronous After:");
-		getGridTabContent().setWidget(14, 1, cbAsycAfter);
+		VerticalPanel vPanelAsyncAfter = new VerticalPanel();
+		vPanelAsyncAfter.setWidth("100%");
+		vPanelAsyncAfter.add(cbAsycAfter);
+		vPanelAsyncAfter.add(new Label("This feature is supported for camunda BPM engine version 7.2 and higher."));
+		getGridTabContent().setWidget(14, 1, vPanelAsyncAfter);
 
 		getGridTabContent().setText(15, 0, "Exclusive:");
 		getGridTabContent().setWidget(15, 1, cbExclusive);
 
 		getGridTabContent().setText(16, 0, "Retry Time Cycle:");
-		getGridTabContent().setWidget(16, 1, tbRetryTimeCycle);
+		VerticalPanel vRetryTimeCycle = new VerticalPanel();
+		vRetryTimeCycle.setWidth("100%");
+		vRetryTimeCycle.add(tbRetryTimeCycle);
+		vRetryTimeCycle.add(new Label("Retry interval in ISO 8601 format (e.g. 'R3/PT10M' for '3 cycles, every 10 minutes')"));
+		getGridTabContent().setWidget(16, 1, vRetryTimeCycle);
 
 		getGridTabContent().setText(17, 0, "For Compensation:");
 		getGridTabContent().setWidget(17, 1, cbForCompensation);
@@ -230,12 +248,15 @@ public class TabGeneralView extends AbstractBpmnPropertiesTabWidget {
 		 */
 		cbAsycBefore = new CheckBox();
 		cbAsycBefore.setWidth("100%");
+		cbAsycBefore.setHTML("More information on asynchronous continuation can be found in the <a href='http://docs.camunda.org/manual/7.3/guides/user-guide/#process-engine-transactions-in-processes-asynchronous-continuations' target='_blank'>Camunda user guide</a>");
 
 		cbAsycAfter = new CheckBox();
 		cbAsycAfter.setWidth("100%");
+		cbAsycAfter.setHTML("More information on asynchronous continuation can be found in the <a href='http://docs.camunda.org/manual/7.3/guides/user-guide/#process-engine-transactions-in-processes-asynchronous-continuations' target='_blank'>Camunda user guide</a>");
 
 		cbExclusive = new CheckBox();
 		cbExclusive.setWidth("100%");
+		cbExclusive.setHTML("More information on exclusive jobs can be found in the <a href='http://docs.camunda.org/manual/7.3/guides/user-guide/#process-engine-the-job-executor-exclusive-jobs' target='_blank'>Camunda user guide</a>");
 
 		tbRetryTimeCycle = new TextBox();
 		tbRetryTimeCycle.setWidth("100%");
