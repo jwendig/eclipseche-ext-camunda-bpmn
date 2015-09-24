@@ -68,6 +68,7 @@ public class BpmnIoElementJso extends JavaScriptObject {
 
 	public final native void addExtensionElement(
 			BpmnIoExtensionElementJso extensionElement, BpmnIoModdleJso moddle)/*-{
+																				var that = this;
 																				this.businessObject.extensionElements = this.businessObject.extensionElements	|| moddle.create('bpmn:ExtensionElements');
 																				this.businessObject.extensionElements.get('values').push(extensionElement);
 																				}-*/;
@@ -80,19 +81,21 @@ public class BpmnIoElementJso extends JavaScriptObject {
 														}
 														
 														if(this.businessObject.extensionElements.values.length == 0){
-																delete this.businessObject.extensionElements;
+																this.businessObject.extensionElements = undefined;
 														}
 
 														}-*/;
 
 	public final native JsArray<BpmnIoExtensionElementJso> getExtensionElements(
-			String type)/*-{
+			String elementType)/*-{
+						var that = this;
+			
 						if (!this.businessObject.extensionElements) {
 							return [];
 						}
 
-						return this.businessObject.extensionElements.values.filter(function(e) {
-						return e.$instanceOf(type);
+						return this.businessObject.extensionElements.get('values').filter(function(e) {
+							return e.$instanceOf(elementType);
 						});
 						}-*/;
 
