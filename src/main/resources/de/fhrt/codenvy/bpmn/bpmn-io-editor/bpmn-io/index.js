@@ -55190,6 +55190,18 @@ module.exports={
       ]
     },
     {
+      "name": "FailedJobRetryTimeCycle",
+      "superClass": [ "Element" ],
+      "properties": [
+      	{
+          "name": "body",
+          "isAttr": false,
+          "isBody": true,
+          "type": "String"
+        }        
+      ]
+    },
+    {
       "name": "ExecutionListener",
       "superClass": [ "Element" ],
       "properties": [
@@ -55521,9 +55533,7 @@ module.exports={
   "types": [
     {
       "name": "FailedJobRetryTimeCycle",
-      "extends": [
-        "bpmn:FlowNode"
-      ],
+      "superClass": [ "Element" ],
       "properties": [
         {
           "name": "body",
