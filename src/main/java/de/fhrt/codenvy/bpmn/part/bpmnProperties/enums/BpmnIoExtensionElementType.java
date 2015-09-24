@@ -11,9 +11,12 @@
 package de.fhrt.codenvy.bpmn.part.bpmnProperties.enums;
 
 public enum BpmnIoExtensionElementType {
+	// TODO: check which is the correct namespace for remove fox_failed_job.., fox or camunda
+	
 	CAMUNDA_EXECUTION_LISTENER("camunda:ExecutionListener"), CAMUNDA_TASK_LISTENER(
 			"camunda:TaskListener"), FOX_FAILED_JOB_RETRY_TIME_CYCLE(
-			"fox:FailedJobRetryTimeCycle");
+			"fox:FailedJobRetryTimeCycle"), CAMUNDA_FAILED_JOB_RETRY_TIME_CYCLE(
+					"camunda:FailedJobRetryTimeCycle");
 
 	private final String type;
 
