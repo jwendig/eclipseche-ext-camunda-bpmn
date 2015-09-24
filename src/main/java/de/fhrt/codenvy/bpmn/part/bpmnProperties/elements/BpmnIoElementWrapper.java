@@ -20,6 +20,7 @@ import com.google.gwt.core.client.JsArray;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.childElements.MultiInstanceLoopCharacteristicsChildElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.childElements.StandardLoopCharacteristicsChildElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.ExecutionListenerExtensionElement;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.FailedJobRetryTimeCycleExtensionElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.TaskListenerExtensionElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.FormFieldExtensionElementChild;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.InputParameterExtensionElementChild;
@@ -427,6 +428,34 @@ public class BpmnIoElementWrapper implements ProcessElement, StartEventElement,
 	/*
 	 * extensionElements
 	 */
+
+	@Override
+	public void clearExtensionElementFailedJobRetryTimeCycle(
+			FailedJobRetryTimeCycleExtensionElement retryTimeCycleElement) {
+		element.removeExtensionElement((BpmnIoExtensionElementJso) retryTimeCycleElement
+				.getElement());
+	}
+
+	@Override
+	public FailedJobRetryTimeCycleExtensionElement getExtensionElementFailedJobRetryTimeCycle() {
+		JsArray<BpmnIoExtensionElementJso> jsos = element
+				.getExtensionElements(BpmnIoExtensionElementType.FOX_FAILED_JOB_RETRY_TIME_CYCLE
+						.toString());
+		if (jsos.length() == 0) {
+			return null;
+		}
+
+		return new BpmnIoExtensionElementWrapper(jsos.get(0), modeler);
+	}
+
+	@Override
+	public FailedJobRetryTimeCycleExtensionElement createExtensionElementFailedJobRetryTimeCycle() {
+		BpmnIoExtensionElementJso executionListenerJso = (BpmnIoExtensionElementJso) moddle
+				.create(BpmnIoExtensionElementType.FOX_FAILED_JOB_RETRY_TIME_CYCLE
+						.toString());
+		element.addExtensionElement(executionListenerJso, moddle);
+		return new BpmnIoExtensionElementWrapper(executionListenerJso, modeler);
+	}
 
 	@Override
 	public ExecutionListenerExtensionElement addExtensionElementExecutionListener() {

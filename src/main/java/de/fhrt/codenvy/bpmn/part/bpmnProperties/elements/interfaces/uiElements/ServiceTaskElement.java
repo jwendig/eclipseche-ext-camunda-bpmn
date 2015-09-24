@@ -41,6 +41,10 @@ public interface ServiceTaskElement extends TaskElement {
 
 	public void setAttr_isForCompensation(boolean isForCompensation);
 
+	/*
+	 * extension-elements
+	 */
+	
 	public void removeExtensionChildElementInputParameter(
 			InputParameterExtensionElementChild inputParameterElement);
 

@@ -14,6 +14,8 @@ package de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.uiElements;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces._BaseElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.childElements.MultiInstanceLoopCharacteristicsChildElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.childElements.StandardLoopCharacteristicsChildElement;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.FailedJobRetryTimeCycleExtensionElement;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.InputParameterExtensionElementChild;
 
 /*
  * attribute access for all bpmn-io task elements
@@ -42,5 +44,16 @@ public interface TaskElement extends _BaseElement {
 	public void setMultiInstanceLoopCharacteristics(boolean enabled);
 
 	public MultiInstanceLoopCharacteristicsChildElement getMultiInstanceLoopCharacteristicsChildElement();
+
+	/*
+	 * extension elements
+	 */
+
+	public void clearExtensionElementFailedJobRetryTimeCycle(
+			FailedJobRetryTimeCycleExtensionElement retryTimeCycleElement);
+
+	public FailedJobRetryTimeCycleExtensionElement getExtensionElementFailedJobRetryTimeCycle();
+
+	public FailedJobRetryTimeCycleExtensionElement createExtensionElementFailedJobRetryTimeCycle();
 
 }

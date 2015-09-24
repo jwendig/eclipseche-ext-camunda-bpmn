@@ -22,16 +22,18 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.BpmnPropertiesView;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.BpmnIoElementWrapper;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.FailedJobRetryTimeCycleExtensionElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.widgets.AbstractBpmnPropertiesTabController;
 
-// from usertask
-// TODO: include process elements, startevent-elements
+// TODO: include process elements
 
 public class TabGeneralController<T> extends
 		AbstractBpmnPropertiesTabController<BpmnIoElementWrapper> {
 
 	private final static String TAB_NAME = "General";
 	private TabGeneralView view;
+
+	private FailedJobRetryTimeCycleExtensionElement retryTimeCycle;
 
 	public TabGeneralController(BpmnPropertiesView.CurrentJsoAccess jsoAccess,
 			Integer[] fields) {
@@ -61,6 +63,12 @@ public class TabGeneralController<T> extends
 
 		updateServiceTaskFieldValues();
 
+		retryTimeCycle = getCurrentBpmnElement()
+				.getExtensionElementFailedJobRetryTimeCycle();
+		if (null != retryTimeCycle) {
+			view.getTbRetryTimeCycle().setText(retryTimeCycle.getAttr_body());
+		}
+
 		refreshDependentDefaultFields();
 
 		// TODO: implement
@@ -77,6 +85,13 @@ public class TabGeneralController<T> extends
 			view.getCbExclusive().setValue(true);
 			view.getTbRetryTimeCycle().setEnabled(false);
 			view.getTbRetryTimeCycle().setText("");
+
+			if (null != retryTimeCycle) {
+				getCurrentBpmnElement()
+						.clearExtensionElementFailedJobRetryTimeCycle(
+								retryTimeCycle);
+				retryTimeCycle = null;
+			}
 		}
 	}
 
@@ -359,8 +374,21 @@ public class TabGeneralController<T> extends
 
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
-				// TODO: implement
-				// getActionDelegate().onContentChange();
+				if (getView().getTbRetryTimeCycle().getText().length() == 0) {
+					getCurrentBpmnElement()
+							.clearExtensionElementFailedJobRetryTimeCycle(
+									retryTimeCycle);
+					retryTimeCycle = null;
+				} else {
+					if (null == retryTimeCycle) {
+						retryTimeCycle = getCurrentBpmnElement()
+								.createExtensionElementFailedJobRetryTimeCycle();
+					}
+
+					retryTimeCycle.setAttr_body(getView().getTbRetryTimeCycle()
+							.getText());
+				}
+				contentChanged();
 			}
 		});
 

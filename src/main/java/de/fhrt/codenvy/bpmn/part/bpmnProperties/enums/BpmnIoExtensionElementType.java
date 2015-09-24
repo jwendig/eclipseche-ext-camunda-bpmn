@@ -12,7 +12,8 @@ package de.fhrt.codenvy.bpmn.part.bpmnProperties.enums;
 
 public enum BpmnIoExtensionElementType {
 	CAMUNDA_EXECUTION_LISTENER("camunda:ExecutionListener"), CAMUNDA_TASK_LISTENER(
-			"camunda:TaskListener");
+			"camunda:TaskListener"), FOX_FAILED_JOB_RETRY_TIME_CYCLE(
+			"fox:FailedJobRetryTimeCycle");
 
 	private final String type;
 

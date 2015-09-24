@@ -14,11 +14,10 @@ package de.fhrt.codenvy.bpmn.part.bpmnProperties.elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.che.ide.util.loging.Log;
-
 import com.google.gwt.core.client.JsArray;
 
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.ExecutionListenerExtensionElement;
+import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.FailedJobRetryTimeCycleExtensionElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.TaskListenerExtensionElement;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.ConstraintExtensionElementChild;
 import de.fhrt.codenvy.bpmn.part.bpmnProperties.elements.interfaces.extensionElements.childs.FormFieldExtensionElementChild;
@@ -43,7 +42,8 @@ public class BpmnIoExtensionElementWrapper implements
 		InputParameterExtensionElementChild,
 		OutputParameterExtensionElementChild,
 		InputOutputParameterExtensionElementChild,
-		ListValueExtensionElementChild, MapEntryExtensionElementChild {
+		ListValueExtensionElementChild, MapEntryExtensionElementChild,
+		FailedJobRetryTimeCycleExtensionElement {
 	private BpmnIoExtensionElementJso element;
 	private BpmnIoModelerJso modeler;
 	private BpmnIoModelingJso modeling;
@@ -223,6 +223,16 @@ public class BpmnIoExtensionElementWrapper implements
 	@Override
 	public void setAttr_key(String key) {
 		element.setAttribute("key", key);
+	}
+
+	@Override
+	public String getAttr_body() {
+		return element.getStringAttribute("body");
+	}
+
+	@Override
+	public void setAttr_body(String body) {
+		element.setAttribute("body", body);
 	}
 
 	/*
