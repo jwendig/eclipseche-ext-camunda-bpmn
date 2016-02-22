@@ -51,11 +51,13 @@ public class NewBpmnFileAction extends AbstractNewResourceAction {
 		return resource.newBpmnFile().getText();
 	}
 
-	@Override
-	protected String getMimeType() {
-		Log.info(NewBpmnFileAction.class, "getMimeType");
-		return BpmnExtension.BPMN_MIME_TYPE;
-	}
+	//
+	//
+	// @Override
+	// protected String getMimeType() {
+	// Log.info(NewBpmnFileAction.class, "getMimeType");
+	// return BpmnExtension.BPMN_MIME_TYPE;
+	// }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -65,8 +67,8 @@ public class NewBpmnFileAction extends AbstractNewResourceAction {
 	}
 
 	@Override
-	public void updateProjectAction(ActionEvent e) {
-		Log.info(NewBpmnFileAction.class, "updateProjectAction");
-		super.updateProjectAction(e);
+	public void updateInPerspective(ActionEvent e) {
+		Log.info(NewBpmnFileAction.class, "updateInPerspective");
+		super.updateInPerspective(e);
 	}
 }

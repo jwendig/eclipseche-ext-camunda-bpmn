@@ -11,14 +11,13 @@
 package de.fhrt.codenvy.bpmn.part.howto;
 
 import org.eclipse.che.ide.api.parts.AbstractPartPresenter;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-
 import org.vectomatic.dom.svg.ui.SVGResource;
 
-import javax.annotation.Nonnull;
+import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.gwt.user.client.ui.IsWidget;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * Show information how to use notification tutorial.
@@ -26,43 +25,53 @@ import javax.annotation.Nonnull;
  * @author <a href="mailto:aplotnikov@codenvy.com">Andrey Plotnikov</a>
  */
 @Singleton
-public class HowToPresenter extends AbstractPartPresenter implements HowToView.ActionDelegate {
-    private HowToView view;
+public class HowToPresenter extends AbstractPartPresenter implements
+		HowToView.ActionDelegate {
+	private HowToView view;
 
-    @Inject
-    public HowToPresenter(HowToView view) {
-        this.view = view;
-        this.view.setDelegate(this);
-    }
+	@Inject
+	public HowToPresenter(HowToView view) {
+		this.view = view;
+		this.view.setDelegate(this);
+	}
 
-    /** {@inheritDoc} */
-    @Nonnull
-    @Override
-    public String getTitle() {
-        return "Editor API";
-    }
+	/** {@inheritDoc} */
+	@Override
+	public String getTitle() {
+		return "Editor API";
+	}
 
-    /** {@inheritDoc} */
-    @Override
-    public ImageResource getTitleImage() {
-        return null;
-    }
+	/** {@inheritDoc} */
+	@Override
+	public ImageResource getTitleImage() {
+		return null;
+	}
 
-    /** {@inheritDoc} */
-    @Override
-    public SVGResource getTitleSVGImage() {
-        return null;
-    }
+	/** {@inheritDoc} */
+	@Override
+	public SVGResource getTitleSVGImage() {
+		return null;
+	}
 
-    /** {@inheritDoc} */
-    @Override
-    public String getTitleToolTip() {
-        return null;
-    }
+	/** {@inheritDoc} */
+	@Override
+	public String getTitleToolTip() {
+		return null;
+	}
 
-    /** {@inheritDoc} */
-    @Override
-    public void go(AcceptsOneWidget container) {
-        container.setWidget(view);
-    }
+	/** {@inheritDoc} */
+	@Override
+	public void go(AcceptsOneWidget container) {
+		container.setWidget(view);
+	}
+
+	@Override
+	public void setVisible(boolean visible) {
+
+	}
+
+	@Override
+	public IsWidget getView() {
+		return view;
+	}
 }

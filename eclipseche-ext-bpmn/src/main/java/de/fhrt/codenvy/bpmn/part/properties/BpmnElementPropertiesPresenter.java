@@ -20,17 +20,6 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
 
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso;
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnModelerJso;
-import de.fhrt.codenvy.bpmn.editor.widget.diagram.jso.BpmnElementJso.BpmnElementType;
-import de.fhrt.codenvy.bpmn.part.properties.widgets.AbstractBpmnPropertiesWidget;
-import de.fhrt.codenvy.bpmn.part.properties.widgets.noselection.NoSelectionWidget;
-import de.fhrt.codenvy.bpmn.part.properties.widgets.process.ProcessPropertiesWidget;
-import de.fhrt.codenvy.bpmn.part.properties.widgets.servicetask.ServiceTaskPropertiesWidget;
-import de.fhrt.codenvy.bpmn.part.properties.widgets.startevent.StartEventPropertiesWidget;
-import de.fhrt.codenvy.bpmn.part.properties.widgets.unknown.UnknownItemWidget;
-import de.fhrt.codenvy.bpmn.part.properties.widgets.usertask.UserTaskPropertiesWidget;
-
 public class BpmnElementPropertiesPresenter extends BasePresenter implements
 		BpmnElementPropertiesView.ActionDelegate {
 
@@ -77,6 +66,12 @@ public class BpmnElementPropertiesPresenter extends BasePresenter implements
 
 	public BpmnElementPropertiesView getView() {
 		return view;
+	}
+
+	@Override
+	public void setVisible(boolean visible) {
+		Log.info(BpmnElementPropertiesPresenter.class, "setVisible");
+		
 	}
 	
 	
