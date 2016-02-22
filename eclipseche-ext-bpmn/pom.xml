@@ -1,75 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-
-    Copyright (c) 2012-2015 Codenvy, S.A.
-    All rights reserved. This program and the accompanying materials
-    are made available under the terms of the Eclipse Public License v1.0
-    which accompanies this distribution, and is available at
-    http://www.eclipse.org/legal/epl-v10.html
-
-    Contributors:
-      Codenvy, S.A. - initial API and implementation
-
--->
+<!-- Copyright (c) 2012-2015 Codenvy, S.A. All rights reserved. This program 
+	and the accompanying materials are made available under the terms of the 
+	Eclipse Public License v1.0 which accompanies this distribution, and is available 
+	at http://www.eclipse.org/legal/epl-v10.html Contributors: Codenvy, S.A. 
+	- initial API and implementation -->
 <!-- This POM is for che version 3.12.3 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.eclipse.che.depmgt</groupId>
 		<artifactId>maven-depmgt-pom</artifactId>
-		<version>3.12.0</version>
+		<groupId>org.eclipse.che.depmgt</groupId>
+		<version>4.0.0-RC6</version>
 	</parent>
 	<groupId>de.fhrt</groupId>
 	<artifactId>codenvy.bpmn</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	<name>Codenvy Tutorial :: Editor API</name>
-	<properties>
-		<chesdk.created-jar-target-folder>../../../che/assembly-sdk/target/tomcat-ide/ext</chesdk.created-jar-target-folder>
-	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>org.eclipse.che.core</groupId>
-			<artifactId>che-core-ide-api</artifactId>
-			<version>${che.core.version}</version>
-		</dependency>
-		<dependency>
-            <groupId>org.eclipse.che.core</groupId>
-            <artifactId>che-core-ide-ui</artifactId>
-            <version>${che.core.version}</version>
-        </dependency>		
-		<dependency>
-            <groupId>org.eclipse.che.core</groupId>
-            <artifactId>che-core-ide-app</artifactId>
-            <version>${che.core.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.che.core</groupId>
-            <artifactId>che-core-ide-jseditor</artifactId>
-            <version>${che.core.version}</version>
-        </dependency>
-		
 		<dependency>
 			<groupId>com.google.gwt.inject</groupId>
 			<artifactId>gin</artifactId>
-			<version>${com.google.gwt.gin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>edu.stanford.protege</groupId>
+			<artifactId>codemirror-gwt</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.che.core</groupId>
+			<artifactId>che-core-api-project</artifactId>
+			<version>4.0.0-RC6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.che.core</groupId>
+			<artifactId>che-core-client-gwt-project</artifactId>
+			<version>4.0.0-RC6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.che.core</groupId>
+			<artifactId>che-core-commons-gwt</artifactId>
+			<version>4.0.0-RC6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.che.core</groupId>
+			<artifactId>che-core-ide-api</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.che.core</groupId>
+			<artifactId>che-core-ide-app</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.che.core</groupId>
+			<artifactId>che-core-ide-jseditor</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.che.core</groupId>
+			<artifactId>che-core-ide-ui</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.vectomatic</groupId>
+			<artifactId>lib-gwt-svg</artifactId>
+			<version>0.5.10</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
-			<version>${com.google.gwt.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.googlecode.gwtquery</groupId>
-			<artifactId>gwtquery</artifactId>
-			<version>1.4.2</version>
-		</dependency>
-		<dependency>
-		  	<groupId>edu.stanford.protege</groupId>
-		  	<artifactId>codemirror-gwt</artifactId>
-		  	<version>2.0.0</version>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+			<version>2.7.0</version>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 	<repositories>
@@ -78,7 +91,24 @@
 			<name>codenvy public</name>
 			<url>https://maven.codenvycorp.com/content/groups/public/</url>
 		</repository>
+		<repository>
+			<id>codenvy-public-snapshots-repo</id>
+			<name>codenvy public snapshots</name>
+			<url>https://maven.codenvycorp.com/content/repositories/codenvy-public-snapshots/</url>
+		</repository>
 	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>codenvy-public-repo</id>
+			<name>codenvy public</name>
+			<url>https://maven.codenvycorp.com/content/groups/public/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>codenvy-public-snapshots-repo</id>
+			<name>codenvy public snapshots</name>
+			<url>https://maven.codenvycorp.com/content/repositories/codenvy-public-snapshots/</url>
+		</pluginRepository>
+	</pluginRepositories>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<outputDirectory>target/classes</outputDirectory>
@@ -90,7 +120,7 @@
 				<directory>src/main/resources</directory>
 			</resource>
 		</resources>
-		<plugins>			
+		<plugins>
 			<plugin>
 				<groupId>com.google.code.sortpom</groupId>
 				<artifactId>maven-sortpom-plugin</artifactId>
@@ -102,48 +132,9 @@
 				<groupId>com.mycila</groupId>
 				<artifactId>license-maven-plugin</artifactId>
 				<configuration>
-					<excludes>
-						<exclude>**/*.svg</exclude>
-						<exclude>**/*.png</exclude>
-						<exclude>**/*.gif</exclude>
-						<exclude>**/*.jpg</exclude>
-						<exclude>**/*.css</exclude>
-						<exclude>**/*.js</exclude>
-						<exclude>**/*.eot</exclude>
-						<exclude>**/*.ttf</exclude>
-						<exclude>**/*.woff</exclude>
-						<exclude>**/*.bpmn</exclude>
-						<exclude>**/*.bpmn_custom</exclude>
-					</excludes>
+					<skip>true</skip>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.10</version>
-				<executions>
-					<execution>
-						<id>copy-installed</id>
-						<phase>install</phase>
-						<goals>
-							<goal>copy</goal>
-						</goals>
-						<configuration>
-							<skip>true</skip>
-							<artifactItems>
-								<artifactItem>
-									<groupId>${project.groupId}</groupId>
-									<artifactId>${project.artifactId}</artifactId>
-									<version>${project.version}</version>
-									<type>${project.packaging}</type>
-								</artifactItem>
-							</artifactItems>
-							<outputDirectory>${chesdk.created-jar-target-folder}</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
 </project>
-
