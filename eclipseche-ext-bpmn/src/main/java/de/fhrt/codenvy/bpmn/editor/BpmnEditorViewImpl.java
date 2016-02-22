@@ -10,8 +10,6 @@
  *******************************************************************************/
 package de.fhrt.codenvy.bpmn.editor;
 
-import javax.annotation.Nonnull;
-
 import org.eclipse.che.api.project.gwt.client.ProjectServiceClient;
 import org.eclipse.che.api.project.shared.dto.ItemReference;
 import org.eclipse.che.ide.api.editor.AbstractEditorPresenter;
@@ -19,7 +17,6 @@ import org.eclipse.che.ide.api.editor.EditorInput;
 import org.eclipse.che.ide.api.parts.PartStackType;
 import org.eclipse.che.ide.api.parts.WorkspaceAgent;
 import org.eclipse.che.ide.rest.AsyncRequestCallback;
-import org.eclipse.che.ide.rest.StringUnmarshaller;
 import org.eclipse.che.ide.ui.dialogs.CancelCallback;
 import org.eclipse.che.ide.ui.dialogs.ConfirmCallback;
 import org.eclipse.che.ide.ui.dialogs.DialogFactory;
@@ -106,10 +103,9 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	@Override
 	public void activate() {
 		Log.info(BpmnEditorViewImpl.class, "activate");
-
 		// bpmnElementPropertiesEditorPresenter.bpmnElementSelected(
 		// bpmnDiagramWidget.getBpmnIoModelerJso(), null);
-//		bpmnElementPropertiesEditorPresenter.noBpmnElementSelected();
+		// bpmnElementPropertiesEditorPresenter.noBpmnElementSelected();
 		bpmnElementPropertiesEditorPresenter.getView().clearView();
 
 	}
@@ -121,7 +117,7 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	}
 
 	@Override
-	public void onClose(@Nonnull final AsyncCallback<Void> callback) {
+	public void onClose(final AsyncCallback<Void> callback) {
 		Log.info(BpmnEditorViewImpl.class, "onClose");
 		viewCounter--;
 
@@ -181,32 +177,33 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	@Override
 	protected void initializeEditor() {
 		Log.info(BpmnEditorViewImpl.class, "initializeEditor");
+		
+		// TODO: !!!!!
+		/*
+		 * projectServiceClient.getFileContent(EnvironmentContext.getCurrent()
+		 * .getWorkspaceId(), input.getFile().getPath(), new
+		 * AsyncRequestCallback<String>(new StringUnmarshaller()) {
+		 * 
+		 * @Override protected void onSuccess(String result) {
+		 * Log.info(BpmnEditorViewImpl.class,
+		 * "initializeEditor:getFileContent:onSuccess: file-loaded"); while
+		 * (null == bpmnDiagramWidget) { Log.info(BpmnEditorViewImpl.class,
+		 * "initializeEditor:getFileContent:onSuccess: diagramWidget not ready"
+		 * ); }
+		 * 
+		 * Log.info(BpmnEditorViewImpl.class,
+		 * "initializeEditor:getFileContent:onSuccess: diagramWidget ready");
+		 * 
+		 * bpmnDiagramWidget.openDiagram(result); }
+		 * 
+		 * @Override protected void onFailure(Throwable exception) {
+		 * Log.error(BpmnEditorViewImpl.class,
+		 * "initializeEditor:getFileContent:onFailure", exception); // TODO:
+		 * alert or something else } });
+		 */
 
-		projectServiceClient.getFileContent(input.getFile().getPath(),
-				new AsyncRequestCallback<String>(new StringUnmarshaller()) {
-					@Override
-					protected void onSuccess(String result) {
-						Log.info(BpmnEditorViewImpl.class,
-								"initializeEditor:getFileContent:onSuccess: file-loaded");
-						while (null == bpmnDiagramWidget) {
-							Log.info(BpmnEditorViewImpl.class,
-									"initializeEditor:getFileContent:onSuccess: diagramWidget not ready");
-						}
-
-						Log.info(BpmnEditorViewImpl.class,
-								"initializeEditor:getFileContent:onSuccess: diagramWidget ready");
-
-						bpmnDiagramWidget.openDiagram(result);
-					}
-
-					@Override
-					protected void onFailure(Throwable exception) {
-						Log.error(BpmnEditorViewImpl.class,
-								"initializeEditor:getFileContent:onFailure",
-								exception);
-						// TODO: alert or something else
-					}
-				});
+		bpmnDiagramWidget
+				.openDiagram("<?xml version=\"1.0\" encoding=\"UTF-8\"?><bpmn2:definitions xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:bpmn2=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:camunda=\"http://activiti.org/bpmn\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xsi:schemaLocation=\"http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd\" id=\"sample-diagram\" exporter=\"camunda modeler\" exporterVersion=\"2.5.0\" targetNamespace=\"http://activiti.org/bpmn\"><bpmn2:process id=\"Process_1\" isExecutable=\"false\"/>  <bpmndi:BPMNDiagram id=\"BPMNDiagram_1\">    <bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"Process_1\"/>  </bpmndi:BPMNDiagram></bpmn2:definitions>");
 
 		initSvgFileVariables();
 
@@ -379,12 +376,13 @@ public class BpmnEditorViewImpl extends AbstractEditorPresenter implements
 	 * .bpmnelements.BpmnDiagramElementJso)
 	 */
 	@Override
-	public void bpmnElementSelected(BpmnModelerJso modelerJso, BpmnElementJso elementJso) {
-//		bpmnElementPropertiesEditorPresenter.bpmnElementSelected(
-//				modelerJso, elementJso);
-		
-		bpmnElementPropertiesEditorPresenter.getView().loadWidgetForSelectedBpmnElement(modelerJso, elementJso);
+	public void bpmnElementSelected(BpmnModelerJso modelerJso,
+			BpmnElementJso elementJso) {
+		// bpmnElementPropertiesEditorPresenter.bpmnElementSelected(
+		// modelerJso, elementJso);
+
+		bpmnElementPropertiesEditorPresenter.getView()
+				.loadWidgetForSelectedBpmnElement(modelerJso, elementJso);
 	}
-	
-	
+
 }
